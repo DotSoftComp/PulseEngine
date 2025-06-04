@@ -10,12 +10,23 @@ Whether you're building a fast-paced shooter or an action-heavy hack 'n slash, P
 
 ---
 
+## 🚀 2025 Roadmap
+Our key objective for 2025:
+
+**✅ Deliver a fully functional and production-ready version of Pulse Engine**
+
+**🚧 Implement a complete visual scripting system (Blueprints) to allow developers to build game logic without writing a single line of code**
+
+These goals reflect our commitment to making game development faster, more accessible, and more powerful for indie developers.
+
+---
+
 ## 🧱 Built With
 
 - **C++**
-- **OpenGL**
+- **Flexible Graphics API Support (Vulkan, DirectX, OpenGL, etc.)**
 
-These core technologies ensure high efficiency, low overhead, and direct control over rendering and performance-critical systems.
+While originally built with OpenGL, Pulse Engine now features a modular rendering architecture that allows developers to choose the graphics API that best fits their needs.
 
 ---
 
@@ -23,7 +34,7 @@ These core technologies ensure high efficiency, low overhead, and direct control
 
 To get started:
 
-1. [Download the Pulse Engine installer](https://your-download-link.com) (`.exe`)
+1. [Download the Pulse Engine installer](https://placeholder.com) (`.exe`)
 2. Run the installer and follow the setup instructions
 3. Launch Pulse Engine and start building your game!
 
@@ -48,7 +59,7 @@ This repository is for distribution and official development only. Pulse Engine 
 **Pulse Software**  
 Empowering indie developers with specialized tools to bring their vision to life.  
 📍 France  
-🌐 [pulse-software.com](https://your-company-website.com)
+🌐 [pulse-software.com](https://placeholder.com)
 
 ---
 
