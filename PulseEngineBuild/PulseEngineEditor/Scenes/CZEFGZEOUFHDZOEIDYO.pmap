@@ -1,0 +1,57 @@
+{
+    "entities": [
+        {
+            "Scripts": [
+                {
+                    "exposedVariables": [
+                        {
+                            "name": "speed",
+                            "type": 0,
+                            "value": 1
+                        }
+                    ],
+                    "name": "CreateCustomScriptA"
+                }
+            ],
+            "guid": 4999045609554485032,
+            "muid": 662031816869141367,
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "Scripts": [
+                {
+                    "exposedVariables": [
+                        {
+                            "name": "speed",
+                            "type": 0,
+                            "value": -10
+                        }
+                    ],
+                    "name": "CreateCustomScriptA"
+                }
+            ],
+            "guid": 4999045609554485032,
+            "muid": 10737175689693915419,
+            "position": [
+                -0.8999999761581421,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                31.0,
+                0.0,
+                0.0
+            ]
+        }
+    ],
+    "sceneName": "defaultMap.pmap"
+}

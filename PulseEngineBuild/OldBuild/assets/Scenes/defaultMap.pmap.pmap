@@ -1,0 +1,27 @@
+{
+    "entities": [
+        {
+            "Scripts": [
+            ],
+            "guid": 4999045609554485032,
+            "muid": 10737175689693915419,
+            "name": "Cube (1)",
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    ],
+    "sceneName": "defaultMap.pmap"
+}
