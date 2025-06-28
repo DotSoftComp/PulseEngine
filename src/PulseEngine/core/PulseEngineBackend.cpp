@@ -86,7 +86,8 @@ void PulseEngineBackend::FramebufferSizeCallback(GLFWwindow* window, int width, 
 
 std::string PulseEngineBackend::GetWindowName(const std::string &location)
 {
-    return engine + " | " + version +  " | " + location +  " | " + devMonth + " | " + company + " <" + graphicsAPI->GetApiName() + ">";
+    if(gameName != "NULL") return std::string(gameName) + " - " + gameVersion;
+    else return engine + " | " + version +  " | " + location +  " | " + devMonth + " | " + company + " <" + graphicsAPI->GetApiName() + ">";
 }
 
 void PulseEngineBackend::SetWindowName(const std::string &location)
@@ -126,7 +127,7 @@ void PulseEngineBackend::Update()
         for (size_t j = i + 1; j < entities.size(); ++j)
         {
             Entity* entityB = entities[j];
-            collisionManager::ManageCollision(dynamic_cast<Collider*>(entityA->collider), dynamic_cast<Collider*>(entityB->collider));                
+            CollisionManager::ManageCollision(dynamic_cast<Collider*>(entityA->collider), dynamic_cast<Collider*>(entityB->collider));                
         }
     }
     )
@@ -190,16 +191,10 @@ void PulseEngineBackend::DeleteEntity(Entity *entity)
 
 void PulseEngineBackend::ProcessInput(GLFWwindow* window)
 {
-    static bool loadOnce = true;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) activeCamera->ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) activeCamera->ProcessKeyboard(BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) activeCamera->ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) activeCamera->ProcessKeyboard(RIGHT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        if(!loadOnce) return;
-        loadOnce = false;
-        SceneLoader::LoadScene(std::string(ASSET_PATH) + "Scenes/CZEFGZEOUFHDZOEIDYO.pmap", this);
-    }
 }
 
 glm::vec3 PulseEngineBackend::CalculateLighting(const glm::vec3 &position, const glm::vec3 &normal, const glm::vec3 &viewPos, const LightData& light)

@@ -64,13 +64,29 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                 system("xcopy PulseEngineEditor \"Build/assets\" /E /I /Y");    
                 std::cout << "=== Copying PulseEngine.dll For window ===" << std::endl;
                 system("xcopy dist\\PulseEngine.dll \"Build\" /Y");
-                std::cout << "=== Copying executable for window ===" << std::endl;
+                // std::cout << "=== Copying executable for window ===" << std::endl;
 
-                system("xcopy dist\\game.exe \"Build\" /Y");
+                // system("xcopy dist\\game.exe \"Build\" /Y");
 
+                std::cout << "=== Creating the executable for window ===" << std::endl;
                 
                 nlohmann::json_abi_v3_12_0::json engineConfig = FileManager::OpenEngineConfigFile(engine);
                 std::string gameName = engineConfig["GameData"]["Name"].get<std::string>();
+                std::string gameVersion = engineConfig["GameData"]["version"].get<std::string>();
+                
+                std::string defineGameName = "-DGAME_NAME=\\\"" + gameName + "\\\"";
+                std::string defineGameVersion = "-DGAME_VERSION=\\\"" + gameVersion + "\\\"";
+                
+                std::string compileCommand = 
+                "g++ -Idist/src -Idist/include dist/main.cpp "
+                "-Ldist/Build -lPulseEngine "
+                "-LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 "
+                "-DWINDOW_PULSE_EXPORT " + defineGameName + " " + defineGameVersion + " " 
+                "-o Build/Game.exe";
+                std::cout << "Compile command: " << compileCommand << std::endl;
+                system(compileCommand.c_str());
+
+                
                 std::string renameCmd = "rename \"Build\\game.exe\" \"" + gameName + ".exe\"";
                 system(renameCmd.c_str());
 

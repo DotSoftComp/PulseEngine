@@ -1,4 +1,20 @@
+/**
+ * @file TopBar.cpp
+ * @author your name (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-06-27
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "TopBar.h"
+
+#include <cstdlib>
+
+// #include "json.hpp"
+
 #include "imgui/imgui.h"
 #include "PulseEngine/core/PulseEngineBackend.h"
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
@@ -11,7 +27,16 @@
 #include "PulseEngineEditor/InterfaceEditor/InterfaceEditor.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "PulseEngine/core/Lights/PointLight/PointLight.h"
+#include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
+#include "PulseEngine/core/FileManager/FileManager.h"
 
+/**
+ * @brief Update the top bar of the editor interface. It's actually the render of the bar in ImGui
+ * 
+ * @param[in] engine pointer to the actual backend, needed to perform modification on entities, lighting, etcetc
+ * @param[in] editor the interface, because the topbar isn't part of the interface module, but need to rely on it sometimes.
+ */
 void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
 {
     static bool requestOpenNewMapPopup = false;
@@ -27,6 +52,36 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             {
                 requestOpenNewMapPopup = true;
                 strcpy(newMapName, "");
+            }
+            if (ImGui::MenuItem("Build game"))
+            {     
+                ///
+                system("echo === Generating folders for Window ===");           
+                system("if not exist Build mkdir Build");
+                system("if not exist \"Build/assets\" mkdir \"Build/assets\"");
+                system("if not exist \"Build/Logs\" mkdir \"Build/Logs\"");
+                std::cout << "=== Copying assets For window ===" << std::endl;
+                system("xcopy PulseEngineEditor \"Build/assets\" /E /I /Y");    
+                std::cout << "=== Copying PulseEngine.dll For window ===" << std::endl;
+                system("xcopy dist\\PulseEngine.dll \"Build\" /Y");
+                // std::cout << "=== Copying executable for window ===" << std::endl;
+
+                // system("xcopy dist\\game.exe \"Build\" /Y");
+
+                std::cout << "=== Creating the executable for window ===" << std::endl;
+
+                system(R"(
+                g++ dist/main.cpp dist/glad.c dist/GuidGenerator.cpp dist/shader.cpp dist/camera.cpp dist/PulseEngineBackend.cpp dist/Mouse.cpp dist/Entity.cpp dist/mesh.cpp dist/WindowContext.cpp dist/Material.cpp dist/MaterialManager.cpp dist/Primitive.cpp dist/GuidReader.cpp dist/SceneLoader.cpp dist/FileManager.cpp dist/DirectionalLight.cpp -I. -Idist/include -Idist/imgui -Idist/src -IE:/dist/Editor/Include -LD:/lib -lglfw3 -lopengl32 -lm -DWINDOW_PULSE_EXPORT -o Build/Game.exe
+                )");
+
+                
+                nlohmann::json_abi_v3_12_0::json engineConfig = FileManager::OpenEngineConfigFile(engine);
+                std::string gameName = engineConfig["GameData"]["Name"].get<std::string>();
+                std::string renameCmd = "rename \"Build\\game.exe\" \"" + gameName + ".exe\"";
+                system(renameCmd.c_str());
+
+
+
             }
 
             if (ImGui::MenuItem("Open"))
@@ -91,7 +146,30 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                     cube->SetMuid(GenerateGUIDFromPathAndMap(finalName, engine->actualMapPath));
                     engine->entities.push_back(cube);
                 }
+                if (ImGui::MenuItem("Point light"))
+                {
+                    engine->lights.push_back(new PointLight(
+                        PulseEngine::Vector3(0.0f, 5.0f, 0.0f),
+                        PulseEngine::Color(1.0f, 1.0f, 1.0f),
+                        5.0f,
+                        5.0f,
+                        50.0f
+                    ));
 
+                }
+                if (ImGui::MenuItem("Directional light"))
+                {
+                    engine->lights.push_back(new DirectionalLight(
+                        1.0f,
+                        50.0f,
+                        glm::vec3(0.0f,0.0f,0.0f),
+                        PulseEngine::Vector3(0.0f, 0.0f, 0.0f),
+                        PulseEngine::Color(1.0f, 1.0f, 1.0f),
+                        1.0f,
+                        10.0f
+                    ));
+
+                }
 
                 ImGui::EndMenu();
             }
