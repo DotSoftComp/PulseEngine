@@ -23,6 +23,8 @@
 #include "PulseEngine/core/Physics/Collider/BoxCollider.h"
 #include "PulseEngine/core/Lights/LightManager.h"
 #include "PulseEngine/core/Physics/CollisionManager.h"
+#include "PulseEngine/core/coroutine/CoroutineManager.h"
+#include "PulseEngine/core/coroutine/Coroutine.h"
 
 
 
@@ -51,6 +53,8 @@ int PulseEngineBackend::Initialize()
     }
     graphicsAPI->Initialize(GetWindowName("editor").c_str(), &width, &height, this);
     windowContext->SetGLFWWindow(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
+
+    coroutineManager = new CoroutineManager();
 
 
     // lights.push_back(new DirectionalLight(1.0f, 10.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(3.0f, 3.0f, 0.0f), glm::vec3(1.0f), 10, 1));
@@ -86,7 +90,7 @@ void PulseEngineBackend::FramebufferSizeCallback(GLFWwindow* window, int width, 
 
 std::string PulseEngineBackend::GetWindowName(const std::string &location)
 {
-    if(gameName != "NULL") return std::string(gameName);
+    if(gameName != "NULL") return std::string(gameName) + " - " + gameVersion;
     else return engine + " | " + version +  " | " + location +  " | " + devMonth + " | " + company + " <" + graphicsAPI->GetApiName() + ">";
 }
 
@@ -132,6 +136,7 @@ void PulseEngineBackend::Update()
     }
     )
 
+    coroutineManager->UpdateAll(deltaTime);
 }
 
 void PulseEngineBackend::Render()

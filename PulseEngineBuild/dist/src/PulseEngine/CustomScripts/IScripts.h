@@ -2,6 +2,7 @@
 #define ISCRIPT_H
 
 #include "Common/dllExport.h"
+#include "Common/common.h"
 #include <unordered_map>
 
 //ExposedVariable is used to expose variables to the editor

@@ -16,6 +16,12 @@ public:
     ~TopBar() {}
 
     void UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor);
+    void BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor *editor);
+    void CompileUserScripts(InterfaceEditor *editor);
+    void GenerateExecutableForWindow(PulseEngineBackend *engine);
+    void CopyDllForWindow();
+    void CopyAssetForWindow();
+    void GenerateWindowsDirectory();
 };
 
 

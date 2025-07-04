@@ -30,6 +30,8 @@
 #include "PulseEngine/core/Lights/PointLight/PointLight.h"
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
 #include "PulseEngine/core/FileManager/FileManager.h"
+#include "PulseEngine/core/coroutine/CoroutineManager.h"
+#include "PulseEngineEditor/InterfaceEditor/BuildGameCoroutine.h"
 
 /**
  * @brief Update the top bar of the editor interface. It's actually the render of the bar in ImGui
@@ -56,42 +58,7 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             if (ImGui::MenuItem("Build game"))
             {     
                 ///
-                system("echo === Generating folders for Window ===");           
-                system("if not exist Build mkdir Build");
-                system("if not exist \"Build/assets\" mkdir \"Build/assets\"");
-                system("if not exist \"Build/Logs\" mkdir \"Build/Logs\"");
-                std::cout << "=== Copying assets For window ===" << std::endl;
-                system("xcopy PulseEngineEditor \"Build/assets\" /E /I /Y");    
-                std::cout << "=== Copying PulseEngine.dll For window ===" << std::endl;
-                system("xcopy dist\\PulseEngine.dll \"Build\" /Y");
-                // std::cout << "=== Copying executable for window ===" << std::endl;
-
-                // system("xcopy dist\\game.exe \"Build\" /Y");
-
-                std::cout << "=== Creating the executable for window ===" << std::endl;
-                
-                nlohmann::json_abi_v3_12_0::json engineConfig = FileManager::OpenEngineConfigFile(engine);
-                std::string gameName = engineConfig["GameData"]["Name"].get<std::string>();
-                std::string gameVersion = engineConfig["GameData"]["version"].get<std::string>();
-                
-                std::string defineGameName = "-DGAME_NAME=\\\"" + gameName + "\\\"";
-                std::string defineGameVersion = "-DGAME_VERSION=\\\"" + gameVersion + "\\\"";
-                
-                std::string compileCommand = 
-                "g++ -Idist/src -Idist/include dist/main.cpp "
-                "-Ldist/Build -lPulseEngine "
-                "-LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 "
-                "-DWINDOW_PULSE_EXPORT " + defineGameName + " " + defineGameVersion + " " 
-                "-o Build/Game.exe";
-                std::cout << "Compile command: " << compileCommand << std::endl;
-                system(compileCommand.c_str());
-
-                
-                std::string renameCmd = "rename \"Build\\game.exe\" \"" + gameName + ".exe\"";
-                system(renameCmd.c_str());
-
-
-
+                BuildGameToWindow(engine, editor);
             }
 
             if (ImGui::MenuItem("Open"))
@@ -240,4 +207,117 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
 
         ImGui::EndPopup();
     }
+}
+
+void TopBar::BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor* editor)
+{
+    std::cout << "=== Building game to window ===" << std::endl;
+
+    // Create the build coroutine
+    std::unique_ptr<Coroutine> buildCoroutine = std::make_unique<BuildGameCoroutine>();
+
+    // Safely cast raw pointer from base Coroutine* to derived BuildGameCoroutine*
+    BuildGameCoroutine* co = dynamic_cast<BuildGameCoroutine*>(buildCoroutine.get());
+    if (co)
+    {
+        co->engine = engine;
+        co->editor = editor;
+        co->topbar = this;
+    }
+    else
+    {
+        // Handle error: cast failed
+        std::cerr << "Failed to cast Coroutine* to BuildGameCoroutine*\n";
+    }
+
+
+    // Add the coroutine to the editor
+    engine->coroutineManager->Add(std::move(buildCoroutine));
+}
+
+void TopBar::CompileUserScripts(InterfaceEditor * editor)
+{
+    std::cout << "Compiling...\n";
+                    //Lets work on the custom files scripts now
+                std::string compiler = "g++";
+                std::string output = "Build/CustomScripts.dll";
+                std::string stdVersion = "-std=c++17";
+                std::string defines = "-DBUILDING_DLL -DWINDOW_PULSE_EXPORT";
+                std::string flags = "-shared -Wall -g -mconsole " + defines;
+                std::string includeDirs = R"(-IUserScripts -Idist\src\PulseEngine\CustomScripts -Idist\include -Idist\src -Idist/src/dllexport -Ldist)";
+                std::string libs = "-lPulseEngine";
+
+                // Gather source files
+                std::string sources;
+                for (const auto& entry : std::filesystem::directory_iterator("UserScripts"))
+                {
+                    if (entry.path().extension() == ".cpp")
+                    {
+                        sources += entry.path().string() + " ";
+                    }
+                }
+            
+                // Final compilation command
+                std::string compileCommand = compiler + " " + stdVersion +
+                                             " -o " + output + " " + sources +
+                                             includeDirs + " " + libs + " " + flags;
+            
+                std::cout << "Compiling with command:\n" << compileCommand << "\n";
+            
+                int result = system(compileCommand.c_str());
+
+                editor->ChangePorgressIn("Building Game", 1.0f);
+                if (result != 0)
+                {
+                    std::cerr << "Compilation failed.\n";
+                }
+                else
+                {
+                    std::cout << "DLL generated: " << output << "\n";
+                }
+}
+
+void TopBar::GenerateExecutableForWindow(PulseEngineBackend * engine)
+{
+    std::cout << "=== Creating the executable for window ===" << std::endl;
+
+    nlohmann::json_abi_v3_12_0::json engineConfig = FileManager::OpenEngineConfigFile(engine);
+    std::string gameName = engineConfig["GameData"]["Name"].get<std::string>();
+    std::string gameVersion = engineConfig["GameData"]["version"].get<std::string>();
+
+    std::string defineGameName = "-DGAME_NAME=\\\"" + gameName + "\\\"";
+    std::string defineGameVersion = "-DGAME_VERSION=\\\"" + gameVersion + "\\\"";
+
+    std::string compileCommand =
+        "g++ -Idist/src -Idist/include dist/main.cpp "
+        "-Ldist/Build -lPulseEngine "
+        "-LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 "
+        "-DWINDOW_PULSE_EXPORT " +
+        defineGameName + " " + defineGameVersion + " "
+                                                   "-o Build/Game.exe";
+    std::cout << "Compile command: " << compileCommand << std::endl;
+    system(compileCommand.c_str());
+
+    std::string renameCmd = "rename \"Build\\game.exe\" \"" + gameName + ".exe\"";
+    system(renameCmd.c_str());
+}
+
+void TopBar::CopyDllForWindow()
+{
+    std::cout << "=== Copying PulseEngine.dll For window ===" << std::endl;
+    system("xcopy dist\\PulseEngine.dll \"Build\" /Y");
+}
+
+void TopBar::CopyAssetForWindow()
+{
+    std::cout << "=== Copying assets For window ===" << std::endl;
+    system("xcopy PulseEngineEditor \"Build/assets\" /E /I /Y");
+}
+
+void TopBar::GenerateWindowsDirectory()
+{
+    system("echo === Generating folders for Window ===");
+    system("if not exist Build mkdir Build");
+    system("if not exist \"Build/assets\" mkdir \"Build/assets\"");
+    system("if not exist \"Build/Logs\" mkdir \"Build/Logs\"");
 }

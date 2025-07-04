@@ -8,6 +8,9 @@
 #include "PulseEngine/core/GUID/GuidGenerator.h"
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
+#include "PulseEngine/core/Lights/Lights.h"
+#include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
+#include "PulseEngine/core/Lights/PointLight/PointLight.h"
 
 #include <iostream>
 #include <assimp/Importer.hpp>      // Assimp::Importer
@@ -52,6 +55,46 @@ void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* back
         else
         {
             std::cout << "entity is not valid !" << std::endl;
+        }
+    }
+
+    for (const auto& lightData : sceneData["lights"])
+    {
+        LightData* light = nullptr;
+        std::string type = lightData["type"].get<std::string>();
+        if (type == "DirectionalLight")
+        {
+            light = new DirectionalLight(lightData["nearPlane"].get<float>(),
+                                         lightData["farPlane"].get<float>(),
+                                         /*** @todo remove the glm::vec3 and make it a pulseengine::vector3*/
+                                         glm::vec3(lightData["target"][0].get<float>(), 
+                                                              lightData["target"][1].get<float>(),
+                                                              lightData["target"][2].get<float>()),
+                                         PulseEngine::Vector3(lightData["position"][0].get<float>(),
+                                                              lightData["position"][1].get<float>(),
+                                                              lightData["position"][2].get<float>()),
+                                         PulseEngine::Color(lightData["color"][0].get<float>(),
+                                                              lightData["color"][1].get<float>(),
+                                                              lightData["color"][2].get<float>()),
+                                        lightData["intensity"].get<float>(), lightData["attenuation"].get<float>());
+        }
+        else if (type == "PointLight")
+        {
+            light = new PointLight(PulseEngine::Vector3(lightData["position"][0].get<float>(),
+                                                        lightData["position"][1].get<float>(),
+                                                        lightData["position"][2].get<float>()),
+                                    PulseEngine::Color(lightData["color"][0].get<float>(),
+                                                        lightData["color"][1].get<float>(),
+                                                        lightData["color"][2].get<float>()),
+                                    lightData["intensity"].get<float>(), lightData["attenuation"].get<float>(), lightData["farPlane"].get<float>());
+        }
+
+        if (light)
+        {
+            light->SetName(lightData["name"].get<std::string>());
+            light->SetMuid(lightData["muid"].get<std::size_t>());
+            backend->lights.push_back(light);
+            std::cout << "Light " << light->GetName() << " loaded." << std::endl;
         }
     }
 
@@ -238,6 +281,41 @@ void SceneLoader::SaveSceneToFile(const std::string &mapName, PulseEngineBackend
     for (const auto& entity : backend->entities)
     {
         SaveEntities(entity, sceneData);
+    }
+
+    for (const auto& light : backend->lights)
+    {
+        nlohmann::json lightData;
+        if(DirectionalLight* dirLight = dynamic_cast<DirectionalLight*>(light))
+        {
+            lightData["type"] = "DirectionalLight";
+            lightData["position"] = {dirLight->GetPosition().x, dirLight->GetPosition().y, dirLight->GetPosition().z};
+            lightData["color"] = {dirLight->color.r, dirLight->color.g, dirLight->color.b};
+            lightData["intensity"] = dirLight->intensity;
+            lightData["attenuation"] = dirLight->attenuation;
+            lightData["farPlane"] = dirLight->farPlane;
+            lightData["nearPlane"] = dirLight->nearPlane;
+            lightData["target"] = {dirLight->target.x, dirLight->target.y, dirLight->target.z};
+            lightData["castsShadow"] = dirLight->castsShadow;
+        }
+        else if(PointLight* pointLight = dynamic_cast<PointLight*>(light))
+        {
+            lightData["type"] = "PointLight";
+            lightData["position"] = {pointLight->GetPosition().x, pointLight->GetPosition().y, pointLight->GetPosition().z};
+            lightData["color"] = {pointLight->color.r, pointLight->color.g, pointLight->color.b};
+            lightData["intensity"] = pointLight->intensity;
+            lightData["attenuation"] = pointLight->attenuation;
+            lightData["farPlane"] = pointLight->farPlane;
+            lightData["castsShadow"] = pointLight->castsShadow;
+        }
+        else
+        {
+            std::cout << "Unknown light type, skipping." << std::endl;
+            continue;
+        }
+        lightData["name"] = light->GetName();
+        lightData["muid"] = light->GetMuid();
+        sceneData["lights"].push_back(lightData);
     }
 
     // Write to file

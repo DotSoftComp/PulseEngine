@@ -28,6 +28,7 @@ class LightData;
 class Camera;
 class InterfaceEditor;
 class LightManager;
+class CoroutineManager;
 
 class IGraphicsAPI;
 
@@ -88,6 +89,7 @@ public:
     const std::string& GetGameVersion() const { return gameVersion; }
     
     IGraphicsAPI* graphicsAPI = nullptr;
+    CoroutineManager* coroutineManager = nullptr;
 private:
     WindowContext* windowContext = nullptr;
 
@@ -97,8 +99,8 @@ private:
     std::string gameVersion = "0.0.1";
 
     std::string engine = "Pulse Engine";
-    std::string version = "V0.0.6";
-    std::string devMonth = "June 2025";
+    std::string version = "V0.0.7";
+    std::string devMonth = "July 2025";
     std::string company = "Pulse Software";
 
     float deltaTime = 0.0f;

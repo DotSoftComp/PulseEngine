@@ -1,6 +1,6 @@
 #pragma once
 #include "IScripts.h"
-#include "dllExport.h"
+#include "dist/src/dllexport/dllExport.h"
 
 class MA_DLL_API CustomScript : public IScript
 {

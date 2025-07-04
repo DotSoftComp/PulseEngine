@@ -21,3 +21,8 @@ extern "C" __declspec(dllexport) IScript* CreateCustomScriptA()
 {
     return new CustomScript();
 }
+
+std::vector<ExposedVariable> CustomScript::GetExposedVariables()
+{
+    return exposedVariables;
+}
