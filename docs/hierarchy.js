@@ -3,8 +3,12 @@ var hierarchy =
     [ "Bone", "dc/df9/struct_bone.html", null ],
     [ "BoneAnimation", "df/d9c/struct_bone_animation.html", null ],
     [ "BoneInfo", "d0/df4/struct_bone_info.html", null ],
-    [ "ColiisionManager", "de/d9b/class_coliision_manager.html", null ],
+    [ "CollisionManager", "df/d14/class_collision_manager.html", null ],
     [ "PulseEngine::Color", "d7/de0/struct_pulse_engine_1_1_color.html", null ],
+    [ "Coroutine", "d3/ded/class_coroutine.html", [
+      [ "BuildGameCoroutine", "d3/df2/class_build_game_coroutine.html", null ]
+    ] ],
+    [ "CoroutineManager", "d3/d22/class_coroutine_manager.html", null ],
     [ "Entity", "d2/d96/class_entity.html", [
       [ "LightData", "db/dd6/class_light_data.html", [
         [ "DirectionalLight", "d0/db5/class_directional_light.html", null ],
@@ -25,6 +29,7 @@ var hierarchy =
     ] ],
     [ "Keyframe", "d1/dd4/struct_keyframe.html", null ],
     [ "LightManager", "d1/d3e/class_light_manager.html", null ],
+    [ "LoadingPopupData", "d5/d00/struct_loading_popup_data.html", null ],
     [ "PulseEngine::Mat3", "dc/d91/struct_pulse_engine_1_1_mat3.html", null ],
     [ "PulseEngine::Mat4", "d5/db6/struct_pulse_engine_1_1_mat4.html", null ],
     [ "Material", "dc/dee/class_material.html", null ],

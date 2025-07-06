@@ -12,5 +12,6 @@ var searchData=
   ['getnativehandle_9',['GetNativeHandle',['../d0/d58/class_i_graphics_a_p_i.html#a837d2fc1053e58bbacffe9bae147312d',1,'IGraphicsAPI::GetNativeHandle()'],['../d6/da4/class_open_g_l_a_p_i.html#ad8a4b77e31f2a09d91ce86e4f4eeb77b',1,'OpenGLAPI::GetNativeHandle()']]],
   ['getorientedsize_10',['GetOrientedSize',['../d8/d0c/class_box_collider.html#a27b8ba9d5a2477209ef82579349ef0df',1,'BoxCollider']]],
   ['getposition_11',['GetPosition',['../d8/d0c/class_box_collider.html#a4e15048408acecf61d039b252fe6279c',1,'BoxCollider']]],
-  ['getsize_12',['GetSize',['../d8/d0c/class_box_collider.html#ae36dcce4db52873767df00172df93da7',1,'BoxCollider']]]
+  ['getscriptfromcallname_12',['GetScriptFromCallName',['../de/dd1/class_scripts_loader.html#afeeb586921841639346691f3c09c2bba',1,'ScriptsLoader']]],
+  ['getsize_13',['GetSize',['../d8/d0c/class_box_collider.html#ae36dcce4db52873767df00172df93da7',1,'BoxCollider']]]
 ];

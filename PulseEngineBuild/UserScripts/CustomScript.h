@@ -10,6 +10,7 @@ class MA_DLL_API CustomScript : public IScript
     public:
         CustomScript() { 
             AddExposedVariable(EXPOSE_VAR(speed, INT)); 
+            AddExposedVariable(EXPOSE_VAR(life, FLOAT)); 
             REGISTER_VAR(speed);
         }
         virtual void OnStart() override;
@@ -17,4 +18,5 @@ class MA_DLL_API CustomScript : public IScript
         virtual const char* GetName() const override;
 
         int speed = 1;
+        float life = 1;
 };

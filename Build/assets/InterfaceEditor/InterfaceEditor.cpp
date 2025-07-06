@@ -263,6 +263,11 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
     if(windowStates["viewport"]) Viewport(engine);
 
     topbar->UpdateBar(engine, this);
+
+    for(auto& popup : loadingPopups)
+    {
+        ShowLoadingPopup(popup.contentFunction, popup.progressPercent);
+    }
     // Rendu de la frame
     ImGui::Render();
     ImGui::UpdatePlatformWindows();
@@ -599,4 +604,36 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
     ImGui::End();
 }
 
+void InterfaceEditor::ShowLoadingPopup(std::function<void()> contentFunction, float progressPercent)
+{
+     // Set the size of the popup
+    ImVec2 popupSize = ImVec2(300, 100);
+    ImVec2 windowSize = ImGui::GetMainViewport()->Size;
+    ImVec2 windowPos = ImVec2(
+        windowSize.x - popupSize.x - 10.0f, // 10px padding from right
+        windowSize.y - popupSize.y - 10.0f  // 10px padding from bottom
+    );
 
+    ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always);
+    ImGui::SetNextWindowSize(popupSize, ImGuiCond_Always);
+
+    // You can use ImGuiWindowFlags_NoDecoration to make it look more like a popup
+    ImGui::Begin("LoadingPopup", nullptr,
+        ImGuiWindowFlags_NoDecoration |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_AlwaysAutoResize |
+        ImGuiWindowFlags_NoSavedSettings |
+        ImGuiWindowFlags_NoFocusOnAppearing |
+        ImGuiWindowFlags_NoNav);
+
+    ImGui::Text("Loading...");
+    ImGui::ProgressBar(progressPercent, ImVec2(-1, 0.0f));
+
+    if (contentFunction)
+    {
+        ImGui::Separator();
+        contentFunction();
+    }
+
+    ImGui::End();
+}

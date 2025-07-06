@@ -149,9 +149,17 @@ void PulseEngineBackend::Render()
         Shader* shader = entity->GetMaterial()->GetShader();
 
         shader->Use();
+
+        //here we need to use specific shader setter for each graphic api.
+        /**
+         * @todo make SetMat4() and others from glm:: to PulseEngine::
+         * 
+         */
+        #ifdef WINDOW_PULSE_EXPORT
         shader->SetMat4("projection", projection);
         shader->SetMat4("view", view);
-        shader->SetVec3("viewPos", GetActiveCamera()->Position);
+        shader->SetVec3("viewPos", glm::vec3(GetActiveCamera()->Position.x, GetActiveCamera()->Position.y, GetActiveCamera()->Position.z));
+        #endif
         LightManager::BindLightsToShader(shader, this, entity);
 
         entity->DrawEntity();

@@ -109,7 +109,7 @@ private:
 
     static Camera* activeCamera;
 
-    glm::mat4 view;
+    PulseEngine::Mat4 view;
     glm::mat4 projection;
 
     Shader* shadowShader;

@@ -5,5 +5,6 @@ var searchData=
   ['filemanager_2',['FileManager',['../d0/d48/class_file_manager.html',1,'']]],
   ['finalbonematrices_3',['finalBoneMatrices',['../d7/d08/class_skeleton.html#af2da0d88879f25d03a1adc2a0936a1d7',1,'Skeleton']]],
   ['finaltransform_4',['finalTransform',['../d0/df4/struct_bone_info.html#aa5ac2d70a417e86820451b1f20bac230',1,'BoneInfo']]],
-  ['findnodeanim_5',['FindNodeAnim',['../d7/d08/class_skeleton.html#a78d632669a3ffb9a67dfe686a17ae47b',1,'Skeleton']]]
+  ['findnodeanim_5',['FindNodeAnim',['../d7/d08/class_skeleton.html#a78d632669a3ffb9a67dfe686a17ae47b',1,'Skeleton']]],
+  ['freedll_6',['FreeDll',['../de/dd1/class_scripts_loader.html#afb4c383f22ebda24561e7ade83762d26',1,'ScriptsLoader']]]
 ];

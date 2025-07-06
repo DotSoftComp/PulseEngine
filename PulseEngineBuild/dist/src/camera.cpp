@@ -1,7 +1,7 @@
 #include "camera.h"
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(PulseEngine::Vector3 position, PulseEngine::Vector3 up, float yaw, float pitch)
+    : Front(PulseEngine::Vector3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 {
     Position = position;
     WorldUp = up;
@@ -58,11 +58,12 @@ void Camera::ProcessMouseScroll(float yoffset)
 
 void Camera::UpdateCameraVectors()
 {
-    glm::vec3 front;
-    front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    front.y = sin(glm::radians(Pitch));
-    front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    Front = glm::normalize(front);
-    Right = glm::normalize(glm::cross(Front, WorldUp));
-    Up    = glm::normalize(glm::cross(Right, Front));
+    PulseEngine::Vector3 front;
+    const float DEG2RAD = 3.14159265358979323846f / 180.0f;
+    front.x = cos(Yaw * DEG2RAD) * cos(Pitch * DEG2RAD);
+    front.y = sin(Pitch * DEG2RAD);
+    front.z = sin(Yaw * DEG2RAD) * cos(Pitch * DEG2RAD);
+    Front = front.Normalized();
+    Right = Front.Cross(WorldUp).Normalized();
+    Up    = Right.Cross(Front).Normalized();
 }

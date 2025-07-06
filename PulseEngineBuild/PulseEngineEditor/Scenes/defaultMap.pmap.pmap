@@ -7,15 +7,15 @@
                         {
                             "name": "speed",
                             "type": 0,
-                            "value": 1
+                            "value": 2
                         },
                         {
-                            "name": "speed",
-                            "type": 0,
-                            "value": 1
+                            "name": "life",
+                            "type": 1,
+                            "value": 350.0
                         }
                     ],
-                    "name": "CreateCustomScriptA"
+                    "name": "PulseScriptA"
                 }
             ],
             "guid": 4999045609554485032,
@@ -38,7 +38,8 @@
             ]
         },
         {
-            "Scripts": [],
+            "Scripts": [
+            ],
             "guid": 4999045609554485032,
             "muid": 10737175689693915419,
             "name": "Cube (1)",
@@ -65,10 +66,15 @@
                         {
                             "name": "speed",
                             "type": 0,
-                            "value": 1
+                            "value": 2
+                        },
+                        {
+                            "name": "life",
+                            "type": 1,
+                            "value": 150.0
                         }
                     ],
-                    "name": "CreateCustomScriptA"
+                    "name": "PulseScriptA"
                 }
             ],
             "guid": 4999045609554485032,

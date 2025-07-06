@@ -10,6 +10,7 @@ var searchData=
   ['bones_7',['bones',['../d7/d08/class_skeleton.html#adba61b1a027721376e2406cbf6adea89',1,'Skeleton']]],
   ['boxcollider_8',['BoxCollider',['../d8/d0c/class_box_collider.html',1,'BoxCollider'],['../d8/d0c/class_box_collider.html#a7f8ffcff391ac050360fc91d7f95fade',1,'BoxCollider::BoxCollider()']]],
   ['bug_20list_9',['Bug List',['../de/da5/bug.html',1,'']]],
-  ['built_20with_10',['🧱 Built With',['../index.html#autotoc_md6',1,'']]],
-  ['by_11',['🏢 Developed By',['../index.html#autotoc_md14',1,'']]]
+  ['buildgamecoroutine_10',['BuildGameCoroutine',['../d3/df2/class_build_game_coroutine.html',1,'']]],
+  ['built_20with_11',['🧱 Built With',['../index.html#autotoc_md6',1,'']]],
+  ['by_12',['🏢 Developed By',['../index.html#autotoc_md14',1,'']]]
 ];

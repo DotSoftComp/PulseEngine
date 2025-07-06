@@ -7,7 +7,7 @@ bool BuildGameCoroutine::Update(float deltaTime)
     {
 
         timer += deltaTime;
-
+        EDITOR_ONLY(
         switch (currentStep)
         {
             case Init:
@@ -87,7 +87,7 @@ bool BuildGameCoroutine::Update(float deltaTime)
             case Done:
                 std::cout << "Build Done!\n";
                 return false;
-        }
+        })
 
         return true;
     }

@@ -55,7 +55,7 @@ bool BuildGameCoroutine::Update(float deltaTime)
                     }, "Building Game");
                     topbar->CopyDllForWindow();
                     std::cout << "Step 3 done\n";
-                    currentStep = Compile;
+                    currentStep = Step4;
                     timer = 0;
                 }
                 break;

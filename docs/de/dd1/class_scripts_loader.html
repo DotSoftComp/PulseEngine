@@ -96,10 +96,12 @@ $(function(){initNavTree('de/dd1/class_scripts_loader.html','../../','d7/d9f/cla
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afeeb586921841639346691f3c09c2bba" id="r_afeeb586921841639346691f3c09c2bba"><td class="memItemLeft" align="right" valign="top"><a id="afeeb586921841639346691f3c09c2bba" name="afeeb586921841639346691f3c09c2bba"></a>
-static <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetScriptFromCallName</b> (std::string callName)</td></tr>
-<tr class="memitem:a9e299bfa51a47e830fb4f714643724ae" id="r_a9e299bfa51a47e830fb4f714643724ae"><td class="memItemLeft" align="right" valign="top"><a id="a9e299bfa51a47e830fb4f714643724ae" name="a9e299bfa51a47e830fb4f714643724ae"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadDLL</b> ()</td></tr>
+<tr class="memitem:afeeb586921841639346691f3c09c2bba" id="r_afeeb586921841639346691f3c09c2bba"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afeeb586921841639346691f3c09c2bba">GetScriptFromCallName</a> (std::string callName)</td></tr>
+<tr class="memdesc:afeeb586921841639346691f3c09c2bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Script From Call Name object.  <br /></td></tr>
+<tr class="memitem:a9e299bfa51a47e830fb4f714643724ae" id="r_a9e299bfa51a47e830fb4f714643724ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e299bfa51a47e830fb4f714643724ae">LoadDLL</a> ()</td></tr>
+<tr class="memdesc:a9e299bfa51a47e830fb4f714643724ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the specific dll of custom scripts (CustomScripts.dll) and load the exported functions.  <br /></td></tr>
+<tr class="memitem:afb4c383f22ebda24561e7ade83762d26" id="r_afb4c383f22ebda24561e7ade83762d26"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb4c383f22ebda24561e7ade83762d26">FreeDll</a> ()</td></tr>
+<tr class="memdesc:afb4c383f22ebda24561e7ade83762d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple function to be called before a new dll generation.  <br /></td></tr>
 <tr class="memitem:abf914685a685d96033a9d483b42ed1e5" id="r_abf914685a685d96033a9d483b42ed1e5"><td class="memItemLeft" align="right" valign="top"><a id="abf914685a685d96033a9d483b42ed1e5" name="abf914685a685d96033a9d483b42ed1e5"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadExportedFunctions</b> ()</td></tr>
 </table><table class="memberdecls">
@@ -110,6 +112,101 @@ static HMODULE&#160;</td><td class="memItemRight" valign="bottom"><b>customScrip
 <tr class="memitem:ab2789e329f28c0f3f40c661568c08dd1" id="r_ab2789e329f28c0f3f40c661568c08dd1"><td class="memItemLeft" align="right" valign="top"><a id="ab2789e329f28c0f3f40c661568c08dd1" name="ab2789e329f28c0f3f40c661568c08dd1"></a>
 static std::map&lt; std::string, CreateScriptFunc &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scriptMap</b></td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="afb4c383f22ebda24561e7ade83762d26" name="afb4c383f22ebda24561e7ade83762d26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb4c383f22ebda24561e7ade83762d26">&#9670;&#160;</a></span>FreeDll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScriptsLoader::FreeDll </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A simple function to be called before a new dll generation. </p>
+<p>the customScript.dll will be locked by the system, so we need to free it before generating a new one, or modifying it. </p>
+
+</div>
+</div>
+<a id="afeeb586921841639346691f3c09c2bba" name="afeeb586921841639346691f3c09c2bba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeeb586921841639346691f3c09c2bba">&#9670;&#160;</a></span>GetScriptFromCallName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/da4/class_i_script.html">IScript</a> * ScriptsLoader::GetScriptFromCallName </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>callName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Script From Call Name object. </p>
+<p>This function will retrieve the script from the dll and create the IScript*.</p>
+<p>If no dll loaded, it will try to load it. No crash if the dll is not loaded. It will just return a nullptr.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callName</td><td>Name of the function to call in the dll. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The function should be exported from the dll with the name "PulseScript" </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>IScript* the actual script. it will be a child that inherit from this interface but its not important, it has the Update and Start functions. </dd></dl>
+
+</div>
+</div>
+<a id="a9e299bfa51a47e830fb4f714643724ae" name="a9e299bfa51a47e830fb4f714643724ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e299bfa51a47e830fb4f714643724ae">&#9670;&#160;</a></span>LoadDLL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScriptsLoader::LoadDLL </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Load the specific dll of custom scripts (CustomScripts.dll) and load the exported functions. </p>
+<p>each function should start with "PulseScript" to specify that it is a script function.</p>
+<p>this function will give the possibility to GetScriptFromCallName to retrieve the script from the dll and create the IScript* </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

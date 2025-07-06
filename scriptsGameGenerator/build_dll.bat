@@ -28,6 +28,8 @@ src/PulseEngine/core/Lights/PointLight/PointLight.cpp ^
 src/PulseEngine/core/Material/Texture.cpp ^
 src/PulseEngine/core/Lights/LightManager.cpp ^
 src/PulseEngine/core/Physics/CollisionManager.cpp ^
+src\PulseEngine\core\coroutine\CoroutineManager.cpp ^
+PulseEngineEditor\InterfaceEditor\BuildGameCoroutine.cpp ^
 -I. ^
 -Iinclude ^
 -I./src -Iexternal/assimp/include ^

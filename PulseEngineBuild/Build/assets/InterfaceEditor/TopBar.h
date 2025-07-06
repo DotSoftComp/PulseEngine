@@ -17,7 +17,7 @@ public:
 
     void UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor);
     void BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor *editor);
-    void CompileUserScripts(InterfaceEditor *editor);
+    void CompileUserScripts(InterfaceEditor *editor, std::string output = "Build/CustomScripts.dll");
     void GenerateExecutableForWindow(PulseEngineBackend *engine);
     void CopyDllForWindow();
     void CopyAssetForWindow();

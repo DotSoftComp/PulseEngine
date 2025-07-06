@@ -32,6 +32,7 @@
 #include "PulseEngine/core/FileManager/FileManager.h"
 #include "PulseEngine/core/coroutine/CoroutineManager.h"
 #include "PulseEngineEditor/InterfaceEditor/BuildGameCoroutine.h"
+#include "PulseEngine/CustomScripts/ScriptsLoader.h"
 
 /**
  * @brief Update the top bar of the editor interface. It's actually the render of the bar in ImGui
@@ -59,6 +60,13 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             {     
                 ///
                 BuildGameToWindow(engine, editor);
+            }
+            if(ImGui::MenuItem("Compile user scripts"))
+            {
+                ScriptsLoader::FreeDll(); 
+                CompileUserScripts(editor, "CustomScripts.dll");
+                ScriptsLoader::LoadDLL();
+                
             }
 
             if (ImGui::MenuItem("Open"))
@@ -235,12 +243,11 @@ void TopBar::BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor* edit
     engine->coroutineManager->Add(std::move(buildCoroutine));
 }
 
-void TopBar::CompileUserScripts(InterfaceEditor * editor)
+void TopBar::CompileUserScripts(InterfaceEditor * editor, std::string output )
 {
     std::cout << "Compiling...\n";
                     //Lets work on the custom files scripts now
                 std::string compiler = "g++";
-                std::string output = "Build/CustomScripts.dll";
                 std::string stdVersion = "-std=c++17";
                 std::string defines = "-DBUILDING_DLL -DWINDOW_PULSE_EXPORT";
                 std::string flags = "-shared -Wall -g -mconsole " + defines;

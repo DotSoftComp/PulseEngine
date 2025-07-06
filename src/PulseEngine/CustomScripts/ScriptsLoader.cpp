@@ -43,6 +43,12 @@ void ScriptsLoader::LoadDLL()
     }
 }
 
+void ScriptsLoader::FreeDll()
+{
+        FreeLibrary(customScriptDll); // Libère la DLL après le chargement des fonctions
+        customScriptDll = nullptr; // Réinitialise le handle de la DLL
+}
+
 void ScriptsLoader::LoadExportedFunctions()
 {
     DWORD size;
@@ -61,8 +67,8 @@ void ScriptsLoader::LoadExportedFunctions()
     {
         const char* funcName = (const char*)(base + funcNames[i]);
 
-        // Si le nom commence par "CreateCustomScript"
-        if (std::string(funcName).rfind("CreateCustomScript", 0) == 0)
+        // Si le nom commence par "PulseScript"
+        if (std::string(funcName).rfind("PulseScript", 0) == 0)
         {
             FARPROC proc = GetProcAddress(customScriptDll, funcName);
             if (proc)

@@ -41,6 +41,73 @@ namespace PulseEngine
                 default: throw std::out_of_range("Index out of range for Vector3");
             }
         }
+
+        // Add assignment operator+=
+        Vector3& operator+=(const Vector3& other)
+        {
+            x += other.x;
+            y += other.y;
+            z += other.z;
+            return *this;
+        }
+
+        // Add assignment operator-=
+        Vector3& operator-=(const Vector3& other)
+        {
+            x -= other.x;
+            y -= other.y;
+            z -= other.z;
+            return *this;
+        }
+
+        // Subtract two vectors
+        Vector3 operator-(const Vector3& other) const
+        {
+            return Vector3(x - other.x, y - other.y, z - other.z);
+        }
+        
+
+        // Add two vectors
+        Vector3 operator+(const Vector3& other) const
+        {
+            return Vector3(x + other.x, y + other.y, z + other.z);
+        }
+
+        // Multiply vector by scalar
+        Vector3 operator*(float scalar) const
+        {
+            return Vector3(x * scalar, y * scalar, z * scalar);
+        }
+
+        // Multiply scalar by vector (friend function)
+        friend Vector3 operator*(float scalar, const Vector3& vec)
+        {
+            return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+        }
+
+
+
+        Vector3 Normalized() const
+        {
+            float length = std::sqrt(x * x + y * y + z * z);
+            if (length == 0.0f)
+            throw std::runtime_error("Cannot normalize zero-length vector");
+            return Vector3(x / length, y / length, z / length);
+        }
+
+        Vector3 Cross(const Vector3& other) const
+        {
+            return Vector3(
+            y * other.z - z * other.y,
+            z * other.x - x * other.z,
+            x * other.y - y * other.x
+            );
+        }
+
+        float Dot(const Vector3& other) const
+        {
+            return x * other.x + y * other.y + z * other.z;
+        }
     };
 }
 
