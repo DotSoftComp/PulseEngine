@@ -27,7 +27,7 @@ class PulseEngineBackend;
  * @details It contains properties like position, color, intensity, attenuation, and whether the light casts shadows.
  * @details Each light type (e.g., PointLight, DirectionalLight) will inherit from this class and implement its own specific behavior.
  */
-class MA_DLL_API LightData: public Entity
+class PULSE_ENGINE_DLL_API LightData: public Entity
 {
     public:
         glm::mat4 lightSpaceMatrix;

@@ -18,7 +18,7 @@
 
 class PulseEngineBackend;
 
-class MA_DLL_API FileManager
+class PULSE_ENGINE_DLL_API FileManager
 {
 private:
     FileManager() = default;

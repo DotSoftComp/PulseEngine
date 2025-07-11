@@ -14,7 +14,7 @@
 #include "Common/common.h"
 #include "Common/dllExport.h"
 
-std::size_t MA_DLL_API GenerateGUIDFromPath(const std::string& filepath);
-std::size_t MA_DLL_API GenerateGUIDFromPathAndMap(const std::string& filepath, const std::string& mapName);
+std::size_t PULSE_ENGINE_DLL_API GenerateGUIDFromPath(const std::string& filepath);
+std::size_t PULSE_ENGINE_DLL_API GenerateGUIDFromPathAndMap(const std::string& filepath, const std::string& mapName);
 
 #endif

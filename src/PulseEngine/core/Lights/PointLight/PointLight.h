@@ -20,7 +20,7 @@
  * @brief PointLight class, with specification of 6 shadow map (cubemap) one for each direction.
  * 
  */
-class MA_DLL_API PointLight : public LightData
+class PULSE_ENGINE_DLL_API PointLight : public LightData
 {
 public:
     float farPlane;

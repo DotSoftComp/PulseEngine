@@ -23,7 +23,7 @@ namespace PulseEngine
      * @brief Color class represents a color in RGBA format.
      * 
      */
-    struct MA_DLL_API Color
+    struct PULSE_ENGINE_DLL_API Color
     {
         float r;
         float g;

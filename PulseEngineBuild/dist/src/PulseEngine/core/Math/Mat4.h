@@ -1,12 +1,11 @@
 #ifndef MAT4PULSE_H
 #define MAT4PULSE_H
 
-#include "Common/common.h"
 #include <cstring> 
 
 namespace PulseEngine
 {
-    struct MA_DLL_API Mat4
+    struct PULSE_ENGINE_DLL_API Mat4
     {
         float data[4][4]; 
 
@@ -14,6 +13,17 @@ namespace PulseEngine
         {
             SetIdentity();
         }
+
+        // Constructor that sets the diagonal to a scalar value
+        Mat4(float scalar)
+        {
+            memset(data, 0, sizeof(data));
+            for (int i = 0; i < 4; ++i)
+            {
+                data[i][i] = scalar;
+            }
+        }
+        
 
         void SetIdentity()
         {
@@ -43,6 +53,8 @@ namespace PulseEngine
         {
             return &data[0][0];
         }
+
+
         
     };
 }

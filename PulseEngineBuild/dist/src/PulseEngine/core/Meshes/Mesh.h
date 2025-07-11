@@ -28,7 +28,7 @@ struct Vertex
  * @brief Represents a 3D mesh including geometry, bones, and rendering data.
  * This class handles OpenGL buffer setup and rendering, and can import mesh data via Assimp.
  */
-class MA_DLL_API Mesh
+class PULSE_ENGINE_DLL_API Mesh
 {
 public:
     /**

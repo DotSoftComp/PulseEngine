@@ -38,7 +38,7 @@ class BoxCollider;
  * Entities are the core unit of composition in the scene and may hold meshes,
  * materials, scripts, and colliders.
  */
-class MA_DLL_API Entity
+class PULSE_ENGINE_DLL_API Entity
 {
 public:
     // ------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 
 class Mesh;
 
-class MA_DLL_API Primitive
+class PULSE_ENGINE_DLL_API Primitive
 {
     public:
     static Mesh* Cube();

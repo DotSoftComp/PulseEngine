@@ -22,8 +22,8 @@ public:
     OpenGLAPI() = default;
     virtual ~OpenGLAPI() override;
 
-    bool Initialize(const char* title, int* width, int* height, PulseEngineBackend* engine) override;
-    void Shutdown() override;
+    bool InitializeApi(const char* title, int* width, int* height, PulseEngineBackend* engine) override;
+    void ShutdownApi() override;
 
     void PollEvents() const override;
     void SwapBuffers() const override;

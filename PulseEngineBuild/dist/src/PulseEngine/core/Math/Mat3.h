@@ -33,7 +33,7 @@ namespace PulseEngine
      * @brief Mat3 class represents a 3x3 matrix used for 3D transformations.
      * 
      */
-    struct MA_DLL_API Mat3
+    struct PULSE_ENGINE_DLL_API Mat3
     {
         float m[3][3]; // Ligne-colonne
 

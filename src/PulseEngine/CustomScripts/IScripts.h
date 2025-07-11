@@ -3,6 +3,8 @@
 
 #include "Common/dllExport.h"
 #include <unordered_map>
+#include <string>
+#include <vector>
 
 //ExposedVariable is used to expose variables to the editor
 #define EXPOSE_VAR(var, typeEnum) ExposedVariable(#var, ExposedVariable::Type::typeEnum, reinterpret_cast<void*>(&var))
@@ -30,7 +32,7 @@ struct ExposedVariable
         : name(name), type(type), ptr(ptr) {}
 };
 
-class MA_DLL_API IScript
+class PULSE_ENGINE_DLL_API IScript
 {
 public:
     virtual void OnStart() = 0;

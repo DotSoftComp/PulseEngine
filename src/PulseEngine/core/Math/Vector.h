@@ -9,7 +9,7 @@
 
 namespace PulseEngine
 {
-    struct MA_DLL_API Vector2
+    struct PULSE_ENGINE_DLL_API Vector2
     {
         float x;
         float y;

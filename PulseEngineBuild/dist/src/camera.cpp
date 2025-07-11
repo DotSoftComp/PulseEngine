@@ -10,9 +10,27 @@ Camera::Camera(PulseEngine::Vector3 position, PulseEngine::Vector3 up, float yaw
     UpdateCameraVectors();
 }
 
-glm::mat4 Camera::GetViewMatrix()
+PulseEngine::Mat4 Camera::GetViewMatrix()
 {
-    return glm::lookAt(Position, Position + Front, Up);
+    // Custom implementation of lookAt using PulseEngine::Vector3
+    PulseEngine::Vector3 f = (Position + Front - Position).Normalized();
+    PulseEngine::Vector3 s = f.Cross(Up).Normalized();
+    PulseEngine::Vector3 u = s.Cross(f);
+
+    PulseEngine::Mat4 result(1.0f);
+    result[0][0] = s.x;
+    result[1][0] = s.y;
+    result[2][0] = s.z;
+    result[0][1] = u.x;
+    result[1][1] = u.y;
+    result[2][1] = u.z;
+    result[0][2] = -f.x;
+    result[1][2] = -f.y;
+    result[2][2] = -f.z;
+    result[3][0] = -s.Dot(Position);
+    result[3][1] = -u.Dot(Position);
+    result[3][2] = f.Dot(Position);
+    return result;
 }
 
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)

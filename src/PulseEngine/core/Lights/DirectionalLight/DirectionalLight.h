@@ -18,7 +18,7 @@
 
 class PulseEngineBackend;
 
-class MA_DLL_API DirectionalLight : public LightData
+class PULSE_ENGINE_DLL_API DirectionalLight : public LightData
 {
     public:
         glm::vec3 direction;

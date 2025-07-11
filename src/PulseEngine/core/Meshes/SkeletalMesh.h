@@ -58,7 +58,7 @@ struct BoneAnimation
  * 
  * Handles the bone hierarchy, transformations, and animation playback.
  */
-class MA_DLL_API Skeleton 
+class PULSE_ENGINE_DLL_API Skeleton 
 {
 public:
     /**

@@ -8,7 +8,7 @@ class PulseEngineBackend;
 class TopBar;
 class Entity;
 
-class MA_DLL_API InterfaceEditor
+class PULSE_ENGINE_DLL_API InterfaceEditor
 {
 private:
 TopBar* topbar;

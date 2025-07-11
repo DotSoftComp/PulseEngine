@@ -43,15 +43,14 @@ int PulseEngineBackend::Initialize()
 
     // load the graphic API based on the platform
     //some platform can have multiple graphic API possible.
-    #ifdef WINDOW_PULSE_EXPORT
-        graphicsAPI = new OpenGLAPI();
-    #endif
+    graphicsAPI = dynamic_cast<IGraphicsAPI*>(ModuleLoader::GetModuleFromPath("Modules/OpenGLApi.dll"));
+
     if(graphicsAPI == nullptr)
     {
         std::cerr << "Error while initializing graphics API." << std::endl;
         return -1;
     }
-    graphicsAPI->Initialize(GetWindowName("editor").c_str(), &width, &height, this);
+    graphicsAPI->InitializeApi(GetWindowName("editor").c_str(), &width, &height, this);
     windowContext->SetGLFWWindow(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
 
     // coroutine manager, give the possibility to add async tasks to the engine
@@ -184,7 +183,7 @@ void PulseEngineBackend::RenderShadow()
 
 void PulseEngineBackend::Shutdown()
 {    
-    graphicsAPI->Shutdown();
+    graphicsAPI->ShutdownApi();
 }
 
 void PulseEngineBackend::ClearScene()

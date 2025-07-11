@@ -6,7 +6,7 @@
 
 class PulseEngineBackend;
 
-class MA_DLL_API TopBar
+class PULSE_ENGINE_DLL_API TopBar
 {
 private:
 

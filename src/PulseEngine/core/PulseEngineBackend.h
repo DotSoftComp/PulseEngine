@@ -36,7 +36,7 @@ class IGraphicsAPI;
  * @brief PulseEngineBackend is the main class of the Pulse Engine.
  * 
  */
-class MA_DLL_API PulseEngineBackend
+class PULSE_ENGINE_DLL_API PulseEngineBackend
 {
 public:
     friend InterfaceEditor;

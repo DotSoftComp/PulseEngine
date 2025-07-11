@@ -1,6 +1,6 @@
 /**
- * @file MA_DLL_API.h
- * @brief Defines the MA_DLL_API macro for DLL export/import on different platforms.
+ * @file PULSE_ENGINE_DLL_API.h
+ * @brief Defines the PULSE_ENGINE_DLL_API macro for DLL export/import on different platforms.
  *
  * This header allows you to export and import symbols from a DLL/shared library
  * in a platform-agnostic way.
@@ -10,7 +10,7 @@
  *
  * To use:
  * - Define `BUILDING_DLL` when building the DLL.
- * - Include this header and use `MA_DLL_API` before class/function declarations.
+ * - Include this header and use `PULSE_ENGINE_DLL_API` before class/function declarations.
  *
  * @note This is a common pattern for cross-platform C++ shared libraries.
  */
@@ -23,12 +23,12 @@
 #if defined(_WIN32) || defined(__CYGWIN__)
   #ifdef BUILDING_DLL
     /// Export symbols when building the DLL on Windows.
-    #define MA_DLL_API __declspec(dllexport)
+    #define PULSE_ENGINE_DLL_API __declspec(dllexport)
   #else
     /// Import symbols when using the DLL on Windows.
-    #define MA_DLL_API __declspec(dllimport)
+    #define PULSE_ENGINE_DLL_API __declspec(dllimport)
   #endif
 #else
   /// No-op for non-Windows platforms (Linux/macOS).
-  #define MA_DLL_API
+  #define PULSE_ENGINE_DLL_API
 #endif

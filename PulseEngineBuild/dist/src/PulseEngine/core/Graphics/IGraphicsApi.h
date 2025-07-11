@@ -25,7 +25,7 @@ class PulseEngineBackend;
  * This abstract class defines all the necessary methods required to initialize,
  * manage, and use a rendering backend for the Pulse engine.
  */
-class MA_DLL_API IGraphicsAPI
+class PULSE_ENGINE_DLL_API IGraphicsAPI
 {
 public:
     virtual ~IGraphicsAPI() = default;

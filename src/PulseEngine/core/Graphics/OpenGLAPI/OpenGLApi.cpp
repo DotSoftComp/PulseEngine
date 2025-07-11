@@ -6,7 +6,7 @@
 #include <iostream>
 #include "OpenGLApi.h"
 
-bool OpenGLAPI::Initialize(const char* title, int* width, int* height, PulseEngineBackend* engine)
+bool OpenGLAPI::InitializeApi(const char* title, int* width, int* height, PulseEngineBackend* engine)
 {
         this->engine = engine;
     if (!glfwInit())
@@ -68,7 +68,7 @@ bool OpenGLAPI::Initialize(const char* title, int* width, int* height, PulseEngi
     return true;
 }
 
-void OpenGLAPI::Shutdown()
+void OpenGLAPI::ShutdownApi()
 {
     if (window)
     {

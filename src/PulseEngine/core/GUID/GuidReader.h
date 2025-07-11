@@ -17,7 +17,7 @@
 class Entity;
 class Mesh;
 
-class MA_DLL_API GuidReader
+class PULSE_ENGINE_DLL_API GuidReader
 {
     public:
         static Entity* GetEntityFromGuid(std::size_t Guid);

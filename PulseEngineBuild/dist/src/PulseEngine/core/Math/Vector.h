@@ -9,7 +9,7 @@
 
 namespace PulseEngine
 {
-    struct MA_DLL_API Vector2
+    struct PULSE_ENGINE_DLL_API Vector2
     {
         float x;
         float y;
@@ -42,6 +42,51 @@ namespace PulseEngine
             }
         }
 
+        // Add assignment operator+=
+        Vector3& operator+=(const Vector3& other)
+        {
+            x += other.x;
+            y += other.y;
+            z += other.z;
+            return *this;
+        }
+
+        // Add assignment operator-=
+        Vector3& operator-=(const Vector3& other)
+        {
+            x -= other.x;
+            y -= other.y;
+            z -= other.z;
+            return *this;
+        }
+
+        // Subtract two vectors
+        Vector3 operator-(const Vector3& other) const
+        {
+            return Vector3(x - other.x, y - other.y, z - other.z);
+        }
+        
+
+        // Add two vectors
+        Vector3 operator+(const Vector3& other) const
+        {
+            return Vector3(x + other.x, y + other.y, z + other.z);
+        }
+
+        // Multiply vector by scalar
+        Vector3 operator*(float scalar) const
+        {
+            return Vector3(x * scalar, y * scalar, z * scalar);
+        }
+
+        // Multiply scalar by vector (friend function)
+        friend Vector3 operator*(float scalar, const Vector3& vec)
+        {
+            return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+        }
+
+
+
         Vector3 Normalized() const
         {
             float length = std::sqrt(x * x + y * y + z * z);
@@ -57,6 +102,11 @@ namespace PulseEngine
             z * other.x - x * other.z,
             x * other.y - y * other.x
             );
+        }
+
+        float Dot(const Vector3& other) const
+        {
+            return x * other.x + y * other.y + z * other.z;
         }
     };
 }

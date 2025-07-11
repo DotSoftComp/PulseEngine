@@ -9,7 +9,7 @@
  * This class extends the generic Collider interface and uses either standard SAT (Separating Axis Theorem)
  * or a fast approximate method for detecting and resolving collisions.
  */
-class MA_DLL_API BoxCollider : public Collider
+class PULSE_ENGINE_DLL_API BoxCollider : public Collider
 {
 public:
     /**

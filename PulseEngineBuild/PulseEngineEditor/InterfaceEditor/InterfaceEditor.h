@@ -29,7 +29,7 @@ struct LoadingPopupData
     float progressPercent = 0.0f;
 };
 
-class MA_DLL_API InterfaceEditor
+class PULSE_ENGINE_DLL_API InterfaceEditor
 {
 private:
     friend class TopBar;

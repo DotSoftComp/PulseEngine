@@ -12,7 +12,7 @@
 class Shader;
 class Texture;
 
-class MA_DLL_API Material
+class PULSE_ENGINE_DLL_API Material
 {
 public:
     Material(const std::string& name, Shader* shader) : name(name), shader(shader) {}

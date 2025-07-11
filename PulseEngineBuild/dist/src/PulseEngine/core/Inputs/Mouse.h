@@ -14,7 +14,7 @@
 #include "Common/common.h"
 #include "Common/dllExport.h"
 
-class MA_DLL_API MouseInput
+class PULSE_ENGINE_DLL_API MouseInput
 {
     public:
         static void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);

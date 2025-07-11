@@ -2,7 +2,7 @@
 #include "IScripts.h"
 #include "dist/src/dllexport/dllExport.h"
 
-class MA_DLL_API CustomScript : public IScript
+class PULSE_ENGINE_DLL_API CustomScript : public IScript
 {
     public:
         virtual void OnStart() override;

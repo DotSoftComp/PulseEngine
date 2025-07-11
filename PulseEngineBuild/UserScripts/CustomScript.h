@@ -5,7 +5,7 @@
 
 struct ExposedVariable;
 
-class MA_DLL_API CustomScript : public IScript
+class PULSE_ENGINE_DLL_API CustomScript : public IScript
 {
     public:
         CustomScript() { 

@@ -233,6 +233,25 @@ void RenderMainDockSpace()
     ImGui::End();
 }
 
+void InterfaceEditor::RenderFullscreenWelcomePanel()
+{
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize, ImGuiCond_Always);
+    ImGui::Begin("Welcome", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing);
+
+    ImGui::Text("Welcome to Pulse Engine Editor!");
+    ImGui::Text("Please select a project to get started.");
+    
+    if (ImGui::Button("Select Project"))
+    {
+        // Logic to open project selection dialog
+        // For now, we just set hasProjectSelected to true
+        hasProjectSelected = true;
+    }
+
+    ImGui::End();
+}
+
 
 void InterfaceEditor::Render(PulseEngineBackend *engine)
 {        
@@ -241,32 +260,40 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
     ImGui::NewFrame();
     RenderMainDockSpace();
 
-    if(windowStates["SceneData"]) GenerateSceneDataWindow(engine);
-
-    if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
-
-    if (windowStates["EngineConfig"])
+    if(!hasProjectSelected)
     {
-        EngineConfigWindow(engine);
+        RenderFullscreenWelcomePanel();
     }
-    if (windowStates["assetManager"])
+    else
     {
-        ImGui::Begin("Asset Manager", &windowStates["assetManager"]);
-        static fs::path selectedFile;
-        FileExplorerWindow();
 
-        ImGui::Text("Asset Manager");
-        ImGui::End();
-    }
+        if(windowStates["SceneData"]) GenerateSceneDataWindow(engine);
+
+        if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
+
+        if (windowStates["EngineConfig"])
+        {
+            EngineConfigWindow(engine);
+        }
+        if (windowStates["assetManager"])
+        {
+            ImGui::Begin("Asset Manager", &windowStates["assetManager"]);
+            static fs::path selectedFile;
+            FileExplorerWindow();
+
+            ImGui::Text("Asset Manager");
+            ImGui::End();
+        }
 
 
-    if(windowStates["viewport"]) Viewport(engine);
+        if(windowStates["viewport"]) Viewport(engine);
 
-    topbar->UpdateBar(engine, this);
+        topbar->UpdateBar(engine, this);
 
-    for(auto& popup : loadingPopups)
-    {
-        ShowLoadingPopup(popup.contentFunction, popup.progressPercent);
+        for(auto& popup : loadingPopups)
+        {
+            ShowLoadingPopup(popup.contentFunction, popup.progressPercent);
+        }
     }
     // Rendu de la frame
     ImGui::Render();

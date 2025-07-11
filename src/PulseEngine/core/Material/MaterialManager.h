@@ -7,7 +7,7 @@
 
 class Material;
 
-class MA_DLL_API MaterialManager 
+class PULSE_ENGINE_DLL_API MaterialManager 
 {
 public:
 

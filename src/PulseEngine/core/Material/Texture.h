@@ -5,7 +5,7 @@
 #include "Common/common.h"
 #include "Common/dllExport.h"
 
-class MA_DLL_API Texture
+class PULSE_ENGINE_DLL_API Texture
 {
 public:
     Texture(const std::string& filePath);

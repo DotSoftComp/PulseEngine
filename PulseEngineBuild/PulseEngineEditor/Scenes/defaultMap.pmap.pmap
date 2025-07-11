@@ -7,12 +7,12 @@
                         {
                             "name": "speed",
                             "type": 0,
-                            "value": 2
+                            "value": 5
                         },
                         {
                             "name": "life",
                             "type": 1,
-                            "value": 350.0
+                            "value": 15000.0
                         }
                     ],
                     "name": "PulseScriptA"
@@ -23,7 +23,7 @@
             "name": "Cube",
             "position": [
                 0.0,
-                0.0,
+                0.5,
                 0.0
             ],
             "rotation": [
@@ -39,34 +39,12 @@
         },
         {
             "Scripts": [
-            ],
-            "guid": 4999045609554485032,
-            "muid": 10737175689693915419,
-            "name": "Cube (1)",
-            "position": [
-                0.0,
-                -2.5,
-                0.0
-            ],
-            "rotation": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "scale": [
-                50.0,
-                1.0,
-                50.0
-            ]
-        },
-        {
-            "Scripts": [
                 {
                     "exposedVariables": [
                         {
                             "name": "speed",
                             "type": 0,
-                            "value": 2
+                            "value": 1
                         },
                         {
                             "name": "life",
@@ -78,17 +56,38 @@
                 }
             ],
             "guid": 4999045609554485032,
-            "muid": 6749660197713058692,
-            "name": "Cube (2)",
+            "muid": 10737175689693915419,
+            "name": "Cube (1)",
             "position": [
-                -2.0,
-                2.0,
-                -2.0
+                -1.100000023841858,
+                2.0999999046325684,
+                -1.899999976158142
             ],
             "rotation": [
                 0.0,
                 0.0,
                 0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "Scripts": [],
+            "guid": 4999045609554485032,
+            "muid": 6749660197713058692,
+            "name": "Cube (2)",
+            "position": [
+                -0.800000011920929,
+                1.7000000476837158,
+                -2.5
+            ],
+            "rotation": [
+                20.200000762939453,
+                -15.699999809265137,
+                2.700000047683716
             ],
             "scale": [
                 1.0,
@@ -103,8 +102,8 @@
             "castsShadow": true,
             "color": [
                 1.0,
-                1.0,
-                1.0
+                0.0,
+                0.0
             ],
             "farPlane": 50.0,
             "intensity": 1.0,
@@ -122,6 +121,25 @@
                 0.0
             ],
             "type": "DirectionalLight"
+        },
+        {
+            "attenuation": 5.0,
+            "castsShadow": true,
+            "color": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "farPlane": 93.19999694824219,
+            "intensity": 60.099998474121094,
+            "muid": 0,
+            "name": "Light",
+            "position": [
+                2.299999952316284,
+                2.5999999046325684,
+                -0.5
+            ],
+            "type": "PointLight"
         }
     ],
     "sceneName": "defaultMap.pmap"

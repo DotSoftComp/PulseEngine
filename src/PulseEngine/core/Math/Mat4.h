@@ -5,7 +5,7 @@
 
 namespace PulseEngine
 {
-    struct MA_DLL_API Mat4
+    struct PULSE_ENGINE_DLL_API Mat4
     {
         float data[4][4]; 
 

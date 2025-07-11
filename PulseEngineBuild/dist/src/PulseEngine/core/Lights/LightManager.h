@@ -19,7 +19,7 @@ class LightData;
  * @brief LightManager is responsible for managing all lights in the scene.
  * 
  */
-class MA_DLL_API LightManager
+class PULSE_ENGINE_DLL_API LightManager
 {
     public:    
         void RenderAllShadowsMap(PulseEngineBackend& scene);

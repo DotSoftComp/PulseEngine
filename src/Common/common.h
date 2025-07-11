@@ -37,6 +37,8 @@
 #include "shader.h"
 #include "camera.h"
 #include "PulseEngine/core/Material/Texture.h"
+#include "PulseEngine/ModuleLoader/ModuleLoader.h"
+#include "PulseEngine/ModuleLoader/IModule/IModule.h"
 
 // --------------------
 // Platform-Specific Includes

@@ -25,7 +25,7 @@ void CustomScript::OnUpdate()
     if (GetAsyncKeyState('M') & 0x8000)
         position.y -= 0.1f;
 
-    rotation.y += 1.0f * life;
+    rotation.x += 1.0f * life;
     parent->SetPosition(position);
     parent->SetRotation(rotation);
 }

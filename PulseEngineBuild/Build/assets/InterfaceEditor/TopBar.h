@@ -1,3 +1,16 @@
+/**
+ * @file TopBar.h
+ * @author Dorian LEXTERIAQUE (dlexteriaque@gmail.com)
+ * @brief The topbar of the editor interface, it contains the menu bar and the main functions of the editor.
+ * @todo the internal function of the topbar (for compilation) are wrotten in the cpp, but should be moved to a "BuildSystem.h" and "BuildSystem.cpp" files.
+ * @note The topbar is not part of the interface module, but it is used by the interface editor to provide a menu bar and some main functions.
+ * @note The topbar is not part of the PulseEngineBackend, but it is used by the interface editor to provide a menu bar and some main functions.
+ * @version 0.1
+ * @date 2025-07-04
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #ifndef TOPBAR_H
 #define TOPBAR_H
 
@@ -6,7 +19,7 @@
 
 class PulseEngineBackend;
 
-class MA_DLL_API TopBar
+class PULSE_ENGINE_DLL_API TopBar
 {
 private:
 

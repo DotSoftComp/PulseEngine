@@ -10,7 +10,7 @@ class PulseEngineBackend;
 struct ExposedVariable;
 struct aiScene;
 
-class MA_DLL_API SceneLoader
+class PULSE_ENGINE_DLL_API SceneLoader
 {
     public:
         ///====== SceneLoader ======

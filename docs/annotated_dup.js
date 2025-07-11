@@ -35,7 +35,7 @@ var annotated_dup =
     [ "OpenGLAPI", "d6/da4/class_open_g_l_a_p_i.html", "d6/da4/class_open_g_l_a_p_i" ],
     [ "PointLight", "dd/d0a/class_point_light.html", "dd/d0a/class_point_light" ],
     [ "Primitive", "d1/df5/class_primitive.html", null ],
-    [ "PulseEngineBackend", "da/d08/class_pulse_engine_backend.html", null ],
+    [ "PulseEngineBackend", "da/d08/class_pulse_engine_backend.html", "da/d08/class_pulse_engine_backend" ],
     [ "SceneLoader", "db/d69/class_scene_loader.html", null ],
     [ "ScriptsLoader", "de/dd1/class_scripts_loader.html", null ],
     [ "Skeleton", "d7/d08/class_skeleton.html", "d7/d08/class_skeleton" ],

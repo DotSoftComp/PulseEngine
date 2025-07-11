@@ -11,7 +11,7 @@
  * @brief it inherit from IScript, it will be needed to attach it to an entity.
  * 
  */
-class MA_DLL_API Collider : public IScript
+class PULSE_ENGINE_DLL_API Collider : public IScript
 {
     public:
         Collider() : IScript() {}

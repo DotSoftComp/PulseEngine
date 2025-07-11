@@ -54,6 +54,7 @@ int PulseEngineBackend::Initialize()
     graphicsAPI->Initialize(GetWindowName("editor").c_str(), &width, &height, this);
     windowContext->SetGLFWWindow(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
 
+    // coroutine manager, give the possibility to add async tasks to the engine
     coroutineManager = new CoroutineManager();
 
 
@@ -149,7 +150,6 @@ void PulseEngineBackend::Render()
         Shader* shader = entity->GetMaterial()->GetShader();
 
         shader->Use();
-
         //here we need to use specific shader setter for each graphic api.
         /**
          * @todo make SetMat4() and others from glm:: to PulseEngine::
@@ -157,7 +157,10 @@ void PulseEngineBackend::Render()
          */
         #ifdef WINDOW_PULSE_EXPORT
         shader->SetMat4("projection", projection);
-        shader->SetMat4("view", view);
+        shader->SetMat4("view", glm::mat4(view[0][0], view[0][1], view[0][2], view[0][3],
+                          view[1][0], view[1][1], view[1][2], view[1][3],
+                          view[2][0], view[2][1], view[2][2], view[2][3],
+                          view[3][0], view[3][1], view[3][2], view[3][3]));
         shader->SetVec3("viewPos", glm::vec3(GetActiveCamera()->Position.x, GetActiveCamera()->Position.y, GetActiveCamera()->Position.z));
         #endif
         LightManager::BindLightsToShader(shader, this, entity);

@@ -21,7 +21,7 @@
 class IScript;
 typedef IScript* (*CreateScriptFunc)();
 
-class MA_DLL_API ScriptsLoader
+class PULSE_ENGINE_DLL_API ScriptsLoader
 {
     public:
         static HMODULE customScriptDll;

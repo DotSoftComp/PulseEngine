@@ -5,7 +5,7 @@
 #include "Common/dllExport.h"
 #include "PulseEngine/core/PulseEngineBackend.h"
 
-class MA_DLL_API WindowContext
+class PULSE_ENGINE_DLL_API WindowContext
 {
 public:
     bool Initialize(const char* title, int width, int height);

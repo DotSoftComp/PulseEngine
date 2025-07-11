@@ -32,6 +32,7 @@ src/PulseEngine/core/Lights/LightManager.cpp ^
 src/PulseEngine/core/Physics/CollisionManager.cpp ^
 src\PulseEngine\core\coroutine\CoroutineManager.cpp ^
 PulseEngineEditor\InterfaceEditor\BuildGameCoroutine.cpp ^
+src\PulseEngine\ModuleLoader\ModuleLoader.cpp ^
 imgui/imgui.cpp ^
 imgui/imgui_draw.cpp ^
 imgui/imgui_tables.cpp ^

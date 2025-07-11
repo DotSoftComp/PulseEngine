@@ -29,7 +29,7 @@ struct LoadingPopupData
     float progressPercent = 0.0f;
 };
 
-class MA_DLL_API InterfaceEditor
+class PULSE_ENGINE_DLL_API InterfaceEditor
 {
 private:
     friend class TopBar;
@@ -37,6 +37,7 @@ private:
     Entity* selectedEntity = nullptr;
     std::unordered_map<std::string, bool> windowStates;
     std::vector<LoadingPopupData> loadingPopups;
+    bool hasProjectSelected;
 
 public:
     InterfaceEditor(PulseEngineBackend* engine);
@@ -46,6 +47,7 @@ public:
     void EntityAnalyzerWindow();
     void GenerateSceneDataWindow(PulseEngineBackend *engine);
     void Viewport(PulseEngineBackend *engine);
+    void RenderFullscreenWelcomePanel();
 
     void ShowLoadingPopup(std::function<void()> contentFunction, float progressPercent);
     void AddLoadingPopup(std::function<void()> contentFunction, float progressPercent, const std::string& title = "")
