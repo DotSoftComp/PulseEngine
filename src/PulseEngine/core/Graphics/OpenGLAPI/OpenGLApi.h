@@ -16,7 +16,7 @@
 #include "PulseEngine/core/Graphics/IGraphicsApi.h"
 #include <GLFW/glfw3.h>
 
-class OpenGLAPI : public IGraphicsAPI
+class PULSE_ENGINE_DLL_API OpenGLAPI : public IGraphicsAPI
 {
 public:
     OpenGLAPI() = default;
@@ -38,6 +38,12 @@ public:
     
     void StartFrame() const override;
     void EndFrame() const override;
+
+    unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath) override;
+    
+    std::string LoadShaderCode(const std::string& path);
+    unsigned int CompileShader(unsigned int type, const char* source);
+    unsigned int LinkProgram(unsigned int vertexShader, unsigned int fragmentShader);
 
     GLFWwindow* window = nullptr;
     GLuint fbo, fboTexture, rbo;

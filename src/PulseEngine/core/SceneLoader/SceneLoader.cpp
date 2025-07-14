@@ -40,6 +40,7 @@ void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* back
 
         Entity* entity = LoadEntityBaseData(entityData);
 
+        std::cout << "loaded entity base data " << std::endl;
 
         if(entity)
         {
@@ -195,7 +196,16 @@ Entity* SceneLoader::LoadEntityBaseData(const nlohmann::json_abi_v3_12_0::json &
     std::size_t muid = entityData["muid"].get<std::size_t>();
     nlohmann::json entityDocData;
 
+    std::cout << "Loading entity base data:" << std::endl;
+    std::cout << "  Name: " << name << std::endl;
+    std::cout << "  GUID: " << guid << std::endl;
+    std::cout << "  MUID: " << muid << std::endl;
+    std::cout << "  Position: (" << position.x << ", " << position.y << ", " << position.z << ")" << std::endl;
+    std::cout << "  Rotation: (" << rotation.x << ", " << rotation.y << ", " << rotation.z << ")" << std::endl;
+    std::cout << "  Scale: (" << scale.x << ", " << scale.y << ", " << scale.z << ")" << std::endl;
+
     Entity* entity = GuidReader::GetEntityFromGuid(guid);
+    std::cout << "Entity retrieved from GUID: " << (entity ? "Valid" : "Invalid") << std::endl;
     if (!entity)
     {
         std::cout << "entity not valid" << std::endl;
@@ -208,6 +218,7 @@ Entity* SceneLoader::LoadEntityBaseData(const nlohmann::json_abi_v3_12_0::json &
     entity->SetScale(scale);
     entity->SetName(name);
     entity->SetMaterial(MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat"));
+    std::cout << "Entity base data loaded and properties set." << std::endl;
     return entity;
 }
 

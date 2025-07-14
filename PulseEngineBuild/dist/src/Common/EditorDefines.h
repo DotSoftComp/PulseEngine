@@ -51,13 +51,13 @@
     /// Strips `code` from editor builds; used to isolate game/runtime-only code.
     #define IN_GAME_ONLY(code)
 
-    /// Logs a message to standard output with a timestamp and editor tag.
+    /// Logs a message to standard output with a timestamp, editor tag, and function name.
     #define EDITOR_LOG(msg) \
-        std::cout << "[" << GetCurrentDateTime() << "] [Editor - LOG]: " << msg << std::endl;
+        std::cout << "[" << GetCurrentDateTime() << "] [Editor - LOG] [" << __FUNCTION__ << "]: " << msg << std::endl;
 
-    /// Logs an error message to standard error with a timestamp and editor tag.
+    /// Logs an error message to standard error with a timestamp, editor tag, and function name.
     #define EDITOR_ERROR(msg) \
-        std::cerr << "[" << GetCurrentDateTime() << "] [Editor - ERROR]: " << msg << std::endl;
+        std::cerr << "[" << GetCurrentDateTime() << "] [Editor - ERROR] [" << __FUNCTION__ << "]: " << msg << std::endl;
 
 #else
 
@@ -78,5 +78,8 @@
     #define EDITOR_ERROR(msg)
 
 #endif // ENGINE_EDITOR
+
+#define PulseEngineInstance PulseEngineBackend::GetInstance()
+#define PulseEngineGraphicsAPI PulseEngineBackend::graphicsAPI
 
 #endif // EDITORDEFINES_H

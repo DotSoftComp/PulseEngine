@@ -42,7 +42,8 @@ public:
     friend InterfaceEditor;
     friend LightManager;
 
-    PulseEngineBackend();
+
+    static PulseEngineBackend* GetInstance();
     ~PulseEngineBackend() {}
 
     void LoadModel(std::string path);
@@ -88,7 +89,7 @@ public:
     const void SetGameVersion(const std::string& version) { gameVersion = version; }
     const std::string& GetGameVersion() const { return gameVersion; }
     
-    IGraphicsAPI* graphicsAPI = nullptr;
+    static IGraphicsAPI* graphicsAPI;
     CoroutineManager* coroutineManager = nullptr;
 private:
     WindowContext* windowContext = nullptr;
@@ -121,6 +122,12 @@ private:
     void ProcessInput(GLFWwindow* window);
     glm::vec3 CalculateLighting(const glm::vec3& position, const glm::vec3& normal, const glm::vec3& viewPos, const LightData& light);
     bool IsRenderable(Entity* entity) const;
+    PulseEngineBackend();
+    PulseEngineBackend(const PulseEngineBackend&) = delete; // Disable copy constructor
+    PulseEngineBackend& operator=(const PulseEngineBackend&) = delete; // Disable assignment operator
+    PulseEngineBackend(PulseEngineBackend&&) = delete; // Disable move constructor
+
+    static PulseEngineBackend* instance;
 };
 
 #endif

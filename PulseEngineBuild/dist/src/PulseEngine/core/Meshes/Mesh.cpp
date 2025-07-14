@@ -102,27 +102,19 @@ void Mesh::Draw(GLuint shaderProgram) const
 
     // 3. Bind VAO et dessiner
     
-    std::cout << "VAO value = " << VAO << std::endl;
-    std::cout << "binding VAO: " << VAO << std::endl;
     glBindVertexArray(VAO);
-    
 
-    std::cout << "indices.size() = " << indices.size() << std::endl;
-    std::cout << "vertices.size() = " << vertices.size() << std::endl;
 
     if (!indices.empty())
     {
-        std::cout << "drawing with glDrawElements" << std::endl;
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, 0);
     }
     else
     {
-        std::cout << "drawing with glDrawArrays" << std::endl;
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
     }
 
     glBindVertexArray(0);
-    std::cout << "finished drawing the mesh" << std::endl;
 }
 
 Mesh* Mesh::LoadFromAssimp(const aiMesh* mesh, const aiScene* scene)

@@ -27,7 +27,10 @@
 
 int main()
 {
-    PulseEngineBackend* engine = new PulseEngineBackend();
+    PulseEngineBackend* engine = PulseEngineBackend::GetInstance();
+
+    //during the compilation of the game, some datas are defined in the preprocessor.
+    //here, we get them and use them with the engine. (the dll didnt have them, so we need to set them manually)
     #ifdef GAME_NAME
         std::cout << std::string(GAME_NAME) << std::endl;
         engine->SetGameName(GAME_NAME);
@@ -39,6 +42,14 @@ int main()
     if (engine->Initialize() != 0)
     {
         std::cerr << "Engine failed to initialize" << std::endl;
+        while(true) {}
+        return -1;
+    }
+
+    if(engine->graphicsAPI == nullptr)
+    {
+        std::cerr << "Graphics API failed to initialize" << std::endl;
+        while(true) {}
         return -1;
     }
 
@@ -69,14 +80,13 @@ int main()
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-    )
+    )  
+    delete engine;
+    #ifdef ENGINE_EDITOR
+        delete editor;
+    #endif
 
-    while (true)
-    {
-        /* code */
-    }
-    
-    
+    while(true) {}
 
     return 0;
 }

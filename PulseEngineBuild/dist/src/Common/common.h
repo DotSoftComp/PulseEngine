@@ -19,6 +19,7 @@
 // --------------------
 #include <cstddef>      // for std::size_t
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>

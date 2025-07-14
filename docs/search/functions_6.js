@@ -8,10 +8,11 @@ var searchData=
   ['getfinalbonematrices_5',['GetFinalBoneMatrices',['../d7/d08/class_skeleton.html#a2d904240e27a258fb6b748855a021afc',1,'Skeleton']]],
   ['gethalfsize_6',['GetHalfSize',['../d8/d0c/class_box_collider.html#a5d701926803559f153014b8e526d846a',1,'BoxCollider']]],
   ['getmuid_7',['GetMuid',['../d2/d96/class_entity.html#a9fa5f6533e9e91cf04e0aee58073cb8b',1,'Entity']]],
-  ['getname_8',['GetName',['../d8/d0c/class_box_collider.html#a9573df5b0e9931b845dd1a77a128b37b',1,'BoxCollider']]],
+  ['getname_8',['GetName',['../d0/d58/class_i_graphics_a_p_i.html#aec0a3ded53e4bc13849ff0f175968d15',1,'IGraphicsAPI::GetName()'],['../d8/d0c/class_box_collider.html#a9573df5b0e9931b845dd1a77a128b37b',1,'BoxCollider::GetName()'],['../de/d6d/class_i_module.html#a54afe67696bc0348df70e6722d528c77',1,'IModule::GetName()']]],
   ['getnativehandle_9',['GetNativeHandle',['../d0/d58/class_i_graphics_a_p_i.html#a837d2fc1053e58bbacffe9bae147312d',1,'IGraphicsAPI::GetNativeHandle()'],['../d6/da4/class_open_g_l_a_p_i.html#ad8a4b77e31f2a09d91ce86e4f4eeb77b',1,'OpenGLAPI::GetNativeHandle()']]],
   ['getorientedsize_10',['GetOrientedSize',['../d8/d0c/class_box_collider.html#a27b8ba9d5a2477209ef82579349ef0df',1,'BoxCollider']]],
   ['getposition_11',['GetPosition',['../d8/d0c/class_box_collider.html#a4e15048408acecf61d039b252fe6279c',1,'BoxCollider']]],
   ['getscriptfromcallname_12',['GetScriptFromCallName',['../de/dd1/class_scripts_loader.html#afeeb586921841639346691f3c09c2bba',1,'ScriptsLoader']]],
-  ['getsize_13',['GetSize',['../d8/d0c/class_box_collider.html#ae36dcce4db52873767df00172df93da7',1,'BoxCollider']]]
+  ['getsize_13',['GetSize',['../d8/d0c/class_box_collider.html#ae36dcce4db52873767df00172df93da7',1,'BoxCollider']]],
+  ['getversion_14',['GetVersion',['../d0/d58/class_i_graphics_a_p_i.html#a4cd7a8a7dd124e0445ae0dd0217e99df',1,'IGraphicsAPI::GetVersion()'],['../de/d6d/class_i_module.html#ae86bf606a8b8879a858e4d7ebea7fa53',1,'IModule::GetVersion()']]]
 ];

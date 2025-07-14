@@ -23,9 +23,6 @@ public:
 private:
     unsigned int shaderID;
 
-    std::string loadShaderCode(const std::string& path);
-    unsigned int compileShader(unsigned int type, const char* source);
-    unsigned int linkProgram(unsigned int vertexShader, unsigned int fragmentShader);
 };
 
 #endif // SHADER_H

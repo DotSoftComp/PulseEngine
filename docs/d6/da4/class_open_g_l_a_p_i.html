@@ -99,16 +99,17 @@ Inheritance diagram for OpenGLAPI:</div>
  <div class="center">
   <img src="../../d6/da4/class_open_g_l_a_p_i.png" usemap="#OpenGLAPI_map" alt=""/>
   <map id="OpenGLAPI_map" name="OpenGLAPI_map">
-<area href="../../d0/d58/class_i_graphics_a_p_i.html" title="Interface for any graphics API backend (OpenGL, Vulkan, DirectX, etc.)." alt="IGraphicsAPI" shape="rect" coords="0,0,86,24"/>
+<area href="../../d0/d58/class_i_graphics_a_p_i.html" title="Interface for any graphics API backend (OpenGL, Vulkan, DirectX, etc.)." alt="IGraphicsAPI" shape="rect" coords="0,56,86,80"/>
+<area href="../../de/d6d/class_i_module.html" alt="IModule" shape="rect" coords="0,0,86,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a73da26b09fe5ce762009541375d8e18a" id="r_a73da26b09fe5ce762009541375d8e18a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73da26b09fe5ce762009541375d8e18a">Initialize</a> (const char *title, int *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ad57c3abdd4d28965896b627978df40d1">width</a>, int *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ab78afaf745a74176fe545ace11fe0690">height</a>, <a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#aff23d88cb68df94fd12b4e49eca3e3cb">engine</a>) override</td></tr>
-<tr class="memdesc:a73da26b09fe5ce762009541375d8e18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the graphics API and creates the main window.  <br /></td></tr>
-<tr class="memitem:a8e37df407c6f55551f898ffa1be7f522" id="r_a8e37df407c6f55551f898ffa1be7f522"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e37df407c6f55551f898ffa1be7f522">Shutdown</a> () override</td></tr>
-<tr class="memdesc:a8e37df407c6f55551f898ffa1be7f522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the graphics API and releases all resources.  <br /></td></tr>
+<tr class="memitem:ad539ff063644edd57f0e2431824068dd" id="r_ad539ff063644edd57f0e2431824068dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad539ff063644edd57f0e2431824068dd">InitializeApi</a> (const char *title, int *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ad57c3abdd4d28965896b627978df40d1">width</a>, int *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ab78afaf745a74176fe545ace11fe0690">height</a>, <a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#aff23d88cb68df94fd12b4e49eca3e3cb">engine</a>) override</td></tr>
+<tr class="memdesc:ad539ff063644edd57f0e2431824068dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the graphics API and creates the main window.  <br /></td></tr>
+<tr class="memitem:af2bb3a021e126db072dc12240d51efda" id="r_af2bb3a021e126db072dc12240d51efda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2bb3a021e126db072dc12240d51efda">ShutdownApi</a> () override</td></tr>
+<tr class="memdesc:af2bb3a021e126db072dc12240d51efda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the graphics API and releases all resources.  <br /></td></tr>
 <tr class="memitem:ae8be859065a3823a2e3c732630ab0ab4" id="r_ae8be859065a3823a2e3c732630ab0ab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8be859065a3823a2e3c732630ab0ab4">PollEvents</a> () const override</td></tr>
 <tr class="memdesc:ae8be859065a3823a2e3c732630ab0ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls input and window events (e.g., key presses, window resize).  <br /></td></tr>
 <tr class="memitem:a06f09d4e8b96a17d1d86a4714b3e49e6" id="r_a06f09d4e8b96a17d1d86a4714b3e49e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06f09d4e8b96a17d1d86a4714b3e49e6">SwapBuffers</a> () const override</td></tr>
@@ -127,6 +128,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a076b665e3e63ccc0d56a0d1608636cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a new rendering frame. Should clear buffers and prepare for drawing.  <br /></td></tr>
 <tr class="memitem:af0cea21322504a6f5c6fdeec12211cc4" id="r_af0cea21322504a6f5c6fdeec12211cc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0cea21322504a6f5c6fdeec12211cc4">EndFrame</a> () const override</td></tr>
 <tr class="memdesc:af0cea21322504a6f5c6fdeec12211cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the rendering frame. Usually includes buffer swapping or command submission.  <br /></td></tr>
+<tr class="memitem:a709aa8b42f055d0ed42266216e23b275" id="r_a709aa8b42f055d0ed42266216e23b275"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a709aa8b42f055d0ed42266216e23b275">CreateShader</a> (const std::string &amp;vertexPath, const std::string &amp;fragmentPath) override</td></tr>
+<tr class="memitem:a6dc8883f102323708635350af697920c" id="r_a6dc8883f102323708635350af697920c"><td class="memItemLeft" align="right" valign="top"><a id="a6dc8883f102323708635350af697920c" name="a6dc8883f102323708635350af697920c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>LoadShaderCode</b> (const std::string &amp;path)</td></tr>
+<tr class="memitem:ae45f7fa11f2d39dd3f62f854efb4e284" id="r_ae45f7fa11f2d39dd3f62f854efb4e284"><td class="memItemLeft" align="right" valign="top"><a id="ae45f7fa11f2d39dd3f62f854efb4e284" name="ae45f7fa11f2d39dd3f62f854efb4e284"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>CompileShader</b> (unsigned int type, const char *source)</td></tr>
+<tr class="memitem:ae5cbbb40b1b85ada219c76e150191ecf" id="r_ae5cbbb40b1b85ada219c76e150191ecf"><td class="memItemLeft" align="right" valign="top"><a id="ae5cbbb40b1b85ada219c76e150191ecf" name="ae5cbbb40b1b85ada219c76e150191ecf"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>LinkProgram</b> (unsigned int vertexShader, unsigned int fragmentShader)</td></tr>
+<tr class="inherit_header pub_methods_class_i_graphics_a_p_i"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_i_graphics_a_p_i')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html">IGraphicsAPI</a></td></tr>
+<tr class="memitem:aec0a3ded53e4bc13849ff0f175968d15 inherit pub_methods_class_i_graphics_a_p_i" id="r_aec0a3ded53e4bc13849ff0f175968d15"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#aec0a3ded53e4bc13849ff0f175968d15">GetName</a> () const override</td></tr>
+<tr class="memdesc:aec0a3ded53e4bc13849ff0f175968d15 inherit pub_methods_class_i_graphics_a_p_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the module.  <br /></td></tr>
+<tr class="memitem:a4cd7a8a7dd124e0445ae0dd0217e99df inherit pub_methods_class_i_graphics_a_p_i" id="r_a4cd7a8a7dd124e0445ae0dd0217e99df"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#a4cd7a8a7dd124e0445ae0dd0217e99df">GetVersion</a> () const override</td></tr>
+<tr class="memdesc:a4cd7a8a7dd124e0445ae0dd0217e99df inherit pub_methods_class_i_graphics_a_p_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of the module.  <br /></td></tr>
+<tr class="memitem:ad98823e2c38b119e38e0ff3b2890b72d inherit pub_methods_class_i_graphics_a_p_i" id="r_ad98823e2c38b119e38e0ff3b2890b72d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ad98823e2c38b119e38e0ff3b2890b72d">Initialize</a> () override</td></tr>
+<tr class="memdesc:ad98823e2c38b119e38e0ff3b2890b72d inherit pub_methods_class_i_graphics_a_p_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the module.  <br /></td></tr>
+<tr class="memitem:a1047c9d3b1ef5558fa9fd7ea73d26162 inherit pub_methods_class_i_graphics_a_p_i" id="r_a1047c9d3b1ef5558fa9fd7ea73d26162"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#a1047c9d3b1ef5558fa9fd7ea73d26162">Shutdown</a> () override</td></tr>
+<tr class="memdesc:a1047c9d3b1ef5558fa9fd7ea73d26162 inherit pub_methods_class_i_graphics_a_p_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown the module.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -154,6 +171,37 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
 <tr class="memdesc:aff23d88cb68df94fd12b4e49eca3e3cb inherit pub_attribs_class_i_graphics_a_p_i"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the engine backend, for API-engine communication. <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a709aa8b42f055d0ed42266216e23b275" name="a709aa8b42f055d0ed42266216e23b275"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a709aa8b42f055d0ed42266216e23b275">&#9670;&#160;</a></span>CreateShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int OpenGLAPI::CreateShader </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>vertexPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>fragmentPath</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html">IGraphicsAPI</a>.</p>
+
+</div>
+</div>
 <a id="af0cea21322504a6f5c6fdeec12211cc4" name="af0cea21322504a6f5c6fdeec12211cc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0cea21322504a6f5c6fdeec12211cc4">&#9670;&#160;</a></span>EndFrame()</h2>
 
@@ -243,8 +291,8 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
 
 </div>
 </div>
-<a id="a73da26b09fe5ce762009541375d8e18a" name="a73da26b09fe5ce762009541375d8e18a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73da26b09fe5ce762009541375d8e18a">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="ad539ff063644edd57f0e2431824068dd" name="ad539ff063644edd57f0e2431824068dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad539ff063644edd57f0e2431824068dd">&#9670;&#160;</a></span>InitializeApi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +301,7 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool OpenGLAPI::Initialize </td>
+          <td class="memname">bool OpenGLAPI::InitializeApi </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>title</em></span>, </td>
         </tr>
@@ -292,7 +340,7 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if initialization succeeds, false otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#a3d88bbf0136e326e4d1a1409e0b492ff">IGraphicsAPI</a>.</p>
+<p>Implements <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ab43c16ecf4a230d89200ff0f1e16b328">IGraphicsAPI</a>.</p>
 
 </div>
 </div>
@@ -430,8 +478,8 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
 
 </div>
 </div>
-<a id="a8e37df407c6f55551f898ffa1be7f522" name="a8e37df407c6f55551f898ffa1be7f522"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e37df407c6f55551f898ffa1be7f522">&#9670;&#160;</a></span>Shutdown()</h2>
+<a id="af2bb3a021e126db072dc12240d51efda" name="af2bb3a021e126db072dc12240d51efda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2bb3a021e126db072dc12240d51efda">&#9670;&#160;</a></span>ShutdownApi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +488,7 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void OpenGLAPI::Shutdown </td>
+          <td class="memname">void OpenGLAPI::ShutdownApi </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -455,7 +503,7 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = nullptr
 
 <p>Shuts down the graphics API and releases all resources. </p>
 
-<p>Implements <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#a9c03f75f7769760c4d3cf0edcfbbcfdd">IGraphicsAPI</a>.</p>
+<p>Implements <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html#ad2ccdcf36c3e0d992c61f9367ba4e694">IGraphicsAPI</a>.</p>
 
 </div>
 </div>

@@ -33,6 +33,9 @@ src/PulseEngine/core/Physics/CollisionManager.cpp ^
 src\PulseEngine\core\coroutine\CoroutineManager.cpp ^
 PulseEngineEditor\InterfaceEditor\BuildGameCoroutine.cpp ^
 src\PulseEngine\ModuleLoader\ModuleLoader.cpp ^
+src\PulseEngine\API\EngineApi.cpp ^
+src\PulseEngine\API\GameEntity.cpp ^
+src\PulseEngine\core\Math\Transform\Transform.cpp ^
 imgui/imgui.cpp ^
 imgui/imgui_draw.cpp ^
 imgui/imgui_tables.cpp ^

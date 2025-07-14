@@ -155,6 +155,11 @@ public:
     // ------------------------------------------------------------------------
     BoxCollider* collider = nullptr;
 
+    void AddTag(const std::string& tag);
+    void RemoveTag(const std::string& tag);
+
+    bool HasTag(const std::string& tag) const;
+
 protected:
     PulseEngine::Vector3 position;
     PulseEngine::Vector3 rotation;
@@ -166,6 +171,7 @@ private:
     // Internal Data
     // ------------------------------------------------------------------------
     std::string name;
+    std::vector<std::string> tags;
 
     PulseEngine::Mat4 entityMatrix;
 

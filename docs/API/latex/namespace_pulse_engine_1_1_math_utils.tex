@@ -1,0 +1,84 @@
+\doxysection{Pulse\+Engine\+::Math\+Utils Namespace Reference}
+\hypertarget{namespace_pulse_engine_1_1_math_utils}{}\label{namespace_pulse_engine_1_1_math_utils}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+
+
+Utility functions for mathematical operations.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{To\+Radians}} (float degrees)
+\begin{DoxyCompactList}\small\item\em Convert degrees to radians. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}{To\+Degrees}} (float radians)
+\begin{DoxyCompactList}\small\item\em Convert radians to degrees. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac}{Create\+Rotation\+Matrix}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&euler)
+\begin{DoxyCompactList}\small\item\em Create a rotation matrix from Euler angles (in radians). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_ac727ece3de22e048cf0e67edfb64bbf5}\label{namespace_pulse_engine_1_1_math_utils_ac727ece3de22e048cf0e67edfb64bbf5} 
+constexpr float {\bfseries PI} = 3.\+14159265358979323846f
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility functions for mathematical operations. 
+
+\label{doc-func-members}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!CreateRotationMatrix@{CreateRotationMatrix}}
+\index{CreateRotationMatrix@{CreateRotationMatrix}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+\doxysubsubsection{\texorpdfstring{CreateRotationMatrix()}{CreateRotationMatrix()}}
+{\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Math\+Utils\+::\+Create\+Rotation\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{euler}{}\end{DoxyParamCaption})}
+
+
+
+Create a rotation matrix from Euler angles (in radians). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em euler} & the Euler angles in radians (pitch, yaw, roll). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the rotation matrix. 
+\end{DoxyReturn}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!ToDegrees@{ToDegrees}}
+\index{ToDegrees@{ToDegrees}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+\doxysubsubsection{\texorpdfstring{ToDegrees()}{ToDegrees()}}
+{\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0} 
+float Pulse\+Engine\+::\+Math\+Utils\+::\+To\+Degrees (\begin{DoxyParamCaption}\item[{float}]{radians}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert radians to degrees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radians} & the angle in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float the angle in degrees. 
+\end{DoxyReturn}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!ToRadians@{ToRadians}}
+\index{ToRadians@{ToRadians}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+\doxysubsubsection{\texorpdfstring{ToRadians()}{ToRadians()}}
+{\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900} 
+float Pulse\+Engine\+::\+Math\+Utils\+::\+To\+Radians (\begin{DoxyParamCaption}\item[{float}]{degrees}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert degrees to radians. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degrees} & the angle in degrees. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float the angle in radians. 
+\end{DoxyReturn}

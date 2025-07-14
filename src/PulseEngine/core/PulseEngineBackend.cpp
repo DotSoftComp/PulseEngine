@@ -31,30 +31,43 @@
 #include "Common/dllExport.h"
 
 Camera* PulseEngineBackend::activeCamera = new Camera();
+IGraphicsAPI* PulseEngineBackend::graphicsAPI = nullptr;
+PulseEngineBackend* PulseEngineBackend::instance = nullptr;
 
 
 PulseEngineBackend::PulseEngineBackend() { }
 
 int PulseEngineBackend::Initialize()
 {
+    std::cout << "PulseEngineBackend::Initialize() called" << std::endl;
     std::cout << "init" << std::endl;
     windowContext = new WindowContext();
     activeCamera = new Camera();
 
     // load the graphic API based on the platform
     //some platform can have multiple graphic API possible.
-    graphicsAPI = dynamic_cast<IGraphicsAPI*>(ModuleLoader::GetModuleFromPath("Modules/OpenGLApi.dll"));
+    // graphicsAPI = dynamic_cast<IGraphicsAPI*>(ModuleLoader::GetModuleFromPath("Modules/OpenGLApi.dll"));
+    /**
+     * @note For renderer, we wont use dynamic DLL to load the graphic API, we will use inside the game engine dll one. So we need to create a game engine dll for each platform.
+     * 
+     */
+    #ifdef WINDOW_PULSE_EXPORT
+    graphicsAPI = new OpenGLAPI();
+    #endif
 
     if(graphicsAPI == nullptr)
     {
         std::cerr << "Error while initializing graphics API." << std::endl;
         return -1;
     }
+    std::cout << "Graphics API loaded successfully." << std::endl;
     graphicsAPI->InitializeApi(GetWindowName("editor").c_str(), &width, &height, this);
+    
     windowContext->SetGLFWWindow(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
 
     // coroutine manager, give the possibility to add async tasks to the engine
     coroutineManager = new CoroutineManager();
+    std::cout << "CoroutineManager created." << std::endl;
 
 
     // lights.push_back(new DirectionalLight(1.0f, 10.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(3.0f, 3.0f, 0.0f), glm::vec3(1.0f), 10, 1));
@@ -62,22 +75,27 @@ int PulseEngineBackend::Initialize()
 
     shadowShader = new Shader(std::string(ASSET_PATH) + "shaders/depthMap/Depth.vert", std::string(ASSET_PATH) + "shaders/depthMap/Depth.frag");
     debugShader = new Shader(std::string(ASSET_PATH) +"shaders/debug.vert", std::string(ASSET_PATH) + "shaders/debug.frag");
+    std::cout << "Shaders loaded." << std::endl;
     
     // === insert base item to the collection ===
     GuidReader::InsertIntoCollection("Entities/simpleActor.pEntity");    
-    // GuidReader::InsertIntoCollection("models/primitiveCube.pmesh");    
+    GuidReader::InsertIntoCollection("Entities/primitiveCube.pEntity"); 
     
     
     EDITOR_ONLY(
         ScriptsLoader::LoadDLL();
+        std::cout << "Scripts loaded." << std::endl;
     )
 
  
     engineConfig = FileManager::OpenEngineConfigFile(this);
+    std::cout << "Engine config loaded." << std::endl;
 
     std::string firstScene = engineConfig["GameData"]["FirstScene"];
+    std::cout << "Loading first scene: " << firstScene << std::endl;
     SceneLoader::LoadScene(std::string(ASSET_PATH) + firstScene, this);
 
+    std::cout << "Initialization complete." << std::endl;
     return 0;
 }
 
@@ -248,3 +266,13 @@ bool PulseEngineBackend::IsRenderable(Entity *entity) const
 {
     return entity != nullptr && entity->GetMaterial() != nullptr && entity->GetMaterial()->GetShader() != nullptr;
 }
+
+PulseEngineBackend* PulseEngineBackend::GetInstance()
+{
+    if (!instance)
+    {
+        instance = new PulseEngineBackend();
+    }
+    return instance;
+}
+

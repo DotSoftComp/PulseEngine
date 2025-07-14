@@ -17,6 +17,8 @@
 #include "Common/dllExport.h"
 #include <string>
 
+#include "src\PulseEngine\ModuleLoader\IModule\IModule.h"
+
 class PulseEngineBackend;
 
 /**
@@ -25,10 +27,15 @@ class PulseEngineBackend;
  * This abstract class defines all the necessary methods required to initialize,
  * manage, and use a rendering backend for the Pulse engine.
  */
-class PULSE_ENGINE_DLL_API IGraphicsAPI
+class PULSE_ENGINE_DLL_API IGraphicsAPI : public IModule
 {
 public:
     virtual ~IGraphicsAPI() = default;
+
+    virtual std::string GetName() const override { return "IGraphicsAPI"; }
+    virtual std::string GetVersion() const override { return "0.1"; }
+    virtual void Initialize() override {}
+    virtual void Shutdown() override {}
 
     // ===== Initialization & Shutdown =====
 
@@ -41,12 +48,12 @@ public:
      * @param engine Pointer to the Pulse engine backend instance.
      * @return true if initialization succeeds, false otherwise.
      */
-    virtual bool Initialize(const char* title, int* width, int* height, PulseEngineBackend* engine) = 0;
+    virtual bool InitializeApi(const char* title, int* width, int* height, PulseEngineBackend* engine) = 0;
 
     /**
      * @brief Shuts down the graphics API and releases all resources.
      */
-    virtual void Shutdown() = 0;
+    virtual void ShutdownApi() = 0;
 
     // ===== Window Management =====
 
@@ -107,6 +114,8 @@ public:
      * @brief Ends the rendering frame. Usually includes buffer swapping or command submission.
      */
     virtual void EndFrame() const = 0;
+
+    virtual unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath) = 0;
 
     // ===== Shared Context Variables =====
 

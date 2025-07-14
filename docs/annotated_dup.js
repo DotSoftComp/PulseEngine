@@ -2,8 +2,10 @@ var annotated_dup =
 [
     [ "PulseEngine", null, [
       [ "Color", "d7/de0/struct_pulse_engine_1_1_color.html", "d7/de0/struct_pulse_engine_1_1_color" ],
+      [ "GameEntity", "dc/d6b/class_pulse_engine_1_1_game_entity.html", null ],
       [ "Mat3", "dc/d91/struct_pulse_engine_1_1_mat3.html", "dc/d91/struct_pulse_engine_1_1_mat3" ],
       [ "Mat4", "d5/db6/struct_pulse_engine_1_1_mat4.html", null ],
+      [ "Transform", "d3/de7/class_pulse_engine_1_1_transform.html", null ],
       [ "Vector2", "db/d8f/struct_pulse_engine_1_1_vector2.html", null ],
       [ "Vector3", "d4/dce/struct_pulse_engine_1_1_vector3.html", null ]
     ] ],
@@ -22,6 +24,7 @@ var annotated_dup =
     [ "FileManager", "d0/d48/class_file_manager.html", null ],
     [ "GuidReader", "d5/d36/class_guid_reader.html", null ],
     [ "IGraphicsAPI", "d0/d58/class_i_graphics_a_p_i.html", "d0/d58/class_i_graphics_a_p_i" ],
+    [ "IModule", "de/d6d/class_i_module.html", "de/d6d/class_i_module" ],
     [ "InterfaceEditor", "d7/d53/class_interface_editor.html", null ],
     [ "IScript", "d7/da4/class_i_script.html", null ],
     [ "Keyframe", "d1/dd4/struct_keyframe.html", "d1/dd4/struct_keyframe" ],
@@ -31,6 +34,7 @@ var annotated_dup =
     [ "Material", "dc/dee/class_material.html", null ],
     [ "MaterialManager", "d9/d53/class_material_manager.html", null ],
     [ "Mesh", "dc/dbe/class_mesh.html", "dc/dbe/class_mesh" ],
+    [ "ModuleLoader", "d9/d66/class_module_loader.html", null ],
     [ "MouseInput", "df/d63/class_mouse_input.html", null ],
     [ "OpenGLAPI", "d6/da4/class_open_g_l_a_p_i.html", "d6/da4/class_open_g_l_a_p_i" ],
     [ "PointLight", "dd/d0a/class_point_light.html", "dd/d0a/class_point_light" ],

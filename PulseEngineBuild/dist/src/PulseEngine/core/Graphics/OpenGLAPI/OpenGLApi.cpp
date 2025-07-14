@@ -4,10 +4,13 @@
 #include "PulseEngine/core/PulseEngineBackend.h"
 #include "pulseEngine/core/Inputs/Mouse.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "OpenGLApi.h"
 
-bool OpenGLAPI::Initialize(const char* title, int* width, int* height, PulseEngineBackend* engine)
+bool OpenGLAPI::InitializeApi(const char* title, int* width, int* height, PulseEngineBackend* engine)
 {
+    std::cout << "starting to init opengl" << std::endl;
         this->engine = engine;
     if (!glfwInit())
     {
@@ -65,10 +68,12 @@ bool OpenGLAPI::Initialize(const char* title, int* width, int* height, PulseEngi
         EDITOR_ERROR("ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    std::cout << "OpenGL API initialized successfully." << std::endl;
+    std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     return true;
 }
 
-void OpenGLAPI::Shutdown()
+void OpenGLAPI::ShutdownApi()
 {
     if (window)
     {
@@ -80,7 +85,6 @@ void OpenGLAPI::Shutdown()
 
 void OpenGLAPI::PollEvents() const
 {
-    
     glfwSetCursorPosCallback(window, MouseInput::MouseCallback);
     glfwSetScrollCallback(window, MouseInput::ScrollCallback);
 
@@ -94,6 +98,13 @@ void OpenGLAPI::SwapBuffers() const
 
 bool OpenGLAPI::ShouldClose() const
 {
+    if (!window)
+    {
+        EDITOR_ERROR("GLFW window is not initialized.");
+        return true; // Consider it closed if window is null
+    }
+    std::cout << glfwWindowShouldClose(window) << std::endl;
+    
     return glfwWindowShouldClose(window);
 }
 
@@ -138,7 +149,93 @@ void OpenGLAPI::EndFrame() const
         glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
     )
 }
+
+unsigned int OpenGLAPI::CreateShader(const std::string& vertexPath, const std::string& fragmentPath)
+{
+    // Charger et compiler les shaders
+    std::string vertexCode = LoadShaderCode(vertexPath);
+    std::string fragmentCode = LoadShaderCode(fragmentPath);
+    
+    unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, vertexCode.c_str());
+    unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentCode.c_str());
+    unsigned int shaderID = LinkProgram(vertexShader, fragmentShader);
+    return shaderID;
+}
+
+std::string OpenGLAPI::LoadShaderCode(const std::string& path)
+{
+    std::ifstream shaderFile(path);
+    if (!shaderFile.is_open())
+    {
+        std::cerr << "Erreur : impossible d'ouvrir le fichier shader : " << path << std::endl;
+        return "";
+    }
+
+    std::stringstream shaderStream;
+    shaderStream << shaderFile.rdbuf();
+    return shaderStream.str();
+}
+
+unsigned int OpenGLAPI::CompileShader(unsigned int type, const char* source)
+{
+    unsigned int shader = glCreateShader(type);
+    glShaderSource(shader, 1, &source, nullptr);
+    glCompileShader(shader);
+
+    int success;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        char infoLog[512];
+        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+        std::cerr << "Erreur de compilation du "
+                  << (type == GL_VERTEX_SHADER ? "vertex" : "fragment")
+                  << " shader:\n" << infoLog << std::endl;
+    }
+
+    return shader;
+}
+
+unsigned int OpenGLAPI::LinkProgram(unsigned int vertexShader, unsigned int fragmentShader)
+{
+    unsigned int program = glCreateProgram();
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragmentShader);
+    glLinkProgram(program);
+
+    int success;
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        char infoLog[512];
+        glGetProgramInfoLog(program, 512, nullptr, infoLog);
+        std::cerr << "Erreur de linkage du shader program:\n" << infoLog << std::endl;
+    }
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    return program;
+}
+
+
 OpenGLAPI::~OpenGLAPI()
 {
     Shutdown();
+}
+
+
+extern "C" __declspec(dllexport) IModule* CreateModule()
+{
+    return new OpenGLAPI();
+}
+
+
+// graphicsAPI.cpp
+__declspec(dllexport) void InitializeGraphics()
+{
+    if (!glfwInit())
+    {
+        throw std::runtime_error("Failed to initialize GLFW");
+    }
 }

@@ -12,9 +12,10 @@ var searchData=
   ['setwindowsize_9',['SetWindowSize',['../d0/d58/class_i_graphics_a_p_i.html#adaf5f5d6c8df8594167394beb92c8fb7',1,'IGraphicsAPI::SetWindowSize()'],['../d6/da4/class_open_g_l_a_p_i.html#adf32d300bda58916b645de85bbd6c5d3',1,'OpenGLAPI::SetWindowSize()']]],
   ['setwindowtitle_10',['SetWindowTitle',['../d0/d58/class_i_graphics_a_p_i.html#a40c47a781c47fe539496b2eca3186fdc',1,'IGraphicsAPI::SetWindowTitle()'],['../d6/da4/class_open_g_l_a_p_i.html#afb4f4cc2241d0fb4dc94944eb417470e',1,'OpenGLAPI::SetWindowTitle()']]],
   ['shouldclose_11',['ShouldClose',['../d0/d58/class_i_graphics_a_p_i.html#a34a0dac7fe36ab0aeebe458c334aff56',1,'IGraphicsAPI::ShouldClose()'],['../d6/da4/class_open_g_l_a_p_i.html#a44bbc73b9bcdb9dda654467de9694a40',1,'OpenGLAPI::ShouldClose()']]],
-  ['shutdown_12',['Shutdown',['../d0/d58/class_i_graphics_a_p_i.html#a9c03f75f7769760c4d3cf0edcfbbcfdd',1,'IGraphicsAPI::Shutdown()'],['../d6/da4/class_open_g_l_a_p_i.html#a8e37df407c6f55551f898ffa1be7f522',1,'OpenGLAPI::Shutdown()']]],
-  ['simplydrawmesh_13',['SimplyDrawMesh',['../d2/d96/class_entity.html#a4f27a12aa63126cc65c83a85b80696a7',1,'Entity']]],
-  ['skeleton_14',['Skeleton',['../d7/d08/class_skeleton.html#a7b165022cefbdc5975ec89a205c37ed4',1,'Skeleton']]],
-  ['startframe_15',['StartFrame',['../d0/d58/class_i_graphics_a_p_i.html#a5c30e64637b1185558b41f7a6f75adbe',1,'IGraphicsAPI::StartFrame()'],['../d6/da4/class_open_g_l_a_p_i.html#a076b665e3e63ccc0d56a0d1608636cfc',1,'OpenGLAPI::StartFrame()']]],
-  ['swapbuffers_16',['SwapBuffers',['../d0/d58/class_i_graphics_a_p_i.html#a3c21b8bc41fd98d263db684120affe29',1,'IGraphicsAPI::SwapBuffers()'],['../d6/da4/class_open_g_l_a_p_i.html#a06f09d4e8b96a17d1d86a4714b3e49e6',1,'OpenGLAPI::SwapBuffers()']]]
+  ['shutdown_12',['Shutdown',['../d0/d58/class_i_graphics_a_p_i.html#a1047c9d3b1ef5558fa9fd7ea73d26162',1,'IGraphicsAPI::Shutdown()'],['../de/d6d/class_i_module.html#a1d5aa8071a05da6d377b2ce5f5eb5e7f',1,'IModule::Shutdown()']]],
+  ['shutdownapi_13',['ShutdownApi',['../d0/d58/class_i_graphics_a_p_i.html#ad2ccdcf36c3e0d992c61f9367ba4e694',1,'IGraphicsAPI::ShutdownApi()'],['../d6/da4/class_open_g_l_a_p_i.html#af2bb3a021e126db072dc12240d51efda',1,'OpenGLAPI::ShutdownApi()']]],
+  ['simplydrawmesh_14',['SimplyDrawMesh',['../d2/d96/class_entity.html#a4f27a12aa63126cc65c83a85b80696a7',1,'Entity']]],
+  ['skeleton_15',['Skeleton',['../d7/d08/class_skeleton.html#a7b165022cefbdc5975ec89a205c37ed4',1,'Skeleton']]],
+  ['startframe_16',['StartFrame',['../d0/d58/class_i_graphics_a_p_i.html#a5c30e64637b1185558b41f7a6f75adbe',1,'IGraphicsAPI::StartFrame()'],['../d6/da4/class_open_g_l_a_p_i.html#a076b665e3e63ccc0d56a0d1608636cfc',1,'OpenGLAPI::StartFrame()']]],
+  ['swapbuffers_17',['SwapBuffers',['../d0/d58/class_i_graphics_a_p_i.html#a3c21b8bc41fd98d263db684120affe29',1,'IGraphicsAPI::SwapBuffers()'],['../d6/da4/class_open_g_l_a_p_i.html#a06f09d4e8b96a17d1d86a4714b3e49e6',1,'OpenGLAPI::SwapBuffers()']]]
 ];

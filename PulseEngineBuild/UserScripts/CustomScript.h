@@ -3,6 +3,7 @@
 #include "Common/dllExport.h"
 #include <vector>
 
+
 struct ExposedVariable;
 
 class PULSE_ENGINE_DLL_API CustomScript : public IScript
@@ -19,4 +20,8 @@ class PULSE_ENGINE_DLL_API CustomScript : public IScript
 
         int speed = 1;
         float life = 1;
+        float spawnTimer = 0.0f;
+        float spawnDelay = 1.0f;
+
+        Entity* spawnedEntity = nullptr;
 };

@@ -5,5 +5,6 @@ var searchData=
   ['material_2',['Material',['../dc/dee/class_material.html',1,'']]],
   ['materialmanager_3',['MaterialManager',['../d9/d53/class_material_manager.html',1,'']]],
   ['mesh_4',['Mesh',['../dc/dbe/class_mesh.html',1,'']]],
-  ['mouseinput_5',['MouseInput',['../df/d63/class_mouse_input.html',1,'']]]
+  ['moduleloader_5',['ModuleLoader',['../d9/d66/class_module_loader.html',1,'']]],
+  ['mouseinput_6',['MouseInput',['../df/d63/class_mouse_input.html',1,'']]]
 ];

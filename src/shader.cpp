@@ -2,70 +2,21 @@
 #include "Common/common.h"
 #include "PulseEngine/core/Lights/Lights.h"
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
+#include "PulseEngine/core/Graphics/IGraphicsApi.h"
 
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
     // Charger et compiler les shaders
-    std::string vertexCode = loadShaderCode(vertexPath);
-    std::string fragmentCode = loadShaderCode(fragmentPath);
-    
-    unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertexCode.c_str());
-    unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentCode.c_str());
-    
-    shaderID = linkProgram(vertexShader, fragmentShader);
+    std::cout << "Loading shader from: " << vertexPath << " and " << fragmentPath << std::endl;
+    /**
+     * @todo we need to use the graphics API to load the shader. We then need to pass it via parameter or make the graphicAPI unique by using a static.
+     * 
+     */
+    shaderID = PulseEngineBackend::graphicsAPI->CreateShader(vertexPath, fragmentPath);
+    std::cout << "Shader program linked with ID: " << shaderID << std::endl;
 }
 
-std::string Shader::loadShaderCode(const std::string& path) {
-    std::ifstream shaderFile(path);
-    if (!shaderFile.is_open())
-    {
-        std::cerr << "Erreur : impossible d'ouvrir le fichier shader : " << path << std::endl;
-        return ""; // Return empty to prevent further problems
-    }
 
-    std::stringstream shaderStream;
-    shaderStream << shaderFile.rdbuf();
-    return shaderStream.str();
-}
-
-unsigned int Shader::compileShader(unsigned int type, const char* source)
-{
-    unsigned int shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, nullptr);
-    glCompileShader(shader);
-
-    int success;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        char infoLog[512];
-        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-        std::cerr << "Erreur de compilation du " 
-                  << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") 
-                  << " shader:\n" << infoLog << std::endl;
-    }
-
-    return shader;
-}
-
-unsigned int Shader::linkProgram(unsigned int vertexShader, unsigned int fragmentShader)
-{
-    unsigned int program = glCreateProgram();
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragmentShader);
-    glLinkProgram(program);
-
-    int success;
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if (!success)
-    {
-        char infoLog[512];
-        glGetProgramInfoLog(program, 512, nullptr, infoLog);
-        std::cerr << "Erreur de linkage du shader program:\n" << infoLog << std::endl;
-    }
-
-    return program;
-}
 
 void Shader::Use() const
 {

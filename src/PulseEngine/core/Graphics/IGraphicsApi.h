@@ -115,6 +115,8 @@ public:
      */
     virtual void EndFrame() const = 0;
 
+    virtual unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath) = 0;
+
     // ===== Shared Context Variables =====
 
     /// Pointer to current window width.

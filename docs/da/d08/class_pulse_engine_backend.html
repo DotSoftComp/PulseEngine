@@ -103,8 +103,7 @@ $(function(){initNavTree('da/d08/class_pulse_engine_backend.html','../../','d4/d
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a601d2b7a3738a9acbd5ba764e33a6369" id="r_a601d2b7a3738a9acbd5ba764e33a6369"><td class="memItemLeft" align="right" valign="top"><a id="a601d2b7a3738a9acbd5ba764e33a6369" name="a601d2b7a3738a9acbd5ba764e33a6369"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadModel</b> (std::string path)</td></tr>
-<tr class="memitem:a5f24f39088330e3e96666c37599dd6a1" id="r_a5f24f39088330e3e96666c37599dd6a1"><td class="memItemLeft" align="right" valign="top"><a id="a5f24f39088330e3e96666c37599dd6a1" name="a5f24f39088330e3e96666c37599dd6a1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> ()</td></tr>
+<tr class="memitem:a5f24f39088330e3e96666c37599dd6a1" id="r_a5f24f39088330e3e96666c37599dd6a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f24f39088330e3e96666c37599dd6a1">Initialize</a> ()</td></tr>
 <tr class="memitem:a69d415efbe583866ef6fd8710cf2c69b" id="r_a69d415efbe583866ef6fd8710cf2c69b"><td class="memItemLeft" align="right" valign="top"><a id="a69d415efbe583866ef6fd8710cf2c69b" name="a69d415efbe583866ef6fd8710cf2c69b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsRunning</b> ()</td></tr>
 <tr class="memitem:a173da89f03d92b4e4111d7239487a540" id="r_a173da89f03d92b4e4111d7239487a540"><td class="memItemLeft" align="right" valign="top"><a id="a173da89f03d92b4e4111d7239487a540" name="a173da89f03d92b4e4111d7239487a540"></a>
@@ -145,6 +144,8 @@ const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Ge
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aaf44e18e17a9ada2e62124a268679138" id="r_aaf44e18e17a9ada2e62124a268679138"><td class="memItemLeft" align="right" valign="top"><a id="aaf44e18e17a9ada2e62124a268679138" name="aaf44e18e17a9ada2e62124a268679138"></a>
+static <a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetInstance</b> ()</td></tr>
 <tr class="memitem:a645bcea92e20bb203fa0276fce63b05a" id="r_a645bcea92e20bb203fa0276fce63b05a"><td class="memItemLeft" align="right" valign="top"><a id="a645bcea92e20bb203fa0276fce63b05a" name="a645bcea92e20bb203fa0276fce63b05a"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>FramebufferSizeCallback</b> (GLFWwindow *window, int width, int height)</td></tr>
 <tr class="memitem:a56c038f843921d37b197faa01345f5c9" id="r_a56c038f843921d37b197faa01345f5c9"><td class="memItemLeft" align="right" valign="top"><a id="a56c038f843921d37b197faa01345f5c9" name="a56c038f843921d37b197faa01345f5c9"></a>
@@ -164,14 +165,35 @@ std::vector&lt; <a class="el" href="../../db/dd6/class_light_data.html">LightDat
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>actualMapPath</b> = &quot;Scenes/defaultMap.pmap&quot;</td></tr>
 <tr class="memitem:a65f982ffe541cd2a51d9cbb28f6556d7" id="r_a65f982ffe541cd2a51d9cbb28f6556d7"><td class="memItemLeft" align="right" valign="top"><a id="a65f982ffe541cd2a51d9cbb28f6556d7" name="a65f982ffe541cd2a51d9cbb28f6556d7"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>actualMapName</b> = &quot;defaultMap.pmap&quot;</td></tr>
-<tr class="memitem:a85435df9e97bdbf2243d45a65141d806" id="r_a85435df9e97bdbf2243d45a65141d806"><td class="memItemLeft" align="right" valign="top"><a id="a85435df9e97bdbf2243d45a65141d806" name="a85435df9e97bdbf2243d45a65141d806"></a>
-<a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html">IGraphicsAPI</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>graphicsAPI</b> = nullptr</td></tr>
 <tr class="memitem:ab7f5cc5db29e1bafb138f43a6fb784db" id="r_ab7f5cc5db29e1bafb138f43a6fb784db"><td class="memItemLeft" align="right" valign="top"><a id="ab7f5cc5db29e1bafb138f43a6fb784db" name="ab7f5cc5db29e1bafb138f43a6fb784db"></a>
 <a class="el" href="../../d3/d22/class_coroutine_manager.html">CoroutineManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>coroutineManager</b> = nullptr</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a22d6f2ffd728430b78efd5b8337a534e" id="r_a22d6f2ffd728430b78efd5b8337a534e"><td class="memItemLeft" align="right" valign="top"><a id="a22d6f2ffd728430b78efd5b8337a534e" name="a22d6f2ffd728430b78efd5b8337a534e"></a>
+static <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html">IGraphicsAPI</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>graphicsAPI</b> = nullptr</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="../../da/d08/class_pulse_engine_backend.html" title="PulseEngineBackend is the main class of the Pulse Engine.">PulseEngineBackend</a> is the main class of the Pulse Engine. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5f24f39088330e3e96666c37599dd6a1" name="a5f24f39088330e3e96666c37599dd6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f24f39088330e3e96666c37599dd6a1">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PulseEngineBackend::Initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>For renderer, we wont use dynamic DLL to load the graphic API, we will use inside the game engine dll one. So we need to create a game engine dll for each platform.</dd></dl>
+
+</div>
+</div>
 <a id="a7e2d21372f73d5a6066749523e1c4863" name="a7e2d21372f73d5a6066749523e1c4863"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e2d21372f73d5a6066749523e1c4863">&#9670;&#160;</a></span>Render()</h2>
 

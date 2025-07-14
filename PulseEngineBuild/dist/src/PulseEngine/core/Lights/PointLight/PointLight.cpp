@@ -82,19 +82,16 @@ void PointLight::RenderShadowMap(Shader &shader, PulseEngineBackend& scene)
 
     for (unsigned int i = 0; i < 6; ++i)
     {
-        std::cout << "Rendering shadow map face: " << i << std::endl;
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
             GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, depthCubeMap, 0);
 
         shader.SetMat4("shadowMatrix", shadowTransforms[i]);
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         {
-            std::cerr << "Framebuffer not complete for cube face " << i << std::endl;
             continue; // optionally skip this face
         }
         for (Entity* obj : scene.entities)
         {
-            std::cout << "Drawing entity: " << obj->GetName() << std::endl;
             glm::mat4 model = glm::make_mat4(obj->GetMatrix().Ptr());
             shader.SetMat4("model", model);
             obj->DrawMeshWithShader(shader.getProgramID());

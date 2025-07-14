@@ -1,0 +1,59 @@
+\doxysection{Pulse\+Engine\+::Game\+Entity Class Reference}
+\hypertarget{class_pulse_engine_1_1_game_entity}{}\label{class_pulse_engine_1_1_game_entity}\index{PulseEngine::GameEntity@{PulseEngine::GameEntity}}
+
+
+The \doxylink{class_pulse_engine_1_1_game_entity}{Game\+Entity} class provides static functions relative to the management of entities in the game.  
+
+
+
+
+{\ttfamily \#include $<$Engine\+Api.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Entity \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71}{Instantiate}} (const std\+::string \&path, \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} position=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.\+0f, 0.\+0f, 0.\+0f), \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} rotation=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.\+0f, 0.\+0f, 0.\+0f), \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} scale=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(1.\+0f, 1.\+0f, 1.\+0f))
+\begin{DoxyCompactList}\small\item\em Instantiate an entity from a path to a file, position, rotation and scale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_pulse_engine_1_1_game_entity}{Game\+Entity} class provides static functions relative to the management of entities in the game. 
+
+\label{doc-func-members}
+\Hypertarget{class_pulse_engine_1_1_game_entity_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71}\index{PulseEngine::GameEntity@{PulseEngine::GameEntity}!Instantiate@{Instantiate}}
+\index{Instantiate@{Instantiate}!PulseEngine::GameEntity@{PulseEngine::GameEntity}}
+\doxysubsubsection{\texorpdfstring{Instantiate()}{Instantiate()}}
+{\footnotesize\ttfamily \label{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71} 
+Entity \texorpdfstring{$\ast$}{*} Pulse\+Engine\+::\+Game\+Entity\+::\+Instantiate (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}}]{position}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.0f,~0.0f,~0.0f)}, }\item[{\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}}]{rotation}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.0f,~0.0f,~0.0f)}, }\item[{\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}}]{scale}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(1.0f,~1.0f,~1.0f)}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Instantiate an entity from a path to a file, position, rotation and scale. 
+
+The instantiation will directly call the Start() method from the entity, and also all start methods from the scripts attached to the entity.
+
+If no entity could have been instantiated, it will return a nullptr. \begin{DoxyNote}{Note}
+By passing an Entity\texorpdfstring{$\ast$}{*} to this method, by replacing path, you can instantiate an already existing entity in the world, saving ressources from loading it again.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the .pentity file. With this method you can only instantiate entities that are loaded in the engine. \\
+\hline
+{\em position} & Position where the entity will be instantiated. \\
+\hline
+{\em rotation} & Rotation of the entity in degrees (pitch, yaw, roll). \\
+\hline
+{\em scale} & Scale of the entity, we recommend to use the same scalar on each axis to keep the entity uniform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Entity\texorpdfstring{$\ast$}{*} The pointer to the entity instantiate in the world. You can directly modify it after the instantiation. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Pulse\+Engine/\+API/\mbox{\hyperlink{_engine_api_8h}{Engine\+Api.\+h}}\item 
+src/\+Pulse\+Engine/\+API/Game\+Entity.\+cpp\end{DoxyCompactItemize}

@@ -15,70 +15,82 @@
 
 Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
 {
+    
     static int count = 0;
     std::string name = "Entity_" + std::to_string(count++);
     Entity* entity = new Entity(name, PulseEngine::Vector3(0.0f), nullptr, MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat"));
-    
+
     nlohmann::json guidCollection;
     std::ifstream guidColFile(std::string(ASSET_PATH) +"Guid/guidCollectionEntities.puid");
     if(!guidColFile.is_open())
     {
-        std::cout << "guid entity file not open" << std::endl;
         delete entity;
-         return nullptr;
+        return nullptr;
     }
+    
     guidColFile >> guidCollection;
 
     if(guidCollection.contains(std::to_string(guid)))
     {
+        
         nlohmann::json entityData;
         std::ifstream entityFile(std::string(ASSET_PATH) + std::string(guidCollection[std::to_string(guid)]));
         if(!entityFile.is_open())
         {
-            std::cout << "entity data file not open" << std::endl;
+            
             delete entity;
             return nullptr;
         }
+        
         entityFile >> entityData;
         if(entityData.contains("Meshes"))
         {
-             for (const auto& mesh : entityData["Meshes"])
-             {
-                 std::cout << "adding mesh" << std::endl;
-                 std::size_t meshGuid = 0;
-                 try
-                 {
-                     if (mesh.is_string())
-                     {
-                         meshGuid = std::stoull(mesh.get<std::string>());
-                     }
-                     else if (mesh.is_number_unsigned())
-                     {
-                         meshGuid = mesh.get<std::size_t>();
-                     }
-                     else
-                     {
-                         std::cerr << "Invalid mesh GUID format." << std::endl;
-                         continue;
-                     }
-        
-                     Mesh* msh = GetMeshFromGuid(meshGuid);
-                     if (msh) entity->AddMesh(msh);
-                 }
-                 catch (const std::exception& e)
-                 {
-                     std::cerr << "Error parsing mesh guid: " << e.what() << std::endl;
-                 }
-             }
+            
+            for (const auto& mesh : entityData["Meshes"])
+            {
+                
+                std::size_t meshGuid = 0;
+                try
+                {
+                    if (mesh.is_string())
+                    {
+                        meshGuid = std::stoull(mesh.get<std::string>());
+                    }
+                    else if (mesh.is_number_unsigned())
+                    {
+                        meshGuid = mesh.get<std::size_t>();
+                    }
+                    else
+                    {
+                        std::cerr << "[GetEntityFromGuid] Invalid mesh GUID format." << std::endl;
+                        continue;
+                    }
+
+                    
+                    Mesh* msh = GetMeshFromGuid(meshGuid);
+                    if (msh) {
+                        
+                        entity->AddMesh(msh);
+                    } else {
+                        
+                    }
+                }
+                catch (const std::exception& e)
+                {
+                    std::cerr << "[GetEntityFromGuid] Error parsing mesh guid: " << e.what() << std::endl;
+                }
+            }
         }
         if(entityData.contains("Scripts"))
         {
+            
             for (const auto& script : entityData["Scripts"])
             {
+                
                 IScript* scriptLoaded = ScriptsLoader::GetScriptFromCallName(script);
                 if(!scriptLoaded) 
                 {
-                    std::cout << "Script " << script << " couldn't be loaded for " << guid << std::endl;
+                    
                     continue;
                 }
                 scriptLoaded->isEntityLinked = true;
@@ -87,11 +99,12 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
                 
             }
         }
-        std::cout << "returning entity" << std::endl;
+        
         return entity;
     }
     else
     {
+        
         delete entity;
         return nullptr;
     }
@@ -108,7 +121,7 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
     std::ifstream guidColFile(std::string(ASSET_PATH) +"Guid/guidCollectionMeshes.puid");
     if(!guidColFile.is_open())
     {
-        std::cout << "guid entity file not open" << std::endl;
+        
          return nullptr;
     }
     guidColFile >> guidCollection;
@@ -177,7 +190,7 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
         return nullptr;
     }
 
-    std::cout << "Modèle chargé avec succès : " << path << std::endl;
+    
     Mesh* msh = Mesh::LoadFromAssimp(scene->mMeshes[0], scene); // OK: importer toujours vivant ici
 
     msh->importer = importer;
@@ -190,7 +203,7 @@ std::size_t GuidReader::InsertIntoCollection(const std::string &filePath)
     std::size_t guid = GenerateGUIDFromPath(filePath);
 
     std::string collectionPath = GUID_COLLECTION_PATH + collectionType;
-    std::cout << collectionPath << std::endl;
+    
 
     // Load existing collection
     nlohmann::json jsonData;

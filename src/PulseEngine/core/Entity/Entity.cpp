@@ -67,7 +67,6 @@ void Entity::DrawEntity() const
     material->GetShader()->SetMat4("model", glmMat);
     material->GetShader()->SetFloat("specularStrength", material ? material->specular : 1.0f);
     material->GetShader()->SetVec3("objectColor", material ? glm::vec3(material->color.x, material->color.y, material->color.z) : glm::vec3(0.5f));
-    std::cout << "bind of model matrix done successfully" << std::endl;
     SimplyDrawMesh();
 }
 
@@ -78,10 +77,8 @@ void Entity::UseShader() const
 
 void Entity::SimplyDrawMesh() const
 {
-    std::cout << "number of mesh inside of entity : " << meshes.size() << std::endl;
     for (const auto &mesh : meshes)
     {
-        std::cout << "rendering mesh" << std::endl;
         if (auto albedoTex = material->GetTexture("albedo"))
         {
             albedoTex->Bind(6); // Slot 6
@@ -122,3 +119,24 @@ void Entity::RemoveScript(IScript* script)
     }
 }
 
+void Entity::AddTag(const std::string &tag)
+{
+    if (std::find(tags.begin(), tags.end(), tag) == tags.end())
+    {
+        tags.push_back(tag);
+    }
+}
+
+void Entity::RemoveTag(const std::string &tag)
+{
+    auto it = std::remove(tags.begin(), tags.end(), tag);
+    if (it != tags.end())
+    {
+        tags.erase(it);
+    }
+}
+
+bool Entity::HasTag(const std::string & tag) const
+{
+    return std::find(tags.begin(), tags.end(), tag) != tags.end();
+}

@@ -1,0 +1,240 @@
+\doxysection{Pulse\+Engine\+::Mat4 Struct Reference}
+\hypertarget{struct_pulse_engine_1_1_mat4}{}\label{struct_pulse_engine_1_1_mat4}\index{PulseEngine::Mat4@{PulseEngine::Mat4}}
+
+
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} class represents a 4x4 matrix used for 3D transformations.  
+
+
+
+
+{\ttfamily \#include $<$Mat4.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_pulse_engine_1_1_mat4_a8bd52c19ae5535f691803c8065c1c08b}\label{struct_pulse_engine_1_1_mat4_a8bd52c19ae5535f691803c8065c1c08b} 
+{\bfseries Mat4} (float scalar)
+\item 
+\Hypertarget{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2}\label{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2} 
+void {\bfseries Set\+Identity} ()
+\begin{DoxyCompactList}\small\item\em Set the Identity object. \end{DoxyCompactList}\item 
+float \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a5a4c09a7112593d6f9e31de7680724d5}{operator\mbox{[}$\,$\mbox{]}}} (int row)
+\begin{DoxyCompactList}\small\item\em Access operator to get a row of the matrix. \end{DoxyCompactList}\item 
+const float \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a7b3f3074509a0b6a9bddf4e919c2d43f}{operator\mbox{[}$\,$\mbox{]}}} (int row) const
+\begin{DoxyCompactList}\small\item\em Access operator to get a row of the matrix. \end{DoxyCompactList}\item 
+const float \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}} () const
+\begin{DoxyCompactList}\small\item\em Get a pointer to the underlying data. \end{DoxyCompactList}\item 
+float \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6408391ca4308ac795ae1288533b062c}{Ptr}} ()
+\begin{DoxyCompactList}\small\item\em Get a pointer to the underlying data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f8ba01531909e358d2336bf5369e45e}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \&other) const
+\begin{DoxyCompactList}\small\item\em Multiply this matrix by another matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa88ef30aac252732d6399db877f53301}{Multiply\+Point}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&v) const
+\begin{DoxyCompactList}\small\item\em Multiply this matrix by a vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_ae92ca35c7395fa61874275357eccb3d0}{Multiply\+Vector}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&v) const
+\begin{DoxyCompactList}\small\item\em Multiply this matrix by a vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6d0f39ab2572f84afb1aa39401c9dca8}{Create\+Translation}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&t)
+\begin{DoxyCompactList}\small\item\em Create a translation matrix. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f79a73acaad927cd1dd5697b60e9999}{Create\+Scale}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&s)
+\begin{DoxyCompactList}\small\item\em Create a rotation matrix from Euler angles (in radians). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa7c78169f83a22a9048d7a1f53a8a46a}{Create\+From\+Euler\+Angles}} (float pitch, float yaw, float roll)
+\begin{DoxyCompactList}\small\item\em Create a rotation matrix from Euler angles (in radians). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_pulse_engine_1_1_mat4_abe6f036eb8c724575c1480b8054b1412}\label{struct_pulse_engine_1_1_mat4_abe6f036eb8c724575c1480b8054b1412} 
+float {\bfseries data} \mbox{[}4\mbox{]}\mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} class represents a 4x4 matrix used for 3D transformations. 
+
+\label{doc-func-members}
+\Hypertarget{struct_pulse_engine_1_1_mat4_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_pulse_engine_1_1_mat4_aa7c78169f83a22a9048d7a1f53a8a46a}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!CreateFromEulerAngles@{CreateFromEulerAngles}}
+\index{CreateFromEulerAngles@{CreateFromEulerAngles}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{CreateFromEulerAngles()}{CreateFromEulerAngles()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_aa7c78169f83a22a9048d7a1f53a8a46a} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Mat4\+::\+Create\+From\+Euler\+Angles (\begin{DoxyParamCaption}\item[{float}]{pitch}{, }\item[{float}]{yaw}{, }\item[{float}]{roll}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create a rotation matrix from Euler angles (in radians). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pitch} & rotation around the X axis. \\
+\hline
+{\em yaw} & rotation around the Y axis. \\
+\hline
+{\em roll} & rotation around the Z axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the rotation matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a8f79a73acaad927cd1dd5697b60e9999}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!CreateScale@{CreateScale}}
+\index{CreateScale@{CreateScale}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{CreateScale()}{CreateScale()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a8f79a73acaad927cd1dd5697b60e9999} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Mat4\+::\+Create\+Scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{s}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create a rotation matrix from Euler angles (in radians). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pitch} & rotation around the X axis. \\
+\hline
+{\em yaw} & rotation around the Y axis. \\
+\hline
+{\em roll} & rotation around the Z axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the rotation matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a6d0f39ab2572f84afb1aa39401c9dca8}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!CreateTranslation@{CreateTranslation}}
+\index{CreateTranslation@{CreateTranslation}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{CreateTranslation()}{CreateTranslation()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a6d0f39ab2572f84afb1aa39401c9dca8} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Mat4\+::\+Create\+Translation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create a translation matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the translation vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the translation matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_aa88ef30aac252732d6399db877f53301}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!MultiplyPoint@{MultiplyPoint}}
+\index{MultiplyPoint@{MultiplyPoint}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{MultiplyPoint()}{MultiplyPoint()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_aa88ef30aac252732d6399db877f53301} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Mat4\+::\+Multiply\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{v}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply this matrix by a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vector to multiply with the matrix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector3}{Vector3} the resulting vector after multiplication. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_ae92ca35c7395fa61874275357eccb3d0}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!MultiplyVector@{MultiplyVector}}
+\index{MultiplyVector@{MultiplyVector}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{MultiplyVector()}{MultiplyVector()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_ae92ca35c7395fa61874275357eccb3d0} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Mat4\+::\+Multiply\+Vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{v}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply this matrix by a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vector to multiply with the matrix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector3}{Vector3} the resulting vector after multiplication. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a8f8ba01531909e358d2336bf5369e45e}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a8f8ba01531909e358d2336bf5369e45e} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Mat4\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiply this matrix by another matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the other matrix to multiply with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the resulting matrix after multiplication. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a5a4c09a7112593d6f9e31de7680724d5}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a5a4c09a7112593d6f9e31de7680724d5} 
+float \texorpdfstring{$\ast$}{*} Pulse\+Engine\+::\+Mat4\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{row}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access operator to get a row of the matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & which row to access (0, 1, 2, or 3). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float\texorpdfstring{$\ast$}{*} return a pointer to the specified row of the matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a7b3f3074509a0b6a9bddf4e919c2d43f}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a7b3f3074509a0b6a9bddf4e919c2d43f} 
+const float \texorpdfstring{$\ast$}{*} Pulse\+Engine\+::\+Mat4\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{row}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access operator to get a row of the matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & which row to access (0, 1, 2, or 3). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+const float\texorpdfstring{$\ast$}{*} return a pointer to the specified row of the matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a6408391ca4308ac795ae1288533b062c}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{Ptr()}{Ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a6408391ca4308ac795ae1288533b062c} 
+float \texorpdfstring{$\ast$}{*} Pulse\+Engine\+::\+Mat4\+::\+Ptr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a pointer to the underlying data. 
+
+\begin{DoxyReturn}{Returns}
+float\texorpdfstring{$\ast$}{*} pointer to the first element of the matrix. 
+\end{DoxyReturn}
+\Hypertarget{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}\index{PulseEngine::Mat4@{PulseEngine::Mat4}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!PulseEngine::Mat4@{PulseEngine::Mat4}}
+\doxysubsubsection{\texorpdfstring{Ptr()}{Ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220} 
+const float \texorpdfstring{$\ast$}{*} Pulse\+Engine\+::\+Mat4\+::\+Ptr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a pointer to the underlying data. 
+
+\begin{DoxyReturn}{Returns}
+const float\texorpdfstring{$\ast$}{*} pointer to the first element of the matrix. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Pulse\+Engine/core/\+Math/Mat4.\+h\end{DoxyCompactItemize}
