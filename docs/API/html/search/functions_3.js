@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['multiplypoint_0',['MultiplyPoint',['../struct_pulse_engine_1_1_mat4.html#aa88ef30aac252732d6399db877f53301',1,'PulseEngine::Mat4']]],
-  ['multiplyvector_1',['MultiplyVector',['../struct_pulse_engine_1_1_mat4.html#ae92ca35c7395fa61874275357eccb3d0',1,'PulseEngine::Mat4']]]
+  ['fromeulerxyz_0',['FromEulerXYZ',['../struct_pulse_engine_1_1_mat3.html#a1368d537c101db606f9ba13f6fedae7b',1,'PulseEngine::Mat3']]]
 ];

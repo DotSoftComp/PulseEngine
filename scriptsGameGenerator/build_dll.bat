@@ -2,7 +2,7 @@
 echo === Compilation of PulseEngine.dll for Window ===
 
 g++ -shared ^
--o Build/PulseEngine.dll ^
+-o distribuables/PulseEngine.dll ^
 src/main.cpp ^
 src/glad.c ^
 src/PulseEngine/core/GUID/GuidGenerator.cpp ^
@@ -54,3 +54,6 @@ if %errorlevel% neq 0 (
 ) else (
   echo ✅ Compilation réussie de PulseEngine.dll
 )
+
+copy distribuables\PulseEngine.dll PulseEngineBuild\dist\
+copy distribuables\PulseEngine.dll PulseEngineBuild\Build\

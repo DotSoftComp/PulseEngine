@@ -86,7 +86,7 @@ void OpenGLAPI::ShutdownApi()
 void OpenGLAPI::PollEvents() const
 {
     glfwSetCursorPosCallback(window, MouseInput::MouseCallback);
-    glfwSetScrollCallback(window, MouseInput::ScrollCallback);
+    // glfwSetScrollCallback(window, MouseInput::ScrollCallback);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
@@ -223,8 +223,6 @@ OpenGLAPI::~OpenGLAPI()
 {
     Shutdown();
 }
-
-
 extern "C" __declspec(dllexport) IModule* CreateModule()
 {
     return new OpenGLAPI();

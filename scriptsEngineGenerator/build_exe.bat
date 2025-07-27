@@ -10,7 +10,7 @@ imgui/imgui_widgets.cpp ^
 imgui/imgui_demo.cpp ^
 imgui/backends/imgui_impl_glfw.cpp ^
 imgui/backends/imgui_impl_opengl3.cpp ^
--LPulseEngineBuild -lPulseEngineEditor ^
+-LPulseEngineBuild -lPulseEngineEditor  ^
 -LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 ^
 -DENGINE_EDITOR ^
 -DWINDOW_PULSE_EXPORT ^

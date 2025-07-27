@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "API of Pulse Engine", "index.html", [
+    [ "Pulse Engine", "index.html", "index" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -39,16 +40,13 @@ var NAVTREE =
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ]
       ] ]
-    ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_color_8h.html"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

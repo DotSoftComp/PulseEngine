@@ -43,64 +43,7 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
         }
         
         entityFile >> entityData;
-        if(entityData.contains("Meshes"))
-        {
-            
-            for (const auto& mesh : entityData["Meshes"])
-            {
-                
-                std::size_t meshGuid = 0;
-                try
-                {
-                    if (mesh.is_string())
-                    {
-                        meshGuid = std::stoull(mesh.get<std::string>());
-                    }
-                    else if (mesh.is_number_unsigned())
-                    {
-                        meshGuid = mesh.get<std::size_t>();
-                    }
-                    else
-                    {
-                        std::cerr << "[GetEntityFromGuid] Invalid mesh GUID format." << std::endl;
-                        continue;
-                    }
-
-                    
-                    Mesh* msh = GetMeshFromGuid(meshGuid);
-                    if (msh) {
-                        
-                        entity->AddMesh(msh);
-                    } else {
-                        
-                    }
-                }
-                catch (const std::exception& e)
-                {
-                    std::cerr << "[GetEntityFromGuid] Error parsing mesh guid: " << e.what() << std::endl;
-                }
-            }
-        }
-        if(entityData.contains("Scripts"))
-        {
-            
-            for (const auto& script : entityData["Scripts"])
-            {
-                
-                IScript* scriptLoaded = ScriptsLoader::GetScriptFromCallName(script);
-                if(!scriptLoaded) 
-                {
-                    
-                    continue;
-                }
-                scriptLoaded->isEntityLinked = true;
-                scriptLoaded->parent = entity;
-                entity->AddScript(scriptLoaded);
-                
-            }
-        }
-        
-        return entity;
+        return GetEntityFromJson(entityData, entity);
     }
     else
     {
@@ -108,6 +51,82 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
         delete entity;
         return nullptr;
     }
+}
+
+Entity *GuidReader::GetEntityFromJson(nlohmann::json_abi_v3_12_0::json &entityData, Entity *entity)
+{
+    if (entityData.contains("Meshes"))
+    {
+
+        for (const auto &mesh : entityData["Meshes"])
+        {
+
+            std::size_t meshGuid = 0;
+            try
+            {
+                if (mesh["Guid"].is_string())
+                {
+                    meshGuid = std::stoull(mesh["Guid"].get<std::string>());
+                }
+                else if (mesh["Guid"].is_number_unsigned())
+                {
+                    meshGuid = mesh.get<std::size_t>();
+                }
+                else
+                {
+                    std::cerr << "[GetEntityFromGuid] Invalid mesh GUID format." << std::endl;
+                    continue;
+                }
+
+                Mesh *msh = GetMeshFromGuid(meshGuid);
+                msh->position.x = mesh["Position"][0].get<float>();
+                msh->position.y = mesh["Position"][1].get<float>();
+                msh->position.z = mesh["Position"][2].get<float>();
+                            
+                msh->rotation.x = mesh["Rotation"][0].get<float>();
+                msh->rotation.y = mesh["Rotation"][1].get<float>();
+                msh->rotation.z = mesh["Rotation"][2].get<float>();
+                            
+                msh->scale.x = mesh["Scale"][0].get<float>();
+                msh->scale.y = mesh["Scale"][1].get<float>();
+                msh->scale.z = mesh["Scale"][2].get<float>();
+                msh->SetGuid(meshGuid);
+                msh->SetName(mesh["Name"].get<std::string>());
+
+                if (msh)
+                {
+
+                    entity->AddMesh(msh);
+                }
+                else
+                {
+                }
+            }
+            catch (const std::exception &e)
+            {
+                std::cerr << "[GetEntityFromGuid] Error parsing mesh guid: " << e.what() << std::endl;
+            }
+        }
+    }
+    if (entityData.contains("Scripts"))
+    {
+
+        for (const auto &script : entityData["Scripts"])
+        {
+
+            IScript *scriptLoaded = ScriptsLoader::GetScriptFromCallName(script);
+            if (!scriptLoaded)
+            {
+
+                continue;
+            }
+            scriptLoaded->isEntityLinked = true;
+            scriptLoaded->parent = entity;
+            entity->AddScript(scriptLoaded);
+        }
+    }
+
+    return entity;
 }
 
 Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
@@ -194,6 +213,8 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
     Mesh* msh = Mesh::LoadFromAssimp(scene->mMeshes[0], scene); // OK: importer toujours vivant ici
 
     msh->importer = importer;
+    msh->SetGuid(guid);
+    msh->SetName(meshPath);
     return msh;
 }
 
@@ -202,12 +223,14 @@ std::size_t GuidReader::InsertIntoCollection(const std::string &filePath)
     std::string collectionType = FileManager::GetCollectionByExtension(filePath);
     std::size_t guid = GenerateGUIDFromPath(filePath);
 
+
     std::string collectionPath = GUID_COLLECTION_PATH + collectionType;
-    
+    std::cout << collectionPath << std::endl;    
 
     // Load existing collection
     nlohmann::json jsonData;
-
+std::cout << "Working directory: " << std::filesystem::current_path() << std::endl;
+std::cout << "Full collection path: " << collectionPath << std::endl;
     std::ifstream inFile(collectionPath);
     if (inFile.is_open()) {
         // If file exists, read the existing JSON data
@@ -232,4 +255,27 @@ std::size_t GuidReader::InsertIntoCollection(const std::string &filePath)
     }
 
     return guid;
+}
+
+std::vector<std::pair<std::string, std::string>> GuidReader::GetAllAvailableFiles(const std::string &guidFile)
+{
+    std::string collectionType = FileManager::GetCollectionByExtension(guidFile);
+    std::string collectionPath = GUID_COLLECTION_PATH + guidFile;
+    nlohmann::json jsonData;
+    std::ifstream inFile(collectionPath);
+
+    if (inFile.is_open()) {
+        inFile >> jsonData;
+        inFile.close();
+        
+        std::vector<std::pair<std::string, std::string>> files;
+        for (const auto& item : jsonData.items()) {
+            files.push_back(std::make_pair(item.key(), item.value().get<std::string>()));
+        }
+        return files;
+    } else {
+        std::cerr << "Failed to open GUID collection file." << std::endl;
+    }
+
+    return std::vector<std::pair<std::string, std::string>>();
 }

@@ -26,16 +26,17 @@ src/PulseEngine/core/Physics/Collider/BoxCollider.cpp ^
 src/PulseEngine/core/Meshes/SkeletalMesh.cpp ^
 PulseEngineEditor/InterfaceEditor/InterfaceEditor.cpp ^
 PulseEngineEditor/InterfaceEditor/TopBar.cpp ^
+PulseEngineEditor/InterfaceEditor/InterfaceAPI/PulseInterfaceAPI.cpp ^
 src/PulseEngine/core/Lights/PointLight/PointLight.cpp ^
 src/PulseEngine/core/Material/Texture.cpp ^
 src/PulseEngine/core/Lights/LightManager.cpp ^
 src/PulseEngine/core/Physics/CollisionManager.cpp ^
-src\PulseEngine\core\coroutine\CoroutineManager.cpp ^
-PulseEngineEditor\InterfaceEditor\BuildGameCoroutine.cpp ^
-src\PulseEngine\ModuleLoader\ModuleLoader.cpp ^
-src\PulseEngine\API\EngineApi.cpp ^
-src\PulseEngine\API\GameEntity.cpp ^
-src\PulseEngine\core\Math\Transform\Transform.cpp ^
+src/PulseEngine/core/coroutine/CoroutineManager.cpp ^
+PulseEngineEditor/InterfaceEditor/BuildGameCoroutine.cpp ^
+src/PulseEngine/ModuleLoader/ModuleLoader.cpp ^
+src/PulseEngine/API/EngineApi.cpp ^
+src/PulseEngine/API/GameEntity.cpp ^
+src/PulseEngine/core/Math/Transform/Transform.cpp ^
 imgui/imgui.cpp ^
 imgui/imgui_draw.cpp ^
 imgui/imgui_tables.cpp ^
@@ -47,7 +48,7 @@ imgui/backends/imgui_impl_opengl3.cpp ^
 -Lexternal/assimp/lib ^
 -Lexternal/assimp/lib/x64 ^
 -LD:/MSYS2/mingw64/lib ^
--lglfw3 -lopengl32 -lm -lassimp ^
+-lglfw3 -lopengl32 -lm -lassimp -lcomdlg32 ^
 -DBUILDING_DLL -DENGINE_EDITOR -DWINDOW_PULSE_EXPORT
 
 if %errorlevel% neq 0 (
@@ -55,4 +56,46 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 ) else (
     echo DLL build succeeded!
+    if not exist distribuables (
+        mkdir distribuables
+    )
+    copy /Y PulseEngineBuild\libPulseEngineEditor.a distribuables\
+    copy /Y PulseEngineBuild\PulseEngineEditor.dll distribuables\
+    
+    if not exist PulseEngineBuild\dist\src (
+        mkdir PulseEngineBuild\dist\src
+    )
+    if not exist PulseEngineBuild\dist\include (
+        mkdir PulseEngineBuild\dist\include
+    )
+    xcopy /E /I /Y src PulseEngineBuild\dist\src
+    copy /Y src\main.cpp PulseEngineBuild\dist\main.cpp
+    xcopy /E /I /Y include PulseEngineBuild\dist\include
+    
+    del /S /Q PulseEngineBuild\dist\src\*.cpp
+    del /S /Q PulseEngineBuild\dist\include\*.cpp
+
+
+    if not exist ..\ModuleCreator\src (
+        mkdir ..\ModuleCreator\src
+    )
+    if not exist ..\ModuleCreator\include (
+        mkdir ..\ModuleCreator\include
+    )
+
+    if not exist ..\ModuleCreator\PulseEngineEditor (
+        mkdir ..\ModuleCreator\PulseEngineEditor
+    )
+
+    copy /Y PulseEngineBuild\libPulseEngineEditor.a ..\ModuleCreator\lib
+
+    xcopy /E /I /Y src ..\ModuleCreator\src
+    xcopy /E /I /Y include ..\ModuleCreator\include
+    xcopy /E /I /Y PulseEngineEditor ..\ModuleCreator\PulseEngineEditor
+
+    del /S /Q ..\ModuleCreator\src\*.cpp
+    del /S /Q ..\ModuleCreator\include\*.cpp
+    del /S /Q ..\ModuleCreator\PulseEngineEditor\*.cpp
+
 )
+

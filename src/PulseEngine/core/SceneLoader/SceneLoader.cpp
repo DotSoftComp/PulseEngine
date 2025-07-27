@@ -141,6 +141,7 @@ void SceneLoader::LoadEntityScript(const nlohmann::json_abi_v3_12_0::json &scrip
             std::cout << "Exposed variable name: " + var->name << std::endl;
         }
         entity->AddScript(scriptInstance);
+        scriptInstance->OnStart();
         std::cout << "Script " << scriptName << " loaded." << std::endl;
     }
     else

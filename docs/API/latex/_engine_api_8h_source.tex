@@ -1,6 +1,6 @@
 \doxysection{Engine\+Api.\+h}
 \hypertarget{_engine_api_8h_source}{}\label{_engine_api_8h_source}\index{src/PulseEngine/API/EngineApi.h@{src/PulseEngine/API/EngineApi.h}}
-\mbox{\hyperlink{_engine_api_8h}{Go to the documentation of this file.}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ ENGINEAPI\_H}}
@@ -19,10 +19,12 @@
 \DoxyCodeLine{00028\ \ \ \ \ \{}
 \DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Entity*\ \mbox{\hyperlink{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71}{Instantiate}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\ position\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}(0.0f,\ 0.0f,\ 0.0f),\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\ rotation\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}(0.0f,\ 0.0f,\ 0.0f),\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\ scale\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}(1.0f,\ 1.0f,\ 1.0f));}
-\DoxyCodeLine{00043\ \ \ \ \ \};}
-\DoxyCodeLine{00044\ \}}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00043\ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ \mbox{\hyperlink{class_pulse_engine_1_1_game_entity_a65c3a2aa12dc1df0c948ee7f07578f41}{GetAllEntitiesByTag}}(\textcolor{keyword}{const}\ std::string\&\ tag);}
+\DoxyCodeLine{00051\ \ \ \ \ \};}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

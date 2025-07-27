@@ -81,5 +81,6 @@
 
 #define PulseEngineInstance PulseEngineBackend::GetInstance()
 #define PulseEngineGraphicsAPI PulseEngineBackend::graphicsAPI
+#define PulseEngineDeltaTime PulseEngineBackend::GetDeltaTime()
 
 #endif // EDITORDEFINES_H

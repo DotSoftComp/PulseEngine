@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>API of Pulse Engine: src/PulseEngine/core/Math/MathUtils.h Source File</title>
-<link rel="icon" href="pulseIcon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +18,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">API of Pulse Engine<span id="projectnumber">&#160;0.0.7</span>
+   <div id="projectname">API of Pulse Engine<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Pulse Engine is a 3D game engine written in C++. It provides an easy to use API to use the engine for your own project.</div>
   </td>
@@ -157,15 +157,42 @@ $(function(){initNavTree('_math_utils_8h_source.html','',''); });
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">return</span> mat;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="namespace_pulse_engine_1_1_math_utils.html#a3e03e15e6cf50d03a659d67e1bdfcf1b">   89</a></span>        <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> <a class="code hl_function" href="namespace_pulse_engine_1_1_math_utils.html#a3e03e15e6cf50d03a659d67e1bdfcf1b">LookAt</a>(<span class="keyword">const</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&amp; position, <span class="keyword">const</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&amp; target, <span class="keyword">const</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&amp; up = <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>(0.0f, 1.0f, 0.0f))</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> zaxis = (position - target).Normalized(); <span class="comment">// Forward vector</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> xaxis = up.Cross(zaxis).Normalized();    <span class="comment">// Right vector</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> yaxis = zaxis.Cross(xaxis);              <span class="comment">// Up vector</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>(xaxis.x, yaxis.y, zaxis.z);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
 </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespace_pulse_engine_1_1_math_utils.html#a2cbbb2d07fe726c88c46c4fc07c49528">  107</a></span>        <span class="keyword">inline</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> <a class="code hl_function" href="namespace_pulse_engine_1_1_math_utils.html#a2cbbb2d07fe726c88c46c4fc07c49528">RotateAround</a>(<span class="keyword">const</span> <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&amp; target, <span class="keywordtype">float</span> yaw, <span class="keywordtype">float</span> pitch, <span class="keywordtype">float</span> radius)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordtype">float</span> yawRad = <a class="code hl_function" href="namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900">ToRadians</a>(yaw);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordtype">float</span> pitchRad = <a class="code hl_function" href="namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900">ToRadians</a>(pitch);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <a class="code hl_struct" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> offset;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            offset.x = radius * cosf(pitchRad) * cosf(yawRad);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            offset.y = radius * sinf(pitchRad);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            offset.z = radius * cosf(pitchRad) * sinf(yawRad);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            <span class="keywordflow">return</span> target - offset;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html">PulseEngine::MathUtils</a></div><div class="ttdoc">Utility functions for mathematical operations.</div><div class="ttdef"><b>Definition</b> MathUtils.h:15</div></div>
 <div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html_a11e59009707d3837a7c695e7c90e7cac"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html#a11e59009707d3837a7c695e7c90e7cac">PulseEngine::MathUtils::CreateRotationMatrix</a></div><div class="ttdeci">Mat4 CreateRotationMatrix(const Vector3 &amp;euler)</div><div class="ttdoc">Create a rotation matrix from Euler angles (in radians).</div><div class="ttdef"><b>Definition</b> MathUtils.h:46</div></div>
+<div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html_a2cbbb2d07fe726c88c46c4fc07c49528"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html#a2cbbb2d07fe726c88c46c4fc07c49528">PulseEngine::MathUtils::RotateAround</a></div><div class="ttdeci">Vector3 RotateAround(const Vector3 &amp;target, float yaw, float pitch, float radius)</div><div class="ttdoc">Give an easy to use function to rotate an point around a target point in a 3D space with no complexit...</div><div class="ttdef"><b>Definition</b> MathUtils.h:107</div></div>
+<div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html_a3e03e15e6cf50d03a659d67e1bdfcf1b"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html#a3e03e15e6cf50d03a659d67e1bdfcf1b">PulseEngine::MathUtils::LookAt</a></div><div class="ttdeci">Vector3 LookAt(const Vector3 &amp;position, const Vector3 &amp;target, const Vector3 &amp;up=Vector3(0.0f, 1.0f, 0.0f))</div><div class="ttdoc">Make an object rotate, to look at a certain position.</div><div class="ttdef"><b>Definition</b> MathUtils.h:89</div></div>
 <div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html_a44c3b6227858241c58fcc3bf839f5900"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900">PulseEngine::MathUtils::ToRadians</a></div><div class="ttdeci">float ToRadians(float degrees)</div><div class="ttdoc">Convert degrees to radians.</div><div class="ttdef"><b>Definition</b> MathUtils.h:24</div></div>
 <div class="ttc" id="anamespace_pulse_engine_1_1_math_utils_html_acfecb92b970cefa26e8c08141090f4f0"><div class="ttname"><a href="namespace_pulse_engine_1_1_math_utils.html#acfecb92b970cefa26e8c08141090f4f0">PulseEngine::MathUtils::ToDegrees</a></div><div class="ttdeci">float ToDegrees(float radians)</div><div class="ttdoc">Convert radians to degrees.</div><div class="ttdef"><b>Definition</b> MathUtils.h:35</div></div>
 <div class="ttc" id="astruct_pulse_engine_1_1_mat4_html"><div class="ttname"><a href="struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a></div><div class="ttdoc">Mat4 class represents a 4x4 matrix used for 3D transformations.</div><div class="ttdef"><b>Definition</b> Mat4.h:13</div></div>

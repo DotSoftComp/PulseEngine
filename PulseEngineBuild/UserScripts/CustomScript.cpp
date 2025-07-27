@@ -5,73 +5,70 @@
 #include <windows.h>
 #include "PulseEngine/API/EngineApi.h"
 #include "PulseEngine/core/Math/Transform/Transform.h"
+#include "PulseEngine/core/Physics/Collider/BoxCollider.h"
+#include "BulletScript.h"
+#include "MeteorScript.h"
 
 void CustomScript::OnStart()
 {
-    // Initialization logic if needed
+    
+    
 }
+
+
 
 void CustomScript::OnUpdate()
 {
+    if(!doOnce)
+    {
+        doOnce = true;
+    for (unsigned int i = 0; i < 100; i++)
+    {
+        Entity* nwEnt = PulseEngine::GameEntity::Instantiate(
+                "Entities/primitiveCube.pEntity",
+                PulseEngine::Vector3( -25 + (rand() % 50), -25 + (rand() % 50), -25 + (rand() % 50)),
+                PulseEngine::Vector3(10 + (rand() % 500),10 + (rand() % 500),10 + (rand() % 500)),
+                PulseEngine::Vector3(0.3f * (rand() % 5))
+            );
+
+        nwEnt->collider->SetSize(nwEnt->GetScale());
+
+        MeteorScript* meteor = new MeteorScript();
+        meteor->parent = nwEnt;
+        nwEnt->AddScript(meteor);
+
+    }
+
+    }
     spawnTimer -= 0.1f;
-
-    PulseEngine::Vector3 position = parent->GetPosition();
-    PulseEngine::Vector3 rotation = parent->GetRotation();
-
-    // Movement controls
-    if (GetAsyncKeyState('I') & 0x8000) position.z += 0.1f;
-    if (GetAsyncKeyState('K') & 0x8000) position.z -= 0.1f;
-    if (GetAsyncKeyState('J') & 0x8000) position.x -= 0.1f;
-    if (GetAsyncKeyState('L') & 0x8000) position.x += 0.1f;
-    if (GetAsyncKeyState('P') & 0x8000) position.y += 0.1f;
-    if (GetAsyncKeyState('M') & 0x8000) position.y -= 0.1f;
-
     // Entity spawning
     if (GetAsyncKeyState('O') & 0x8000)
     {
-        if (spawnTimer <= 0.0f && spawnedEntity == nullptr)
+        
+        if (spawnTimer <= 0.0f)
         {
             spawnTimer = spawnDelay;
 
-            PulseEngine::Transform transform;
-            transform.position = parent->GetPosition();
-            transform.rotation = parent->GetRotation();
+            PulseEngine::Vector3 front(PulseEngineInstance->GetActiveCamera()->Front.x, PulseEngineInstance->GetActiveCamera()->Front.y, PulseEngineInstance->GetActiveCamera()->Front.z);
+            PulseEngine::Vector3 right(PulseEngineInstance->GetActiveCamera()->Right.x, PulseEngineInstance->GetActiveCamera()->Right.y, PulseEngineInstance->GetActiveCamera()->Right.z);
 
-            PulseEngine::Vector3 spawnPos = transform.position + transform.GetForward() * 2.0f;
+            PulseEngine::Vector3 spawnPos = PulseEngineInstance->GetCameraPosition() + front * 2.0f;
 
             spawnedEntity = PulseEngine::GameEntity::Instantiate(
                 "Entities/primitiveCube.pEntity",
                 spawnPos,
-                parent->GetRotation(),
-                PulseEngine::Vector3(1.0f, 1.0f, 1.0f)
+                PulseEngineInstance->GetCameraRotation(),
+                PulseEngine::Vector3(0.3f)
             );
+            spawnedEntity->collider->SetSize(spawnedEntity->GetScale());
 
-            std::cout << "Spawned an entity at position: "
-                      << spawnedEntity->GetPosition().x << ", "
-                      << spawnedEntity->GetPosition().y << ", "
-                      << spawnedEntity->GetPosition().z << std::endl;
+
+            BulletScript* bullet = new BulletScript();
+            bullet->direction = front;
+            spawnedEntity->AddScript(bullet);
+            bullet->parent = spawnedEntity;
         }
     }
-
-    // Update spawned entity position
-    if (spawnedEntity != nullptr)
-    {
-        PulseEngine::Transform transform;
-        transform.position = parent->GetPosition();
-        transform.rotation = parent->GetRotation();
-        transform.rotation.x *= -1;
-        transform.rotation.y *= -1;
-        transform.rotation.z *= -1;
-
-        PulseEngine::Vector3 newPos = transform.position + transform.GetForward() * 2.0f;
-        spawnedEntity->SetPosition(newPos);
-    }
-
-    // Apply rotation
-    rotation.x += 1.0f * life;
-
-    parent->SetPosition(position);
-    parent->SetRotation(rotation);
 }
 
 const char* CustomScript::GetName() const

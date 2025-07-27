@@ -140,7 +140,8 @@ public:
     const std::size_t& GetMuid() const {return muid;}
     std::string GetName() const {return name;}
     Material* GetMaterial() {return material; }
-    std::vector<IScript*> GetScripts() {return scripts; }
+    std::vector<IScript*>& GetScripts() {return scripts; }
+    std::vector<Mesh*>& GetMeshes() {return meshes; }
 
     // ------------------------------------------------------------------------
     // Setters
@@ -155,6 +156,25 @@ public:
     // ------------------------------------------------------------------------
     BoxCollider* collider = nullptr;
 
+    void AddTag(const std::string& tag);
+    void RemoveTag(const std::string& tag);
+
+    bool HasTag(const std::string& tag) const;
+
+    /**
+     * @brief Move the entity -> actualPostion + direction * deltaTime
+     * 
+     * @param direction the direction of the entity, the movement wanted in 1 second.
+     */
+    void Move(const PulseEngine::Vector3& direction);
+    /**
+     * @brief Rotate the entity on the 3 axes from his actual rotation.
+     * -> actualRotation + rotation * deltatime
+     * 
+     * @param rotation the rotation to add to the entity, wanted in 1 second.
+     */
+    void Rotate(const PulseEngine::Vector3& rotation);
+
 protected:
     PulseEngine::Vector3 position;
     PulseEngine::Vector3 rotation;
@@ -166,6 +186,7 @@ private:
     // Internal Data
     // ------------------------------------------------------------------------
     std::string name;
+    std::vector<std::string> tags;
 
     PulseEngine::Mat4 entityMatrix;
 

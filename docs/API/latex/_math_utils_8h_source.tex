@@ -60,10 +60,31 @@
 \DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat;}
 \DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \}}
-\DoxyCodeLine{00082\ \}}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}{LookAt}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ position,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ up\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,\ 1.0f,\ 0.0f))}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ zaxis\ =\ (position\ -\/\ target).Normalized();\ \textcolor{comment}{//\ Forward\ vector}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ xaxis\ =\ up.Cross(zaxis).Normalized();\ \ \ \ \textcolor{comment}{//\ Right\ vector}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ yaxis\ =\ zaxis.Cross(xaxis);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Up\ vector}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(xaxis.x,\ yaxis.y,\ zaxis.z);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}{RotateAround}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keywordtype}{float}\ yaw,\ \textcolor{keywordtype}{float}\ pitch,\ \textcolor{keywordtype}{float}\ radius)}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yawRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(yaw);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ pitchRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(pitch);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ offset;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ offset.x\ =\ radius\ *\ cosf(pitchRad)\ *\ cosf(yawRad);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ offset.y\ =\ radius\ *\ sinf(pitchRad);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ offset.z\ =\ radius\ *\ cosf(pitchRad)\ *\ sinf(yawRad);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ target\ -\/\ offset;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

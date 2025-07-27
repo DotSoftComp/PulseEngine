@@ -6,6 +6,8 @@
 
 using json = nlohmann::json;
 
+std::filesystem::path FileManager::workingDirectory = "";
+
 static bool EndsWith(const std::string& str, const std::string& suffix)
 {
     return str.size() >= suffix.size() &&

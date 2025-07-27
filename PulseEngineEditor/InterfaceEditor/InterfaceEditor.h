@@ -17,10 +17,12 @@
 #include "Common/dllExport.h"
 #include <unordered_map>
 #include <string>
+#include <filesystem>
 
 class PulseEngineBackend;
 class TopBar;
 class Entity;
+class IModuleInterface;
 
 struct LoadingPopupData
 {
@@ -28,6 +30,7 @@ struct LoadingPopupData
     std::function<void()> contentFunction;
     float progressPercent = 0.0f;
 };
+
 
 class PULSE_ENGINE_DLL_API InterfaceEditor
 {
@@ -37,17 +40,21 @@ private:
     Entity* selectedEntity = nullptr;
     std::unordered_map<std::string, bool> windowStates;
     std::vector<LoadingPopupData> loadingPopups;
-    bool hasProjectSelected;
+    bool hasProjectSelected = true;
+    std::vector<IModuleInterface*> modules;
 
 public:
-    InterfaceEditor(PulseEngineBackend* engine);
+    InterfaceEditor();
 
-    void Render(PulseEngineBackend *engine);
-    void EngineConfigWindow(PulseEngineBackend *engine);
+    void Render();
+    void EngineConfigWindow();
     void EntityAnalyzerWindow();
-    void GenerateSceneDataWindow(PulseEngineBackend *engine);
-    void Viewport(PulseEngineBackend *engine);
+    void GenerateSceneDataWindow();
     void RenderFullscreenWelcomePanel();
+
+    void FileExplorerWindow();
+    void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile);
+    std::vector<std::function<void(const ClickedFileData&)>> fileClickedCallbacks;
 
     void ShowLoadingPopup(std::function<void()> contentFunction, float progressPercent);
     void AddLoadingPopup(std::function<void()> contentFunction, float progressPercent, const std::string& title = "")
@@ -89,6 +96,14 @@ public:
         loadingPopups.erase(std::remove_if(loadingPopups.begin(), loadingPopups.end(),
             [&title](const LoadingPopupData& popup) { return popup.title == title; }), loadingPopups.end());
     }
+
+    Entity* GetSelectedEntity() const
+    {
+        return selectedEntity;
+    }
+
+    fs::path currentDir = "PulseEngineEditor";
+    fs::path selected;
     ~InterfaceEditor() {}
 };
 

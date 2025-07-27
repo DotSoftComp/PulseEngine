@@ -5,7 +5,12 @@
 
 namespace PulseEngine 
 {
-    class Transform 
+    /**
+     * @brief The Transform class represents a 3D transformation consisting of position, rotation, and scale.
+     * It provides all the method relative to the transformation of an entity in the 3D space to easy manipulation.
+     * 
+     */
+    class PULSE_ENGINE_DLL_API Transform 
     {
     public:
         PulseEngine::Vector3 position; // Position in 3D space
@@ -19,9 +24,23 @@ namespace PulseEngine
         // Transformation operations
         PulseEngine::Vector3 Apply(const PulseEngine::Vector3& point) const;
 
-        // Direction vectors
+        /**
+         * @brief Get the Forward vector of the transform.
+         * 
+         * @return PulseEngine::Vector3 
+         */
         PulseEngine::Vector3 GetForward() const;
+        /**
+         * @brief Get the Up vector of the transform.
+         * 
+         * @return PulseEngine::Vector3 
+         */
         PulseEngine::Vector3 GetUp() const;
+        /**
+         * @brief Get the Right vector of the transform.
+         * 
+         * @return PulseEngine::Vector3 
+         */
         PulseEngine::Vector3 GetRight() const;
     };
 }

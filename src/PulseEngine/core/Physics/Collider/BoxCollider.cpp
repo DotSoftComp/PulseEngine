@@ -145,15 +145,12 @@ bool BoxCollider::FastCheckCollision(BoxCollider *otherBox)
     sizeB.y /= 2.0f;
     sizeB.z /= 2.0f;
 
-    std::cout << "Checking collision between BoxCollider A at " << posA.x << ", " << posA.y << ", " << posA.z
-              << " and BoxCollider B at " << posB.x << ", " << posB.y << ", " << posB.z << std::endl;
 
     bool xOverlap = std::abs(posA.x - posB.x) <= (sizeA.x + sizeB.x);
     bool yOverlap = std::abs(posA.y - posB.y) <= (sizeA.y + sizeB.y);
     bool zOverlap = std::abs(posA.z - posB.z) <= (sizeA.z + sizeB.z);
 
     bool collisionDetected = xOverlap && yOverlap && zOverlap;
-    std::cout << "Collision detected: " << (collisionDetected ? "Yes" : "No") << std::endl;
 
     return xOverlap && yOverlap && zOverlap;
 }
@@ -180,8 +177,6 @@ void BoxCollider::ResolveCollision(Collider* other)
     sizeB.x /= 2.0f;
     sizeB.y /= 2.0f;
     sizeB.z /= 2.0f;
-    std::cout << "Resolving collision between BoxCollider A at " << posA.x << ", " << posA.y << ", " << posA.z
-              << " and BoxCollider B at " << posB.x << ", " << posB.y << ", " << posB.z << std::endl;
 
     float deltaX = posB.x - posA.x;
     float intersectX = (sizeA.x + sizeB.x) - std::abs(deltaX);

@@ -69,7 +69,6 @@ void PointLight::RenderShadowMap(Shader &shader, PulseEngineBackend& scene)
 {
     // if (!castsShadow) return;
 
-    std::cout << " ============= render shadowmap for light point ============= " << std::endl;
 
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glViewport(0, 0, DEFAULT_SHADOW_MAP_RES, DEFAULT_SHADOW_MAP_RES);

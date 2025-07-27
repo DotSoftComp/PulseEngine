@@ -9,7 +9,8 @@ struct ExposedVariable;
 class PULSE_ENGINE_DLL_API CustomScript : public IScript
 {
     public:
-        CustomScript() { 
+        CustomScript() 
+        { 
             AddExposedVariable(EXPOSE_VAR(speed, INT)); 
             AddExposedVariable(EXPOSE_VAR(life, FLOAT)); 
             REGISTER_VAR(speed);
@@ -21,7 +22,8 @@ class PULSE_ENGINE_DLL_API CustomScript : public IScript
         int speed = 1;
         float life = 1;
         float spawnTimer = 0.0f;
-        float spawnDelay = 1.0f;
+        float spawnDelay = 0.2f;
+        bool doOnce= false;
 
         Entity* spawnedEntity = nullptr;
 };

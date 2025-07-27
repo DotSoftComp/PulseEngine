@@ -23,6 +23,7 @@ void Entity::BaseConstructor()
 {
     UpdateModelMatrix();
     collider = new BoxCollider(&this->position, &this->rotation, PulseEngine::Vector3(1.0f, 1.0f, 1.0f));
+    collider->parent = this;
 }
 
 Entity::Entity(const std::string &name, const PulseEngine::Vector3 &position) : name(name), position(position)
@@ -50,9 +51,10 @@ void Entity::SetMaterial(Material * material) { this->material = material; }
 
 void Entity::UpdateEntity(float deltaTime) const
 {
-    for(auto s : scripts)
+    collider->SetRotation(rotation);
+    for (size_t i = 0; i < scripts.size(); ++i)
     {
-        s->OnUpdate();
+        scripts[i]->OnUpdate();
     }
     for (const auto &mesh : meshes)
     {
@@ -79,6 +81,23 @@ void Entity::SimplyDrawMesh() const
 {
     for (const auto &mesh : meshes)
     {
+        glm::mat4 entityMat = glm::mat4(1.0f);
+        entityMat = glm::translate(entityMat, glm::vec3(position.x, position.y, position.z));
+        entityMat = glm::rotate(entityMat, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        entityMat = glm::rotate(entityMat, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        entityMat = glm::rotate(entityMat, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+        entityMat = glm::scale(entityMat, glm::vec3(scale.x, scale.y, scale.z));
+        
+        glm::mat4 meshMat = glm::mat4(1.0f);
+        meshMat = glm::translate(meshMat, glm::vec3(mesh->position.x, mesh->position.y, mesh->position.z));
+        meshMat = glm::rotate(meshMat, glm::radians(mesh->rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        meshMat = glm::rotate(meshMat, glm::radians(mesh->rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        meshMat = glm::rotate(meshMat, glm::radians(mesh->rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+        meshMat = glm::scale(meshMat, glm::vec3(mesh->scale.x, mesh->scale.y, mesh->scale.z));
+        
+
+        glm::mat4 glmMat = entityMat * meshMat;
+        material->GetShader()->SetMat4("model", glmMat);
         if (auto albedoTex = material->GetTexture("albedo"))
         {
             albedoTex->Bind(6); // Slot 6
@@ -106,6 +125,7 @@ void Entity::AddScript(IScript *script)
 {
     if(!script) return;
     scripts.push_back(script);
+    script->parent = this;
     script->OnStart();
 }
 
@@ -139,4 +159,14 @@ void Entity::RemoveTag(const std::string &tag)
 bool Entity::HasTag(const std::string & tag) const
 {
     return std::find(tags.begin(), tags.end(), tag) != tags.end();
+}
+
+void Entity::Move(const PulseEngine::Vector3 &direction)
+{
+    position = position + (direction * PulseEngineInstance->GetDeltaTime());
+}
+
+void Entity::Rotate(const PulseEngine::Vector3 &rotation)
+{
+    this->rotation = this->rotation + (rotation * PulseEngineInstance->GetDeltaTime());
 }

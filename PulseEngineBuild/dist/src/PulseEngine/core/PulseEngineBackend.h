@@ -1,3 +1,4 @@
+
 /**
  * @file PulseEngineBackend.h
  * @author Dorian LEXTERIAQUE (dlexteriaque@gmail.com)
@@ -54,9 +55,11 @@ public:
     void PollEvents(); 
     void Update(); 
     void Render(); 
+    void SpecificRender(Camera* cam, int specificVBO, std::vector<Entity*> entitiesToRender);
     void RenderShadow(); 
     void Shutdown(); 
-
+    // Editor grid quad rendering
+    void DrawGridQuad(PulseEngine::Mat4 viewCam);
     void ClearScene();
     void DeleteEntity(Entity* entity);
 
@@ -66,6 +69,7 @@ public:
     // === static functions ===
     static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
     static Camera* GetActiveCamera() {return activeCamera;}
+    static void SetActiveCamera(Camera* camera) { activeCamera = camera; }
 
 
     std::vector<Entity*> entities;
@@ -88,9 +92,17 @@ public:
 
     const void SetGameVersion(const std::string& version) { gameVersion = version; }
     const std::string& GetGameVersion() const { return gameVersion; }
-    
+
+    const float GetDeltaTime() {return deltaTime;}
+    PulseEngine::Vector3 GetCameraPosition();
+    PulseEngine::Vector3 GetCameraRotation();
+
     static IGraphicsAPI* graphicsAPI;
     CoroutineManager* coroutineManager = nullptr;
+
+    EDITOR_ONLY(
+        static InterfaceEditor* editor;
+    )
 private:
     WindowContext* windowContext = nullptr;
 
@@ -100,11 +112,11 @@ private:
     std::string gameVersion = "0.0.1";
 
     std::string engine = "Pulse Engine";
-    std::string version = "V0.0.7";
+    std::string version = "V0.1.0";
     std::string devMonth = "July 2025";
     std::string company = "Pulse Software";
 
-    float deltaTime = 0.0f;
+    static float deltaTime;
     float lastFrame = 0.0f;
     float mapLoading = 0.0f;
 
@@ -128,6 +140,7 @@ private:
     PulseEngineBackend(PulseEngineBackend&&) = delete; // Disable move constructor
 
     static PulseEngineBackend* instance;
+
 };
 
 #endif

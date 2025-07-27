@@ -1,10 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: "cefgimoprstv",
-  1: "cgmv",
+  0: "2abcdefgilmoprstvw🎯🏢📄🚀🚫🛠🧱",
+  1: "cgmpv",
   2: "p",
-  3: "ce",
-  4: "cfimoprst"
+  3: "abcfgilmoprstw",
+  4: "2bcdeilprw🎯🏢📄🚀🚫🛠🧱"
 };
 
 var indexSectionNames =
@@ -12,8 +12,8 @@ var indexSectionNames =
   0: "all",
   1: "classes",
   2: "namespaces",
-  3: "files",
-  4: "functions"
+  3: "functions",
+  4: "pages"
 };
 
 var indexSectionLabels =
@@ -21,7 +21,7 @@ var indexSectionLabels =
   0: "All",
   1: "Classes",
   2: "Namespaces",
-  3: "Files",
-  4: "Functions"
+  3: "Functions",
+  4: "Pages"
 };
 

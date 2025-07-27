@@ -68,13 +68,11 @@ void Mesh::SetupMesh()
     glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);
-    std::cout << "Mesh setup done, VAO = " << VAO << std::endl;
 
 }
 
 void Mesh::Draw(GLuint shaderProgram) const
 {
-    std::cout << "starting to draw the mesh" << std::endl;
     glUseProgram(shaderProgram);
 
     // // 1. Envoie à l'uniform 'hasSkeleton'

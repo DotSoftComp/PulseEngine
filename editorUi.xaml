@@ -1,3 +1,0 @@
-<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-    <TextBlock Text="Hello NoesisGUI" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-</Grid>

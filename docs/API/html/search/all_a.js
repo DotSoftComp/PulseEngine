@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['todegrees_0',['ToDegrees',['../namespace_pulse_engine_1_1_math_utils.html#acfecb92b970cefa26e8c08141090f4f0',1,'PulseEngine::MathUtils']]],
-  ['toradians_1',['ToRadians',['../namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900',1,'PulseEngine::MathUtils']]],
-  ['transpose_2',['Transpose',['../struct_pulse_engine_1_1_mat3.html#a694b6b311b191110cffb56c20034c727',1,'PulseEngine::Mat3']]]
+  ['mat3_0',['Mat3',['../struct_pulse_engine_1_1_mat3.html',1,'PulseEngine']]],
+  ['mat4_1',['Mat4',['../struct_pulse_engine_1_1_mat4.html',1,'PulseEngine']]],
+  ['mousedelta_2',['MouseDelta',['../class_pulse_interface_a_p_i.html#a8c0986447843f2afb25ec2bb9101094f',1,'PulseInterfaceAPI']]],
+  ['mousein_3',['MouseIn',['../class_pulse_interface_a_p_i.html#abedd65e627db2c45d8f286a8b96d50ed',1,'PulseInterfaceAPI']]],
+  ['multiplypoint_4',['MultiplyPoint',['../struct_pulse_engine_1_1_mat4.html#aa88ef30aac252732d6399db877f53301',1,'PulseEngine::Mat4']]],
+  ['multiplyvector_5',['MultiplyVector',['../struct_pulse_engine_1_1_mat4.html#ae92ca35c7395fa61874275357eccb3d0',1,'PulseEngine::Mat4']]]
 ];

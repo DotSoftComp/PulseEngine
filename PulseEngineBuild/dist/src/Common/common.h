@@ -19,7 +19,6 @@
 // --------------------
 #include <cstddef>      // for std::size_t
 #include <string>
-#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -31,6 +30,7 @@
 #include "PulseEngine/core/Math/Mat4.h"
 #include "PulseEngine/core/Math/Mat3.h"
 #include "PulseEngine/core/Math/Color.h"
+#include "PulseEngine/core/Math/Transform/Transform.h"
 
 // --------------------
 // Engine Core Includes
@@ -40,6 +40,7 @@
 #include "PulseEngine/core/Material/Texture.h"
 #include "PulseEngine/ModuleLoader/ModuleLoader.h"
 #include "PulseEngine/ModuleLoader/IModule/IModule.h"
+#include "PulseEngine/core/FileManager/FileManager.h"
 
 // --------------------
 // Platform-Specific Includes
@@ -89,4 +90,11 @@
 // Globally unique identifier type used across the engine
 using GUID_PULSE = std::size_t;
 
+#include <filesystem>
+namespace fs = std::filesystem;
+struct ClickedFileData
+{
+    fs::path path;
+    fs::path name;
+};
 #endif // COMMON_H

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['ptr_0',['Ptr',['../struct_pulse_engine_1_1_mat4.html#a3d9eb151817805f2e144b7502f729220',1,'PulseEngine::Mat4::Ptr() const'],['../struct_pulse_engine_1_1_mat4.html#a6408391ca4308ac795ae1288533b062c',1,'PulseEngine::Mat4::Ptr()']]],
-  ['pulseengine_3a_3amathutils_1',['MathUtils',['../namespace_pulse_engine_1_1_math_utils.html',1,'PulseEngine']]]
+  ['gameentity_0',['GameEntity',['../class_pulse_engine_1_1_game_entity.html',1,'PulseEngine']]],
+  ['getallentitiesbytag_1',['GetAllEntitiesByTag',['../class_pulse_engine_1_1_game_entity.html#a65c3a2aa12dc1df0c948ee7f07578f41',1,'PulseEngine::GameEntity']]],
+  ['getselectedentity_2',['GetSelectedEntity',['../class_pulse_interface_a_p_i.html#a1a8f210e46bd5a955a870713fb856379',1,'PulseInterfaceAPI']]]
 ];

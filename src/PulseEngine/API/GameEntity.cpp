@@ -4,7 +4,7 @@
 #include "PulseEngine/core/GUID/GuidReader.h"
 #include "PulseEngine/core/Material/MaterialManager.h"
 #include "PulseEngine/core/Material/Material.h"
-
+#include "PulseEngine/CustomScripts/IScripts.h"
 
 Entity *PulseEngine::GameEntity::Instantiate(const std::string &path, PulseEngine::Vector3 position, PulseEngine::Vector3 rotation, PulseEngine::Vector3 scale)
 {
@@ -22,6 +22,10 @@ Entity *PulseEngine::GameEntity::Instantiate(const std::string &path, PulseEngin
         entity->SetScale(scale);
         entity->SetGuid(guid);
         entity->SetMaterial(MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat"));
+        for(IScript* script : entity->GetScripts())
+        {
+            script->OnStart();
+        }
     }
 
     PulseEngineInstance->entities.push_back(entity);
@@ -35,7 +39,7 @@ std::vector<Entity *> PulseEngine::GameEntity::GetAllEntitiesByTag(const std::st
     std::vector<Entity*> entitiesWithTag;
     for(Entity* entity : PulseEngineInstance->entities)
     {
-        if(entity.HasTag(tag))
+        if(entity->HasTag(tag))
         {
             entitiesWithTag.push_back(entity);
         }

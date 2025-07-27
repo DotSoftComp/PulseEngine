@@ -41,6 +41,12 @@ namespace PulseEngine
          */
         static Entity* Instantiate(const std::string& path, PulseEngine::Vector3 position = PulseEngine::Vector3(0.0f, 0.0f, 0.0f), PulseEngine::Vector3 rotation = PulseEngine::Vector3(0.0f, 0.0f, 0.0f), PulseEngine::Vector3 scale = PulseEngine::Vector3(1.0f, 1.0f, 1.0f));
     
+        /**
+         * @brief Get the All Entities By Tag object. All entities can have multiple tags on them.
+         * 
+         * @param tag the tag has it is written on the tag list of the editor.
+         * @return a simple list of entities.
+         */
         static std::vector<Entity*> GetAllEntitiesByTag(const std::string& tag);
     };
 }

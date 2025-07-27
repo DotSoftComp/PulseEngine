@@ -25,6 +25,7 @@ private:
     ~FileManager() = default;
 
 public:
+    static std::filesystem::path workingDirectory;
     /**
      * Returns the collection type based on the file extension.
      */
@@ -37,6 +38,7 @@ public:
     * Saves engine configuration from a JSON object to disk.
     */
     static void SaveEngineConfigFile(PulseEngineBackend* engine, const nlohmann::json_abi_v3_12_0::json& engineConfig);
+
 
 };
 

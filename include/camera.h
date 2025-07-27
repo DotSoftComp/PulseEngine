@@ -5,6 +5,7 @@
 // #include <glm/gtc/matrix_transform.hpp>
 #include "PulseEngine/core/Math/Vector.h"
 #include "PulseEngine/core/Math/Mat4.h"   
+#include "Common/dllExport.h"
 
 enum Camera_Movement {
     FORWARD,
@@ -19,7 +20,7 @@ const float SPEED       =  2.5f;
 const float SENSITIVITY =  0.1f;
 const float ZOOM        =  45.0f;
 
-class Camera
+class PULSE_ENGINE_DLL_API Camera
 {
 public:
     PulseEngine::Vector3 Position;

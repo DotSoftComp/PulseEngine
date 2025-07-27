@@ -31,7 +31,6 @@ void LightManager::BindLightsToShader(Shader *shader, PulseEngineBackend* scene,
 
         std::string baseName = "pointLights[" + std::to_string(boundPointLights) + "]";
         shader->SetInt((baseName + ".depthMap").c_str(), textureUnit);
-        std::cout << (baseName + ".depthMap").c_str() << " = " << textureUnit << std::endl;
 
         boundPointLights++;
     }

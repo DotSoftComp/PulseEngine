@@ -78,6 +78,44 @@ namespace PulseEngine
             return mat;
         }
 
+        /**
+         * @brief Make an object rotate, to look at a certain position.
+         * 
+         * @param position of the object
+         * @param target we want to look at
+         * @param up let it be the default up vector (0,1,0) or change it to another one.
+         * @return Vector3 This function returns a Vector3 that represents the direction the object should face.
+         */
+        Vector3 LookAt(const Vector3& position, const Vector3& target, const Vector3& up = Vector3(0.0f, 1.0f, 0.0f))
+        {
+            Vector3 zaxis = (position - target).Normalized(); // Forward vector
+            Vector3 xaxis = up.Cross(zaxis).Normalized();    // Right vector
+            Vector3 yaxis = zaxis.Cross(xaxis);              // Up vector
+
+            return Vector3(xaxis.x, yaxis.y, zaxis.z);
+        }
+
+        /**
+         * @brief Give an easy to use function to rotate an point around a target point in a 3D space with no complexity.
+         * 
+         * @param target The point to orbit around.
+         * @param yaw The yaw angle in degrees.
+         * @param pitch The pitch angle in degrees.
+         * @param radius The distance from the target.
+         * @return Vector3 The new position after rotation.
+         */
+        inline Vector3 RotateAround(const Vector3& target, float yaw, float pitch, float radius)
+        {
+            float yawRad = ToRadians(yaw);
+            float pitchRad = ToRadians(pitch);
+
+            Vector3 offset;
+            offset.x = radius * cosf(pitchRad) * cosf(yawRad);
+            offset.y = radius * sinf(pitchRad);
+            offset.z = radius * cosf(pitchRad) * sinf(yawRad);
+
+            return target - offset;
+        }
     }
 }
 

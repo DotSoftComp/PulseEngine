@@ -9,6 +9,10 @@
 
 namespace PulseEngine
 {
+    /**
+     * @brief Vector2 class represents a 2D vector.
+     * 
+     */
     struct PULSE_ENGINE_DLL_API Vector2
     {
         float x;
@@ -20,6 +24,10 @@ namespace PulseEngine
         Vector2(const Vector2& vect) : x(vect.x), y(vect.y) {}
     };
 
+    /**
+     * @brief Vector3 class represents a 3D vector.
+     * 
+     */
     struct Vector3
     {
         float x;
@@ -30,6 +38,8 @@ namespace PulseEngine
         Vector3(float scalar) : x(scalar), y(scalar), z(scalar) {}
         Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
         Vector3(const Vector3& vect) : x(vect.x), y(vect.y), z(vect.z) {}
+
+
         
         float& operator[](int index)
         {
@@ -110,5 +120,6 @@ namespace PulseEngine
         }
     };
 }
+
 
 #endif

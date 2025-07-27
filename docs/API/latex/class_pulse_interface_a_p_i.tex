@@ -1,0 +1,192 @@
+\doxysection{Pulse\+Interface\+API Class Reference}
+\hypertarget{class_pulse_interface_a_p_i}{}\label{class_pulse_interface_a_p_i}\index{PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e}{Open\+Window}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Inform the engine that its the beginning of a window. this didnt tell to opent the window, it tells the engine to generate a new window from this point up to \doxylink{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}{Close\+Window()} \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}\label{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff} 
+static void {\bfseries Close\+Window} ()
+\begin{DoxyCompactList}\small\item\em All content between open and close will be shown inside of the window. After the close, nothing can be in the window. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}{Write\+Text}} (const std\+::string \&text)
+\begin{DoxyCompactList}\small\item\em write a simple text in line. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7}{Image}} (int user\+\_\+texture\+\_\+id, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&image\+\_\+size, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&uv0, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&uv1)
+\begin{DoxyCompactList}\small\item\em display an image on the window from a Open\+GL texture ID. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}{Add\+Space}} (int amount=1)
+\begin{DoxyCompactList}\small\item\em Add space for a certain number of "{}line"{}. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}{Button}} (const std\+::string \&name, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&size)
+\begin{DoxyCompactList}\small\item\em Create a button with a specific name and size. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_a08f3a4872b83ee1dfae61321effb666b}\label{class_pulse_interface_a_p_i_a08f3a4872b83ee1dfae61321effb666b} 
+static void {\bfseries Separator} ()
+\begin{DoxyCompactList}\small\item\em Add a separator in line/column on the window size. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_a73d8cb1a2d955e62ae01df83831f9ab8}\label{class_pulse_interface_a_p_i_a73d8cb1a2d955e62ae01df83831f9ab8} 
+static void {\bfseries Same\+Line} ()
+\begin{DoxyCompactList}\small\item\em Make the next element on the same line has the last one. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_a3d538a67b293b3e3803165cdef177106}\label{class_pulse_interface_a_p_i_a3d538a67b293b3e3803165cdef177106} 
+static void {\bfseries Push\+Style\+Color} (Pulse\+Engine\+Style syle, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} \&color, const float \&alpha=1.\+0f)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a0bed2108eb9697cba14fe6490abbcf47}\label{class_pulse_interface_a_p_i_a0bed2108eb9697cba14fe6490abbcf47} 
+static void {\bfseries Pop\+Style\+Color} (int amount=1)
+\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}{Render\+Camera\+To\+Interface}} (Camera \texorpdfstring{$\ast$}{*}camera, const std\+::string \&window\+Name, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&image\+Size, std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$ entities\+To\+Render)
+\begin{DoxyCompactList}\small\item\em Renders the scene from a specific camera and displays it in an interface window. \end{DoxyCompactList}\item 
+static Entity \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}{Get\+Selected\+Entity}} ()
+\begin{DoxyCompactList}\small\item\em Get the Selected Entity object. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_ae9dc76f69da09b627aa4176c8a45eabd}\label{class_pulse_interface_a_p_i_ae9dc76f69da09b627aa4176c8a45eabd} 
+static bool {\bfseries Is\+Current\+Window\+Focused} ()
+\begin{DoxyCompactList}\small\item\em Returns true if the current Im\+Gui window is focused. Call this between Open\+Window/\+Begin and Close\+Window/\+End. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \mbox{\hyperlink{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}{Mouse\+In}} ()
+\begin{DoxyCompactList}\small\item\em Get the current mouse position in the interface window. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \mbox{\hyperlink{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}{Mouse\+Delta}} ()
+\begin{DoxyCompactList}\small\item\em Get the current mouse delta in the interface window. for more detail \+: the delta is the difference between the last frame and the current frame mouse position. it is useful to know how much the mouse has moved since the last frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_pulse_interface_a_p_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!AddSpace@{AddSpace}}
+\index{AddSpace@{AddSpace}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{AddSpace()}{AddSpace()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791} 
+void Pulse\+Interface\+API\+::\+Add\+Space (\begin{DoxyParamCaption}\item[{int}]{amount}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Add space for a certain number of "{}line"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & amount of line to space. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!Button@{Button}}
+\index{Button@{Button}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70} 
+bool Pulse\+Interface\+API\+::\+Button (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a button with a specific name and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the button \\
+\hline
+{\em size} & size in the relative window space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The button has been clicked this frame 
+
+false the button has not been clicked this frame 
+\end{DoxyReturn}
+\Hypertarget{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!GetSelectedEntity@{GetSelectedEntity}}
+\index{GetSelectedEntity@{GetSelectedEntity}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{GetSelectedEntity()}{GetSelectedEntity()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379} 
+Entity \texorpdfstring{$\ast$}{*} Pulse\+Interface\+API\+::\+Get\+Selected\+Entity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the Selected Entity object. 
+
+\begin{DoxyReturn}{Returns}
+Entity\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!Image@{Image}}
+\index{Image@{Image}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{Image()}{Image()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7} 
+void Pulse\+Interface\+API\+::\+Image (\begin{DoxyParamCaption}\item[{int}]{user\+\_\+texture\+\_\+id}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{image\+\_\+size}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{uv0}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{uv1}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+display an image on the window from a Open\+GL texture ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+texture\+\_\+id} & id saved from an opengl importation \\
+\hline
+{\em image\+\_\+size} & size of the image wanted on the window. \\
+\hline
+{\em uv0} & start of the uv (mostly 0,0) \\
+\hline
+{\em uv1} & end of the uv (mostly 1,1) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!MouseDelta@{MouseDelta}}
+\index{MouseDelta@{MouseDelta}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{MouseDelta()}{MouseDelta()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} Pulse\+Interface\+API\+::\+Mouse\+Delta (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the current mouse delta in the interface window. for more detail \+: the delta is the difference between the last frame and the current frame mouse position. it is useful to know how much the mouse has moved since the last frame. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2} 
+\end{DoxyReturn}
+\Hypertarget{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!MouseIn@{MouseIn}}
+\index{MouseIn@{MouseIn}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{MouseIn()}{MouseIn()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} Pulse\+Interface\+API\+::\+Mouse\+In (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the current mouse position in the interface window. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2} 
+\end{DoxyReturn}
+\Hypertarget{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!OpenWindow@{OpenWindow}}
+\index{OpenWindow@{OpenWindow}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{OpenWindow()}{OpenWindow()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e} 
+void Pulse\+Interface\+API\+::\+Open\+Window (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Inform the engine that its the beginning of a window. this didnt tell to opent the window, it tells the engine to generate a new window from this point up to \doxylink{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}{Close\+Window()} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the window to show on top. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!RenderCameraToInterface@{RenderCameraToInterface}}
+\index{RenderCameraToInterface@{RenderCameraToInterface}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{RenderCameraToInterface()}{RenderCameraToInterface()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749} 
+void Pulse\+Interface\+API\+::\+Render\+Camera\+To\+Interface (\begin{DoxyParamCaption}\item[{Camera \texorpdfstring{$\ast$}{*}}]{camera}{, }\item[{const std\+::string \&}]{window\+Name}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{image\+Size}{, }\item[{std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$}]{entities\+To\+Render}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Renders the scene from a specific camera and displays it in an interface window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & The camera to render from. \\
+\hline
+{\em window\+Name} & The name of the Im\+Gui window. \\
+\hline
+{\em image\+Size} & The size to display the image. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!WriteText@{WriteText}}
+\index{WriteText@{WriteText}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{WriteText()}{WriteText()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe} 
+void Pulse\+Interface\+API\+::\+Write\+Text (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+write a simple text in line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & text to write. \\
+\hline
+\end{DoxyParams}

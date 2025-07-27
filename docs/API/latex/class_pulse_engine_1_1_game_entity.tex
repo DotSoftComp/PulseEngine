@@ -13,7 +13,9 @@ The \doxylink{class_pulse_engine_1_1_game_entity}{Game\+Entity} class provides s
 \begin{DoxyCompactItemize}
 \item 
 static Entity \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71}{Instantiate}} (const std\+::string \&path, \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} position=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.\+0f, 0.\+0f, 0.\+0f), \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} rotation=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(0.\+0f, 0.\+0f, 0.\+0f), \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} scale=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}}(1.\+0f, 1.\+0f, 1.\+0f))
-\begin{DoxyCompactList}\small\item\em Instantiate an entity from a path to a file, position, rotation and scale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Instantiate an entity from a path to a file, position, rotation and scale. \end{DoxyCompactList}\item 
+static std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_pulse_engine_1_1_game_entity_a65c3a2aa12dc1df0c948ee7f07578f41}{Get\+All\+Entities\+By\+Tag}} (const std\+::string \&tag)
+\begin{DoxyCompactList}\small\item\em Get the All Entities By Tag object. All entities can have multiple tags on them. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -22,6 +24,24 @@ The \doxylink{class_pulse_engine_1_1_game_entity}{Game\+Entity} class provides s
 \label{doc-func-members}
 \Hypertarget{class_pulse_engine_1_1_game_entity_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_pulse_engine_1_1_game_entity_a65c3a2aa12dc1df0c948ee7f07578f41}\index{PulseEngine::GameEntity@{PulseEngine::GameEntity}!GetAllEntitiesByTag@{GetAllEntitiesByTag}}
+\index{GetAllEntitiesByTag@{GetAllEntitiesByTag}!PulseEngine::GameEntity@{PulseEngine::GameEntity}}
+\doxysubsubsection{\texorpdfstring{GetAllEntitiesByTag()}{GetAllEntitiesByTag()}}
+{\footnotesize\ttfamily \label{class_pulse_engine_1_1_game_entity_a65c3a2aa12dc1df0c948ee7f07578f41} 
+std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$ Pulse\+Engine\+::\+Game\+Entity\+::\+Get\+All\+Entities\+By\+Tag (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the All Entities By Tag object. All entities can have multiple tags on them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & the tag has it is written on the tag list of the editor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a simple list of entities. 
+\end{DoxyReturn}
 \Hypertarget{class_pulse_engine_1_1_game_entity_a65c44058f7b7cdde6cfbda2ceee99a71}\index{PulseEngine::GameEntity@{PulseEngine::GameEntity}!Instantiate@{Instantiate}}
 \index{Instantiate@{Instantiate}!PulseEngine::GameEntity@{PulseEngine::GameEntity}}
 \doxysubsubsection{\texorpdfstring{Instantiate()}{Instantiate()}}
@@ -51,9 +71,3 @@ By passing an Entity\texorpdfstring{$\ast$}{*} to this method, by replacing path
 \begin{DoxyReturn}{Returns}
 Entity\texorpdfstring{$\ast$}{*} The pointer to the entity instantiate in the world. You can directly modify it after the instantiation. 
 \end{DoxyReturn}
-
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
-\item 
-src/\+Pulse\+Engine/\+API/\mbox{\hyperlink{_engine_api_8h}{Engine\+Api.\+h}}\item 
-src/\+Pulse\+Engine/\+API/Game\+Entity.\+cpp\end{DoxyCompactItemize}

@@ -12,13 +12,17 @@
 #include "PulseEngine/core/Lights/Lights.h"
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
 #include "PulseEngine/core/Lights/PointLight/PointLight.h"
+#include "PulseEngine/ModuleLoader/IModule/IModule.h"
+#include "PulseEngine/ModuleLoader/IModuleInterface/IModuleInterface.h"
+#include "PulseEngine/ModuleLoader/ModuleLoader.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "imgui/imgui.h"
+#include <filesystem>
 
 namespace fs = std::filesystem;
 
 
-void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
+void InterfaceEditor::ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
 {
     static float thumbnailSize = 64.0f;
     static float padding = 16.0f;
@@ -55,9 +59,17 @@ void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
             {
                 // Navigate into directory
                 selectedFile = entry.path();
+
             }
             else
             {
+                for (auto& callback : fileClickedCallbacks)
+                {
+                    ClickedFileData clickedFileData;
+                    clickedFileData.name = entry.path();
+                    clickedFileData.path = currentDir;
+                    callback(clickedFileData);
+                }
                 selectedFile = entry.path();
             }
         }
@@ -73,10 +85,9 @@ void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
     ImGui::Columns(1);
 }
 
-void FileExplorerWindow()
+void InterfaceEditor::FileExplorerWindow()
 {
-    static fs::path currentDir = "PulseEngineEditor";
-    static fs::path selected;
+
 
     ImGui::Begin("Asset Manager");
 
@@ -112,7 +123,7 @@ void FileExplorerWindow()
 
     ImGui::End();
 }
-InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
+InterfaceEditor::InterfaceEditor()
 {    
     topbar = new TopBar();
     IMGUI_CHECKVERSION();
@@ -126,7 +137,7 @@ InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
 
     ImGui::StyleColorsDark(); 
 
-    ImGui_ImplGlfw_InitForOpenGL(engine->GetWindowContext()->GetGLFWWindow(), true);
+    ImGui_ImplGlfw_InitForOpenGL(PulseEngineInstance->GetWindowContext()->GetGLFWWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 460");
 
     windowStates["EntityAnalyzer"] = true;
@@ -134,6 +145,27 @@ InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
     windowStates["EngineConfig"] = false;
     windowStates["SceneData"] = false;
     windowStates["assetManager"] = false;
+
+    std::vector<std::string> filenames;
+
+    for (const auto& entry : fs::directory_iterator("./Modules/Interface"))
+    {
+        if (entry.is_regular_file())
+        {
+            filenames.push_back(entry.path().filename().string());
+        }
+    }
+
+    for(auto file : filenames)
+    {
+        IModuleInterface* module = dynamic_cast<IModuleInterface*>(ModuleLoader::GetModuleFromPath(std::string("./Modules/Interface/") + file));
+        if(module)
+        {
+            modules.push_back(module);
+            windowStates[module->GetName()] = false;
+        }
+    }
+
     
     ImGuiStyle& style = ImGui::GetStyle();
     style.WindowRounding = 6.0f;
@@ -253,7 +285,7 @@ void InterfaceEditor::RenderFullscreenWelcomePanel()
 }
 
 
-void InterfaceEditor::Render(PulseEngineBackend *engine)
+void InterfaceEditor::Render()
 {        
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -266,14 +298,18 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
     }
     else
     {
+        for(auto mod : modules)
+        {
+            if(windowStates[mod->GetName()]) mod->Render();
+        }
 
-        if(windowStates["SceneData"]) GenerateSceneDataWindow(engine);
+        if(windowStates["SceneData"]) GenerateSceneDataWindow();
 
         if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
 
         if (windowStates["EngineConfig"])
         {
-            EngineConfigWindow(engine);
+            EngineConfigWindow();
         }
         if (windowStates["assetManager"])
         {
@@ -286,9 +322,8 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
         }
 
 
-        if(windowStates["viewport"]) Viewport(engine);
 
-        topbar->UpdateBar(engine, this);
+        topbar->UpdateBar(PulseEngineInstance, this);
 
         for(auto& popup : loadingPopups)
         {
@@ -303,22 +338,22 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
+void InterfaceEditor::EngineConfigWindow()
 {
 
     ImGui::Separator();
     ImGui::Begin("Engine config", &windowStates["EngineConfig"]);
     ImGui::BeginChild("EngineConfigBox", ImVec2(0, 120), true, ImGuiWindowFlags_None);
-    ImGui::Text("Engine name: %s", engine->GetEngineName().c_str());
-    ImGui::Text("Engine version: %s", engine->GetEngineVersion().c_str());
-    ImGui::Text("Engine dev month: %s", engine->GetDevMonth().c_str());
-    ImGui::Text("Engine company: %s", engine->GetCompanyName().c_str());
+    ImGui::Text("Engine name: %s", PulseEngineInstance->GetEngineName().c_str());
+    ImGui::Text("Engine version: %s", PulseEngineInstance->GetEngineVersion().c_str());
+    ImGui::Text("Engine dev month: %s", PulseEngineInstance->GetDevMonth().c_str());
+    ImGui::Text("Engine company: %s", PulseEngineInstance->GetCompanyName().c_str());
     ImGui::EndChild();
 
     static int selectedMapIndex = 0;
     static std::vector<std::string> mapFiles = SceneLoader::GetSceneFiles("PulseEngineEditor/Scenes");
 
-    auto saveConfig = FileManager::OpenEngineConfigFile(engine);
+    auto saveConfig = FileManager::OpenEngineConfigFile(PulseEngineInstance);
 
     static char engineNameBuffer[128] = {0};
     static bool nameInitialized = false;
@@ -331,7 +366,7 @@ void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
     ImGui::Text("Project Name:");
     if (ImGui::InputText("##ProjectName", engineNameBuffer, sizeof(engineNameBuffer))) {
         saveConfig["GameData"]["Name"] = std::string(engineNameBuffer);
-        FileManager::SaveEngineConfigFile(engine, saveConfig);
+        FileManager::SaveEngineConfigFile(PulseEngineInstance, saveConfig);
     }
 
     ImGui::Text("Launch Map:");
@@ -361,22 +396,13 @@ void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
             {
                 selectedMapIndex = i;
                 saveConfig["GameData"]["FirstScene"] = mapFiles[i];
-                FileManager::SaveEngineConfigFile(engine, saveConfig);
+                FileManager::SaveEngineConfigFile(PulseEngineInstance, saveConfig);
             }
             if (isSelected)
                 ImGui::SetItemDefaultFocus();
         }
         ImGui::EndCombo();
     }
-
-    ImGui::End();
-}
-void InterfaceEditor::Viewport(PulseEngineBackend *engine)
-{
-    ImGui::Begin("Viewport");
-    OpenGLAPI* openGLAPI = dynamic_cast<OpenGLAPI*>(engine->graphicsAPI);
-    if(openGLAPI)
-        ImGui::Image((ImTextureID)(intptr_t)openGLAPI->fboTexture, ImVec2(openGLAPI->fboWidth, openGLAPI->fboHeight), ImVec2(0, 1), ImVec2(1, 0));
 
     ImGui::End();
 }
@@ -532,7 +558,7 @@ void InterfaceEditor::EntityAnalyzerWindow()
     ImGui::End();
 }
 
-void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
+void InterfaceEditor::GenerateSceneDataWindow()
 {
     ImGui::Begin("Scene Manager");
 
@@ -542,7 +568,7 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
     if (ImGui::Button("Clear Scene", ImVec2(-1, 0))) // Full-width button
     {
         selectedEntity = nullptr;
-        engine->ClearScene();
+        PulseEngineInstance->ClearScene();
     }
 
     ImGui::Spacing();
@@ -553,15 +579,15 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
 
     ImGui::Text("Entities:");
 
-    for (size_t i = 0; i < engine->entities.size(); i++)
+    for (size_t i = 0; i < PulseEngineInstance->entities.size(); i++)
     {
-        if(!engine->entities[i]) continue;
-        std::string entityLabel = "Entity: " + engine->entities[i]->GetName() + "_"  + std::to_string(i) +  "##" + std::to_string(i);
+        if(!PulseEngineInstance->entities[i]) continue;
+        std::string entityLabel = "Entity: " + PulseEngineInstance->entities[i]->GetName() + "_"  + std::to_string(i) +  "##" + std::to_string(i);
         std::string deleteButtonLabel = "X##" + std::to_string(i);
 
         if (ImGui::Button(entityLabel.c_str()))
         {
-            selectedEntity = engine->entities[i];
+            selectedEntity = PulseEngineInstance->entities[i];
         }
 
         ImGui::SameLine();
@@ -573,11 +599,11 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
 
         if (ImGui::Button(deleteButtonLabel.c_str()))
         {
-            if (selectedEntity == engine->entities[i])
+            if (selectedEntity == PulseEngineInstance->entities[i])
             {
                 selectedEntity = nullptr;
             }
-            engine->DeleteEntity(engine->entities[i]);
+            PulseEngineInstance->DeleteEntity(PulseEngineInstance->entities[i]);
         }
 
         ImGui::PopStyleVar();
@@ -587,9 +613,9 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
     }
 
     ImGui::Text("Lights:");
-    for (size_t i = 0; i < engine->lights.size(); ++i)
+    for (size_t i = 0; i < PulseEngineInstance->lights.size(); ++i)
     {
-        auto& light = engine->lights[i];
+        auto& light = PulseEngineInstance->lights[i];
         std::string lightLabel = "Light: " + std::to_string(i + 1) + "##" + std::to_string(i);
 
         if (ImGui::Button(lightLabel.c_str()))
@@ -612,7 +638,7 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
                 selectedEntity = nullptr;
             }
             // Remove from vector after deletion
-            engine->lights.erase(engine->lights.begin() + i);
+            PulseEngineInstance->lights.erase(PulseEngineInstance->lights.begin() + i);
             --i; // Adjust index after erase
             ImGui::PopStyleVar();
             ImGui::PopStyleColor(3);
@@ -643,8 +669,8 @@ void InterfaceEditor::ShowLoadingPopup(std::function<void()> contentFunction, fl
 
     ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always);
     ImGui::SetNextWindowSize(popupSize, ImGuiCond_Always);
-
-    // You can use ImGuiWindowFlags_NoDecoration to make it look more like a popup
+    
+    
     ImGui::Begin("LoadingPopup", nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_NoMove |

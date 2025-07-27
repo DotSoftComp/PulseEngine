@@ -33,6 +33,8 @@ class PULSE_ENGINE_DLL_API Collider : public IScript
         // Getters and Setters
         virtual PulseEngine::Vector3 GetPosition() const = 0;
         virtual void SetPosition(const PulseEngine::Vector3& position) = 0;
+
+        std::vector<Collider*> othersCollider;
 };
 
 

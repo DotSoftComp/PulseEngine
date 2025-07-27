@@ -13,7 +13,11 @@ float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58
 float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}{To\+Degrees}} (float radians)
 \begin{DoxyCompactList}\small\item\em Convert radians to degrees. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac}{Create\+Rotation\+Matrix}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&euler)
-\begin{DoxyCompactList}\small\item\em Create a rotation matrix from Euler angles (in radians). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Create a rotation matrix from Euler angles (in radians). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}{Look\+At}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&position, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&target, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&up=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.\+0f, 1.\+0f, 0.\+0f))
+\begin{DoxyCompactList}\small\item\em Make an object rotate, to look at a certain position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}{Rotate\+Around}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&target, float yaw, float pitch, float radius)
+\begin{DoxyCompactList}\small\item\em Give an easy to use function to rotate an point around a target point in a 3D space with no complexity. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,6 +49,52 @@ Create a rotation matrix from Euler angles (in radians).
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 \doxylink{struct_pulse_engine_1_1_mat4}{Mat4} the rotation matrix. 
+\end{DoxyReturn}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!LookAt@{LookAt}}
+\index{LookAt@{LookAt}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+\doxysubsubsection{\texorpdfstring{LookAt()}{LookAt()}}
+{\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Math\+Utils\+::\+Look\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{position}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{target}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{up}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,~1.0f,~0.0f)}}\end{DoxyParamCaption})}
+
+
+
+Make an object rotate, to look at a certain position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & of the object \\
+\hline
+{\em target} & we want to look at \\
+\hline
+{\em up} & let it be the default up vector (0,1,0) or change it to another one. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector3}{Vector3} This function returns a \doxylink{struct_pulse_engine_1_1_vector3}{Vector3} that represents the direction the object should face. 
+\end{DoxyReturn}
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!RotateAround@{RotateAround}}
+\index{RotateAround@{RotateAround}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
+\doxysubsubsection{\texorpdfstring{RotateAround()}{RotateAround()}}
+{\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Math\+Utils\+::\+Rotate\+Around (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{target}{, }\item[{float}]{yaw}{, }\item[{float}]{pitch}{, }\item[{float}]{radius}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Give an easy to use function to rotate an point around a target point in a 3D space with no complexity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The point to orbit around. \\
+\hline
+{\em yaw} & The yaw angle in degrees. \\
+\hline
+{\em pitch} & The pitch angle in degrees. \\
+\hline
+{\em radius} & The distance from the target. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_pulse_engine_1_1_vector3}{Vector3} The new position after rotation. 
 \end{DoxyReturn}
 \Hypertarget{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}\index{PulseEngine::MathUtils@{PulseEngine::MathUtils}!ToDegrees@{ToDegrees}}
 \index{ToDegrees@{ToDegrees}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}

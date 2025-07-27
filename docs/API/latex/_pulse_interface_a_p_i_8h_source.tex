@@ -1,0 +1,118 @@
+\doxysection{Pulse\+Interface\+API.\+h}
+\hypertarget{_pulse_interface_a_p_i_8h_source}{}\label{_pulse_interface_a_p_i_8h_source}\index{PulseEngineEditor/InterfaceEditor/InterfaceAPI/PulseInterfaceAPI.h@{PulseEngineEditor/InterfaceEditor/InterfaceAPI/PulseInterfaceAPI.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ PULSEINTERFACEAPI\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ PULSEINTERFACEAPI\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Common/common.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}Common/dllExport.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }Entity;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{enum\ class}\ PulseEngineStyle}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ Text,}
+\DoxyCodeLine{00026\ \ \ \ \ TextDisabled,}
+\DoxyCodeLine{00027\ \ \ \ \ WindowBg,}
+\DoxyCodeLine{00028\ \ \ \ \ ChildBg,}
+\DoxyCodeLine{00029\ \ \ \ \ PopupBg,}
+\DoxyCodeLine{00030\ \ \ \ \ Border,}
+\DoxyCodeLine{00031\ \ \ \ \ BorderShadow,}
+\DoxyCodeLine{00032\ \ \ \ \ FrameBg,}
+\DoxyCodeLine{00033\ \ \ \ \ FrameBgHovered,}
+\DoxyCodeLine{00034\ \ \ \ \ FrameBgActive,}
+\DoxyCodeLine{00035\ \ \ \ \ TitleBg,}
+\DoxyCodeLine{00036\ \ \ \ \ TitleBgActive,}
+\DoxyCodeLine{00037\ \ \ \ \ TitleBgCollapsed,}
+\DoxyCodeLine{00038\ \ \ \ \ MenuBarBg,}
+\DoxyCodeLine{00039\ \ \ \ \ ScrollbarBg,}
+\DoxyCodeLine{00040\ \ \ \ \ ScrollbarGrab,}
+\DoxyCodeLine{00041\ \ \ \ \ ScrollbarGrabHovered,}
+\DoxyCodeLine{00042\ \ \ \ \ ScrollbarGrabActive,}
+\DoxyCodeLine{00043\ \ \ \ \ CheckMark,}
+\DoxyCodeLine{00044\ \ \ \ \ SliderGrab,}
+\DoxyCodeLine{00045\ \ \ \ \ SliderGrabActive,}
+\DoxyCodeLine{00046\ \ \ \ \ Button,}
+\DoxyCodeLine{00047\ \ \ \ \ ButtonHovered,}
+\DoxyCodeLine{00048\ \ \ \ \ ButtonActive,}
+\DoxyCodeLine{00049\ \ \ \ \ Header,}
+\DoxyCodeLine{00050\ \ \ \ \ HeaderHovered,}
+\DoxyCodeLine{00051\ \ \ \ \ HeaderActive,}
+\DoxyCodeLine{00052\ \ \ \ \ Separator,}
+\DoxyCodeLine{00053\ \ \ \ \ SeparatorHovered,}
+\DoxyCodeLine{00054\ \ \ \ \ SeparatorActive,}
+\DoxyCodeLine{00055\ \ \ \ \ ResizeGrip,}
+\DoxyCodeLine{00056\ \ \ \ \ ResizeGripHovered,}
+\DoxyCodeLine{00057\ \ \ \ \ ResizeGripActive,}
+\DoxyCodeLine{00058\ \ \ \ \ InputTextCursor,}
+\DoxyCodeLine{00059\ \ \ \ \ TabHovered,}
+\DoxyCodeLine{00060\ \ \ \ \ Tab,}
+\DoxyCodeLine{00061\ \ \ \ \ TabSelected,}
+\DoxyCodeLine{00062\ \ \ \ \ TabSelectedOverline,}
+\DoxyCodeLine{00063\ \ \ \ \ TabDimmed,}
+\DoxyCodeLine{00064\ \ \ \ \ TabDimmedSelected,}
+\DoxyCodeLine{00065\ \ \ \ \ TabDimmedSelectedOverline,}
+\DoxyCodeLine{00066\ \ \ \ \ DockingPreview,}
+\DoxyCodeLine{00067\ \ \ \ \ DockingEmptyBg,}
+\DoxyCodeLine{00068\ \ \ \ \ PlotLines,}
+\DoxyCodeLine{00069\ \ \ \ \ PlotLinesHovered,}
+\DoxyCodeLine{00070\ \ \ \ \ PlotHistogram,}
+\DoxyCodeLine{00071\ \ \ \ \ PlotHistogramHovered,}
+\DoxyCodeLine{00072\ \ \ \ \ TableHeaderBg,}
+\DoxyCodeLine{00073\ \ \ \ \ TableBorderStrong,}
+\DoxyCodeLine{00074\ \ \ \ \ TableBorderLight,}
+\DoxyCodeLine{00075\ \ \ \ \ TableRowBg,}
+\DoxyCodeLine{00076\ \ \ \ \ TableRowBgAlt,}
+\DoxyCodeLine{00077\ \ \ \ \ TextLink,}
+\DoxyCodeLine{00078\ \ \ \ \ TextSelectedBg,}
+\DoxyCodeLine{00079\ \ \ \ \ TreeLines,}
+\DoxyCodeLine{00080\ \ \ \ \ DragDropTarget,}
+\DoxyCodeLine{00081\ \ \ \ \ NavCursor,}
+\DoxyCodeLine{00082\ \ \ \ \ NavWindowingHighlight,}
+\DoxyCodeLine{00083\ \ \ \ \ NavWindowingDimBg,}
+\DoxyCodeLine{00084\ \ \ \ \ ModalWindowDimBg,}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ COUNT}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{class\ }PULSE\_ENGINE\_DLL\_API\ \mbox{\hyperlink{class_pulse_interface_a_p_i}{PulseInterfaceAPI}}}
+\DoxyCodeLine{00091\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e}{OpenWindow}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}{CloseWindow}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}{WriteText}}(\textcolor{keyword}{const}\ std::string\&\ text);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7}{Image}}(\textcolor{keywordtype}{int}\ user\_texture\_id,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ image\_size,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv1);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}{AddSpace}}(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}{Button}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ size);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a08f3a4872b83ee1dfae61321effb666b}{Separator}}();}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a73d8cb1a2d955e62ae01df83831f9ab8}{SameLine}}();}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PushStyleColor(PulseEngineStyle\ syle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\&\ color,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ alpha\ =\ 1.0f);}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PopStyleColor(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}{RenderCameraToInterface}}(Camera*\ camera,\ \textcolor{keyword}{const}\ std::string\&\ windowName,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ imageSize,\ std::vector<Entity*>\ entitiesToRender);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{static}\ Entity*\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}{GetSelectedEntity}}();}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_ae9dc76f69da09b627aa4176c8a45eabd}{IsCurrentWindowFocused}}();}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}{MouseIn}}();}
+\DoxyCodeLine{00184\ \ \ \ \ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}{MouseDelta}}();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \};}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

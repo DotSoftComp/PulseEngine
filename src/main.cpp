@@ -13,6 +13,7 @@
 #include "PulseEngine/core/Material/Material.h"
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
 #include "PulseEngine/CustomScripts/IScripts.h"
+#include "PulseEngine/core/FileManager/FileManager.h"
 
 #ifdef ENGINE_EDITOR
     #include "PulseEngineEditor/InterfaceEditor/InterfaceEditor.h"
@@ -27,6 +28,8 @@
 
 int main()
 {
+    std::cout << "the actual working directory is : " << std::filesystem::current_path() << std::endl;
+    FileManager::workingDirectory = std::filesystem::current_path();
     PulseEngineBackend* engine = PulseEngineBackend::GetInstance();
 
     //during the compilation of the game, some datas are defined in the preprocessor.
@@ -55,7 +58,8 @@ int main()
 
     
     EDITOR_ONLY(
-        InterfaceEditor* editor = new InterfaceEditor(engine);
+        InterfaceEditor* editor = new InterfaceEditor();
+        engine->editor = editor;
     )
     
 
@@ -68,7 +72,7 @@ int main()
         engine->RenderShadow();
         engine->Render();
         EDITOR_ONLY(
-            editor->Render(engine);
+            editor->Render();
         )
 
         glfwSwapBuffers(engine->GetWindowContext()->GetGLFWWindow());

@@ -38,6 +38,8 @@ namespace PulseEngine
         Vector3(float scalar) : x(scalar), y(scalar), z(scalar) {}
         Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
         Vector3(const Vector3& vect) : x(vect.x), y(vect.y), z(vect.z) {}
+
+
         
         float& operator[](int index)
         {
@@ -118,5 +120,6 @@ namespace PulseEngine
         }
     };
 }
+
 
 #endif

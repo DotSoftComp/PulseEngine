@@ -8,10 +8,18 @@
 namespace PulseEngine
 {
 
+    
     inline float Dot(const Vector3& a, const Vector3& b)
     {
         return a.x * b.x + a.y * b.y + a.z * b.z;
     }
+    /**
+     * @brief Cross product of two vectors.
+     * 
+     * @param a the first vector.
+     * @param b the second vector.
+     * @return Vector3 the cross product of a and b.
+     */
     inline Vector3 Cross(const Vector3& a, const Vector3& b)
     {
         return Vector3(
@@ -20,6 +28,12 @@ namespace PulseEngine
             a.x * b.y - a.y * b.x
         );
     }
+    /**
+     * @brief Normalize a vector.
+     * 
+     * @param v the vector to normalize.
+     * @return Vector3 the normalized vector.
+     */
     inline Vector3 Normalize(const Vector3& v)
     {
         float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
@@ -64,7 +78,12 @@ namespace PulseEngine
         {
             return m[row];
         }
-
+        /**
+         * @brief Access operator to get a row of the matrix.
+         * 
+         * @param row which row to access (0, 1, or 2).
+         * @return const float* return a pointer to the specified row of the matrix.
+         */
         const float* operator[](int row) const
         {
             return m[row];
@@ -102,12 +121,22 @@ namespace PulseEngine
             }
             return result;
         }
-
+        /**
+         * @brief Create an identity matrix (with 0.0f and 1.0f) effortlessly.
+         * 
+         * @return Mat3 an identity matrix.
+         */
         static Mat3 Identity()
         {
             return Mat3(1.0f);
         }
 
+        /**
+         * @brief Create a rotation matrix around the X axis.
+         * 
+         * @param angleRadians the angle in radians to rotate around the X axis.
+         * @return Mat3 the rotation matrix.
+         */
         static Mat3 RotationX(float angleRadians)
         {
             float c = std::cos(angleRadians);
@@ -121,6 +150,12 @@ namespace PulseEngine
             return rot;
         }
 
+        /**
+         * @brief Create a rotation matrix around the Y axis.
+         * 
+         * @param angleRadians the angle in radians to rotate around the Y axis.
+         * @return Mat3 the rotation matrix.
+         */
         static Mat3 RotationY(float angleRadians)
         {
             float c = std::cos(angleRadians);
@@ -134,6 +169,12 @@ namespace PulseEngine
             return rot;
         }
 
+        /**
+         * @brief Create a rotation matrix around the Z axis.
+         * 
+         * @param angleRadians the angle in radians to rotate around the Z axis.
+         * @return Mat3 the rotation matrix.
+         */
         static Mat3 RotationZ(float angleRadians)
         {
             float c = std::cos(angleRadians);
@@ -147,11 +188,25 @@ namespace PulseEngine
             return rot;
         }
 
+        /**
+         * @brief Create a rotation matrix from Euler angles (in radians).
+         * 
+         * @param rx rotation around the X axis.
+         * @param ry rotation around the Y axis.
+         * @param rz rotation around the Z axis.
+         * @return Mat3 the rotation matrix.
+         */
         static Mat3 FromEulerXYZ(float rx, float ry, float rz)
         {
             return RotationZ(rz) * RotationY(ry) * RotationX(rx);
         }
 
+        /**
+         * @brief Multiply this matrix by another matrix.
+         * 
+         * @param other the other matrix to multiply with.
+         * @return Mat3 the resulting matrix after multiplication.
+         */
         Mat3 operator*(const Mat3& other) const
         {
             Mat3 result;

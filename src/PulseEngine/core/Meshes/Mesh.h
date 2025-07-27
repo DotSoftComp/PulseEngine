@@ -96,6 +96,15 @@ public:
     Mesh(Mesh&&) = default;
     Mesh& operator=(Mesh&&) = default;
 
+    const std::string& GetName() const { return name; }
+    void SetName(const std::string& newName) { name = newName; }
+
+    std::size_t GetGuid() const { return guid; }
+    void SetGuid(std::size_t newGuid) { guid = newGuid; }
+
+    PulseEngine::Vector3 position = PulseEngine::Vector3(0.0f, 0.0f, 0.0f); ///< Position of the mesh in local space.
+    PulseEngine::Vector3 rotation = PulseEngine::Vector3(0.0f, 0.0f, 0.0f); ///< Rotation of the mesh in local space.
+    PulseEngine::Vector3 scale = PulseEngine::Vector3(1.0f, 1.0f, 1.0f); ///< Scale of the mesh in local space.
 private:
     /**
      * @brief Initializes the OpenGL buffers (VAO, VBO, EBO) for rendering.
@@ -106,6 +115,11 @@ private:
     std::vector<glm::vec3> normals;       ///< Normal vectors (used before conversion).
     std::vector<glm::vec2> texCoords;     ///< Texture coordinates (used before conversion).
     std::vector<unsigned int> indices;    ///< Index data for rendering (EBO).
+
+    std::string name;
+    
+    std::size_t guid = 0;
+    std::size_t muid = 0;
 
     unsigned int VAO; ///< Vertex Array Object.
     unsigned int VBO; ///< Vertex Buffer Object.

@@ -33,6 +33,8 @@
 Camera* PulseEngineBackend::activeCamera = new Camera();
 IGraphicsAPI* PulseEngineBackend::graphicsAPI = nullptr;
 PulseEngineBackend* PulseEngineBackend::instance = nullptr;
+float PulseEngineBackend::deltaTime = 0.0f;
+InterfaceEditor* PulseEngineBackend::editor = nullptr;
 
 
 PulseEngineBackend::PulseEngineBackend() { }
@@ -134,7 +136,7 @@ void PulseEngineBackend::Update()
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     view = GetActiveCamera()->GetViewMatrix();
-    projection = glm::perspective(glm::radians(GetActiveCamera()->Zoom), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(GetActiveCamera()->Zoom), static_cast<float>(width) / static_cast<float>(height), 0.1f, 1000.0f);
     mapLoading -= deltaTime;
     for (auto& light : lights) 
     {
@@ -146,6 +148,8 @@ void PulseEngineBackend::Update()
     {
         Entity* entityA = entities[i];
         entityA->UpdateEntity(deltaTime);
+        Collider* col = dynamic_cast<Collider*>(entityA->collider);
+        if(col) col->othersCollider.clear();
         for (size_t j = i + 1; j < entities.size(); ++j)
         {
             Entity* entityB = entities[j];
@@ -185,8 +189,110 @@ void PulseEngineBackend::Render()
         entity->DrawEntity();
     }
 
+        // Draw grid quad in editor only
+    EDITOR_ONLY(
+        DrawGridQuad(view);
+    )
+
+
     graphicsAPI->EndFrame();
 }
+
+// Draws a large quad at y=0 using a grid shader
+void PulseEngineBackend::DrawGridQuad(PulseEngine::Mat4 viewCam)
+{
+    static unsigned int quadVAO = 0, quadVBO = 0;
+    if (quadVAO == 0) {
+        float yOffset = -0.001f; // Slightly below y=0 to avoid z-fighting
+        float quadVertices[] = {
+            // positions
+            -100.0f, yOffset, -100.0f,
+             100.0f, yOffset, -100.0f,
+             100.0f, yOffset,  100.0f,
+            -100.0f, yOffset,  100.0f
+        };
+        glGenVertexArrays(1, &quadVAO);
+        glGenBuffers(1, &quadVBO);
+        glBindVertexArray(quadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    }
+
+    // Load or use your grid shader
+    static Shader* gridShader = nullptr;
+    if (!gridShader) {
+        gridShader = new Shader(
+            std::string(ASSET_PATH) + "shaders/Grid.vert",
+            std::string(ASSET_PATH) + "shaders/Grid.frag"
+        );
+    }
+
+    gridShader->Use();
+    gridShader->SetMat4("model", glm::mat4(1.0f));
+    gridShader->SetMat4("view", glm::mat4(viewCam[0][0], viewCam[0][1], viewCam[0][2], viewCam[0][3],
+                          viewCam[1][0], viewCam[1][1], viewCam[1][2], viewCam[1][3],
+                          viewCam[2][0], viewCam[2][1], viewCam[2][2], viewCam[2][3],
+                          viewCam[3][0], viewCam[3][1], viewCam[3][2], viewCam[3][3]));
+    gridShader->SetMat4("projection", projection);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_DEPTH_TEST);     
+    glDepthMask(GL_FALSE);       
+
+    glBindVertexArray(quadVAO);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    glBindVertexArray(0);
+
+    glDepthMask(GL_TRUE);       
+    glDisable(GL_BLEND);
+}
+
+
+
+void PulseEngineBackend::SpecificRender(Camera *cam, int specificVBO, std::vector<Entity*> entitiesToRender)
+{
+    if (!cam) return;
+
+    // Calculate view and projection matrices for the specific camera
+    PulseEngine::Mat4 specificView = cam->GetViewMatrix();
+    glm::mat4 specificProjection = glm::perspective(glm::radians(cam->Zoom), static_cast<float>(800) / static_cast<float>(600), 0.1f, 1000.0f);
+
+        glBindFramebuffer(GL_FRAMEBUFFER, specificVBO);
+        glViewport(0, 0, 800, 600);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    
+
+    for (Entity* entity : entitiesToRender)
+    {
+        if (!IsRenderable(entity)) continue;
+        Shader* shader = entity->GetMaterial()->GetShader();
+
+        shader->Use();
+        #ifdef WINDOW_PULSE_EXPORT
+        shader->SetMat4("projection", specificProjection);
+        shader->SetMat4("view", glm::mat4(specificView[0][0], specificView[0][1], specificView[0][2], specificView[0][3],
+                          specificView[1][0], specificView[1][1], specificView[1][2], specificView[1][3],
+                          specificView[2][0], specificView[2][1], specificView[2][2], specificView[2][3],
+                          specificView[3][0], specificView[3][1], specificView[3][2], specificView[3][3]));
+        shader->SetVec3("viewPos", glm::vec3(cam->Position.x, cam->Position.y, cam->Position.z));
+        #endif
+        LightManager::BindLightsToShader(shader, this, entity);
+
+        entity->DrawEntity(); 
+    }
+        // Draw grid quad in editor only
+    EDITOR_ONLY(
+        DrawGridQuad(specificView);
+    )
+
+    graphicsAPI->EndFrame();
+}
+
 
 
 
@@ -224,10 +330,10 @@ void PulseEngineBackend::DeleteEntity(Entity *entity)
 
 void PulseEngineBackend::ProcessInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) activeCamera->ProcessKeyboard(FORWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) activeCamera->ProcessKeyboard(BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) activeCamera->ProcessKeyboard(LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) activeCamera->ProcessKeyboard(RIGHT, deltaTime);
+    // if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) activeCamera->ProcessKeyboard(FORWARD, deltaTime);
+    // if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) activeCamera->ProcessKeyboard(BACKWARD, deltaTime);
+    // if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) activeCamera->ProcessKeyboard(LEFT, deltaTime);
+    // if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) activeCamera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
 glm::vec3 PulseEngineBackend::CalculateLighting(const glm::vec3 &position, const glm::vec3 &normal, const glm::vec3 &viewPos, const LightData& light)
@@ -276,3 +382,13 @@ PulseEngineBackend* PulseEngineBackend::GetInstance()
     return instance;
 }
 
+
+PulseEngine::Vector3 PulseEngineBackend::GetCameraPosition()
+{
+    return GetActiveCamera()->Position;
+}
+
+PulseEngine::Vector3 PulseEngineBackend::GetCameraRotation()
+{
+    return PulseEngine::Vector3(GetActiveCamera()->Pitch, GetActiveCamera()->Yaw, 0.0f);
+}

@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>API of Pulse Engine: PulseEngine::MathUtils Namespace Reference</title>
-<link rel="icon" href="pulseIcon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +18,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">API of Pulse Engine<span id="projectnumber">&#160;0.0.7</span>
+   <div id="projectname">API of Pulse Engine<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Pulse Engine is a 3D game engine written in C++. It provides an easy to use API to use the engine for your own project.</div>
   </td>
@@ -105,6 +105,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:acfecb92b970cefa26e8c08141090f4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert radians to degrees.  <br /></td></tr>
 <tr class="memitem:a11e59009707d3837a7c695e7c90e7cac" id="r_a11e59009707d3837a7c695e7c90e7cac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pulse_engine_1_1_mat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11e59009707d3837a7c695e7c90e7cac">CreateRotationMatrix</a> (const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;euler)</td></tr>
 <tr class="memdesc:a11e59009707d3837a7c695e7c90e7cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a rotation matrix from Euler angles (in radians).  <br /></td></tr>
+<tr class="memitem:a3e03e15e6cf50d03a659d67e1bdfcf1b" id="r_a3e03e15e6cf50d03a659d67e1bdfcf1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e03e15e6cf50d03a659d67e1bdfcf1b">LookAt</a> (const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;position, const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;target, const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;up=<a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>(0.0f, 1.0f, 0.0f))</td></tr>
+<tr class="memdesc:a3e03e15e6cf50d03a659d67e1bdfcf1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make an object rotate, to look at a certain position.  <br /></td></tr>
+<tr class="memitem:a2cbbb2d07fe726c88c46c4fc07c49528" id="r_a2cbbb2d07fe726c88c46c4fc07c49528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cbbb2d07fe726c88c46c4fc07c49528">RotateAround</a> (const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;target, float yaw, float pitch, float radius)</td></tr>
+<tr class="memdesc:a2cbbb2d07fe726c88c46c4fc07c49528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Give an easy to use function to rotate an point around a target point in a 3D space with no complexity.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -137,6 +141,94 @@ constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b> = 3
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_pulse_engine_1_1_mat4.html" title="Mat4 class represents a 4x4 matrix used for 3D transformations.">Mat4</a> the rotation matrix. </dd></dl>
+
+</div>
+</div>
+<a id="a3e03e15e6cf50d03a659d67e1bdfcf1b" name="a3e03e15e6cf50d03a659d67e1bdfcf1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e03e15e6cf50d03a659d67e1bdfcf1b">&#9670;&#160;</a></span>LookAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::MathUtils::LookAt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>up</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>(0.0f,&#160;1.0f,&#160;0.0f)</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Make an object rotate, to look at a certain position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>of the object </td></tr>
+    <tr><td class="paramname">target</td><td>we want to look at </td></tr>
+    <tr><td class="paramname">up</td><td>let it be the default up vector (0,1,0) or change it to another one. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">Vector3</a> This function returns a <a class="el" href="struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">Vector3</a> that represents the direction the object should face. </dd></dl>
+
+</div>
+</div>
+<a id="a2cbbb2d07fe726c88c46c4fc07c49528" name="a2cbbb2d07fe726c88c46c4fc07c49528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cbbb2d07fe726c88c46c4fc07c49528">&#9670;&#160;</a></span>RotateAround()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::MathUtils::RotateAround </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>yaw</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>pitch</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>radius</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Give an easy to use function to rotate an point around a target point in a 3D space with no complexity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The point to orbit around. </td></tr>
+    <tr><td class="paramname">yaw</td><td>The yaw angle in degrees. </td></tr>
+    <tr><td class="paramname">pitch</td><td>The pitch angle in degrees. </td></tr>
+    <tr><td class="paramname">radius</td><td>The distance from the target. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">Vector3</a> The new position after rotation. </dd></dl>
 
 </div>
 </div>
