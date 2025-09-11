@@ -2,6 +2,7 @@
 #define MAT4PULSE_H
 
 #include <cstring> 
+#include "PulseEngine/core/Math/Vector.h"
 
 namespace PulseEngine
 {
@@ -28,6 +29,18 @@ namespace PulseEngine
                 data[i][i] = scalar;
             }
         }
+
+        Mat4(float m00, float m01, float m02, float m03,
+            float m10, float m11, float m12, float m13,
+            float m20, float m21, float m22, float m23,
+            float m30, float m31, float m32, float m33)
+        {
+            data[0][0] = m00; data[0][1] = m01; data[0][2] = m02; data[0][3] = m03;
+            data[1][0] = m10; data[1][1] = m11; data[1][2] = m12; data[1][3] = m13;
+            data[2][0] = m20; data[2][1] = m21; data[2][2] = m22; data[2][3] = m23;
+            data[3][0] = m30; data[3][1] = m31; data[3][2] = m32; data[3][3] = m33;
+        }
+
         
         /**
          * @brief Set the Identity object

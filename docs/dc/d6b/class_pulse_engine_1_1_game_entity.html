@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: PulseEngine::GameEntity Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -93,12 +92,109 @@ $(function(){initNavTree('dc/d6b/class_pulse_engine_1_1_game_entity.html','../..
   <div class="headertitle"><div class="title">PulseEngine::GameEntity Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html" title="The GameEntity class provides static functions relative to the management of entities in the game.">GameEntity</a> class provides static functions relative to the management of entities in the game.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../df/d0b/_engine_api_8h_source.html">EngineApi.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a65c44058f7b7cdde6cfbda2ceee99a71" id="r_a65c44058f7b7cdde6cfbda2ceee99a71"><td class="memItemLeft" align="right" valign="top"><a id="a65c44058f7b7cdde6cfbda2ceee99a71" name="a65c44058f7b7cdde6cfbda2ceee99a71"></a>
-static <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>Instantiate</b> (const std::string &amp;path, <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> position=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> rotation=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> scale=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f))</td></tr>
+<tr class="memitem:a65c44058f7b7cdde6cfbda2ceee99a71" id="r_a65c44058f7b7cdde6cfbda2ceee99a71"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65c44058f7b7cdde6cfbda2ceee99a71">Instantiate</a> (const std::string &amp;path, <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> position=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> rotation=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> scale=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f))</td></tr>
+<tr class="memdesc:a65c44058f7b7cdde6cfbda2ceee99a71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate an entity from a path to a file, position, rotation and scale.  <br /></td></tr>
+<tr class="memitem:a65c3a2aa12dc1df0c948ee7f07578f41" id="r_a65c3a2aa12dc1df0c948ee7f07578f41"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="../../d2/d96/class_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65c3a2aa12dc1df0c948ee7f07578f41">GetAllEntitiesByTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="memdesc:a65c3a2aa12dc1df0c948ee7f07578f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the All Entities By Tag object. All entities can have multiple tags on them.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html" title="The GameEntity class provides static functions relative to the management of entities in the game.">GameEntity</a> class provides static functions relative to the management of entities in the game. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a65c3a2aa12dc1df0c948ee7f07578f41" name="a65c3a2aa12dc1df0c948ee7f07578f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65c3a2aa12dc1df0c948ee7f07578f41">&#9670;&#160;</a></span>GetAllEntitiesByTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="../../d2/d96/class_entity.html">Entity</a> * &gt; PulseEngine::GameEntity::GetAllEntitiesByTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>tag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the All Entities By Tag object. All entities can have multiple tags on them. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>the tag has it is written on the tag list of the editor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a simple list of entities. </dd></dl>
+
+</div>
+</div>
+<a id="a65c44058f7b7cdde6cfbda2ceee99a71" name="a65c44058f7b7cdde6cfbda2ceee99a71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65c44058f7b7cdde6cfbda2ceee99a71">&#9670;&#160;</a></span>Instantiate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/d96/class_entity.html">Entity</a> * PulseEngine::GameEntity::Instantiate </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f,&#160;0.0f,&#160;0.0f)</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></td>          <td class="paramname"><span class="paramname"><em>rotation</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f,&#160;0.0f,&#160;0.0f)</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></td>          <td class="paramname"><span class="paramname"><em>scale</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f,&#160;1.0f,&#160;1.0f)</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiate an entity from a path to a file, position, rotation and scale. </p>
+<p>The instantiation will directly call the Start() method from the entity, and also all start methods from the scripts attached to the entity.</p>
+<p>If no entity could have been instantiated, it will return a nullptr. </p><dl class="section note"><dt>Note</dt><dd>By passing an Entity* to this method, by replacing path, you can instantiate an already existing entity in the world, saving ressources from loading it again.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path of the .pentity file. With this method you can only instantiate entities that are loaded in the engine. </td></tr>
+    <tr><td class="paramname">position</td><td>Position where the entity will be instantiated. </td></tr>
+    <tr><td class="paramname">rotation</td><td>Rotation of the entity in degrees (pitch, yaw, roll). </td></tr>
+    <tr><td class="paramname">scale</td><td>Scale of the entity, we recommend to use the same scalar on each axis to keep the entity uniform. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Entity* The pointer to the entity instantiate in the world. You can directly modify it after the instantiation. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -12,107 +12,21 @@
 #include "PulseEngine/core/Lights/Lights.h"
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
 #include "PulseEngine/core/Lights/PointLight/PointLight.h"
+#include "PulseEngine/ModuleLoader/IModule/IModule.h"
+#include "PulseEngine/ModuleLoader/IModuleInterface/IModuleInterface.h"
+#include "PulseEngine/ModuleLoader/ModuleLoader.h"
+#include "PulseEngine/core/FileManager/FileManager.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/NodeMenuRegistry.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/Node.h"
 #include <glm/gtc/type_ptr.hpp>
+
 #include "imgui/imgui.h"
+
+#include <filesystem>
 
 namespace fs = std::filesystem;
 
-
-void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
-{
-    static float thumbnailSize = 64.0f;
-    static float padding = 16.0f;
-
-    float cellSize = thumbnailSize + padding;
-    float panelWidth = ImGui::GetContentRegionAvail().x;
-    int columnCount = (int)(panelWidth / cellSize);
-    if (columnCount < 1)
-        columnCount = 1;
-
-    ImGui::Columns(columnCount, nullptr, false);
-
-    for (const auto& entry : fs::directory_iterator(currentDir))
-    {
-        const bool isDir = entry.is_directory();
-        const std::string name = entry.path().filename().string();
-
-        ImGui::PushID(name.c_str());
-
-        ImGui::BeginGroup();
-
-        if (isDir)
-        {
-            ImGui::Button("📁", ImVec2(thumbnailSize, thumbnailSize));
-        }
-        else
-        {
-            ImGui::Button("📄", ImVec2(thumbnailSize, thumbnailSize));
-        }
-
-        if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0))
-        {
-            if (isDir)
-            {
-                // Navigate into directory
-                selectedFile = entry.path();
-            }
-            else
-            {
-                selectedFile = entry.path();
-            }
-        }
-
-        ImGui::TextWrapped("%s", name.c_str());
-
-        ImGui::EndGroup();
-
-        ImGui::NextColumn();
-        ImGui::PopID();
-    }
-
-    ImGui::Columns(1);
-}
-
-void FileExplorerWindow()
-{
-    static fs::path currentDir = "PulseEngineEditor";
-    static fs::path selected;
-
-    ImGui::Begin("Asset Manager");
-
-    // Show breadcrumb-style navigation
-    ImGui::Text("Path: %s", currentDir.string().c_str());
-
-    if (ImGui::Button("back"))
-    {    
-        if (currentDir.has_parent_path())
-        {            
-            currentDir = currentDir.parent_path();
-            selected.clear();
-        }
-    }
-
-    ImGui::Separator();
-
-    ShowFileGrid(currentDir, selected);
-
-    if (!selected.empty())
-    {
-        if (fs::is_directory(selected))
-        {
-            currentDir = selected;
-            selected.clear(); 
-        }
-        else
-        {
-            ImGui::Text("Selected file: %s", selected.filename().string().c_str());
-        }
-    }
-
-
-    ImGui::End();
-}
-InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
+InterfaceEditor::InterfaceEditor()
 {    
     topbar = new TopBar();
     IMGUI_CHECKVERSION();
@@ -123,18 +37,59 @@ InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.IniFilename = "PulseEditorGUI.ini";
-
+    
+    ImFont* dmSansFont = io.Fonts->AddFontFromFileTTF((std::string(ASSET_PATH) + "fonts/EngineFont.ttf").c_str(), 18.0f);
+    io.FontDefault = dmSansFont;    
     ImGui::StyleColorsDark(); 
 
-    ImGui_ImplGlfw_InitForOpenGL(engine->GetWindowContext()->GetGLFWWindow(), true);
+
+    icons["folder"] = new Texture(("InterfaceEditor/icon/folder.png"));
+    icons["file"] = new Texture(("InterfaceEditor/icon/file.png"));
+    icons["entityFile"] = new Texture(("InterfaceEditor/icon/entityFile.png"));
+    icons["modelFile"] = new Texture(("InterfaceEditor/icon/modelFile.png"));
+    icons["scene"] = new Texture(("InterfaceEditor/icon/scene.png"));
+    icons["cpp"] = new Texture(("InterfaceEditor/icon/cpp.png"));
+    icons["h"] = new Texture(("InterfaceEditor/icon/h.png"));
+    icons["synapse"] = new Texture(("InterfaceEditor/icon/synapse.png"));
+
+    ImGui_ImplGlfw_InitForOpenGL(PulseEngineInstance->GetWindowContext()->GetGLFWWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 460");
+
+    std::vector<std::string> filenames;
+
+    for (const auto& entry : fs::directory_iterator("./Modules/Interface"))
+    {
+        if (entry.is_regular_file())
+        {
+            filenames.push_back(entry.path().filename().string());
+        }
+    }
+
+    for(auto file : filenames)
+    {
+        IModuleInterface* module = dynamic_cast<IModuleInterface*>(ModuleLoader::GetModuleFromPath(std::string("./Modules/Interface/") + file));
+        if(module)
+        {
+            modules.push_back(module);
+            windowStates[module->GetName()] = false;
+        }
+    }
 
     windowStates["EntityAnalyzer"] = true;
     windowStates["viewport"] = true;
-    windowStates["EngineConfig"] = false;
-    windowStates["SceneData"] = false;
-    windowStates["assetManager"] = false;
-    
+    windowStates["EngineConfig"] = true;
+    windowStates["SceneData"] = true;
+    windowStates["assetManager"] = true;
+
+    if (!context)
+    {
+        ed::Config config;
+        config.SettingsFile = "NodeEditor.json";
+        context = ed::CreateEditor(&config);
+    }
+
+
+
     ImGuiStyle& style = ImGui::GetStyle();
     style.WindowRounding = 6.0f;
     style.FrameRounding = 5.0f;
@@ -152,54 +107,79 @@ InterfaceEditor::InterfaceEditor(PulseEngineBackend* engine)
     style.ItemInnerSpacing = ImVec2(8.0f, 6.0f);
     
     // Couleurs
-    style.Colors[ImGuiCol_Text]                   = ImVec4(0.96f, 0.97f, 1.00f, 1.00f);  // Texte plus lumineux
-    style.Colors[ImGuiCol_TextDisabled]          = ImVec4(0.60f, 0.60f, 0.64f, 1.00f);  // Texte désactivé plus doux
-    style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.08f, 0.09f, 0.11f, 1.00f);  // Fond très sombre
-    style.Colors[ImGuiCol_ChildBg]               = ImVec4(0.12f, 0.13f, 0.15f, 1.00f);  // Fond des enfants un peu plus clair
-    style.Colors[ImGuiCol_PopupBg]               = ImVec4(0.06f, 0.06f, 0.07f, 0.94f);  // Fond popup un peu plus sombre
-    style.Colors[ImGuiCol_Border]                = ImVec4(0.25f, 0.25f, 0.27f, 0.60f);  // Bordures plus discrètes
-    style.Colors[ImGuiCol_BorderShadow]          = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);  // Pas d'ombre de bordure
-    
-    style.Colors[ImGuiCol_FrameBg]               = ImVec4(0.16f, 0.17f, 0.19f, 1.00f);  // Fond des cadres
-    style.Colors[ImGuiCol_FrameBgHovered]        = ImVec4(0.20f, 0.21f, 0.23f, 1.00f);  // Survol des cadres
-    style.Colors[ImGuiCol_FrameBgActive]         = ImVec4(0.24f, 0.25f, 0.27f, 1.00f);  // Cadres actifs
-    
-    style.Colors[ImGuiCol_TitleBg]               = ImVec4(0.09f, 0.10f, 0.12f, 1.00f);  // Fond du titre
-    style.Colors[ImGuiCol_TitleBgActive]         = ImVec4(0.14f, 0.15f, 0.16f, 1.00f);  // Titre actif
-    style.Colors[ImGuiCol_TitleBgCollapsed]      = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);  // Titre réduit
-    
-    style.Colors[ImGuiCol_MenuBarBg]             = ImVec4(0.13f, 0.13f, 0.14f, 1.00f);  // Fond barre de menu
-    style.Colors[ImGuiCol_ScrollbarBg]           = ImVec4(0.08f, 0.08f, 0.08f, 0.53f);  // Fond des barres de défilement
-    style.Colors[ImGuiCol_ScrollbarGrab]         = ImVec4(0.33f, 0.33f, 0.33f, 1.00f);  // Barre de défilement
-    style.Colors[ImGuiCol_ScrollbarGrabHovered]  = ImVec4(0.43f, 0.43f, 0.43f, 1.00f);  // Survol barre de défilement
-    style.Colors[ImGuiCol_ScrollbarGrabActive]   = ImVec4(0.53f, 0.53f, 0.53f, 1.00f);  // Actif barre de défilement
-    
-    style.Colors[ImGuiCol_CheckMark]             = ImVec4(0.30f, 0.60f, 1.00f, 1.00f);  // Coche bleue plus lumineuse
-    style.Colors[ImGuiCol_SliderGrab]            = ImVec4(0.30f, 0.60f, 1.00f, 1.00f);  // Curseur du slider
-    style.Colors[ImGuiCol_SliderGrabActive]      = ImVec4(0.38f, 0.65f, 1.00f, 1.00f);  // Curseur actif du slider
-    
-    style.Colors[ImGuiCol_Button]                = ImVec4(0.22f, 0.23f, 0.27f, 1.00f);  // Fond des boutons
-    style.Colors[ImGuiCol_ButtonHovered]         = ImVec4(0.28f, 0.30f, 0.33f, 1.00f);  // Survol des boutons
-    style.Colors[ImGuiCol_ButtonActive]          = ImVec4(0.33f, 0.35f, 0.38f, 1.00f);  // Bouton actif
-    
-    style.Colors[ImGuiCol_Header]                = ImVec4(0.24f, 0.25f, 0.27f, 1.00f);  // Fond des en-têtes
-    style.Colors[ImGuiCol_HeaderHovered]         = ImVec4(0.30f, 0.32f, 0.35f, 1.00f);  // Survol des en-têtes
-    style.Colors[ImGuiCol_HeaderActive]          = ImVec4(0.36f, 0.38f, 0.41f, 1.00f);  // En-têtes actifs
-    
-    style.Colors[ImGuiCol_Separator]             = ImVec4(0.40f, 0.40f, 0.43f, 0.60f);  // Séparateur discret
-    style.Colors[ImGuiCol_SeparatorHovered]      = ImVec4(0.45f, 0.45f, 0.48f, 1.00f);  // Survol séparateur
-    style.Colors[ImGuiCol_SeparatorActive]       = ImVec4(0.50f, 0.50f, 0.54f, 1.00f);  // Séparateur actif
-    
-    style.Colors[ImGuiCol_ResizeGrip]            = ImVec4(0.26f, 0.60f, 0.98f, 0.20f);  // Grip de redimensionnement
-    style.Colors[ImGuiCol_ResizeGripHovered]     = ImVec4(0.26f, 0.60f, 0.98f, 0.50f);  // Survol grip
-    style.Colors[ImGuiCol_ResizeGripActive]      = ImVec4(0.26f, 0.60f, 0.98f, 0.80f);  // Actif grip
-    
-    style.Colors[ImGuiCol_Tab]                   = ImVec4(0.18f, 0.19f, 0.20f, 1.00f);  // Fond des onglets
-    style.Colors[ImGuiCol_TabHovered]            = ImVec4(0.28f, 0.30f, 0.33f, 1.00f);  // Survol des onglets
-    style.Colors[ImGuiCol_TabActive]             = ImVec4(0.24f, 0.26f, 0.29f, 1.00f);  // Onglet actif
-    style.Colors[ImGuiCol_TabUnfocused]          = ImVec4(0.18f, 0.18f, 0.18f, 1.00f); // Onglet non sélectionné
-    style.Colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.20f, 0.22f, 0.24f, 1.00f); // Onglet non actif
-    
+// Textes
+style.Colors[ImGuiCol_Text]                   = ImVec4(0.92f, 0.95f, 1.00f, 1.00f); // Blanc bleuté, doux
+style.Colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.55f, 0.65f, 1.00f);
+
+// Fond général
+style.Colors[ImGuiCol_WindowBg]               = ImVec4(0.04f, 0.05f, 0.07f, 1.00f); // Très sombre
+style.Colors[ImGuiCol_ChildBg]                = ImVec4(0.07f, 0.08f, 0.10f, 1.00f);
+style.Colors[ImGuiCol_PopupBg]                = ImVec4(0.05f, 0.06f, 0.07f, 0.98f);
+
+// Bordures
+style.Colors[ImGuiCol_Border]                 = ImVec4(0.18f, 0.20f, 0.24f, 0.50f);
+style.Colors[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+
+// Cadres
+style.Colors[ImGuiCol_FrameBg]                = ImVec4(0.12f, 0.13f, 0.16f, 1.00f);
+style.Colors[ImGuiCol_FrameBgHovered]         = ImVec4(0.16f, 0.18f, 0.22f, 1.00f);
+style.Colors[ImGuiCol_FrameBgActive]          = ImVec4(0.18f, 0.20f, 0.25f, 1.00f);
+
+// Titres et barres
+style.Colors[ImGuiCol_TitleBg]                = ImVec4(0.06f, 0.07f, 0.08f, 1.00f);
+style.Colors[ImGuiCol_TitleBgActive]          = ImVec4(0.10f, 0.12f, 0.14f, 1.00f);
+style.Colors[ImGuiCol_TitleBgCollapsed]       = ImVec4(0.03f, 0.03f, 0.04f, 1.00f);
+
+style.Colors[ImGuiCol_MenuBarBg]              = ImVec4(0.07f, 0.08f, 0.09f, 1.00f);
+
+// Scrollbars
+style.Colors[ImGuiCol_ScrollbarBg]            = ImVec4(0.05f, 0.05f, 0.05f, 0.50f);
+style.Colors[ImGuiCol_ScrollbarGrab]          = ImVec4(0.26f, 0.36f, 0.56f, 0.90f);
+style.Colors[ImGuiCol_ScrollbarGrabHovered]   = ImVec4(0.36f, 0.46f, 0.66f, 0.90f);
+style.Colors[ImGuiCol_ScrollbarGrabActive]    = ImVec4(0.46f, 0.56f, 0.76f, 1.00f);
+
+// Coche et sliders
+style.Colors[ImGuiCol_CheckMark]              = ImVec4(0.38f, 0.70f, 1.00f, 1.00f);
+style.Colors[ImGuiCol_SliderGrab]             = ImVec4(0.35f, 0.65f, 1.00f, 1.00f);
+style.Colors[ImGuiCol_SliderGrabActive]       = ImVec4(0.45f, 0.75f, 1.00f, 1.00f);
+
+// Boutons
+style.Colors[ImGuiCol_Button]                 = ImVec4(0.16f, 0.18f, 0.22f, 1.00f);
+style.Colors[ImGuiCol_ButtonHovered]          = ImVec4(0.24f, 0.28f, 0.34f, 1.00f);
+style.Colors[ImGuiCol_ButtonActive]           = ImVec4(0.30f, 0.36f, 0.42f, 1.00f);
+
+// Headers (ex: TreeNode)
+style.Colors[ImGuiCol_Header]                 = ImVec4(0.20f, 0.22f, 0.26f, 1.00f);
+style.Colors[ImGuiCol_HeaderHovered]          = ImVec4(0.28f, 0.32f, 0.38f, 1.00f);
+style.Colors[ImGuiCol_HeaderActive]           = ImVec4(0.34f, 0.40f, 0.48f, 1.00f);
+
+// Séparateurs
+style.Colors[ImGuiCol_Separator]              = ImVec4(0.22f, 0.24f, 0.28f, 0.60f);
+style.Colors[ImGuiCol_SeparatorHovered]       = ImVec4(0.32f, 0.34f, 0.38f, 1.00f);
+style.Colors[ImGuiCol_SeparatorActive]        = ImVec4(0.38f, 0.40f, 0.46f, 1.00f);
+
+// Resize grip
+style.Colors[ImGuiCol_ResizeGrip]             = ImVec4(0.30f, 0.60f, 1.00f, 0.30f);
+style.Colors[ImGuiCol_ResizeGripHovered]      = ImVec4(0.30f, 0.60f, 1.00f, 0.60f);
+style.Colors[ImGuiCol_ResizeGripActive]       = ImVec4(0.30f, 0.60f, 1.00f, 0.90f);
+
+// Tabs
+style.Colors[ImGuiCol_Tab]                    = ImVec4(0.14f, 0.16f, 0.20f, 1.00f);
+style.Colors[ImGuiCol_TabHovered]             = ImVec4(0.24f, 0.28f, 0.32f, 1.00f);
+style.Colors[ImGuiCol_TabActive]              = ImVec4(0.20f, 0.24f, 0.28f, 1.00f);
+style.Colors[ImGuiCol_TabUnfocused]           = ImVec4(0.12f, 0.14f, 0.18f, 1.00f);
+style.Colors[ImGuiCol_TabUnfocusedActive]     = ImVec4(0.18f, 0.20f, 0.24f, 1.00f);
+
+NodeMenuRegistry::Get().AddCategory("Input/Keyboard", "OnKeyPressed", []()
+{
+    // Code to spawn node
+});
+
+NodeMenuRegistry::Get().AddCategory("Mathematical/Basic", "Add", []()
+{
+    // Code to spawn add node
+});
+
 }
 
 void RenderMainDockSpace()
@@ -215,6 +195,7 @@ void RenderMainDockSpace()
         ImGui::SetNextWindowPos(viewport->Pos);
         ImGui::SetNextWindowSize(viewport->Size);
         ImGui::SetNextWindowViewport(viewport->ID);
+        
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
         window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
@@ -252,12 +233,74 @@ void InterfaceEditor::RenderFullscreenWelcomePanel()
     ImGui::End();
 }
 
+void InterfaceEditor::RenderNodeMenu(const std::vector<NodeCategory>& categories)
+{
+    for (auto& cat : categories)
+    {
+        if (ImGui::BeginMenu(cat.name.c_str()))
+        {
+            for (auto& node : cat.nodes)
+            {
+                if (ImGui::MenuItem(node.name.c_str()))
+                {
+                    node.onClick();
+                }
+            }
 
-void InterfaceEditor::Render(PulseEngineBackend *engine)
-{        
+            // Recursively render subcategories
+            if (!cat.subCategories.empty())
+                RenderNodeMenu(cat.subCategories);
+
+            ImGui::EndMenu();
+        }
+    }
+}
+
+
+
+void InterfaceEditor::Render()
+{       
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+ImGui::Begin("Synapse", nullptr,
+    ImGuiWindowFlags_NoScrollbar |
+    ImGuiWindowFlags_NoScrollWithMouse |
+    ImGuiWindowFlags_NoBringToFrontOnFocus);
+
+ed::SetCurrentEditor(context);
+
+// --- Main content area ---
+float bottomBarHeight = ImGui::GetFrameHeight() + ImGui::GetStyle().FramePadding.y * 2.0f;
+ImVec2 contentSize(ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y - bottomBarHeight);
+
+ImGui::BeginChild("NodeEditorArea", contentSize, false);
+{
+    ed::Begin("My Node Editor");
+    // Your node rendering logic here
+    ed::End();
+}
+ImGui::EndChild();
+
+// --- Bottom bar with menu ---
+ImGui::Separator();
+ImGui::BeginChild("BottomBar", ImVec2(0, bottomBarHeight), false,
+    ImGuiWindowFlags_MenuBar); // enables menu bar inside this child
+
+if (ImGui::BeginMenuBar())
+{
+    RenderNodeMenu(NodeMenuRegistry::Get().GetRootCategories());
+    ImGui::EndMenuBar();
+}
+
+ImGui::EndChild();
+
+ed::SetCurrentEditor(nullptr);
+ImGui::End();
+
+
+
     RenderMainDockSpace();
 
     if(!hasProjectSelected)
@@ -266,59 +309,64 @@ void InterfaceEditor::Render(PulseEngineBackend *engine)
     }
     else
     {
-
-        if(windowStates["SceneData"]) GenerateSceneDataWindow(engine);
-
-        if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
-
-        if (windowStates["EngineConfig"])
+        for(auto mod : modules)
         {
-            EngineConfigWindow(engine);
+            if(windowStates[mod->GetName()])
+                mod->Render();
         }
-        if (windowStates["assetManager"])
+
+        if(windowStates["SceneData"]) GenerateSceneDataWindow();
+        if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
+        if(windowStates["EngineConfig"]) EngineConfigWindow();
+
+        if(windowStates["assetManager"])
         {
             ImGui::Begin("Asset Manager", &windowStates["assetManager"]);
             static fs::path selectedFile;
             FileExplorerWindow();
-
-            ImGui::Text("Asset Manager");
             ImGui::End();
         }
 
-
-        if(windowStates["viewport"]) Viewport(engine);
-
-        topbar->UpdateBar(engine, this);
+        topbar->UpdateBar(PulseEngineInstance, this);
 
         for(auto& popup : loadingPopups)
         {
             ShowLoadingPopup(popup.contentFunction, popup.progressPercent);
         }
     }
-    // Rendu de la frame
-    ImGui::Render();
-    ImGui::UpdatePlatformWindows();
-    ImGui::RenderPlatformWindowsDefault();
 
+    // ✅ Fin de la frame
+    ImGui::Render();
+    // ImGui::UpdatePlatformWindows();
+    // ImGui::RenderPlatformWindowsDefault();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    // Render additional viewports (if multi-viewport enabled)
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    {
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        ImGui::UpdatePlatformWindows();             // Create/Update additional platform windows
+        ImGui::RenderPlatformWindowsDefault();      // Render them
+        glfwMakeContextCurrent(backup_current_context);  // Restore original context
+    }
 }
 
-void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
+void InterfaceEditor::EngineConfigWindow()
 {
 
     ImGui::Separator();
     ImGui::Begin("Engine config", &windowStates["EngineConfig"]);
     ImGui::BeginChild("EngineConfigBox", ImVec2(0, 120), true, ImGuiWindowFlags_None);
-    ImGui::Text("Engine name: %s", engine->GetEngineName().c_str());
-    ImGui::Text("Engine version: %s", engine->GetEngineVersion().c_str());
-    ImGui::Text("Engine dev month: %s", engine->GetDevMonth().c_str());
-    ImGui::Text("Engine company: %s", engine->GetCompanyName().c_str());
+    ImGui::Text("Engine name: %s", PulseEngineInstance->GetEngineName().c_str());
+    ImGui::Text("Engine version: %s", PulseEngineInstance->GetEngineVersion().c_str());
+    ImGui::Text("Engine dev month: %s", PulseEngineInstance->GetDevMonth().c_str());
+    ImGui::Text("Engine company: %s", PulseEngineInstance->GetCompanyName().c_str());
     ImGui::EndChild();
 
     static int selectedMapIndex = 0;
     static std::vector<std::string> mapFiles = SceneLoader::GetSceneFiles("PulseEngineEditor/Scenes");
 
-    auto saveConfig = FileManager::OpenEngineConfigFile(engine);
+    auto saveConfig = FileManager::OpenEngineConfigFile(PulseEngineInstance);
 
     static char engineNameBuffer[128] = {0};
     static bool nameInitialized = false;
@@ -331,7 +379,7 @@ void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
     ImGui::Text("Project Name:");
     if (ImGui::InputText("##ProjectName", engineNameBuffer, sizeof(engineNameBuffer))) {
         saveConfig["GameData"]["Name"] = std::string(engineNameBuffer);
-        FileManager::SaveEngineConfigFile(engine, saveConfig);
+        FileManager::SaveEngineConfigFile(PulseEngineInstance, saveConfig);
     }
 
     ImGui::Text("Launch Map:");
@@ -361,22 +409,13 @@ void InterfaceEditor::EngineConfigWindow(PulseEngineBackend *engine)
             {
                 selectedMapIndex = i;
                 saveConfig["GameData"]["FirstScene"] = mapFiles[i];
-                FileManager::SaveEngineConfigFile(engine, saveConfig);
+                FileManager::SaveEngineConfigFile(PulseEngineInstance, saveConfig);
             }
             if (isSelected)
                 ImGui::SetItemDefaultFocus();
         }
         ImGui::EndCombo();
     }
-
-    ImGui::End();
-}
-void InterfaceEditor::Viewport(PulseEngineBackend *engine)
-{
-    ImGui::Begin("Viewport");
-    OpenGLAPI* openGLAPI = dynamic_cast<OpenGLAPI*>(engine->graphicsAPI);
-    if(openGLAPI)
-        ImGui::Image((ImTextureID)(intptr_t)openGLAPI->fboTexture, ImVec2(openGLAPI->fboWidth, openGLAPI->fboHeight), ImVec2(0, 1), ImVec2(1, 0));
 
     ImGui::End();
 }
@@ -532,7 +571,7 @@ void InterfaceEditor::EntityAnalyzerWindow()
     ImGui::End();
 }
 
-void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
+void InterfaceEditor::GenerateSceneDataWindow()
 {
     ImGui::Begin("Scene Manager");
 
@@ -542,7 +581,7 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
     if (ImGui::Button("Clear Scene", ImVec2(-1, 0))) // Full-width button
     {
         selectedEntity = nullptr;
-        engine->ClearScene();
+        PulseEngineInstance->ClearScene();
     }
 
     ImGui::Spacing();
@@ -553,15 +592,15 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
 
     ImGui::Text("Entities:");
 
-    for (size_t i = 0; i < engine->entities.size(); i++)
+    for (size_t i = 0; i < PulseEngineInstance->entities.size(); i++)
     {
-        if(!engine->entities[i]) continue;
-        std::string entityLabel = "Entity: " + engine->entities[i]->GetName() + "_"  + std::to_string(i) +  "##" + std::to_string(i);
+        if(!PulseEngineInstance->entities[i]) continue;
+        std::string entityLabel = "Entity: " + PulseEngineInstance->entities[i]->GetName() + "_"  + std::to_string(i) +  "##" + std::to_string(i);
         std::string deleteButtonLabel = "X##" + std::to_string(i);
 
         if (ImGui::Button(entityLabel.c_str()))
         {
-            selectedEntity = engine->entities[i];
+            selectedEntity = PulseEngineInstance->entities[i];
         }
 
         ImGui::SameLine();
@@ -573,11 +612,11 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
 
         if (ImGui::Button(deleteButtonLabel.c_str()))
         {
-            if (selectedEntity == engine->entities[i])
+            if (selectedEntity == PulseEngineInstance->entities[i])
             {
                 selectedEntity = nullptr;
             }
-            engine->DeleteEntity(engine->entities[i]);
+            PulseEngineInstance->DeleteEntity(PulseEngineInstance->entities[i]);
         }
 
         ImGui::PopStyleVar();
@@ -587,9 +626,9 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
     }
 
     ImGui::Text("Lights:");
-    for (size_t i = 0; i < engine->lights.size(); ++i)
+    for (size_t i = 0; i < PulseEngineInstance->lights.size(); ++i)
     {
-        auto& light = engine->lights[i];
+        auto& light = PulseEngineInstance->lights[i];
         std::string lightLabel = "Light: " + std::to_string(i + 1) + "##" + std::to_string(i);
 
         if (ImGui::Button(lightLabel.c_str()))
@@ -612,7 +651,7 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
                 selectedEntity = nullptr;
             }
             // Remove from vector after deletion
-            engine->lights.erase(engine->lights.begin() + i);
+            PulseEngineInstance->lights.erase(PulseEngineInstance->lights.begin() + i);
             --i; // Adjust index after erase
             ImGui::PopStyleVar();
             ImGui::PopStyleColor(3);
@@ -643,8 +682,8 @@ void InterfaceEditor::ShowLoadingPopup(std::function<void()> contentFunction, fl
 
     ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always);
     ImGui::SetNextWindowSize(popupSize, ImGuiCond_Always);
-
-    // You can use ImGuiWindowFlags_NoDecoration to make it look more like a popup
+    
+    
     ImGui::Begin("LoadingPopup", nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_NoMove |

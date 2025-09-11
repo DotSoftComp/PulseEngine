@@ -32,8 +32,15 @@ var NAVTREE =
     [ "📄 License", "index.html#autotoc_md10", null ],
     [ "🚫 Contributing", "index.html#autotoc_md12", null ],
     [ "🏢 Developed By", "index.html#autotoc_md14", null ],
-    [ "Todo List", "dd/da0/todo.html", null ],
     [ "Bug List", "de/da5/bug.html", null ],
+    [ "Todo List", "dd/da0/todo.html", null ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -49,7 +56,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+""
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

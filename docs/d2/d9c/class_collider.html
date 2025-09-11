@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: Collider Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -113,6 +112,7 @@ Inheritance diagram for Collider:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac75aceb905aa2ef09547c709a717b2c1" id="r_ac75aceb905aa2ef09547c709a717b2c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac75aceb905aa2ef09547c709a717b2c1">OnStart</a> () override</td></tr>
 <tr class="memitem:a22ab3ebf59ab2b6797d000daf83c78c1" id="r_a22ab3ebf59ab2b6797d000daf83c78c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22ab3ebf59ab2b6797d000daf83c78c1">OnUpdate</a> () override</td></tr>
+<tr class="memitem:aed9c5b16fdce79753c351f64f15da21e" id="r_aed9c5b16fdce79753c351f64f15da21e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed9c5b16fdce79753c351f64f15da21e">OnRender</a> () override</td></tr>
 <tr class="memitem:a3cc57e150b1bd1929b3e4e24454ae61d" id="r_a3cc57e150b1bd1929b3e4e24454ae61d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cc57e150b1bd1929b3e4e24454ae61d">GetName</a> () const override</td></tr>
 <tr class="memitem:aa0d954035f8d717582ce1c88ffb2d7d6" id="r_aa0d954035f8d717582ce1c88ffb2d7d6"><td class="memItemLeft" align="right" valign="top"><a id="aa0d954035f8d717582ce1c88ffb2d7d6" name="aa0d954035f8d717582ce1c88ffb2d7d6"></a>
 std::vector&lt; <a class="el" href="../../db/d75/struct_exposed_variable.html">ExposedVariable</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetExposedVariables</b> ()</td></tr>
@@ -130,8 +130,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RegisterRuntimeVariab
 <tr class="memitem:ad4ac34f6798842bdfea4c2d0d36e29de inherit pub_methods_class_i_script" id="r_ad4ac34f6798842bdfea4c2d0d36e29de"><td class="memItemLeft" align="right" valign="top">
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>GetVariableByName</b> (const std::string &amp;name)</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ab6b0c5266f75a4b93ac3b9f9869dba6d" id="r_ab6b0c5266f75a4b93ac3b9f9869dba6d"><td class="memItemLeft" align="right" valign="top"><a id="ab6b0c5266f75a4b93ac3b9f9869dba6d" name="ab6b0c5266f75a4b93ac3b9f9869dba6d"></a>
+std::vector&lt; <a class="el" href="../../d2/d9c/class_collider.html">Collider</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>othersCollider</b></td></tr>
 <tr class="inherit_header pub_attribs_class_i_script"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_class_i_script')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Attributes inherited from <a class="el" href="../../d7/da4/class_i_script.html">IScript</a></td></tr>
 <tr class="memitem:a5271592317553efd47bbe54c4a624bdc inherit pub_attribs_class_i_script" id="r_a5271592317553efd47bbe54c4a624bdc"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent</b></td></tr>
@@ -224,6 +226,33 @@ std::unordered_map&lt; std::string, void * &gt;&#160;</td><td class="memItemRigh
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="../../d8/d0c/class_box_collider.html#a4e15048408acecf61d039b252fe6279c">BoxCollider</a>.</p>
+
+</div>
+</div>
+<a id="aed9c5b16fdce79753c351f64f15da21e" name="aed9c5b16fdce79753c351f64f15da21e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed9c5b16fdce79753c351f64f15da21e">&#9670;&#160;</a></span>OnRender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Collider::OnRender </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d7/da4/class_i_script.html">IScript</a>.</p>
 
 </div>
 </div>

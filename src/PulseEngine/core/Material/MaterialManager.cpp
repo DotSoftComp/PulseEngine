@@ -20,7 +20,12 @@ Material* MaterialManager::loadMaterial(const std::string &filePath)
     #else
     //here, we are using the shared asset system to get the hashed and turn it into a readable json
     #endif
-    std::ifstream file(filePath);
+    std::ifstream file(std::string(ASSET_PATH) + filePath);
+    if(!file.is_open())
+    {
+        EDITOR_ERROR("Failed to open material file: " + filePath);
+        return nullptr;
+    }
     nlohmann::json jsonData;
     file >> jsonData;
 
@@ -32,7 +37,8 @@ Material* MaterialManager::loadMaterial(const std::string &filePath)
         throw std::runtime_error("Failed to open material file: " + filePath);
     }
 
-
+    material->SetPath(filePath);
+    
     if(jsonData.contains("name"))
     {
         material->SetName(jsonData["name"]);
@@ -56,15 +62,32 @@ Material* MaterialManager::loadMaterial(const std::string &filePath)
     {
         material->specular = jsonData["specular"].get<float>();
     }
-    if(jsonData.contains("roughness"))
-    {
-        material->roughness = jsonData["roughness"].get<float>();
-    }
 
     if(jsonData.contains("albedo"))
     {
         Texture* albedoTexture = new Texture(jsonData["albedo"].get<std::string>());
         material->SetTexture("albedo", std::shared_ptr<Texture>(albedoTexture));
+    }
+    if(jsonData.contains("normal"))
+    {
+        
+        Texture* albedoTexture = new Texture(jsonData["normal"].get<std::string>());
+        material->SetTexture("normal", std::shared_ptr<Texture>(albedoTexture));
+    }
+    if(jsonData.contains("height"))
+    {
+        
+        Texture* albedoTexture = new Texture(jsonData["height"].get<std::string>());
+        material->SetTexture("height", std::shared_ptr<Texture>(albedoTexture));
+    }
+    if(jsonData.contains("roughness"))
+    {        
+        Texture* albedoTexture = new Texture(jsonData["roughness"].get<std::string>());
+        material->SetTexture("roughness", std::shared_ptr<Texture>(albedoTexture));
+    }
+    if(jsonData.contains("guid"))
+    {
+        material->guid = jsonData["guid"];
     }
 
     materials[material->GetName()] = material;

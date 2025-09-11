@@ -21,17 +21,18 @@ class PulseEngineBackend;
 class PULSE_ENGINE_DLL_API DirectionalLight : public LightData
 {
     public:
-        glm::vec3 direction;
+        PulseEngine::Vector3 direction;
 
         unsigned int depthMapFBO;
         unsigned int depthMapTex;
 
         float nearPlane;
         float farPlane;
-        glm::vec3 target;
+        PulseEngine::Vector3 target;
 
-        DirectionalLight(float np, float fp, glm::vec3 t, PulseEngine::Vector3 p, PulseEngine::Color c, float i, float a) : LightData(p, c, i, a), nearPlane(np), farPlane(fp), target(t)
+        DirectionalLight(float np, float fp, PulseEngine::Vector3 t, PulseEngine::Vector3 p, PulseEngine::Color c, float i, float a) : LightData(p, c, i, a), nearPlane(np), farPlane(fp), target(t)
         {
+            InitShadowMap(1024);
             RecalculateLightSpaceMatrix();
         }
 

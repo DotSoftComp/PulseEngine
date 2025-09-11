@@ -1,5 +1,5 @@
 #include "SkeletalMesh.h"
-#include <glm/gtc/type_ptr.hpp>
+
 
 Skeleton::Skeleton(const aiMesh *mesh, const aiScene *scene)
 {
@@ -23,8 +23,8 @@ Skeleton::Skeleton(const aiMesh *mesh, const aiScene *scene)
 
         AddBone(boneName, aiBone->mOffsetMatrix);
     }
-    globalInverseTransform = glm::inverse(ConvertMatrix(scene->mRootNode->mTransformation));
-    finalBoneMatrices.resize(100, glm::mat4(1.0f));
+    globalInverseTransform = PulseEngine::MathUtils::Matrix::Inverse(ConvertMatrix(scene->mRootNode->mTransformation));
+    finalBoneMatrices.resize(100, PulseEngine::Mat4(1.0f));
 
 }
 
@@ -38,42 +38,42 @@ void Skeleton::AddBone(const std::string &name, const aiMatrix4x4 &offset)
     }
 }
 
-glm::mat4 Skeleton::GetBoneOffset(const std::string &name) const
+PulseEngine::Mat4 Skeleton::GetBoneOffset(const std::string &name) const
 {
     auto it = boneMapping.find(name);
     if (it != boneMapping.end()) {
         return bones[it->second].offsetMatrix;
     }
-    return glm::mat4(1.0f);
+    return PulseEngine::Mat4(1.0f);
 }
 
-void Skeleton::ApplyAnimation(float timeInSeconds, const aiAnimation* animation, const aiNode* node, const glm::mat4& parentTransform)
+void Skeleton::ApplyAnimation(float timeInSeconds, const aiAnimation* animation, const aiNode* node, const PulseEngine::Mat4& parentTransform)
 {
     std::string nodeName(node->mName.C_Str());
 
     const aiNodeAnim* nodeAnim = FindNodeAnim(animation, nodeName);
 
-    glm::mat4 nodeTransform = ConvertMatrix(node->mTransformation);
+    PulseEngine::Mat4 nodeTransform = ConvertMatrix(node->mTransformation);
 
     if (nodeAnim)
     {
-        glm::vec3 scaling = InterpolateScaling(timeInSeconds, nodeAnim);
-        glm::quat rotation = InterpolateRotation(timeInSeconds, nodeAnim);
-        glm::vec3 position = InterpolatePosition(timeInSeconds, nodeAnim);
+        PulseEngine::Vector3 scaling = InterpolateScaling(timeInSeconds, nodeAnim);
+        PulseEngine::Quaternion rotation = InterpolateRotation(timeInSeconds, nodeAnim);
+        PulseEngine::Vector3 position = InterpolatePosition(timeInSeconds, nodeAnim);
 
-        nodeTransform = glm::translate(glm::mat4(1.0f), position)
-                      * glm::mat4_cast(rotation)
-                      * glm::scale(glm::mat4(1.0f), scaling);
+        nodeTransform = PulseEngine::MathUtils::Matrix::Translate(PulseEngine::Mat4(1.0f), position)
+                      * rotation.ToMat4()
+                      * PulseEngine::MathUtils::Matrix::Scale(PulseEngine::Mat4(1.0f), scaling);
     }
 
-    glm::mat4 globalTransform = parentTransform * nodeTransform;
+    PulseEngine::Mat4 globalTransform = parentTransform * nodeTransform;
 
     if (boneMapping.find(nodeName) != boneMapping.end())
     {
         int index = boneMapping[nodeName];
 
         bones[index].finalTransform = globalInverseTransform * globalTransform * bones[index].offsetMatrix;
-        glm::mat4 offsetMatrix = glm::transpose(bones[index].offsetMatrix);
+        PulseEngine::Mat4 offsetMatrix = PulseEngine::MathUtils::Matrix::Transpose(bones[index].offsetMatrix);
         finalBoneMatrices[index] = globalTransform * offsetMatrix;
 
     }
@@ -130,24 +130,24 @@ void Skeleton::UpdateSkeleton(float deltaTime)
     float ticksPerSecond = animation->mTicksPerSecond != 0 ? animation->mTicksPerSecond : 25.0f;
 
     float timeInTicks = fmod(animationTime * ticksPerSecond, durationInTicks);
-    ApplyAnimation(timeInTicks, animation, rootNode, glm::mat4(1.0f));
+    ApplyAnimation(timeInTicks, animation, rootNode, PulseEngine::Mat4(1.0f));
 }
 
-const std::vector<glm::mat4> &Skeleton::GetFinalBoneMatrices() const
+const std::vector<PulseEngine::Mat4> &Skeleton::GetFinalBoneMatrices() const
 {
     return finalBoneMatrices;
 }
 
-glm::mat4 Skeleton::ConvertMatrix(const aiMatrix4x4 &m)
+PulseEngine::Mat4 Skeleton::ConvertMatrix(const aiMatrix4x4 &m)
 {
-    return glm::transpose(glm::make_mat4(&m.a1));
+    return PulseEngine::MathUtils::Matrix::Transpose(PulseEngine::MathUtils::Matrix::MakeMat4(&m.a1));
 }
 
-glm::vec3 Skeleton::InterpolatePosition(float time, const aiNodeAnim* channel)
+PulseEngine::Vector3 Skeleton::InterpolatePosition(float time, const aiNodeAnim* channel)
 {
     if (channel->mNumPositionKeys == 1)
     {
-        return glm::vec3(channel->mPositionKeys[0].mValue.x,
+        return PulseEngine::Vector3(channel->mPositionKeys[0].mValue.x,
                          channel->mPositionKeys[0].mValue.y,
                          channel->mPositionKeys[0].mValue.z);
     }
@@ -166,22 +166,22 @@ glm::vec3 Skeleton::InterpolatePosition(float time, const aiNodeAnim* channel)
             aiVector3D delta = end - start;
             aiVector3D result = start + factor * delta;
 
-            return glm::vec3(result.x, result.y, result.z);
+            return PulseEngine::Vector3(result.x, result.y, result.z);
         }
     }
 
     // fallback (dernier keyframe)
     const aiVector3D& last = channel->mPositionKeys[channel->mNumPositionKeys - 1].mValue;
-    return glm::vec3(last.x, last.y, last.z);
+    return PulseEngine::Vector3(last.x, last.y, last.z);
 }
 
 
-glm::quat Skeleton::InterpolateRotation(float time, const aiNodeAnim* channel)
+PulseEngine::Quaternion Skeleton::InterpolateRotation(float time, const aiNodeAnim* channel)
 {
     if (channel->mNumRotationKeys == 1)
     {
         const aiQuaternion& q = channel->mRotationKeys[0].mValue;
-        return glm::quat(q.w, q.x, q.y, q.z);
+        return PulseEngine::Quaternion(q.w, q.x, q.y, q.z);
     }
 
     for (unsigned int i = 0; i < channel->mNumRotationKeys - 1; ++i)
@@ -199,21 +199,21 @@ glm::quat Skeleton::InterpolateRotation(float time, const aiNodeAnim* channel)
             aiQuaternion::Interpolate(result, start, end, factor);
             result.Normalize();
 
-            return glm::quat(result.w, result.x, result.y, result.z);
+            return PulseEngine::Quaternion(result.w, result.x, result.y, result.z);
         }
     }
 
     // fallback
     const aiQuaternion& q = channel->mRotationKeys[channel->mNumRotationKeys - 1].mValue;
-    return glm::quat(q.w, q.x, q.y, q.z);
+    return PulseEngine::Quaternion(q.w, q.x, q.y, q.z);
 }
 
-glm::vec3 Skeleton::InterpolateScaling(float time, const aiNodeAnim* channel)
+PulseEngine::Vector3 Skeleton::InterpolateScaling(float time, const aiNodeAnim* channel)
 {
     if (channel->mNumScalingKeys == 1)
     {
         const aiVector3D& s = channel->mScalingKeys[0].mValue;
-        return glm::vec3(s.x, s.y, s.z);
+        return PulseEngine::Vector3(s.x, s.y, s.z);
     }
 
     for (unsigned int i = 0; i < channel->mNumScalingKeys - 1; ++i)
@@ -230,12 +230,12 @@ glm::vec3 Skeleton::InterpolateScaling(float time, const aiNodeAnim* channel)
             aiVector3D delta = end - start;
             aiVector3D result = start + factor * delta;
 
-            return glm::vec3(result.x, result.y, result.z);
+            return PulseEngine::Vector3(result.x, result.y, result.z);
         }
     }
 
     // fallback
     const aiVector3D& last = channel->mScalingKeys[channel->mNumScalingKeys - 1].mValue;
-    return glm::vec3(last.x, last.y, last.z);
+    return PulseEngine::Vector3(last.x, last.y, last.z);
 }
 

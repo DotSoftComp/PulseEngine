@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: Mesh Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -111,8 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5efe4da1a4c0971cfb037bd70304c303" id="r_a5efe4da1a4c0971cfb037bd70304c303"><td class="memItemLeft" align="right" valign="top"><a id="a5efe4da1a4c0971cfb037bd70304c303" name="a5efe4da1a4c0971cfb037bd70304c303"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Mesh</b> ()</td></tr>
 <tr class="memdesc:a5efe4da1a4c0971cfb037bd70304c303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. Cleans up GPU buffers. <br /></td></tr>
-<tr class="memitem:a1b7e52a13ec531bb02223e50b49e3479" id="r_a1b7e52a13ec531bb02223e50b49e3479"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b7e52a13ec531bb02223e50b49e3479">Draw</a> (GLuint shaderProgram) const</td></tr>
-<tr class="memdesc:a1b7e52a13ec531bb02223e50b49e3479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the mesh using the specified shader program.  <br /></td></tr>
+<tr class="memitem:a53561a274e7b51161f5d7de790d418f8" id="r_a53561a274e7b51161f5d7de790d418f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53561a274e7b51161f5d7de790d418f8">Draw</a> (unsigned int shaderProgram)</td></tr>
+<tr class="memdesc:a53561a274e7b51161f5d7de790d418f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the mesh using the specified shader program.  <br /></td></tr>
 <tr class="memitem:a5c0eaab0456ee2fdc363895ccaaea31b" id="r_a5c0eaab0456ee2fdc363895ccaaea31b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c0eaab0456ee2fdc363895ccaaea31b">UpdateMesh</a> (float deltaTime)</td></tr>
 <tr class="memdesc:a5c0eaab0456ee2fdc363895ccaaea31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the mesh state (for animation or other time-based effects).  <br /></td></tr>
 <tr class="memitem:adecf9ab32fac64e846ad6b7753e8996b" id="r_adecf9ab32fac64e846ad6b7753e8996b"><td class="memItemLeft" align="right" valign="top"><a id="adecf9ab32fac64e846ad6b7753e8996b" name="adecf9ab32fac64e846ad6b7753e8996b"></a>
@@ -123,6 +122,14 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> &amp;&amp;)=default</td></tr>
 <tr class="memitem:acaac4dac75328b37e03d9d5f6dd0294c" id="r_acaac4dac75328b37e03d9d5f6dd0294c"><td class="memItemLeft" align="right" valign="top"><a id="acaac4dac75328b37e03d9d5f6dd0294c" name="acaac4dac75328b37e03d9d5f6dd0294c"></a>
 <a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> &amp;&amp;)=default</td></tr>
+<tr class="memitem:aaada4258d7c94a1279247f73b2f4dd09" id="r_aaada4258d7c94a1279247f73b2f4dd09"><td class="memItemLeft" align="right" valign="top"><a id="aaada4258d7c94a1279247f73b2f4dd09" name="aaada4258d7c94a1279247f73b2f4dd09"></a>
+const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetName</b> () const</td></tr>
+<tr class="memitem:a4c58961704dc65c698a47a8a0224eb67" id="r_a4c58961704dc65c698a47a8a0224eb67"><td class="memItemLeft" align="right" valign="top"><a id="a4c58961704dc65c698a47a8a0224eb67" name="a4c58961704dc65c698a47a8a0224eb67"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetName</b> (const std::string &amp;newName)</td></tr>
+<tr class="memitem:a5b53bfa3dcc6daabda354d458e00295c" id="r_a5b53bfa3dcc6daabda354d458e00295c"><td class="memItemLeft" align="right" valign="top"><a id="a5b53bfa3dcc6daabda354d458e00295c" name="a5b53bfa3dcc6daabda354d458e00295c"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetGuid</b> () const</td></tr>
+<tr class="memitem:a62e149cf7c36f53d427b96a1a5725dec" id="r_a62e149cf7c36f53d427b96a1a5725dec"><td class="memItemLeft" align="right" valign="top"><a id="a62e149cf7c36f53d427b96a1a5725dec" name="a62e149cf7c36f53d427b96a1a5725dec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGuid</b> (std::size_t newGuid)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -139,6 +146,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a38f1f90c08e15b8001fad2646fbbfd17" id="r_a38f1f90c08e15b8001fad2646fbbfd17"><td class="memItemLeft" align="right" valign="top"><a id="a38f1f90c08e15b8001fad2646fbbfd17" name="a38f1f90c08e15b8001fad2646fbbfd17"></a>
 Assimp::Importer *&#160;</td><td class="memItemRight" valign="bottom"><b>importer</b></td></tr>
 <tr class="memdesc:a38f1f90c08e15b8001fad2646fbbfd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assimp importer used for loading mesh files. <br /></td></tr>
+<tr class="memitem:a60bceaad67285d9872cb57c25ce80b5d" id="r_a60bceaad67285d9872cb57c25ce80b5d"><td class="memItemLeft" align="right" valign="top"><a id="a60bceaad67285d9872cb57c25ce80b5d" name="a60bceaad67285d9872cb57c25ce80b5d"></a>
+<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>position</b> = <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f)</td></tr>
+<tr class="memdesc:a60bceaad67285d9872cb57c25ce80b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of the mesh in local space. <br /></td></tr>
+<tr class="memitem:a86e37511d0184cd986a95b656f65b792" id="r_a86e37511d0184cd986a95b656f65b792"><td class="memItemLeft" align="right" valign="top"><a id="a86e37511d0184cd986a95b656f65b792" name="a86e37511d0184cd986a95b656f65b792"></a>
+<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rotation</b> = <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f)</td></tr>
+<tr class="memdesc:a86e37511d0184cd986a95b656f65b792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation of the mesh in local space. <br /></td></tr>
+<tr class="memitem:a1272478ea347cc08b4bc42dfd1fa9d92" id="r_a1272478ea347cc08b4bc42dfd1fa9d92"><td class="memItemLeft" align="right" valign="top"><a id="a1272478ea347cc08b4bc42dfd1fa9d92" name="a1272478ea347cc08b4bc42dfd1fa9d92"></a>
+<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> = <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f)</td></tr>
+<tr class="memdesc:a1272478ea347cc08b4bc42dfd1fa9d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale of the mesh in local space. <br /></td></tr>
+<tr class="memitem:ace3a737ea1e544901a31b64e4f753a10" id="r_ace3a737ea1e544901a31b64e4f753a10"><td class="memItemLeft" align="right" valign="top"><a id="ace3a737ea1e544901a31b64e4f753a10" name="ace3a737ea1e544901a31b64e4f753a10"></a>
+<a class="el" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>matrix</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a 3D mesh including geometry, bones, and rendering data. This class handles OpenGL buffer setup and rendering, and can import mesh data via Assimp. </p>
@@ -243,8 +261,8 @@ Assimp::Importer *&#160;</td><td class="memItemRight" valign="bottom"><b>importe
 
 </div>
 </div>
-<a id="a1b7e52a13ec531bb02223e50b49e3479" name="a1b7e52a13ec531bb02223e50b49e3479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b7e52a13ec531bb02223e50b49e3479">&#9670;&#160;</a></span>Draw()</h2>
+<a id="a53561a274e7b51161f5d7de790d418f8" name="a53561a274e7b51161f5d7de790d418f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53561a274e7b51161f5d7de790d418f8">&#9670;&#160;</a></span>Draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,8 +270,8 @@ Assimp::Importer *&#160;</td><td class="memItemRight" valign="bottom"><b>importe
         <tr>
           <td class="memname">void Mesh::Draw </td>
           <td>(</td>
-          <td class="paramtype">GLuint</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

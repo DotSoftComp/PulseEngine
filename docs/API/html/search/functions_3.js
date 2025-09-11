@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fromeulerxyz_0',['FromEulerXYZ',['../struct_pulse_engine_1_1_mat3.html#a1368d537c101db606f9ba13f6fedae7b',1,'PulseEngine::Mat3']]]
+  ['endchild_0',['EndChild',['../class_pulse_interface_a_p_i.html#a25c2eeabe4f3606b453c37e538e986b9',1,'PulseInterfaceAPI']]],
+  ['endcombo_1',['EndCombo',['../class_pulse_interface_a_p_i.html#abcb58eb5c098f748c875bf34422c917a',1,'PulseInterfaceAPI']]]
 ];

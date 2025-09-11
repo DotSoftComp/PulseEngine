@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: GuidReader Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -96,13 +95,231 @@ $(function(){initNavTree('d5/d36/class_guid_reader.html','../../','d0/d55/class_
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a240f60beb7e5be17fd9e570183f64cfe" id="r_a240f60beb7e5be17fd9e570183f64cfe"><td class="memItemLeft" align="right" valign="top"><a id="a240f60beb7e5be17fd9e570183f64cfe" name="a240f60beb7e5be17fd9e570183f64cfe"></a>
-static <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetEntityFromGuid</b> (std::size_t Guid)</td></tr>
-<tr class="memitem:ac311652096e88ad58d2d402779fc0bd1" id="r_ac311652096e88ad58d2d402779fc0bd1"><td class="memItemLeft" align="right" valign="top"><a id="ac311652096e88ad58d2d402779fc0bd1" name="ac311652096e88ad58d2d402779fc0bd1"></a>
-static <a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMeshFromGuid</b> (std::size_t guid)</td></tr>
-<tr class="memitem:afb514442f90af56f3e5b54f75682a102" id="r_afb514442f90af56f3e5b54f75682a102"><td class="memItemLeft" align="right" valign="top"><a id="afb514442f90af56f3e5b54f75682a102" name="afb514442f90af56f3e5b54f75682a102"></a>
-static std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>InsertIntoCollection</b> (const std::string &amp;filePath)</td></tr>
+<tr class="memitem:a240f60beb7e5be17fd9e570183f64cfe" id="r_a240f60beb7e5be17fd9e570183f64cfe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a240f60beb7e5be17fd9e570183f64cfe">GetEntityFromGuid</a> (std::size_t Guid)</td></tr>
+<tr class="memdesc:a240f60beb7e5be17fd9e570183f64cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">If you already have the GUID of the entity wanted to be loaded.  <br /></td></tr>
+<tr class="memitem:ac311652096e88ad58d2d402779fc0bd1" id="r_ac311652096e88ad58d2d402779fc0bd1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac311652096e88ad58d2d402779fc0bd1">GetMeshFromGuid</a> (std::size_t guid)</td></tr>
+<tr class="memdesc:ac311652096e88ad58d2d402779fc0bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">If you already have the GUID of the mesh wanted to be loaded.  <br /></td></tr>
+<tr class="memitem:ac4135d40ef7e1eaf6de93111a53c7bcf" id="r_ac4135d40ef7e1eaf6de93111a53c7bcf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4135d40ef7e1eaf6de93111a53c7bcf">GetEntityFromJson</a> (nlohmann::json_abi_v3_12_0::json &amp;entityData, <a class="el" href="../../d2/d96/class_entity.html">Entity</a> *entity)</td></tr>
+<tr class="memdesc:ac4135d40ef7e1eaf6de93111a53c7bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">If you have the path to the entity, use this one. It's way faster than using the GUID since it didn't need to find it in the engine.  <br /></td></tr>
+<tr class="memitem:a331cac020d26164b4493c5f0d11a249d" id="r_a331cac020d26164b4493c5f0d11a249d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dc/dee/class_material.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a331cac020d26164b4493c5f0d11a249d">GetMaterialFromJson</a> (nlohmann::json_abi_v3_12_0::json &amp;materialData)</td></tr>
+<tr class="memdesc:a331cac020d26164b4493c5f0d11a249d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the content of a material via the actual json (.material) from the engine material saved file.  <br /></td></tr>
+<tr class="memitem:afb514442f90af56f3e5b54f75682a102" id="r_afb514442f90af56f3e5b54f75682a102"><td class="memItemLeft" align="right" valign="top">static std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb514442f90af56f3e5b54f75682a102">InsertIntoCollection</a> (const std::string &amp;filePath)</td></tr>
+<tr class="memdesc:afb514442f90af56f3e5b54f75682a102"><td class="mdescLeft">&#160;</td><td class="mdescRight">If you've got data to add to the collection, to have a new GUID, use this function. It just need a filepath. It can be used for anything that is not related to engine files (like .material, .mesh, etc.)  <br /></td></tr>
+<tr class="memitem:ac9a4638973355bc0f58ba295d669734c" id="r_ac9a4638973355bc0f58ba295d669734c"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9a4638973355bc0f58ba295d669734c">GetAllAvailableFiles</a> (const std::string &amp;guidFile=&quot;.pEntity&quot;)</td></tr>
+<tr class="memdesc:ac9a4638973355bc0f58ba295d669734c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the files from a guid collection.  <br /></td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ac9a4638973355bc0f58ba295d669734c" name="ac9a4638973355bc0f58ba295d669734c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9a4638973355bc0f58ba295d669734c">&#9670;&#160;</a></span>GetAllAvailableFiles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; GuidReader::GetAllAvailableFiles </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>guidFile</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;.pEntity&quot;</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the files from a guid collection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">guidFile</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::pair&lt;std::string, std::string&gt;&gt; you've got all the path available inside a collection. </dd></dl>
+
+</div>
+</div>
+<a id="a240f60beb7e5be17fd9e570183f64cfe" name="a240f60beb7e5be17fd9e570183f64cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a240f60beb7e5be17fd9e570183f64cfe">&#9670;&#160;</a></span>GetEntityFromGuid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/d96/class_entity.html">Entity</a> * GuidReader::GetEntityFromGuid </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>Guid</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If you already have the GUID of the entity wanted to be loaded. </p>
+<dl class="section note"><dt>Note</dt><dd>The GUID is the one generated from the engine and saved inside the collection.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Guid</td><td>actual GUID (unique identifier) of the entity saved in the engine </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Entity* a new entity from your wanted one. </dd></dl>
+
+</div>
+</div>
+<a id="ac4135d40ef7e1eaf6de93111a53c7bcf" name="ac4135d40ef7e1eaf6de93111a53c7bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4135d40ef7e1eaf6de93111a53c7bcf">&#9670;&#160;</a></span>GetEntityFromJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/d96/class_entity.html">Entity</a> * GuidReader::GetEntityFromJson </td>
+          <td>(</td>
+          <td class="paramtype">nlohmann::json_abi_v3_12_0::json &amp;</td>          <td class="paramname"><span class="paramname"><em>entityData</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d2/d96/class_entity.html">Entity</a> *</td>          <td class="paramname"><span class="paramname"><em>entity</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If you have the path to the entity, use this one. It's way faster than using the GUID since it didn't need to find it in the engine. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entityData</td><td>the actual json data of the entity. </td></tr>
+    <tr><td class="paramname">entity</td><td>the entity to fill with the data from the json. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Entity* its the same as the one pass to the function. </dd></dl>
+
+</div>
+</div>
+<a id="a331cac020d26164b4493c5f0d11a249d" name="a331cac020d26164b4493c5f0d11a249d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331cac020d26164b4493c5f0d11a249d">&#9670;&#160;</a></span>GetMaterialFromJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/dee/class_material.html">Material</a> * GuidReader::GetMaterialFromJson </td>
+          <td>(</td>
+          <td class="paramtype">nlohmann::json_abi_v3_12_0::json &amp;</td>          <td class="paramname"><span class="paramname"><em>materialData</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the content of a material via the actual json (.material) from the engine material saved file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">materialData</td><td>the actual json </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Material* a new material from the json data. </dd></dl>
+
+</div>
+</div>
+<a id="ac311652096e88ad58d2d402779fc0bd1" name="ac311652096e88ad58d2d402779fc0bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac311652096e88ad58d2d402779fc0bd1">&#9670;&#160;</a></span>GetMeshFromGuid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> * GuidReader::GetMeshFromGuid </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>guid</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If you already have the GUID of the mesh wanted to be loaded. </p>
+<dl class="section note"><dt>Note</dt><dd>The GUID is the one generated from the engine and saved inside the collection.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Guid</td><td>actual GUID (unique identifier) of the mesh saved in the engine </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Mesh* a new mesh from your wanted one. </dd></dl>
+
+</div>
+</div>
+<a id="afb514442f90af56f3e5b54f75682a102" name="afb514442f90af56f3e5b54f75682a102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb514442f90af56f3e5b54f75682a102">&#9670;&#160;</a></span>InsertIntoCollection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t GuidReader::InsertIntoCollection </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filePath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If you've got data to add to the collection, to have a new GUID, use this function. It just need a filepath. It can be used for anything that is not related to engine files (like .material, .mesh, etc.) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::size_t </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

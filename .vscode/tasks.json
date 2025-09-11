@@ -39,7 +39,8 @@
           "-lglfw3",
           "-lgdi32",
           "-lopengl32",
-          "-DWINDOW_PULSE_EXPORT",
+          "-DPULSE_GRAPHIC_OPENGL",
+          "-DPULSE_WINDOWS",
           "-o", "Build/Game.exe"
         ],
         "problemMatcher": ["$gcc"]

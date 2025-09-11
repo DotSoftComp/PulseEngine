@@ -1,0 +1,25 @@
+{
+    "Guid": "4926892485683412903",
+    "Meshes": [
+        {
+            "Guid": "14047066280545125587",
+            "MeshPath": "Models/player.obj.pmesh",
+            "Name": "Models/player.obj.pmesh",
+            "Position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    ]
+}

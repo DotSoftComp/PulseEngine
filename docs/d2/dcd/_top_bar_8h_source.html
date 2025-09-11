@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: PulseEngineEditor/InterfaceEditor/TopBar.h Source File</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -112,20 +111,22 @@ $(function(){initNavTree('d2/dcd/_top_bar_8h_source.html','../../',''); });
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    TopBar() {}</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    ~TopBar() {}</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../da/dff/class_top_bar.html#af77ebb9bddfeb24d97e08da972c9967c">UpdateBar</a>(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a>* engine, InterfaceEditor* editor);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> BuildGameToWindow(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine, InterfaceEditor *editor);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> CompileUserScripts(InterfaceEditor *editor, std::string output = <span class="stringliteral">&quot;Build/CustomScripts.dll&quot;</span>);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> GenerateExecutableForWindow(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> CopyDllForWindow();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> CopyAssetForWindow();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> GenerateWindowsDirectory();</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../da/dff/class_top_bar.html#af77ebb9bddfeb24d97e08da972c9967c">UpdateBar</a>(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine, InterfaceEditor *editor);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> ImportMesh(InterfaceEditor *editor, std::string &amp;name, std::string &amp;guidPath, <span class="keywordtype">char</span> filePath[260], std::string &amp;meshPath);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> DeletePrefix(std::string &amp;fileStr, std::string &amp;prefix, std::string &amp;guidPath);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> BuildGameToWindow(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine, InterfaceEditor *editor);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> CompileUserScripts(InterfaceEditor *editor, std::string output = <span class="stringliteral">&quot;Build/CustomScripts.dll&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> GenerateExecutableForWindow(<a class="code hl_class" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> CopyDllForWindow();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> CopyAssetForWindow();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> GenerateWindowsDirectory();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_pulse_engine_backend_html"><div class="ttname"><a href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a></div><div class="ttdoc">PulseEngineBackend is the main class of the Pulse Engine.</div><div class="ttdef"><b>Definition</b> PulseEngineBackend.h:40</div></div>
-<div class="ttc" id="aclass_top_bar_html_af77ebb9bddfeb24d97e08da972c9967c"><div class="ttname"><a href="../../da/dff/class_top_bar.html#af77ebb9bddfeb24d97e08da972c9967c">TopBar::UpdateBar</a></div><div class="ttdeci">void UpdateBar(PulseEngineBackend *engine, InterfaceEditor *editor)</div><div class="ttdoc">Update the top bar of the editor interface. It&#39;s actually the render of the bar in ImGui.</div><div class="ttdef"><b>Definition</b> TopBar.cpp:43</div></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_pulse_engine_backend_html"><div class="ttname"><a href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a></div><div class="ttdoc">PulseEngineBackend is the main class of the Pulse Engine.</div><div class="ttdef"><b>Definition</b> PulseEngineBackend.h:44</div></div>
+<div class="ttc" id="aclass_top_bar_html_af77ebb9bddfeb24d97e08da972c9967c"><div class="ttname"><a href="../../da/dff/class_top_bar.html#af77ebb9bddfeb24d97e08da972c9967c">TopBar::UpdateBar</a></div><div class="ttdeci">void UpdateBar(PulseEngineBackend *engine, InterfaceEditor *editor)</div><div class="ttdoc">Update the top bar of the editor interface. It&#39;s actually the render of the bar in ImGui.</div><div class="ttdef"><b>Definition</b> TopBar.cpp:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

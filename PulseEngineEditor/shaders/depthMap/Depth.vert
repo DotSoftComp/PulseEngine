@@ -3,7 +3,7 @@ layout(location = 0) in vec3 aPos;
 
 uniform mat4 shadowMatrix;
 uniform mat4 model;
-uniform bool hasSkeleton;
+// uniform bool hasSkeleton;
 
 void main()
 {

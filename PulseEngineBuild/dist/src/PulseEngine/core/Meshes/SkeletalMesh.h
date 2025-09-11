@@ -4,13 +4,13 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include <map>
 #include <vector>
 #include <string>
+
+#include "Common/common.h"
+#include "PulseEngine/core/Math/MathUtils.h"
 
 #include "Common/dllExport.h"
 
@@ -19,8 +19,8 @@
  */
 struct BoneInfo 
 {
-    glm::mat4 offsetMatrix;     ///< Matrix to transform from model space to bone space.
-    glm::mat4 finalTransform;   ///< Final transform to apply during skinning.
+    PulseEngine::Mat4 offsetMatrix;     ///< Matrix to transform from model space to bone space.
+    PulseEngine::Mat4 finalTransform;   ///< Final transform to apply during skinning.
 };
 
 /**
@@ -30,7 +30,7 @@ struct Bone
 {
     std::string name;           ///< Name of the bone.
     int id;                     ///< Unique ID used in the skeleton.
-    glm::mat4 offsetMatrix;     ///< Offset matrix from bind pose.
+    PulseEngine::Mat4 offsetMatrix;     ///< Offset matrix from bind pose.
 };
 
 /**
@@ -39,9 +39,9 @@ struct Bone
 struct Keyframe 
 {
     float time;                 ///< Time in seconds.
-    glm::vec3 position;         ///< Position of the bone.
-    glm::quat rotation;         ///< Rotation of the bone.
-    glm::vec3 scale;            ///< Scaling of the bone.
+    PulseEngine::Vector3 position;         ///< Position of the bone.
+    PulseEngine::Quaternion rotation;         ///< Rotation of the bone.
+    PulseEngine::Vector3 scale;            ///< Scaling of the bone.
 };
 
 /**
@@ -70,11 +70,11 @@ public:
 
     std::map<std::string, int> boneMapping;        ///< Map from bone name to index.
     std::vector<BoneInfo> bones;                   ///< All bone data.
-    glm::mat4 globalInverseTransform;              ///< Inverse of the root node transform.
+    PulseEngine::Mat4 globalInverseTransform;              ///< Inverse of the root node transform.
     const aiAnimation* animation = nullptr;        ///< Pointer to the animation data.
     aiNode* rootNode;                              ///< Root node of the Assimp scene hierarchy.
     int boneCount = 0;                             ///< Total number of bones.
-    std::vector<glm::mat4> finalBoneMatrices;      ///< Final transforms to be passed to the vertex shader.
+    std::vector<PulseEngine::Mat4> finalBoneMatrices;      ///< Final transforms to be passed to the vertex shader.
 
     /**
      * @brief Adds a new bone to the skeleton.
@@ -88,7 +88,7 @@ public:
      * @param name Name of the bone.
      * @return The offset matrix of the bone.
      */
-    glm::mat4 GetBoneOffset(const std::string& name) const;
+    PulseEngine::Mat4 GetBoneOffset(const std::string& name) const;
 
     /**
      * @brief Applies the animation to the skeleton recursively.
@@ -97,7 +97,7 @@ public:
      * @param rootNode Root node of the Assimp hierarchy.
      * @param parentTransform Parent transform matrix.
      */
-    void ApplyAnimation(float timeInSeconds, const aiAnimation* animation, const aiNode* rootNode, const glm::mat4& parentTransform);
+    void ApplyAnimation(float timeInSeconds, const aiAnimation* animation, const aiNode* rootNode, const PulseEngine::Mat4& parentTransform);
 
     /**
      * @brief Finds the animation channel for a given node.
@@ -117,7 +117,7 @@ public:
      * @brief Returns the final bone matrices after animation.
      * @return Vector of final bone transformation matrices.
      */
-    const std::vector<glm::mat4>& GetFinalBoneMatrices() const;
+    const std::vector<PulseEngine::Mat4>& GetFinalBoneMatrices() const;
 
 private:
     /**
@@ -125,7 +125,7 @@ private:
      * @param m Assimp matrix.
      * @return Converted glm matrix.
      */
-    glm::mat4 ConvertMatrix(const aiMatrix4x4& m);
+    PulseEngine::Mat4 ConvertMatrix(const aiMatrix4x4& m);
 
     /**
      * @brief Interpolates the position for a given animation time.
@@ -133,7 +133,7 @@ private:
      * @param channel Pointer to the animation channel.
      * @return Interpolated position.
      */
-    glm::vec3 InterpolatePosition(float time, const aiNodeAnim* channel);
+    PulseEngine::Vector3 InterpolatePosition(float time, const aiNodeAnim* channel);
 
     /**
      * @brief Interpolates the rotation for a given animation time.
@@ -141,7 +141,7 @@ private:
      * @param channel Pointer to the animation channel.
      * @return Interpolated quaternion rotation.
      */
-    glm::quat InterpolateRotation(float time, const aiNodeAnim* channel);
+    PulseEngine::Quaternion InterpolateRotation(float time, const aiNodeAnim* channel);
 
     /**
      * @brief Interpolates the scale for a given animation time.
@@ -149,7 +149,7 @@ private:
      * @param channel Pointer to the animation channel.
      * @return Interpolated scale vector.
      */
-    glm::vec3 InterpolateScaling(float time, const aiNodeAnim* channel);
+    PulseEngine::Vector3 InterpolateScaling(float time, const aiNodeAnim* channel);
 
     float animationTime = 0.0f; ///< Internal time counter for animation playback.
 };

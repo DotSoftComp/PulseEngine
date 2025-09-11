@@ -25,6 +25,7 @@ public:
     // --- Propriétés de base
     float roughness = 10.0f;
     float specular = 10.0f;
+    std::string guid;
     PulseEngine::Vector3 color = PulseEngine::Vector3(1.0f, 1.0f, 1.0f);
 
     // --- Textures ---
@@ -50,9 +51,13 @@ public:
         return textures;
     }
 
+    std::string GetPath() const {return path;}
+    void SetPath(const std::string& path) { this->path = path; }
+
 private:
     Shader* shader;
     std::string name;
+    std::string path;
 
     std::unordered_map<std::string, std::shared_ptr<Texture>> textures; // "albedo", "normal", etc.
 };

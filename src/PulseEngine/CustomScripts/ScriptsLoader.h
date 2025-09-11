@@ -25,6 +25,7 @@ class PULSE_ENGINE_DLL_API ScriptsLoader
 {
     public:
         static HMODULE customScriptDll;
+        static HMODULE pulseCustomScriptDll;
         static std::map<std::string, CreateScriptFunc> scriptMap;
         /**
          * @brief Get the Script From Call Name object
@@ -49,7 +50,7 @@ class PULSE_ENGINE_DLL_API ScriptsLoader
          * 
          */
         static void FreeDll();
-        static void LoadExportedFunctions();
+        static void LoadExportedFunctions(HMODULE dll);
 
 };
 

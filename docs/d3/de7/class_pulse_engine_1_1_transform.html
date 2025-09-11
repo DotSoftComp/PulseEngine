@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: PulseEngine::Transform Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -93,6 +92,11 @@ $(function(){initNavTree('d3/de7/class_pulse_engine_1_1_transform.html','../../'
   <div class="headertitle"><div class="title">PulseEngine::Transform Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="../../d3/de7/class_pulse_engine_1_1_transform.html" title="The Transform class represents a 3D transformation consisting of position, rotation,...">Transform</a> class represents a 3D transformation consisting of position, rotation, and scale. It provides all the method relative to the transformation of an entity in the 3D space to easy manipulation.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../db/d56/_transform_8h_source.html">Transform.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -100,12 +104,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Transform</b> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;pos=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;rot=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;scl=<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f))</td></tr>
 <tr class="memitem:ad1e9498f74ed6a7f1bd56980964900b9" id="r_ad1e9498f74ed6a7f1bd56980964900b9"><td class="memItemLeft" align="right" valign="top"><a id="ad1e9498f74ed6a7f1bd56980964900b9" name="ad1e9498f74ed6a7f1bd56980964900b9"></a>
 <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Apply</b> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;point) const</td></tr>
-<tr class="memitem:a8446118248f57448e30cfcbb0893c577" id="r_a8446118248f57448e30cfcbb0893c577"><td class="memItemLeft" align="right" valign="top"><a id="a8446118248f57448e30cfcbb0893c577" name="a8446118248f57448e30cfcbb0893c577"></a>
-<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetForward</b> () const</td></tr>
-<tr class="memitem:a90302e5ff3f77e1f64bb1ed964fcd68c" id="r_a90302e5ff3f77e1f64bb1ed964fcd68c"><td class="memItemLeft" align="right" valign="top"><a id="a90302e5ff3f77e1f64bb1ed964fcd68c" name="a90302e5ff3f77e1f64bb1ed964fcd68c"></a>
-<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetUp</b> () const</td></tr>
-<tr class="memitem:a434ae749eb450986a37dd8ad81412152" id="r_a434ae749eb450986a37dd8ad81412152"><td class="memItemLeft" align="right" valign="top"><a id="a434ae749eb450986a37dd8ad81412152" name="a434ae749eb450986a37dd8ad81412152"></a>
-<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetRight</b> () const</td></tr>
+<tr class="memitem:a8446118248f57448e30cfcbb0893c577" id="r_a8446118248f57448e30cfcbb0893c577"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8446118248f57448e30cfcbb0893c577">GetForward</a> () const</td></tr>
+<tr class="memdesc:a8446118248f57448e30cfcbb0893c577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Forward vector of the transform.  <br /></td></tr>
+<tr class="memitem:a90302e5ff3f77e1f64bb1ed964fcd68c" id="r_a90302e5ff3f77e1f64bb1ed964fcd68c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90302e5ff3f77e1f64bb1ed964fcd68c">GetUp</a> () const</td></tr>
+<tr class="memdesc:a90302e5ff3f77e1f64bb1ed964fcd68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Up vector of the transform.  <br /></td></tr>
+<tr class="memitem:a434ae749eb450986a37dd8ad81412152" id="r_a434ae749eb450986a37dd8ad81412152"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a434ae749eb450986a37dd8ad81412152">GetRight</a> () const</td></tr>
+<tr class="memdesc:a434ae749eb450986a37dd8ad81412152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Right vector of the transform.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -116,6 +120,69 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a63090c04468069708c8e77c323e3fde4" id="r_a63090c04468069708c8e77c323e3fde4"><td class="memItemLeft" align="right" valign="top"><a id="a63090c04468069708c8e77c323e3fde4" name="a63090c04468069708c8e77c323e3fde4"></a>
 <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="../../d3/de7/class_pulse_engine_1_1_transform.html" title="The Transform class represents a 3D transformation consisting of position, rotation,...">Transform</a> class represents a 3D transformation consisting of position, rotation, and scale. It provides all the method relative to the transformation of an entity in the 3D space to easy manipulation. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a8446118248f57448e30cfcbb0893c577" name="a8446118248f57448e30cfcbb0893c577"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8446118248f57448e30cfcbb0893c577">&#9670;&#160;</a></span>GetForward()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::Transform::GetForward </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Forward vector of the transform. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">PulseEngine::Vector3</a> </dd></dl>
+
+</div>
+</div>
+<a id="a434ae749eb450986a37dd8ad81412152" name="a434ae749eb450986a37dd8ad81412152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434ae749eb450986a37dd8ad81412152">&#9670;&#160;</a></span>GetRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::Transform::GetRight </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Right vector of the transform. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">PulseEngine::Vector3</a> </dd></dl>
+
+</div>
+</div>
+<a id="a90302e5ff3f77e1f64bb1ed964fcd68c" name="a90302e5ff3f77e1f64bb1ed964fcd68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90302e5ff3f77e1f64bb1ed964fcd68c">&#9670;&#160;</a></span>GetUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::Transform::GetUp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Up vector of the transform. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html" title="Vector3 class represents a 3D vector.">PulseEngine::Vector3</a> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

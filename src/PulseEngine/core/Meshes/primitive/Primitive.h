@@ -10,6 +10,7 @@ class PULSE_ENGINE_DLL_API Primitive
 {
     public:
     static Mesh* Cube();
+    static Mesh* Sphere();
 };
 
 #endif

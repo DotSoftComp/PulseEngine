@@ -8,6 +8,9 @@ Utility functions for mathematical operations.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a0f831137f783fc249c3f5e6c5902e82d}\label{namespace_pulse_engine_1_1_math_utils_a0f831137f783fc249c3f5e6c5902e82d} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} {\bfseries Multiply\+Point} (const \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} \&mat, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&vec)
+\item 
 float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{To\+Radians}} (float degrees)
 \begin{DoxyCompactList}\small\item\em Convert degrees to radians. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}{To\+Degrees}} (float radians)
@@ -17,7 +20,10 @@ float \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e
 \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}{Look\+At}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&position, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&target, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&up=\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.\+0f, 1.\+0f, 0.\+0f))
 \begin{DoxyCompactList}\small\item\em Make an object rotate, to look at a certain position. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}{Rotate\+Around}} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&target, float yaw, float pitch, float radius)
-\begin{DoxyCompactList}\small\item\em Give an easy to use function to rotate an point around a target point in a 3D space with no complexity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Give an easy to use function to rotate an point around a target point in a 3D space with no complexity. \end{DoxyCompactList}\item 
+\Hypertarget{namespace_pulse_engine_1_1_math_utils_a4022950e79dc540cafa857fc5d280c25}\label{namespace_pulse_engine_1_1_math_utils_a4022950e79dc540cafa857fc5d280c25} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} {\bfseries Perspective\+Mat} (float fov\+Radians, float aspect, float near\+Plane, float far\+Plane)
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,7 +42,7 @@ Utility functions for mathematical operations.
 \index{CreateRotationMatrix@{CreateRotationMatrix}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
 \doxysubsubsection{\texorpdfstring{CreateRotationMatrix()}{CreateRotationMatrix()}}
 {\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac} 
-\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Math\+Utils\+::\+Create\+Rotation\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{euler}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}} Pulse\+Engine\+::\+Math\+Utils\+::\+Create\+Rotation\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{euler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -54,7 +60,7 @@ Create a rotation matrix from Euler angles (in radians).
 \index{LookAt@{LookAt}!PulseEngine::MathUtils@{PulseEngine::MathUtils}}
 \doxysubsubsection{\texorpdfstring{LookAt()}{LookAt()}}
 {\footnotesize\ttfamily \label{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b} 
-\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Math\+Utils\+::\+Look\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{position}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{target}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{up}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,~1.0f,~0.0f)}}\end{DoxyParamCaption})}
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} Pulse\+Engine\+::\+Math\+Utils\+::\+Look\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{position}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{target}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}} \&}]{up}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,~1.0f,~0.0f)}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

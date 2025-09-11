@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: src/PulseEngine/API/EngineApi.h Source File</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -106,20 +105,24 @@ $(function(){initNavTree('df/d0b/_engine_api_8h_source.html','../../',''); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span>PulseEngine</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">   23</a></span>    <span class="keyword">class </span>PULSE_ENGINE_DLL_API <a class="code hl_class" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">GameEntity</a></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a>* Instantiate(<span class="keyword">const</span> std::string&amp; path, <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> position = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> rotation = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> scale = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f));</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">   27</a></span>    <span class="keyword">class </span>PULSE_ENGINE_DLL_API <a class="code hl_class" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">GameEntity</a></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a>* <a class="code hl_function" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html#a65c44058f7b7cdde6cfbda2ceee99a71">Instantiate</a>(<span class="keyword">const</span> std::string&amp; path, <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> position = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> rotation = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(0.0f, 0.0f, 0.0f), <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> scale = <a class="code hl_struct" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>(1.0f, 1.0f, 1.0f));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">static</span> std::vector&lt;Entity*&gt; <a class="code hl_function" href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html#a65c3a2aa12dc1df0c948ee7f07578f41">GetAllEntitiesByTag</a>(<span class="keyword">const</span> std::string&amp; tag);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    };</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="../../d2/d96/class_entity.html">Entity</a></div><div class="ttdoc">Represents a scene object with transformation, rendering, and behavior.</div><div class="ttdef"><b>Definition</b> Entity.h:42</div></div>
-<div class="ttc" id="aclass_pulse_engine_1_1_game_entity_html"><div class="ttname"><a href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">PulseEngine::GameEntity</a></div><div class="ttdef"><b>Definition</b> EngineApi.h:24</div></div>
-<div class="ttc" id="astruct_pulse_engine_1_1_vector3_html"><div class="ttname"><a href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></div><div class="ttdef"><b>Definition</b> Vector.h:24</div></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="../../d2/d96/class_entity.html">Entity</a></div><div class="ttdoc">Represents a scene object with transformation, rendering, and behavior.</div><div class="ttdef"><b>Definition</b> Entity.h:41</div></div>
+<div class="ttc" id="aclass_pulse_engine_1_1_game_entity_html"><div class="ttname"><a href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html">PulseEngine::GameEntity</a></div><div class="ttdoc">The GameEntity class provides static functions relative to the management of entities in the game.</div><div class="ttdef"><b>Definition</b> EngineApi.h:28</div></div>
+<div class="ttc" id="aclass_pulse_engine_1_1_game_entity_html_a65c3a2aa12dc1df0c948ee7f07578f41"><div class="ttname"><a href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html#a65c3a2aa12dc1df0c948ee7f07578f41">PulseEngine::GameEntity::GetAllEntitiesByTag</a></div><div class="ttdeci">static std::vector&lt; Entity * &gt; GetAllEntitiesByTag(const std::string &amp;tag)</div><div class="ttdoc">Get the All Entities By Tag object. All entities can have multiple tags on them.</div><div class="ttdef"><b>Definition</b> GameEntity.cpp:48</div></div>
+<div class="ttc" id="aclass_pulse_engine_1_1_game_entity_html_a65c44058f7b7cdde6cfbda2ceee99a71"><div class="ttname"><a href="../../dc/d6b/class_pulse_engine_1_1_game_entity.html#a65c44058f7b7cdde6cfbda2ceee99a71">PulseEngine::GameEntity::Instantiate</a></div><div class="ttdeci">static Entity * Instantiate(const std::string &amp;path, PulseEngine::Vector3 position=PulseEngine::Vector3(0.0f, 0.0f, 0.0f), PulseEngine::Vector3 rotation=PulseEngine::Vector3(0.0f, 0.0f, 0.0f), PulseEngine::Vector3 scale=PulseEngine::Vector3(1.0f, 1.0f, 1.0f))</div><div class="ttdoc">Instantiate an entity from a path to a file, position, rotation and scale.</div><div class="ttdef"><b>Definition</b> GameEntity.cpp:9</div></div>
+<div class="ttc" id="astruct_pulse_engine_1_1_vector3_html"><div class="ttname"><a href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></div><div class="ttdoc">Vector3 class represents a 3D vector.</div><div class="ttdef"><b>Definition</b> Vector.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

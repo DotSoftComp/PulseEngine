@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "PulseEngine/core/Meshes/SkeletalMesh.h"
+#include "PulseEngine/core/Graphics/IGraphicsApi.h"
 
 Mesh::Mesh(const std::vector<float>& vertices)
 {
@@ -17,8 +18,7 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    PulseEngineGraphicsAPI->DeleteMesh(&VAO, &VBO);
     if (skeleton)
     {
         delete skeleton;
@@ -33,47 +33,12 @@ Mesh::~Mesh()
 
 void Mesh::SetupMesh()
 {
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-
-    glBindVertexArray(VAO);
-
-    // Envoie des données des sommets
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
-
-    // Envoie des indices
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
-    // Attribut 0 : Position (vec3)
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Position));
-
-    // Attribut 1 : Normal (vec3)
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
-
-    // Attribut 2 : BoneIDs (ivec4) → glVertexAttribIPointer !
-    glEnableVertexAttribArray(2);
-    glVertexAttribIPointer(2, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, BoneIDs));
-
-    // Attribut 3 : Weights (vec4)
-    glEnableVertexAttribArray(3);
-    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Weights));
-
-    // Attribut 4 : TexCoords (vec2)
-    glEnableVertexAttribArray(4);
-    glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
-
-    glBindVertexArray(0);
-
+    PulseEngineGraphicsAPI->SetupMesh(&VAO, &VBO, &EBO, vertices, indices);
 }
 
-void Mesh::Draw(GLuint shaderProgram) const
+void Mesh::Draw(unsigned int shaderProgram)
 {
-    glUseProgram(shaderProgram);
+    // PulseEngineGraphicsAPI->UseShader(shaderProgram);
 
     // // 1. Envoie à l'uniform 'hasSkeleton'
     // std::cout << "getting hasSkeleton uniform location" << std::endl;
@@ -100,19 +65,7 @@ void Mesh::Draw(GLuint shaderProgram) const
 
     // 3. Bind VAO et dessiner
     
-    glBindVertexArray(VAO);
-
-
-    if (!indices.empty())
-    {
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, 0);
-    }
-    else
-    {
-        glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
-    }
-
-    glBindVertexArray(0);
+    PulseEngineGraphicsAPI->RenderMesh(&VAO, &VBO, vertices, indices);
 }
 
 Mesh* Mesh::LoadFromAssimp(const aiMesh* mesh, const aiScene* scene)
@@ -145,7 +98,7 @@ Mesh* Mesh::LoadFromAssimp(const aiMesh* mesh, const aiScene* scene)
             Vertex vertex = {};
 
             // Position
-            vertex.Position= glm::vec3(
+            vertex.Position= PulseEngine::Vector3(
                 mesh->mVertices[i].x,
                 mesh->mVertices[i].y,
                 mesh->mVertices[i].z
@@ -154,7 +107,7 @@ Mesh* Mesh::LoadFromAssimp(const aiMesh* mesh, const aiScene* scene)
             // Normales
             if (mesh->HasNormals())
             {
-                vertex.Normal = glm::vec3(
+                vertex.Normal = PulseEngine::Vector3(
                     mesh->mNormals[i].x,
                     mesh->mNormals[i].y,
                     mesh->mNormals[i].z
@@ -162,25 +115,25 @@ Mesh* Mesh::LoadFromAssimp(const aiMesh* mesh, const aiScene* scene)
             }
             else
             {
-                vertex.Normal = glm::vec3(0.0f);
+                vertex.Normal = PulseEngine::Vector3(0.0f);
             }
 
             // UVs
             if (mesh->HasTextureCoords(0))
             {
-                vertex.TexCoords = glm::vec2(
+                vertex.TexCoords = PulseEngine::Vector2(
                     mesh->mTextureCoords[0][i].x,
                     mesh->mTextureCoords[0][i].y
                 );
             }
             else
             {
-                vertex.TexCoords = glm::vec2(0.0f);
+                vertex.TexCoords = PulseEngine::Vector2(0.0f);
             }
 
             // Initialisation à zéro pour les bones (sera rempli plus tard si bones)
-            vertex.BoneIDs = glm::ivec4(0);
-            vertex.Weights = glm::vec4(0.0f);
+            vertex.BoneIDs = PulseEngine::iVector4(0);
+            vertex.Weights = PulseEngine::Vector4(0.0f);
 
             newMesh->vertices.push_back(vertex);
         }

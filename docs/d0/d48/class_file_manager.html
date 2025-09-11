@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: FileManager Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -99,6 +98,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac8098b13dc7248337b0feadb2577015a" id="r_ac8098b13dc7248337b0feadb2577015a"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8098b13dc7248337b0feadb2577015a">GetCollectionByExtension</a> (const std::string &amp;fileName)</td></tr>
 <tr class="memitem:adf7a98b43687ea24befeeed39742fb74" id="r_adf7a98b43687ea24befeeed39742fb74"><td class="memItemLeft" align="right" valign="top">static nlohmann::json_abi_v3_12_0::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf7a98b43687ea24befeeed39742fb74">OpenEngineConfigFile</a> (<a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine)</td></tr>
 <tr class="memitem:a14a2350ae7f21b8d90a0d9f09451885f" id="r_a14a2350ae7f21b8d90a0d9f09451885f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14a2350ae7f21b8d90a0d9f09451885f">SaveEngineConfigFile</a> (<a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *engine, const nlohmann::json_abi_v3_12_0::json &amp;engineConfig)</td></tr>
+<tr class="memitem:a5541d20de32d9e9488da61838e95b024" id="r_a5541d20de32d9e9488da61838e95b024"><td class="memItemLeft" align="right" valign="top">static FileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5541d20de32d9e9488da61838e95b024">GetFileType</a> (const std::string &amp;fileName)</td></tr>
+<tr class="memdesc:a5541d20de32d9e9488da61838e95b024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the File Type object based on the file extension in the path (or file name)  <br /></td></tr>
+<tr class="memitem:ac32fab882102ba187d4545a50885799a" id="r_ac32fab882102ba187d4545a50885799a"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::filesystem::path &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac32fab882102ba187d4545a50885799a">GetFilesInDirectoryWithExtension</a> (const std::string &amp;directory, const std::string &amp;extension)</td></tr>
+<tr class="memdesc:ac32fab882102ba187d4545a50885799a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all files in a directory with a specific extension.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a9c4f43663a0c7a02892a241fabb1cd11" id="r_a9c4f43663a0c7a02892a241fabb1cd11"><td class="memItemLeft" align="right" valign="top"><a id="a9c4f43663a0c7a02892a241fabb1cd11" name="a9c4f43663a0c7a02892a241fabb1cd11"></a>
+static std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><b>workingDirectory</b> = &quot;&quot;</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ac8098b13dc7248337b0feadb2577015a" name="ac8098b13dc7248337b0feadb2577015a"></a>
@@ -124,6 +132,79 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Returns the collection type based on the file extension. </p>
+
+</div>
+</div>
+<a id="ac32fab882102ba187d4545a50885799a" name="ac32fab882102ba187d4545a50885799a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32fab882102ba187d4545a50885799a">&#9670;&#160;</a></span>GetFilesInDirectoryWithExtension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::filesystem::path &gt; FileManager::GetFilesInDirectoryWithExtension </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>directory</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>extension</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get all files in a directory with a specific extension. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">directory</td><td>The directory to search in. </td></tr>
+    <tr><td class="paramname">extension</td><td>The file extension to filter by (e.g., ".puid"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::filesystem::path&gt; List of matching files. </dd></dl>
+
+</div>
+</div>
+<a id="a5541d20de32d9e9488da61838e95b024" name="a5541d20de32d9e9488da61838e95b024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5541d20de32d9e9488da61838e95b024">&#9670;&#160;</a></span>GetFileType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileType FileManager::GetFileType </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>fileName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the File Type object based on the file extension in the path (or file name) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileName</td><td>the path or the name WITH the extension. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>FileType of the file (TEXTURE, MESH, PULSE_ENTITY, MATERIAL, MAP, SCRIPT_CPP, SCRIPT_H, UNKNOWN) </dd></dl>
 
 </div>
 </div>

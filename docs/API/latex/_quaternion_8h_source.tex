@@ -1,0 +1,121 @@
+\doxysection{Quaternion.\+h}
+\hypertarget{_quaternion_8h_source}{}\label{_quaternion_8h_source}\index{src/PulseEngine/core/Math/Quaternion.h@{src/PulseEngine/core/Math/Quaternion.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Common/common.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }PulseEngine}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{struct\ }Quaternion}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ w,\ x,\ y,\ z;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constructors}}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ Quaternion()}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ :\ w(1.0f),\ x(0.0f),\ y(0.0f),\ z(0.0f)\ \{\}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ Quaternion(\textcolor{keywordtype}{float}\ w\_,\ \textcolor{keywordtype}{float}\ x\_,\ \textcolor{keywordtype}{float}\ y\_,\ \textcolor{keywordtype}{float}\ z\_)}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ :\ w(w\_),\ x(x\_),\ y(y\_),\ z(z\_)\ \{\}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ Quaternion(\textcolor{keywordtype}{float}\ angleRadians,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ axis)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ halfAngle\ =\ angleRadians\ *\ 0.5f;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ std::sin(halfAngle);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ w\ =\ std::cos(halfAngle);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ axis.x\ *\ s;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ axis.y\ *\ s;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ z\ =\ axis.z\ *\ s;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Length}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ Length()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::sqrt(w\ *\ w\ +\ x\ *\ x\ +\ y\ *\ y\ +\ z\ *\ z);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Normalize}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ Quaternion\ Normalized()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ len\ =\ Length();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Quaternion(w\ /\ len,\ x\ /\ len,\ y\ /\ len,\ z\ /\ len);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Conjugate}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ Quaternion\ Conjugate()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00046\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Quaternion(w,\ -\/x,\ -\/y,\ -\/z);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Inverse}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ Quaternion\ Inverse()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Conjugate().Normalized();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Multiply\ (Quaternion\ *\ Quaternion)}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ Quaternion\ operator*(\textcolor{keyword}{const}\ Quaternion\&\ q)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00058\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Quaternion(}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ *\ q.w\ -\/\ x\ *\ q.x\ -\/\ y\ *\ q.y\ -\/\ z\ *\ q.z,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ *\ q.x\ +\ x\ *\ q.w\ +\ y\ *\ q.z\ -\/\ z\ *\ q.y,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ *\ q.y\ -\/\ x\ *\ q.z\ +\ y\ *\ q.w\ +\ z\ *\ q.x,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ *\ q.z\ +\ x\ *\ q.y\ -\/\ y\ *\ q.x\ +\ z\ *\ q.w}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rotate\ a\ vector}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ Rotate(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ v)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00069\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ Quaternion\ qv(0.0f,\ v.x,\ v.y,\ v.z);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ Quaternion\ result\ =\ (*this)\ *\ qv\ *\ Inverse();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(result.x,\ result.y,\ result.z);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ To\ rotation\ matrix\ (column-\/major)}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ ToMat4()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00077\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ mat;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ xx\ =\ x\ *\ x;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yy\ =\ y\ *\ y;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ zz\ =\ z\ *\ z;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ xy\ =\ x\ *\ y;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ xz\ =\ x\ *\ z;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yz\ =\ y\ *\ z;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ wx\ =\ w\ *\ x;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ wy\ =\ w\ *\ y;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ wz\ =\ w\ *\ z;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[0][0]\ =\ 1.0f\ -\/\ 2.0f\ *\ (yy\ +\ zz);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[0][1]\ =\ 2.0f\ *\ (xy\ +\ wz);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[0][2]\ =\ 2.0f\ *\ (xz\ -\/\ wy);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[0][3]\ =\ 0.0f;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[1][0]\ =\ 2.0f\ *\ (xy\ -\/\ wz);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[1][1]\ =\ 1.0f\ -\/\ 2.0f\ *\ (xx\ +\ zz);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[1][2]\ =\ 2.0f\ *\ (yz\ +\ wx);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[1][3]\ =\ 0.0f;}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[2][0]\ =\ 2.0f\ *\ (xz\ +\ wy);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[2][1]\ =\ 2.0f\ *\ (yz\ -\/\ wx);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[2][2]\ =\ 1.0f\ -\/\ 2.0f\ *\ (xx\ +\ yy);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[2][3]\ =\ 0.0f;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[3][0]\ =\ 0.0f;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[3][1]\ =\ 0.0f;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[3][2]\ =\ 0.0f;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ mat.data[3][3]\ =\ 1.0f;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \}}
+
+\end{DoxyCode}

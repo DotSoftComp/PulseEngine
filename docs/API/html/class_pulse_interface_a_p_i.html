@@ -119,8 +119,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>SameLine</b> (
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>PushStyleColor</b> (PulseEngineStyle syle, const <a class="el" href="struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;color, const float &amp;alpha=1.0f)</td></tr>
 <tr class="memitem:a0bed2108eb9697cba14fe6490abbcf47" id="r_a0bed2108eb9697cba14fe6490abbcf47"><td class="memItemLeft" align="right" valign="top"><a id="a0bed2108eb9697cba14fe6490abbcf47" name="a0bed2108eb9697cba14fe6490abbcf47"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>PopStyleColor</b> (int amount=1)</td></tr>
-<tr class="memitem:a5ab89e51c3584bf64e11cbdcbfbfb749" id="r_a5ab89e51c3584bf64e11cbdcbfbfb749"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ab89e51c3584bf64e11cbdcbfbfb749">RenderCameraToInterface</a> (Camera *camera, const std::string &amp;windowName, const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;imageSize, std::vector&lt; Entity * &gt; entitiesToRender)</td></tr>
-<tr class="memdesc:a5ab89e51c3584bf64e11cbdcbfbfb749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the scene from a specific camera and displays it in an interface window.  <br /></td></tr>
+<tr class="memitem:a06f9e09a4af72f2ba639fbb654a6ebd7" id="r_a06f9e09a4af72f2ba639fbb654a6ebd7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06f9e09a4af72f2ba639fbb654a6ebd7">RenderCameraToInterface</a> (<a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> *previewData, Camera *camera, const std::string &amp;windowName, const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;imageSize, std::vector&lt; Entity * &gt; entitiesToRender, Shader *shader=nullptr)</td></tr>
+<tr class="memdesc:a06f9e09a4af72f2ba639fbb654a6ebd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the scene from a specific camera and displays it in an interface window.  <br /></td></tr>
 <tr class="memitem:a1a8f210e46bd5a955a870713fb856379" id="r_a1a8f210e46bd5a955a870713fb856379"><td class="memItemLeft" align="right" valign="top">static Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a8f210e46bd5a955a870713fb856379">GetSelectedEntity</a> ()</td></tr>
 <tr class="memdesc:a1a8f210e46bd5a955a870713fb856379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Selected Entity object.  <br /></td></tr>
 <tr class="memitem:ae9dc76f69da09b627aa4176c8a45eabd" id="r_ae9dc76f69da09b627aa4176c8a45eabd"><td class="memItemLeft" align="right" valign="top"><a id="ae9dc76f69da09b627aa4176c8a45eabd" name="ae9dc76f69da09b627aa4176c8a45eabd"></a>
@@ -130,8 +130,79 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsCurrentWindo
 <tr class="memdesc:abedd65e627db2c45d8f286a8b96d50ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current mouse position in the interface window.  <br /></td></tr>
 <tr class="memitem:a8c0986447843f2afb25ec2bb9101094f" id="r_a8c0986447843f2afb25ec2bb9101094f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c0986447843f2afb25ec2bb9101094f">MouseDelta</a> ()</td></tr>
 <tr class="memdesc:a8c0986447843f2afb25ec2bb9101094f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current mouse delta in the interface window. for more detail : the delta is the difference between the last frame and the current frame mouse position. it is useful to know how much the mouse has moved since the last frame.  <br /></td></tr>
+<tr class="memitem:a5bf434be03bec81a3f62c66708527caa" id="r_a5bf434be03bec81a3f62c66708527caa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bf434be03bec81a3f62c66708527caa">AddFunctionToFileClickedCallbacks</a> (std::function&lt; void(const ClickedFileData &amp;)&gt; callback)</td></tr>
+<tr class="memdesc:a5bf434be03bec81a3f62c66708527caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permit an easy way to add callback when a files is clicked in the file explorer.  <br /></td></tr>
+<tr class="memitem:ab75fad842d336359f18d7cd825e78c42" id="r_ab75fad842d336359f18d7cd825e78c42"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab75fad842d336359f18d7cd825e78c42">BeginChild</a> (const std::string &amp;name, const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;size, bool border=false)</td></tr>
+<tr class="memdesc:ab75fad842d336359f18d7cd825e78c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin a child window with a specific name, size, border, and flags.  <br /></td></tr>
+<tr class="memitem:a25c2eeabe4f3606b453c37e538e986b9" id="r_a25c2eeabe4f3606b453c37e538e986b9"><td class="memItemLeft" align="right" valign="top"><a id="a25c2eeabe4f3606b453c37e538e986b9" name="a25c2eeabe4f3606b453c37e538e986b9"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>EndChild</b> ()</td></tr>
+<tr class="memdesc:a25c2eeabe4f3606b453c37e538e986b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">End the current child window. <br /></td></tr>
+<tr class="memitem:a8eda8de279e71a465dbc226e722c0f0a" id="r_a8eda8de279e71a465dbc226e722c0f0a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eda8de279e71a465dbc226e722c0f0a">BeginCombo</a> (const std::string &amp;label, const std::string &amp;previewValue)</td></tr>
+<tr class="memdesc:a8eda8de279e71a465dbc226e722c0f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin a combo box with a specific label and preview value.  <br /></td></tr>
+<tr class="memitem:abcb58eb5c098f748c875bf34422c917a" id="r_abcb58eb5c098f748c875bf34422c917a"><td class="memItemLeft" align="right" valign="top"><a id="abcb58eb5c098f748c875bf34422c917a" name="abcb58eb5c098f748c875bf34422c917a"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>EndCombo</b> ()</td></tr>
+<tr class="memdesc:abcb58eb5c098f748c875bf34422c917a"><td class="mdescLeft">&#160;</td><td class="mdescRight">end the actual combo <br /></td></tr>
+<tr class="memitem:ab2a238fd234898097cbc5379d28f9a1e" id="r_ab2a238fd234898097cbc5379d28f9a1e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2a238fd234898097cbc5379d28f9a1e">Selectable</a> (const std::string &amp;label, bool selected=false, const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;size=<a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a>(0, 0))</td></tr>
+<tr class="memdesc:ab2a238fd234898097cbc5379d28f9a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a selectable item to the current combo box.  <br /></td></tr>
+<tr class="memitem:afe75cfdcd9d93655742abb3d0f3b8d4d" id="r_afe75cfdcd9d93655742abb3d0f3b8d4d"><td class="memItemLeft" align="right" valign="top"><a id="afe75cfdcd9d93655742abb3d0f3b8d4d" name="afe75cfdcd9d93655742abb3d0f3b8d4d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>AddTransformModifier</b> (Entity *entity, const std::string &amp;modifierName)</td></tr>
+<tr class="memitem:a40a8a3d5193b791ce0c83e40228c9ebb" id="r_a40a8a3d5193b791ce0c83e40228c9ebb"><td class="memItemLeft" align="right" valign="top"><a id="a40a8a3d5193b791ce0c83e40228c9ebb" name="a40a8a3d5193b791ce0c83e40228c9ebb"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>AddTransformModifierForMesh</b> (Mesh *mesh, const std::string &amp;modifierName)</td></tr>
+<tr class="memitem:a5c7dc50176367dc5b6d5c27cbc366661" id="r_a5c7dc50176367dc5b6d5c27cbc366661"><td class="memItemLeft" align="right" valign="top"><a id="a5c7dc50176367dc5b6d5c27cbc366661" name="a5c7dc50176367dc5b6d5c27cbc366661"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>StartTreeNode</b> (const std::string &amp;name, bool *open)</td></tr>
+<tr class="memitem:a3a9dc9e660af840eb6231042ca20ad27" id="r_a3a9dc9e660af840eb6231042ca20ad27"><td class="memItemLeft" align="right" valign="top"><a id="a3a9dc9e660af840eb6231042ca20ad27" name="a3a9dc9e660af840eb6231042ca20ad27"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>EndTreeNode</b> ()</td></tr>
+<tr class="memitem:ae292d52e4ae7471b7e6ab3947c9af538" id="r_ae292d52e4ae7471b7e6ab3947c9af538"><td class="memItemLeft" align="right" valign="top"><a id="ae292d52e4ae7471b7e6ab3947c9af538" name="ae292d52e4ae7471b7e6ab3947c9af538"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>AddMaterialPreview</b> (Material *&amp;material, const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;imageSize, const std::string &amp;name=&quot;Material Preview&quot;)</td></tr>
+<tr class="memitem:a0261e6a51c40660ec66ed80f6f9cce73" id="r_a0261e6a51c40660ec66ed80f6f9cce73"><td class="memItemLeft" align="right" valign="top"><a id="a0261e6a51c40660ec66ed80f6f9cce73" name="a0261e6a51c40660ec66ed80f6f9cce73"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>MaterialPicker</b> (Material *&amp;material)</td></tr>
+<tr class="memitem:a6edb8fcffbc5b57a82d554ad9a5374d3" id="r_a6edb8fcffbc5b57a82d554ad9a5374d3"><td class="memItemLeft" align="right" valign="top"><a id="a6edb8fcffbc5b57a82d554ad9a5374d3" name="a6edb8fcffbc5b57a82d554ad9a5374d3"></a>
+static <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetActualWindowSize</b> ()</td></tr>
+<tr class="memitem:adee72cfa7cdf15db51449eb90024e705" id="r_adee72cfa7cdf15db51449eb90024e705"><td class="memItemLeft" align="right" valign="top"><a id="adee72cfa7cdf15db51449eb90024e705" name="adee72cfa7cdf15db51449eb90024e705"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>DragFloat</b> (const char *label, float *value, float speed=1.0f, float minVal=0.0f, float maxVal=0.0f, const char *format=&quot;%.3f&quot;)</td></tr>
+<tr class="memitem:aa26ef9adb64d040da476b36f864cbd0d" id="r_aa26ef9adb64d040da476b36f864cbd0d"><td class="memItemLeft" align="right" valign="top"><a id="aa26ef9adb64d040da476b36f864cbd0d" name="aa26ef9adb64d040da476b36f864cbd0d"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>DragFloat3</b> (const char *label, float *values, float speed=1.0f, float minVal=0.0f, float maxVal=0.0f, const char *format=&quot;%.3f&quot;)</td></tr>
+<tr class="memitem:a9ca2d17c72a75343522869c8ead70f00" id="r_a9ca2d17c72a75343522869c8ead70f00"><td class="memItemLeft" align="right" valign="top"><a id="a9ca2d17c72a75343522869c8ead70f00" name="a9ca2d17c72a75343522869c8ead70f00"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>ChangeWindowState</b> (IModuleInterface *script, bool state)</td></tr>
+<tr class="memitem:a34ad5b367f4d12e57621e503f7dd8d22" id="r_a34ad5b367f4d12e57621e503f7dd8d22"><td class="memItemLeft" align="right" valign="top"><a id="a34ad5b367f4d12e57621e503f7dd8d22" name="a34ad5b367f4d12e57621e503f7dd8d22"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>ShowContextMenu</b> (const char *popupId, const std::vector&lt; <a class="el" href="struct_context_menu_item.html">ContextMenuItem</a> &gt; &amp;items)</td></tr>
+<tr class="memitem:a4310c15c6a0d7e609eb30640b6872b02" id="r_a4310c15c6a0d7e609eb30640b6872b02"><td class="memItemLeft" align="right" valign="top"><a id="a4310c15c6a0d7e609eb30640b6872b02" name="a4310c15c6a0d7e609eb30640b6872b02"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>OpenContextMenu</b> (const char *popupId)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5bf434be03bec81a3f62c66708527caa" name="a5bf434be03bec81a3f62c66708527caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf434be03bec81a3f62c66708527caa">&#9670;&#160;</a></span>AddFunctionToFileClickedCallbacks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PulseInterfaceAPI::AddFunctionToFileClickedCallbacks </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const ClickedFileData &amp;)&gt;</td>          <td class="paramname"><span class="paramname"><em>callback</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Permit an easy way to add callback when a files is clicked in the file explorer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>the function to call </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a6e464ec7fa412401672f151e7b2b4791" name="a6e464ec7fa412401672f151e7b2b4791"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e464ec7fa412401672f151e7b2b4791">&#9670;&#160;</a></span>AddSpace()</h2>
 
@@ -162,6 +233,92 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsCurrentWindo
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab75fad842d336359f18d7cd825e78c42" name="ab75fad842d336359f18d7cd825e78c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab75fad842d336359f18d7cd825e78c42">&#9670;&#160;</a></span>BeginChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PulseInterfaceAPI::BeginChild </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>border</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Begin a child window with a specific name, size, border, and flags. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the child window. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the child window. </td></tr>
+    <tr><td class="paramname">border</td><td>Whether to show a border. </td></tr>
+    <tr><td class="paramname">flags</td><td>Additional flags for the child window. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8eda8de279e71a465dbc226e722c0f0a" name="a8eda8de279e71a465dbc226e722c0f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eda8de279e71a465dbc226e722c0f0a">&#9670;&#160;</a></span>BeginCombo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PulseInterfaceAPI::BeginCombo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>label</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>previewValue</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Begin a combo box with a specific label and preview value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">label</td><td>The label for the combo box. </td></tr>
+    <tr><td class="paramname">previewValue</td><td>The preview value displayed in the combo box. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true If the combo box is open. </dd>
+<dd>
+false If the combo box is closed. </dd></dl>
 
 </div>
 </div>
@@ -373,8 +530,8 @@ false the button has not been clicked this frame </dd></dl>
 
 </div>
 </div>
-<a id="a5ab89e51c3584bf64e11cbdcbfbfb749" name="a5ab89e51c3584bf64e11cbdcbfbfb749"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ab89e51c3584bf64e11cbdcbfbfb749">&#9670;&#160;</a></span>RenderCameraToInterface()</h2>
+<a id="a06f9e09a4af72f2ba639fbb654a6ebd7" name="a06f9e09a4af72f2ba639fbb654a6ebd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f9e09a4af72f2ba639fbb654a6ebd7">&#9670;&#160;</a></span>RenderCameraToInterface()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -385,6 +542,11 @@ false the button has not been clicked this frame </dd></dl>
         <tr>
           <td class="memname">void PulseInterfaceAPI::RenderCameraToInterface </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> *</td>          <td class="paramname"><span class="paramname"><em>previewData</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">Camera *</td>          <td class="paramname"><span class="paramname"><em>camera</em></span>, </td>
         </tr>
         <tr>
@@ -400,7 +562,12 @@ false the button has not been clicked this frame </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; Entity * &gt;</td>          <td class="paramname"><span class="paramname"><em>entitiesToRender</em></span>&#160;)</td>
+          <td class="paramtype">std::vector&lt; Entity * &gt;</td>          <td class="paramname"><span class="paramname"><em>entitiesToRender</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shader *</td>          <td class="paramname"><span class="paramname"><em>shader</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -419,6 +586,53 @@ false the button has not been clicked this frame </dd></dl>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab2a238fd234898097cbc5379d28f9a1e" name="ab2a238fd234898097cbc5379d28f9a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2a238fd234898097cbc5379d28f9a1e">&#9670;&#160;</a></span>Selectable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PulseInterfaceAPI::Selectable </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>label</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>selected</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>size</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a>(0,&#160;0)</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a selectable item to the current combo box. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">label</td><td>The label for the selectable item. </td></tr>
+    <tr><td class="paramname">selected</td><td>Whether the item is selected. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the item. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true If the item was clicked. </dd>
+<dd>
+false If the item was not clicked. </dd></dl>
 
 </div>
 </div>

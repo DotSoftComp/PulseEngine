@@ -17,9 +17,18 @@
 #include "Common/dllExport.h"
 #include <string>
 
-#include "src\PulseEngine\ModuleLoader\IModule\IModule.h"
+#include "PulseEngine/ModuleLoader/IModule/IModule.h"
+#include "PulseEngine/core/Meshes/Mesh.h"
+
+
 
 class PulseEngineBackend;
+
+enum TextureType
+{
+    TEXTURE_2D,
+    TEXTURE_CUBE_MAP
+};
 
 /**
  * @brief Interface for any graphics API backend (OpenGL, Vulkan, DirectX, etc.).
@@ -110,12 +119,51 @@ public:
      */
     virtual void StartFrame() const = 0;
 
+    virtual void SpecificStartFrame(int specificVBO, const PulseEngine::Vector2& frameSize) const = 0;
+
     /**
      * @brief Ends the rendering frame. Usually includes buffer swapping or command submission.
      */
     virtual void EndFrame() const = 0;
+    virtual void ActivateBackCull() const = 0;
 
     virtual unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath) = 0;
+    virtual unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath) = 0;
+
+    // ===== Shader Management =====
+    virtual void UseShader(unsigned int shaderID) const = 0;
+    virtual void SetShaderMat4(const Shader* shader, const std::string& name, const PulseEngine::Mat4& mat) const = 0;
+    virtual void SetShaderMat3(const Shader* shader, const std::string& name, const PulseEngine::Mat3& mat) const = 0;
+    virtual void SetShaderVec3(const Shader* shader, const std::string& name, const PulseEngine::Vector3& vec) const = 0;
+    virtual void SetShaderFloat(const Shader* shader, const std::string& name, float value) const = 0;
+    virtual void SetShaderBool(const Shader* shader, const std::string& name, bool value) const = 0;
+    virtual void SetShaderInt(const Shader* shader, const std::string& name, int value) const = 0;
+    virtual void SetShaderIntArray(const Shader* shader, const std::string& name, const int* values, int count) const = 0;
+    virtual void SetShaderVec3Array(const Shader* shader, const std::string& name, const std::vector<PulseEngine::Vector3>& vecArray) const = 0;
+    virtual void SetShaderFloatArray(const Shader* shader, const std::string& name, const std::vector<float>& floatArray) const = 0;
+
+    // ===== Texture and map =====
+    virtual void GenerateDepthCubeMap(unsigned int* FBO, unsigned int* depthCubeMap) const = 0;
+    virtual bool IsFrameBufferComplete() const = 0;
+    virtual void InitCubeMapFaceForRender(unsigned int* CubeMap, unsigned int faceIndex) const = 0;
+    virtual void GenerateTextureMap(unsigned int* textureID, const std::string& filePath) const = 0;
+    virtual void GenerateShadowMap(unsigned int* shadowMap, unsigned int* FBO, int width, int height) const = 0;
+    virtual void BindShadowFramebuffer(unsigned int* FBO) const = 0;
+    virtual void UnbindShadowFramebuffer() const = 0;
+
+    // ===== Mesh and vertex =====
+    virtual void DeleteMesh(unsigned int* VAO, unsigned int* VBO) const = 0;
+
+    virtual void SetupSimpleSquare(unsigned int* VAO, unsigned int* VBO , unsigned int* EBO) const = 0;
+
+
+    virtual float GetTime() const = 0; 
+
+    // ===== Texture management =====
+    virtual void ActivateTexture(unsigned int textureID) const = 0;
+    virtual void BindTexture(TextureType type, unsigned int textureID) const = 0;
+    virtual void SetupMesh(unsigned int* VAO, unsigned int* VBO, unsigned int* EBO, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) const = 0;
+    virtual void RenderMesh(unsigned int* VAO, unsigned int* VBO, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) const = 0;
 
     // ===== Shared Context Variables =====
 

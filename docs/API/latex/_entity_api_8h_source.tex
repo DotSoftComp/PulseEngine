@@ -1,0 +1,53 @@
+\doxysection{Entity\+Api.\+h}
+\hypertarget{_entity_api_8h_source}{}\label{_entity_api_8h_source}\index{src/PulseEngine/API/EntityAPI/EntityApi.h@{src/PulseEngine/API/EntityAPI/EntityApi.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENTITY\_API\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENTITY\_API\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Common/common.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Common/dllExport.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}PulseEngine/core/Entity/Entity.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}PulseEngine/CustomScripts/IScripts.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }PULSE\_ENGINE\_DLL\_API\ EntityApi}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ Entity*\ entity;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ EntityApi(Entity*\ e);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\ GetPosition()\ \{\textcolor{keywordflow}{return}\ entity-\/>GetPosition();\ \}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\ GetRotation()\ \{\textcolor{keywordflow}{return}\ entity-\/>GetRotation();\ \}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetPosition(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\&\ pos)\ \{entity-\/>SetPosition(pos);\}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetRotation(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\&\ rot)\ \{entity-\/>SetRotation(rot);\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ClassScript>}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ ClassScript*\ \mbox{\hyperlink{class_entity_api_aa372883242e50aafa39d2f3c77ccedaf}{GetComponent}}()\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}*\ script\ :\ entity-\/>GetScripts())\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{auto}*\ ptr\ =\ \textcolor{keyword}{dynamic\_cast<}ClassScript*\textcolor{keyword}{>}(script))\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ClassScript>}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ ClassScript*\ \mbox{\hyperlink{class_entity_api_a69c1094377bf6c56c9145d47d84f39bd}{AddComponent}}()}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ ClassScript*\ newScript\ =\ \textcolor{keyword}{new}\ ClassScript();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ entity-\/>AddScript(newScript);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ newScript;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AddScript(IScript*\ script)\ \{entity-\/>AddScript(script);\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

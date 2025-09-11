@@ -4,6 +4,18 @@
 #include "PulseEngineEditor/InterfaceEditor/InterfaceEditor.h"
 #include "PulseEngine/core/Entity/Entity.h"
 #include "PulseEngine/core/Meshes/Mesh.h"
+#include "PulseEngine/core/Material/Material.h"
+#include "PulseEngine/core/Material/Texture.h"
+#include "PulseEngine/core/Material/MaterialManager.h"
+#include "PulseEngine/core/GUID/GuidReader.h"
+#include "PulseEngine/CustomScripts/IScripts.h"
+#include "PulseEngine/ModuleLoader/IModuleInterface/IModuleInterface.h"
+#include "shader.h"
+#include "json.hpp"
+
+#include <memory>
+#include <unordered_map>
+#include <fstream>
 
 void PulseInterfaceAPI::OpenWindow(const std::string &name)
 {
@@ -59,46 +71,58 @@ void PulseInterfaceAPI::PopStyleColor(int amount)
     ImGui::PopStyleColor(amount);
 }
 
-void PulseInterfaceAPI::RenderCameraToInterface(Camera* camera, const std::string& windowName, const PulseEngine::Vector2& imageSize, std::vector<Entity*> entitiesToRender)
+void PulseInterfaceAPI::RenderCameraToInterface(PulseEngine::Vector2* previewData, Camera* camera, const std::string& windowName, const PulseEngine::Vector2& imageSize, std::vector<Entity*> entitiesToRender, Shader* shader)
 {
     // Create or bind a framebuffer/render target
-    static unsigned int previewFBO = 0;
-    static unsigned int previewTexture = 0;
+    unsigned int previewFBO = previewData->x;
+    unsigned int previewTexture = previewData->y;
     static int previewWidth = imageSize.x, previewHeight = imageSize.y;
 
-    if (previewFBO == 0)
+    if (previewFBO == 0 || previewWidth != imageSize.x || previewHeight != imageSize.y)
     {
-        // Generate framebuffer and texture
-        glGenFramebuffers(1, &previewFBO);
+        previewWidth = imageSize.x;
+        previewHeight = imageSize.y;
+    
+        if (previewFBO == 0)
+        {
+            glGenFramebuffers(1, &previewFBO);
+        }
         glBindFramebuffer(GL_FRAMEBUFFER, previewFBO);
-
-        glGenTextures(1, &previewTexture);
+    
+        if (previewTexture == 0)
+        {
+            glGenTextures(1, &previewTexture);
+        }
         glBindTexture(GL_TEXTURE_2D, previewTexture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, previewWidth, previewHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, previewTexture, 0);
-
-        // Optionally add a depth buffer
-        unsigned int rbo;
-        glGenRenderbuffers(1, &rbo);
+    
+        static unsigned int rbo = 0;
+        if (rbo == 0)
+            glGenRenderbuffers(1, &rbo);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, previewWidth, previewHeight);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-
+    
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             std::cerr << "Preview framebuffer not complete!" << std::endl;
-
+    
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
+
 
     glBindFramebuffer(GL_FRAMEBUFFER, previewFBO);
     glViewport(0, 0, previewWidth, previewHeight);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    PulseEngineInstance->SpecificRender(camera, previewFBO, entitiesToRender);
+    PulseEngineInstance->SpecificRender(camera, previewFBO, entitiesToRender, imageSize, shader);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    previewData->x = previewFBO;
+    previewData->y = previewTexture;
 
     PulseInterfaceAPI::Image(previewTexture, imageSize, PulseEngine::Vector2(0, 1), PulseEngine::Vector2(1, 0));
 }
@@ -214,4 +238,167 @@ void PulseInterfaceAPI::AddTransformModifierForMesh(Mesh *mesh, const std::strin
 
             ImGui::TreePop();
         }
+}
+
+bool PulseInterfaceAPI::StartTreeNode(const std::string &name, bool *open)
+{
+    bool isOpen = false;
+    if (open)
+    {
+        if (*open)
+        {
+            isOpen = ImGui::TreeNodeEx(name.c_str(), ImGuiTreeNodeFlags_DefaultOpen, "%s", name.c_str());
+        }
+        else
+        {
+            isOpen = ImGui::TreeNode(name.c_str());
+        }
+    }
+    else
+    {
+        isOpen = ImGui::TreeNode(name.c_str());
+    }
+
+    if (open)
+    {
+        *open = isOpen;
+    }
+
+    return isOpen;
+}
+
+
+void PulseInterfaceAPI::EndTreeNode()
+{
+    ImGui::TreePop();
+}
+
+void PulseInterfaceAPI::AddMaterialPreview(Material*& material, const PulseEngine::Vector2 &imageSize, const std::string &name)
+{
+    std::string childName = "MaterialPreviewChild###" + name;
+    ImGui::BeginChild(childName.c_str(), ImVec2(0, 0), true);
+    if (material == nullptr )
+    {
+        ImGui::Text("No material to preview");
+        MaterialPicker(material);
+        return;
+    }
+
+    ImGui::PushID(name.c_str());
+
+    ImGui::BeginGroup(); // Groupe principal : box globale
+
+    // Trouver la première texture valide (pour l'afficher à gauche)
+    const auto& textures = material->GetAllTextures();
+    std::shared_ptr<Texture> firstTexture = nullptr;
+    for (const auto& [type, texture] : textures)
+    {
+        if (texture)
+        {
+            firstTexture = texture;
+            
+            break;
+        }
+    }
+
+    ImGui::BeginGroup(); // Groupe à gauche pour image
+    if (firstTexture)
+    {
+        PulseInterfaceAPI::Image(firstTexture->id, imageSize, PulseEngine::Vector2(0, 1), PulseEngine::Vector2(1, 0));
+    }
+    else
+    {
+        ImGui::Text("No texture preview");
+    }
+    ImGui::EndGroup();
+
+    ImGui::SameLine(); // Passer à droite, à côté de l'image
+
+    ImGui::BeginGroup(); // Groupe à droite pour infos texte
+    // Nom du material
+    ImGui::Text("%s", material->GetName().c_str());
+
+    MaterialPicker(material);
+
+    ImGui::EndGroup();
+
+    ImGui::EndGroup(); // Fin du groupe principal
+
+    // Tree node pour afficher toutes les textures en détail
+    if (ImGui::TreeNode("Textures"))
+    {
+        for (const auto& [type, texture] : textures)
+        {
+            if (texture)
+            {
+                ImGui::Text("%s:", type.c_str());
+                PulseInterfaceAPI::Image(texture->id, imageSize, PulseEngine::Vector2(0, 1), PulseEngine::Vector2(1, 0));
+            }
+            else
+            {
+                ImGui::Text("%s: No texture assigned", type.c_str());
+            }
+        }
+        ImGui::TreePop();
+    }
+
+    ImGui::PopID();
+    ImGui::EndChild();
+}
+
+void PulseInterfaceAPI::MaterialPicker(Material *&material)
+{
+    if (ImGui::BeginCombo("##MaterialSelector", material ? material->GetName().c_str() : "Select Material"))
+    {
+        for (const auto pr : GuidReader::GetAllAvailableFiles("guidCollectionMaterials.puid"))
+        {
+            if (PulseInterfaceAPI::Selectable(pr.second, false))
+            {
+                material = MaterialManager::loadMaterial(pr.second);
+                if(material) material->guid = pr.first;
+            }
+        }
+        ImGui::EndCombo();
+    }
+}
+
+PulseEngine::Vector2 PulseInterfaceAPI::GetActualWindowSize()
+{
+    ImVec2 size = ImGui::GetWindowSize();
+    return PulseEngine::Vector2(size.x, size.y);
+}
+
+bool PulseInterfaceAPI::DragFloat(const char *label, float *value, float speed, float minVal, float maxVal, const char *format)
+{
+    return ImGui::DragFloat(label, value, speed, minVal, maxVal, format);
+}
+
+bool PulseInterfaceAPI::DragFloat3(const char *label, float *values, float speed, float minVal, float maxVal, const char *format)
+{
+    return ImGui::DragFloat3(label, values, speed, minVal, maxVal, format);
+}
+
+void PulseInterfaceAPI::ChangeWindowState(IModuleInterface* script, bool state)
+{
+    PulseEngineInstance->editor->windowStates[script->GetName()] = state;
+}
+
+void PulseInterfaceAPI::ShowContextMenu(const char* popupId, const std::vector<ContextMenuItem>& items)
+{
+    if (ImGui::BeginPopup(popupId))
+    {
+        for (const auto& item : items)
+        {
+            if (ImGui::MenuItem(item.label.c_str()))
+            {
+                if (item.onClick) item.onClick();
+            }
+        }
+        ImGui::EndPopup();
+    }
+}
+
+void PulseInterfaceAPI::OpenContextMenu(const char *popupId)
+{
+    ImGui::OpenPopup(popupId);
 }

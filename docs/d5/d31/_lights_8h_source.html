@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: src/PulseEngine/core/Lights/Lights.h Source File</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -108,7 +107,7 @@ $(function(){initNavTree('d5/d31/_lights_8h_source.html','../../',''); });
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="../../db/dd6/class_light_data.html">   30</a></span><span class="keyword">class </span>PULSE_ENGINE_DLL_API LightData: <span class="keyword">public</span> <a class="code hl_function" href="../../d2/d96/class_entity.html#a1f6bd31e1c2050d456b87bdcbb47ef0b">Entity</a></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        glm::mat4 lightSpaceMatrix;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_struct" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a> lightSpaceMatrix;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_struct" href="../../d7/de0/struct_pulse_engine_1_1_color.html">PulseEngine::Color</a> color;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordtype">float</span> intensity;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">float</span> attenuation;</div>
@@ -123,12 +122,13 @@ $(function(){initNavTree('d5/d31/_lights_8h_source.html','../../',''); });
 </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_entity_html_a1f6bd31e1c2050d456b87bdcbb47ef0b"><div class="ttname"><a href="../../d2/d96/class_entity.html#a1f6bd31e1c2050d456b87bdcbb47ef0b">Entity::Entity</a></div><div class="ttdeci">Entity(const std::string &amp;name, const PulseEngine::Vector3 &amp;position, Mesh *mesh, Material *material)</div><div class="ttdoc">Constructs an entity with a mesh and material.</div><div class="ttdef"><b>Definition</b> Entity.cpp:13</div></div>
+<div class="ttc" id="aclass_entity_html_a1f6bd31e1c2050d456b87bdcbb47ef0b"><div class="ttname"><a href="../../d2/d96/class_entity.html#a1f6bd31e1c2050d456b87bdcbb47ef0b">Entity::Entity</a></div><div class="ttdeci">Entity(const std::string &amp;name, const PulseEngine::Vector3 &amp;position, Mesh *mesh, Material *material)</div><div class="ttdoc">Constructs an entity with a mesh and material.</div><div class="ttdef"><b>Definition</b> Entity.cpp:14</div></div>
 <div class="ttc" id="aclass_light_data_html_a2764bcbc84ece3b6ac1ca90225687c1d"><div class="ttname"><a href="../../db/dd6/class_light_data.html#a2764bcbc84ece3b6ac1ca90225687c1d">LightData::BindToShader</a></div><div class="ttdeci">virtual void BindToShader(Shader &amp;shader, int index)=0</div><div class="ttdoc">Bind the light data to a shader.</div></div>
 <div class="ttc" id="aclass_light_data_html_ad007e80cf78797d53d36a6ac5fe1c1ac"><div class="ttname"><a href="../../db/dd6/class_light_data.html#ad007e80cf78797d53d36a6ac5fe1c1ac">LightData::RenderShadowMap</a></div><div class="ttdeci">virtual void RenderShadowMap(Shader &amp;shader, PulseEngineBackend &amp;scene)=0</div><div class="ttdoc">Render the shadow map for the light.</div></div>
-<div class="ttc" id="aclass_pulse_engine_backend_html"><div class="ttname"><a href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a></div><div class="ttdoc">PulseEngineBackend is the main class of the Pulse Engine.</div><div class="ttdef"><b>Definition</b> PulseEngineBackend.h:40</div></div>
+<div class="ttc" id="aclass_pulse_engine_backend_html"><div class="ttname"><a href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a></div><div class="ttdoc">PulseEngineBackend is the main class of the Pulse Engine.</div><div class="ttdef"><b>Definition</b> PulseEngineBackend.h:44</div></div>
 <div class="ttc" id="astruct_pulse_engine_1_1_color_html"><div class="ttname"><a href="../../d7/de0/struct_pulse_engine_1_1_color.html">PulseEngine::Color</a></div><div class="ttdoc">Color class represents a color in RGBA format.</div><div class="ttdef"><b>Definition</b> Color.h:27</div></div>
-<div class="ttc" id="astruct_pulse_engine_1_1_vector3_html"><div class="ttname"><a href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></div><div class="ttdef"><b>Definition</b> Vector.h:24</div></div>
+<div class="ttc" id="astruct_pulse_engine_1_1_mat4_html"><div class="ttname"><a href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a></div><div class="ttdoc">Mat4 class represents a 4x4 matrix used for 3D transformations.</div><div class="ttdef"><b>Definition</b> Mat4.h:14</div></div>
+<div class="ttc" id="astruct_pulse_engine_1_1_vector3_html"><div class="ttname"><a href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a></div><div class="ttdoc">Vector3 class represents a 3D vector.</div><div class="ttdef"><b>Definition</b> Vector.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

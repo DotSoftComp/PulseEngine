@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: src/PulseEngine/core/GUID/GuidReader.h Source File</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -102,20 +101,34 @@ $(function(){initNavTree('db/d73/_guid_reader_8h_source.html','../../',''); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span><a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">class </span><a class="code hl_class" href="../../dc/dbe/class_mesh.html">Mesh</a>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../d5/d36/class_guid_reader.html">   20</a></span><span class="keyword">class </span>PULSE_ENGINE_DLL_API <a class="code hl_class" href="../../d5/d36/class_guid_reader.html">GuidReader</a></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a>* GetEntityFromGuid(std::size_t Guid);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../dc/dbe/class_mesh.html">Mesh</a>* GetMeshFromGuid(std::size_t guid);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">static</span> std::size_t InsertIntoCollection(<span class="keyword">const</span> std::string&amp; filePath);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">class </span><a class="code hl_class" href="../../dc/dee/class_material.html">Material</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d5/d36/class_guid_reader.html">   23</a></span><span class="keyword">class </span>PULSE_ENGINE_DLL_API <a class="code hl_class" href="../../d5/d36/class_guid_reader.html">GuidReader</a></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a>* <a class="code hl_function" href="../../d5/d36/class_guid_reader.html#a240f60beb7e5be17fd9e570183f64cfe">GetEntityFromGuid</a>(std::size_t Guid);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../dc/dbe/class_mesh.html">Mesh</a>* <a class="code hl_function" href="../../d5/d36/class_guid_reader.html#ac311652096e88ad58d2d402779fc0bd1">GetMeshFromGuid</a>(std::size_t guid);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a> *<a class="code hl_function" href="../../d5/d36/class_guid_reader.html#ac4135d40ef7e1eaf6de93111a53c7bcf">GetEntityFromJson</a>(nlohmann::json_abi_v3_12_0::json &amp;entityData, <a class="code hl_class" href="../../d2/d96/class_entity.html">Entity</a> *entity);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../dc/dee/class_material.html">Material</a>* <a class="code hl_function" href="../../d5/d36/class_guid_reader.html#a331cac020d26164b4493c5f0d11a249d">GetMaterialFromJson</a>(nlohmann::json_abi_v3_12_0::json &amp;materialData);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keyword">static</span> std::size_t <a class="code hl_function" href="../../d5/d36/class_guid_reader.html#afb514442f90af56f3e5b54f75682a102">InsertIntoCollection</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">static</span> std::vector&lt;std::pair&lt;std::string, std::string&gt;&gt; <a class="code hl_function" href="../../d5/d36/class_guid_reader.html#ac9a4638973355bc0f58ba295d669734c">GetAllAvailableFiles</a>(<span class="keyword">const</span> std::string&amp; guidFile = <span class="stringliteral">&quot;.pEntity&quot;</span>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="../../d2/d96/class_entity.html">Entity</a></div><div class="ttdoc">Represents a scene object with transformation, rendering, and behavior.</div><div class="ttdef"><b>Definition</b> Entity.h:42</div></div>
-<div class="ttc" id="aclass_guid_reader_html"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html">GuidReader</a></div><div class="ttdef"><b>Definition</b> GuidReader.h:21</div></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="../../d2/d96/class_entity.html">Entity</a></div><div class="ttdoc">Represents a scene object with transformation, rendering, and behavior.</div><div class="ttdef"><b>Definition</b> Entity.h:41</div></div>
+<div class="ttc" id="aclass_guid_reader_html"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html">GuidReader</a></div><div class="ttdef"><b>Definition</b> GuidReader.h:24</div></div>
+<div class="ttc" id="aclass_guid_reader_html_a240f60beb7e5be17fd9e570183f64cfe"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#a240f60beb7e5be17fd9e570183f64cfe">GuidReader::GetEntityFromGuid</a></div><div class="ttdeci">static Entity * GetEntityFromGuid(std::size_t Guid)</div><div class="ttdoc">If you already have the GUID of the entity wanted to be loaded.</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:20</div></div>
+<div class="ttc" id="aclass_guid_reader_html_a331cac020d26164b4493c5f0d11a249d"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#a331cac020d26164b4493c5f0d11a249d">GuidReader::GetMaterialFromJson</a></div><div class="ttdeci">static Material * GetMaterialFromJson(nlohmann::json_abi_v3_12_0::json &amp;materialData)</div><div class="ttdoc">Get the content of a material via the actual json (.material) from the engine material saved file.</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:171</div></div>
+<div class="ttc" id="aclass_guid_reader_html_ac311652096e88ad58d2d402779fc0bd1"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#ac311652096e88ad58d2d402779fc0bd1">GuidReader::GetMeshFromGuid</a></div><div class="ttdeci">static Mesh * GetMeshFromGuid(std::size_t guid)</div><div class="ttdoc">If you already have the GUID of the mesh wanted to be loaded.</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:203</div></div>
+<div class="ttc" id="aclass_guid_reader_html_ac4135d40ef7e1eaf6de93111a53c7bcf"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#ac4135d40ef7e1eaf6de93111a53c7bcf">GuidReader::GetEntityFromJson</a></div><div class="ttdeci">static Entity * GetEntityFromJson(nlohmann::json_abi_v3_12_0::json &amp;entityData, Entity *entity)</div><div class="ttdoc">If you have the path to the entity, use this one. It&#39;s way faster than using the GUID since it didn&#39;t...</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:61</div></div>
+<div class="ttc" id="aclass_guid_reader_html_ac9a4638973355bc0f58ba295d669734c"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#ac9a4638973355bc0f58ba295d669734c">GuidReader::GetAllAvailableFiles</a></div><div class="ttdeci">static std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; GetAllAvailableFiles(const std::string &amp;guidFile=&quot;.pEntity&quot;)</div><div class="ttdoc">Get the files from a guid collection.</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:336</div></div>
+<div class="ttc" id="aclass_guid_reader_html_afb514442f90af56f3e5b54f75682a102"><div class="ttname"><a href="../../d5/d36/class_guid_reader.html#afb514442f90af56f3e5b54f75682a102">GuidReader::InsertIntoCollection</a></div><div class="ttdeci">static std::size_t InsertIntoCollection(const std::string &amp;filePath)</div><div class="ttdoc">If you&#39;ve got data to add to the collection, to have a new GUID, use this function....</div><div class="ttdef"><b>Definition</b> GuidReader.cpp:291</div></div>
+<div class="ttc" id="aclass_material_html"><div class="ttname"><a href="../../dc/dee/class_material.html">Material</a></div><div class="ttdef"><b>Definition</b> Material.h:16</div></div>
 <div class="ttc" id="aclass_mesh_html"><div class="ttname"><a href="../../dc/dbe/class_mesh.html">Mesh</a></div><div class="ttdoc">Represents a 3D mesh including geometry, bones, and rendering data. This class handles OpenGL buffer ...</div><div class="ttdef"><b>Definition</b> Mesh.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

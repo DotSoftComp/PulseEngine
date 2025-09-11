@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🎯_20purpose_0',['🎯 Purpose',['../index.html#autotoc_md2',1,'']]]
+  ['with_0',['🧱 Built With',['../index.html#autotoc_md6',1,'']]],
+  ['writetext_1',['WriteText',['../class_pulse_interface_a_p_i.html#a5f6e22be2e22745b9d3172e63b72adbe',1,'PulseInterfaceAPI']]]
 ];

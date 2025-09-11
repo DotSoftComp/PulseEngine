@@ -37,6 +37,14 @@ src/PulseEngine/ModuleLoader/ModuleLoader.cpp ^
 src/PulseEngine/API/EngineApi.cpp ^
 src/PulseEngine/API/GameEntity.cpp ^
 src/PulseEngine/core/Math/Transform/Transform.cpp ^
+PulseEngineEditor\InterfaceEditor\InterfaceEditorFileExplorer.cpp ^
+PulseEngineEditor\InterfaceEditor\Synapse\Synapse.cpp ^
+PulseEngineEditor\InterfaceEditor\NewFileCreator\NewFileManager.cpp ^
+src\PulseEngine\core\GUID\GuidCollection.cpp ^
+src\PulseEngine\core\ExecutableManager\ExecutableLauncher.cpp ^
+src\PulseEngine\core\ExecutableManager\PulseExecutable.cpp ^
+src\PulseEngine\core\ExecutableManager\ExecutableCommunication.cpp ^
+src\PulseEngine\API\EntityAPI\EntityApi.cpp ^
 imgui/imgui.cpp ^
 imgui/imgui_draw.cpp ^
 imgui/imgui_tables.cpp ^
@@ -44,12 +52,16 @@ imgui/imgui_widgets.cpp ^
 imgui/imgui_demo.cpp ^
 imgui/backends/imgui_impl_glfw.cpp ^
 imgui/backends/imgui_impl_opengl3.cpp ^
--I. -Iinclude -Iimgui  -I./src -IE:/Editor/Include -Iexternal/assimp/include ^
+imgui-node/imgui_node_editor.cpp ^
+imgui-node/imgui_node_editor_api.cpp ^
+imgui-node/imgui_canvas.cpp ^
+imgui-node/crude_json.cpp ^
+-I. -Iinclude -Iimgui -Iimgui-node -I./src -IE:/Editor/Include -Iexternal/assimp/include ^
 -Lexternal/assimp/lib ^
 -Lexternal/assimp/lib/x64 ^
 -LD:/MSYS2/mingw64/lib ^
 -lglfw3 -lopengl32 -lm -lassimp -lcomdlg32 ^
--DBUILDING_DLL -DENGINE_EDITOR -DWINDOW_PULSE_EXPORT
+-DBUILDING_DLL -DENGINE_EDITOR -DPULSE_GRAPHIC_OPENGL -DPULSE_WINDOWS -DIMGUI_IMPL_OPENGL_LOADER_GLAD
 
 if %errorlevel% neq 0 (
     echo DLL build failed!

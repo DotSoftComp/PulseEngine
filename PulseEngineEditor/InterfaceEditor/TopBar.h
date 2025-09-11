@@ -28,9 +28,12 @@ public:
     TopBar() {}
     ~TopBar() {}
 
-    void UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor);
+    void UpdateBar(PulseEngineBackend *engine, InterfaceEditor *editor);
+    void ImportMesh(InterfaceEditor *editor, std::string &name, std::string &guidPath, char filePath[260], std::string &meshPath);
+    void DeletePrefix(std::string &fileStr, std::string &prefix, std::string &guidPath);
     void BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor *editor);
     void CompileUserScripts(InterfaceEditor *editor, std::string output = "Build/CustomScripts.dll");
+    void AnalyzeEntry(const std::filesystem::directory_entry &entry, std::string &sources);
     void GenerateExecutableForWindow(PulseEngineBackend *engine);
     void CopyDllForWindow();
     void CopyAssetForWindow();

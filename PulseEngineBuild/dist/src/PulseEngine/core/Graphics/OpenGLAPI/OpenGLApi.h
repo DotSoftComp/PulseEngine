@@ -36,12 +36,47 @@ public:
     std::string GetApiName() const override { return "OpenGL"; }
 
         unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath) override;
+        unsigned int CreateShader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath) override;
     std::string LoadShaderCode(const std::string& path);
     unsigned int CompileShader(unsigned int type, const char* source);
     unsigned int LinkProgram(unsigned int vertexShader, unsigned int fragmentShader);
 
+    void UseShader(unsigned int shaderID) const override;
+    void SetShaderMat4(const Shader* shader, const std::string& name, const PulseEngine::Mat4& mat) const override;
+    void SetShaderMat3(const Shader* shader, const std::string& name, const PulseEngine::Mat3& mat) const override;
+    void SetShaderVec3(const Shader* shader, const std::string& name, const PulseEngine::Vector3& vec) const override;
+    void SetShaderFloat(const Shader* shader, const std::string& name, float value) const override;
+    void SetShaderBool(const Shader* shader, const std::string& name, bool value) const override;
+    void SetShaderInt(const Shader* shader, const std::string& name, int value) const override;
+    void SetShaderIntArray(const Shader* shader, const std::string& name, const int* values, int count) const override;
+    void SetShaderVec3Array(const Shader* shader, const std::string& name, const std::vector<PulseEngine::Vector3>& vecArray) const override;
+    void SetShaderFloatArray(const Shader* shader, const std::string& name, const std::vector<float>& floatArray) const override;
+    void ActivateTexture(unsigned int textureID) const override;
+    void BindTexture(TextureType type, unsigned int textureID) const override;
+
+    void GenerateDepthCubeMap(unsigned int* FBO, unsigned int* depthCubeMap) const override;
+    bool IsFrameBufferComplete() const override;
+    void InitCubeMapFaceForRender(unsigned int* CubeMap, unsigned int faceIndex) const override;
+    void GenerateTextureMap(unsigned int* textureID, const std::string& filePath) const override;
+    void GenerateShadowMap(unsigned int* shadowMap, unsigned int* FBO, int width, int height) const override;
+    void BindShadowFramebuffer(unsigned int* FBO) const override;
+    void UnbindShadowFramebuffer() const override;
+
+    void SetupSimpleSquare(unsigned int* VAO, unsigned int* VBO , unsigned int* EBO) const override;
+
+    void DeleteMesh(unsigned int* VAO, unsigned int* VBO) const override;
+    void SetupMesh(unsigned int* VAO, unsigned int* VBO, unsigned int* EBO, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) const override;
+    void RenderMesh(unsigned int* VAO, unsigned int* VBO, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) const override;
+
+    float GetTime() const override;
+    
+    static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
+
     void StartFrame() const override;
+    void SpecificStartFrame(int specificVBO, const PulseEngine::Vector2& frameSize) const override;
+
     void EndFrame() const override;
+    void ActivateBackCull() const override;
 
     GLFWwindow* window = nullptr;
     GLuint fbo, fboTexture, rbo;

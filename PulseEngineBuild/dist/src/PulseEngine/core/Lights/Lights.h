@@ -30,7 +30,7 @@ class PulseEngineBackend;
 class PULSE_ENGINE_DLL_API LightData: public Entity
 {
     public:
-        glm::mat4 lightSpaceMatrix;
+        PulseEngine::Mat4 lightSpaceMatrix;
         PulseEngine::Color color;
         float intensity;
         float attenuation;

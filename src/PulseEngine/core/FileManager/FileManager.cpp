@@ -30,6 +30,10 @@ std::string FileManager::GetCollectionByExtension(const std::string& fileName)
     {
         collectionType += "Entities";
     }
+    else if (EndsWith(fileName, ".pTexture"))
+    {
+        collectionType += "Textures";
+    }
 
     collectionType += ".puid";
     return collectionType;
@@ -80,4 +84,57 @@ void FileManager::SaveEngineConfigFile(PulseEngineBackend* engine, const json& e
         outFile << engineConfig.dump(4);
         outFile.close();
     }
+}
+
+FileType FileManager::GetFileType(const std::string &fileName)
+{
+    if (EndsWith(fileName, ".png") || EndsWith(fileName, ".jpg") || EndsWith(fileName, ".jpeg"))
+    {
+        return FileType::TEXTURE;
+    }
+    else if (EndsWith(fileName, ".fbx") || EndsWith(fileName, ".obj"))
+    {
+        return FileType::MESH;
+    }
+    else if (EndsWith(fileName, ".pEntity"))
+    {
+        return FileType::PULSE_ENTITY;
+    }
+    else if (EndsWith(fileName, ".pmap"))
+    {
+        return FileType::MAP;
+    }
+    else if (EndsWith(fileName, ".cpp"))
+    {
+        return FileType::SCRIPT_CPP;
+    }
+    else if (EndsWith(fileName, ".h"))
+    {
+        return FileType::SCRIPT_H;
+    }
+    else if (EndsWith(fileName, ".synapse"))
+    {
+        return FileType::SYNAPSE;
+    }
+    
+
+    return FileType::UNKNOWN;
+}
+
+std::vector<std::filesystem::path> FileManager::GetFilesInDirectoryWithExtension(const std::string &directory, const std::string &extension)
+{
+    std::vector<std::filesystem::path> files;
+    std::filesystem::path dirPath(directory);
+
+    if (std::filesystem::exists(dirPath) && std::filesystem::is_directory(dirPath))
+    {
+        for (const auto& entry : std::filesystem::directory_iterator(dirPath))
+        {
+            if (entry.is_regular_file() && entry.path().extension() == extension)
+            {
+                files.push_back(entry.path());
+            }
+        }
+    }
+    return files;
 }

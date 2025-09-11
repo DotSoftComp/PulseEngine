@@ -44,6 +44,7 @@ float CalculateDirectionalShadow(DirectionalLight light, vec3 fragPos)
 {
     vec4 fragPosLightSpace = light.lightSpaceMatrix * vec4(fragPos, 1.0);
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    projCoords = clamp(projCoords, 0.0, 1.0);
     projCoords = projCoords * 0.5 + 0.5;
 
     // Check if fragment is outside the light's orthographic frustum
@@ -143,5 +144,5 @@ void main()
 
     vec3 baseColor = albedoValid ? albedoColor.rgb : objectColor;
 
-    FragColor = vec4(baseColor * lightingResult, 1.0);
+    FragColor = vec4(lightingResult, 1.0);
 }

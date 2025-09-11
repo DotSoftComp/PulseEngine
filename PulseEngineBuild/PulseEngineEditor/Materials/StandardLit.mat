@@ -1,6 +1,10 @@
 {
   "name": "StandardLit",
   "color": [0.8, 0.8, 0.8],
-  "specular": 10.0,
-  "roughness": 0.1
+  "specular": 1.0,
+  "roughness": "Textures/player_RN.png",
+  "albedo": "Textures/TEX_Player_Starship.png",
+  "normal": "Textures/player_NM.png",
+  "height": "Textures/TEX_Player_Starship.png",
+  "guid": "15061499069030162973"
 }

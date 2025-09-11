@@ -18,13 +18,28 @@
 
 class PulseEngineBackend;
 
+    
+    enum FileType
+    {
+        TEXTURE,
+        MESH,
+        PULSE_ENTITY,
+        MATERIAL,
+        MAP,
+        SCRIPT_CPP,
+        SCRIPT_H,
+        SYNAPSE,
+        UNKNOWN
+    };
+
 class PULSE_ENGINE_DLL_API FileManager
 {
-private:
+public:
+    private:
     FileManager() = default;
     ~FileManager() = default;
 
-public:
+    public:
     static std::filesystem::path workingDirectory;
     /**
      * Returns the collection type based on the file extension.
@@ -39,7 +54,23 @@ public:
     */
     static void SaveEngineConfigFile(PulseEngineBackend* engine, const nlohmann::json_abi_v3_12_0::json& engineConfig);
 
+    /**
+     * @brief Get the File Type object based on the file extension in the path (or file name)
+     * 
+     * @param fileName the path or the name WITH the extension.
+     * @return FileType of the file (TEXTURE, MESH, PULSE_ENTITY, MATERIAL, MAP, SCRIPT_CPP, SCRIPT_H, UNKNOWN)
+     */
+    static FileType GetFileType(const std::string& fileName);
 
+
+        /**
+     * @brief Get all files in a directory with a specific extension.
+     * @param directory The directory to search in.
+     * @param extension The file extension to filter by (e.g., ".puid").
+     * @return std::vector<std::filesystem::path> List of matching files.
+     */
+    static std::vector<std::filesystem::path> GetFilesInDirectoryWithExtension(const std::string& directory, const std::string& extension);
+    
 };
 
 

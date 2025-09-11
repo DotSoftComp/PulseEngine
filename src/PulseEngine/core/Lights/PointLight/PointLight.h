@@ -34,10 +34,10 @@ public:
     void RenderShadowMap(Shader &shader, PulseEngineBackend& scene) override;
     void RecalculateLightSpaceMatrix() override;
 
-    const std::array<glm::mat4, 6>& GetShadowTransforms() const;
+    const std::array<PulseEngine::Mat4, 6>& GetShadowTransforms() const;
 
 private:
-    std::array<glm::mat4, 6> shadowTransforms;
+    std::array<PulseEngine::Mat4, 6> shadowTransforms;
 };
 
 #endif

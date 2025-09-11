@@ -10,109 +10,152 @@
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}Common/dllExport.h"{}}}
 \DoxyCodeLine{00016\ }
 \DoxyCodeLine{00017\ \textcolor{keyword}{class\ }Entity;}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00023\ \textcolor{keyword}{enum\ class}\ PulseEngineStyle}
-\DoxyCodeLine{00024\ \{}
-\DoxyCodeLine{00025\ \ \ \ \ Text,}
-\DoxyCodeLine{00026\ \ \ \ \ TextDisabled,}
-\DoxyCodeLine{00027\ \ \ \ \ WindowBg,}
-\DoxyCodeLine{00028\ \ \ \ \ ChildBg,}
-\DoxyCodeLine{00029\ \ \ \ \ PopupBg,}
-\DoxyCodeLine{00030\ \ \ \ \ Border,}
-\DoxyCodeLine{00031\ \ \ \ \ BorderShadow,}
-\DoxyCodeLine{00032\ \ \ \ \ FrameBg,}
-\DoxyCodeLine{00033\ \ \ \ \ FrameBgHovered,}
-\DoxyCodeLine{00034\ \ \ \ \ FrameBgActive,}
-\DoxyCodeLine{00035\ \ \ \ \ TitleBg,}
-\DoxyCodeLine{00036\ \ \ \ \ TitleBgActive,}
-\DoxyCodeLine{00037\ \ \ \ \ TitleBgCollapsed,}
-\DoxyCodeLine{00038\ \ \ \ \ MenuBarBg,}
-\DoxyCodeLine{00039\ \ \ \ \ ScrollbarBg,}
-\DoxyCodeLine{00040\ \ \ \ \ ScrollbarGrab,}
-\DoxyCodeLine{00041\ \ \ \ \ ScrollbarGrabHovered,}
-\DoxyCodeLine{00042\ \ \ \ \ ScrollbarGrabActive,}
-\DoxyCodeLine{00043\ \ \ \ \ CheckMark,}
-\DoxyCodeLine{00044\ \ \ \ \ SliderGrab,}
-\DoxyCodeLine{00045\ \ \ \ \ SliderGrabActive,}
-\DoxyCodeLine{00046\ \ \ \ \ Button,}
-\DoxyCodeLine{00047\ \ \ \ \ ButtonHovered,}
-\DoxyCodeLine{00048\ \ \ \ \ ButtonActive,}
-\DoxyCodeLine{00049\ \ \ \ \ Header,}
-\DoxyCodeLine{00050\ \ \ \ \ HeaderHovered,}
-\DoxyCodeLine{00051\ \ \ \ \ HeaderActive,}
-\DoxyCodeLine{00052\ \ \ \ \ Separator,}
-\DoxyCodeLine{00053\ \ \ \ \ SeparatorHovered,}
-\DoxyCodeLine{00054\ \ \ \ \ SeparatorActive,}
-\DoxyCodeLine{00055\ \ \ \ \ ResizeGrip,}
-\DoxyCodeLine{00056\ \ \ \ \ ResizeGripHovered,}
-\DoxyCodeLine{00057\ \ \ \ \ ResizeGripActive,}
-\DoxyCodeLine{00058\ \ \ \ \ InputTextCursor,}
-\DoxyCodeLine{00059\ \ \ \ \ TabHovered,}
-\DoxyCodeLine{00060\ \ \ \ \ Tab,}
-\DoxyCodeLine{00061\ \ \ \ \ TabSelected,}
-\DoxyCodeLine{00062\ \ \ \ \ TabSelectedOverline,}
-\DoxyCodeLine{00063\ \ \ \ \ TabDimmed,}
-\DoxyCodeLine{00064\ \ \ \ \ TabDimmedSelected,}
-\DoxyCodeLine{00065\ \ \ \ \ TabDimmedSelectedOverline,}
-\DoxyCodeLine{00066\ \ \ \ \ DockingPreview,}
-\DoxyCodeLine{00067\ \ \ \ \ DockingEmptyBg,}
-\DoxyCodeLine{00068\ \ \ \ \ PlotLines,}
-\DoxyCodeLine{00069\ \ \ \ \ PlotLinesHovered,}
-\DoxyCodeLine{00070\ \ \ \ \ PlotHistogram,}
-\DoxyCodeLine{00071\ \ \ \ \ PlotHistogramHovered,}
-\DoxyCodeLine{00072\ \ \ \ \ TableHeaderBg,}
-\DoxyCodeLine{00073\ \ \ \ \ TableBorderStrong,}
-\DoxyCodeLine{00074\ \ \ \ \ TableBorderLight,}
-\DoxyCodeLine{00075\ \ \ \ \ TableRowBg,}
-\DoxyCodeLine{00076\ \ \ \ \ TableRowBgAlt,}
-\DoxyCodeLine{00077\ \ \ \ \ TextLink,}
-\DoxyCodeLine{00078\ \ \ \ \ TextSelectedBg,}
-\DoxyCodeLine{00079\ \ \ \ \ TreeLines,}
-\DoxyCodeLine{00080\ \ \ \ \ DragDropTarget,}
-\DoxyCodeLine{00081\ \ \ \ \ NavCursor,}
-\DoxyCodeLine{00082\ \ \ \ \ NavWindowingHighlight,}
-\DoxyCodeLine{00083\ \ \ \ \ NavWindowingDimBg,}
-\DoxyCodeLine{00084\ \ \ \ \ ModalWindowDimBg,}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \ \ \ \ COUNT}
-\DoxyCodeLine{00087\ \};}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \textcolor{keyword}{class\ }PULSE\_ENGINE\_DLL\_API\ \mbox{\hyperlink{class_pulse_interface_a_p_i}{PulseInterfaceAPI}}}
-\DoxyCodeLine{00091\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e}{OpenWindow}}(\textcolor{keyword}{const}\ std::string\&\ name);}
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}{CloseWindow}}();}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}{WriteText}}(\textcolor{keyword}{const}\ std::string\&\ text);}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7}{Image}}(\textcolor{keywordtype}{int}\ user\_texture\_id,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ image\_size,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv1);}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}{AddSpace}}(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
-\DoxyCodeLine{00131\ }
-\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}{Button}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ size);}
-\DoxyCodeLine{00141\ }
-\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a08f3a4872b83ee1dfae61321effb666b}{Separator}}();}
-\DoxyCodeLine{00147\ }
-\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a73d8cb1a2d955e62ae01df83831f9ab8}{SameLine}}();}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PushStyleColor(PulseEngineStyle\ syle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\&\ color,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ alpha\ =\ 1.0f);}
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PopStyleColor(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}{RenderCameraToInterface}}(Camera*\ camera,\ \textcolor{keyword}{const}\ std::string\&\ windowName,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ imageSize,\ std::vector<Entity*>\ entitiesToRender);}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }Mesh;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }Material;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }IScript;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }IModuleInterface;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_context_menu_item}{ContextMenuItem}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ std::string\ label;}
+\DoxyCodeLine{00027\ \ \ \ \ std::function<void()>\ onClick;}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{enum\ class}\ PulseEngineStyle}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ Text,}
+\DoxyCodeLine{00037\ \ \ \ \ TextDisabled,}
+\DoxyCodeLine{00038\ \ \ \ \ WindowBg,}
+\DoxyCodeLine{00039\ \ \ \ \ ChildBg,}
+\DoxyCodeLine{00040\ \ \ \ \ PopupBg,}
+\DoxyCodeLine{00041\ \ \ \ \ Border,}
+\DoxyCodeLine{00042\ \ \ \ \ BorderShadow,}
+\DoxyCodeLine{00043\ \ \ \ \ FrameBg,}
+\DoxyCodeLine{00044\ \ \ \ \ FrameBgHovered,}
+\DoxyCodeLine{00045\ \ \ \ \ FrameBgActive,}
+\DoxyCodeLine{00046\ \ \ \ \ TitleBg,}
+\DoxyCodeLine{00047\ \ \ \ \ TitleBgActive,}
+\DoxyCodeLine{00048\ \ \ \ \ TitleBgCollapsed,}
+\DoxyCodeLine{00049\ \ \ \ \ MenuBarBg,}
+\DoxyCodeLine{00050\ \ \ \ \ ScrollbarBg,}
+\DoxyCodeLine{00051\ \ \ \ \ ScrollbarGrab,}
+\DoxyCodeLine{00052\ \ \ \ \ ScrollbarGrabHovered,}
+\DoxyCodeLine{00053\ \ \ \ \ ScrollbarGrabActive,}
+\DoxyCodeLine{00054\ \ \ \ \ CheckMark,}
+\DoxyCodeLine{00055\ \ \ \ \ SliderGrab,}
+\DoxyCodeLine{00056\ \ \ \ \ SliderGrabActive,}
+\DoxyCodeLine{00057\ \ \ \ \ Button,}
+\DoxyCodeLine{00058\ \ \ \ \ ButtonHovered,}
+\DoxyCodeLine{00059\ \ \ \ \ ButtonActive,}
+\DoxyCodeLine{00060\ \ \ \ \ Header,}
+\DoxyCodeLine{00061\ \ \ \ \ HeaderHovered,}
+\DoxyCodeLine{00062\ \ \ \ \ HeaderActive,}
+\DoxyCodeLine{00063\ \ \ \ \ Separator,}
+\DoxyCodeLine{00064\ \ \ \ \ SeparatorHovered,}
+\DoxyCodeLine{00065\ \ \ \ \ SeparatorActive,}
+\DoxyCodeLine{00066\ \ \ \ \ ResizeGrip,}
+\DoxyCodeLine{00067\ \ \ \ \ ResizeGripHovered,}
+\DoxyCodeLine{00068\ \ \ \ \ ResizeGripActive,}
+\DoxyCodeLine{00069\ \ \ \ \ InputTextCursor,}
+\DoxyCodeLine{00070\ \ \ \ \ TabHovered,}
+\DoxyCodeLine{00071\ \ \ \ \ Tab,}
+\DoxyCodeLine{00072\ \ \ \ \ TabSelected,}
+\DoxyCodeLine{00073\ \ \ \ \ TabSelectedOverline,}
+\DoxyCodeLine{00074\ \ \ \ \ TabDimmed,}
+\DoxyCodeLine{00075\ \ \ \ \ TabDimmedSelected,}
+\DoxyCodeLine{00076\ \ \ \ \ TabDimmedSelectedOverline,}
+\DoxyCodeLine{00077\ \ \ \ \ DockingPreview,}
+\DoxyCodeLine{00078\ \ \ \ \ DockingEmptyBg,}
+\DoxyCodeLine{00079\ \ \ \ \ PlotLines,}
+\DoxyCodeLine{00080\ \ \ \ \ PlotLinesHovered,}
+\DoxyCodeLine{00081\ \ \ \ \ PlotHistogram,}
+\DoxyCodeLine{00082\ \ \ \ \ PlotHistogramHovered,}
+\DoxyCodeLine{00083\ \ \ \ \ TableHeaderBg,}
+\DoxyCodeLine{00084\ \ \ \ \ TableBorderStrong,}
+\DoxyCodeLine{00085\ \ \ \ \ TableBorderLight,}
+\DoxyCodeLine{00086\ \ \ \ \ TableRowBg,}
+\DoxyCodeLine{00087\ \ \ \ \ TableRowBgAlt,}
+\DoxyCodeLine{00088\ \ \ \ \ TextLink,}
+\DoxyCodeLine{00089\ \ \ \ \ TextSelectedBg,}
+\DoxyCodeLine{00090\ \ \ \ \ TreeLines,}
+\DoxyCodeLine{00091\ \ \ \ \ DragDropTarget,}
+\DoxyCodeLine{00092\ \ \ \ \ NavCursor,}
+\DoxyCodeLine{00093\ \ \ \ \ NavWindowingHighlight,}
+\DoxyCodeLine{00094\ \ \ \ \ NavWindowingDimBg,}
+\DoxyCodeLine{00095\ \ \ \ \ ModalWindowDimBg,}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ COUNT}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{class\ }PULSE\_ENGINE\_DLL\_API\ \mbox{\hyperlink{class_pulse_interface_a_p_i}{PulseInterfaceAPI}}}
+\DoxyCodeLine{00102\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e1be73b76f96cda26254ddce3500c6e}{OpenWindow}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a86fcab2d2e4c1f4062ec0832f08b0dff}{CloseWindow}}();}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}{WriteText}}(\textcolor{keyword}{const}\ std::string\&\ text);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1686b95043ae84a23aac05ada35743d7}{Image}}(\textcolor{keywordtype}{int}\ user\_texture\_id,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ image\_size,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ uv1);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}{AddSpace}}(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}{Button}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ size);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a08f3a4872b83ee1dfae61321effb666b}{Separator}}();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a73d8cb1a2d955e62ae01df83831f9ab8}{SameLine}}();}
 \DoxyCodeLine{00164\ }
-\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{static}\ Entity*\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}{GetSelectedEntity}}();}
-\DoxyCodeLine{00171\ }
-\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_ae9dc76f69da09b627aa4176c8a45eabd}{IsCurrentWindowFocused}}();}
-\DoxyCodeLine{00177\ }
-\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}{MouseIn}}();}
-\DoxyCodeLine{00184\ \ \ \ \ }
-\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}{MouseDelta}}();}
-\DoxyCodeLine{00193\ }
-\DoxyCodeLine{00194\ \};}
-\DoxyCodeLine{00195\ }
-\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PushStyleColor(PulseEngineStyle\ syle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{PulseEngine::Vector3}}\&\ color,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ alpha\ =\ 1.0f);}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ PopStyleColor(\textcolor{keywordtype}{int}\ amount\ =\ 1);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a06f9e09a4af72f2ba639fbb654a6ebd7}{RenderCameraToInterface}}(\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}*\ previewData,\ Camera*\ camera,\ \textcolor{keyword}{const}\ std::string\&\ windowName,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ imageSize,\ std::vector<Entity*>\ entitiesToRender,\ Shader*\ shader\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{static}\ Entity*\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}{GetSelectedEntity}}();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_ae9dc76f69da09b627aa4176c8a45eabd}{IsCurrentWindowFocused}}();}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}{MouseIn}}();}
+\DoxyCodeLine{00195\ \ \ \ \ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}{MouseDelta}}();}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a5bf434be03bec81a3f62c66708527caa}{AddFunctionToFileClickedCallbacks}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ ClickedFileData\&)>\ callback);}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_ab75fad842d336359f18d7cd825e78c42}{BeginChild}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ size,\ \textcolor{keywordtype}{bool}\ border\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a25c2eeabe4f3606b453c37e538e986b9}{EndChild}}();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_a8eda8de279e71a465dbc226e722c0f0a}{BeginCombo}}(\textcolor{keyword}{const}\ std::string\&\ label,\ \textcolor{keyword}{const}\ std::string\&\ previewValue);}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_abcb58eb5c098f748c875bf34422c917a}{EndCombo}}();}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pulse_interface_a_p_i_ab2a238fd234898097cbc5379d28f9a1e}{Selectable}}(\textcolor{keyword}{const}\ std::string\&\ label,\ \textcolor{keywordtype}{bool}\ selected\ =\ \textcolor{keyword}{false},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\&\ size\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}(0,\ 0));}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddTransformModifier(Entity*\ entity,\ \textcolor{keyword}{const}\ std::string\&\ modifierName);}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddTransformModifierForMesh(Mesh*\ mesh,\ \textcolor{keyword}{const}\ std::string\&\ modifierName);}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ StartTreeNode(\textcolor{keyword}{const}\ std::string\ \&name,\ \textcolor{keywordtype}{bool}\ *open);}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ EndTreeNode();}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddMaterialPreview(Material\ *\&material,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ \&imageSize,\ \textcolor{keyword}{const}\ std::string\ \&name\ =\ \textcolor{stringliteral}{"{}Material\ Preview"{}});}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MaterialPicker(Material\ *\&material);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{PulseEngine::Vector2}}\ GetActualWindowSize();}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ DragFloat(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ label,\ \textcolor{keywordtype}{float}*\ value,\ \textcolor{keywordtype}{float}\ speed\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ minVal\ =\ 0.0f,\ \textcolor{keywordtype}{float}\ maxVal\ =\ 0.0f,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ format\ =\ \textcolor{stringliteral}{"{}\%.3f"{}});}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ DragFloat3(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ label,\ \textcolor{keywordtype}{float}*\ values,\ \textcolor{keywordtype}{float}\ speed\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ minVal\ =\ 0.0f,\ \textcolor{keywordtype}{float}\ maxVal\ =\ 0.0f,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ format\ =\ \textcolor{stringliteral}{"{}\%.3f"{}});}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ChangeWindowState(IModuleInterface*\ script,\ \textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowContextMenu(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ popupId,\ \textcolor{keyword}{const}\ std::vector<ContextMenuItem>\&\ items);}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ OpenContextMenu(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ popupId);}
+\DoxyCodeLine{00275\ \};}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

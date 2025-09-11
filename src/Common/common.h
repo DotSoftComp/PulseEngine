@@ -29,6 +29,7 @@
 #include "PulseEngine/core/Math/Vector.h"
 #include "PulseEngine/core/Math/Mat4.h"
 #include "PulseEngine/core/Math/Mat3.h"
+#include "PulseEngine/core/Math/Quaternion.h"
 #include "PulseEngine/core/Math/Color.h"
 #include "PulseEngine/core/Math/Transform/Transform.h"
 
@@ -45,7 +46,68 @@
 // --------------------
 // Platform-Specific Includes
 // --------------------
-#include <Windows.h>    // Windows API access (window creation, dialogs, etc.)
+// -----------------------------
+// Windows
+// -----------------------------
+#ifdef PULSE_WINDOWS
+    #include <Windows.h>      // Core Windows API
+    #include <direct.h>       // _mkdir, _getcwd
+#endif
+
+// -----------------------------
+// Linux
+// -----------------------------
+#ifdef PULSE_LINUX
+#endif
+
+// -----------------------------
+// macOS
+// -----------------------------
+#ifdef PULSE_MACOS
+#endif
+
+// -----------------------------
+// Android
+// -----------------------------
+#ifdef PULSE_ANDROID
+#endif
+
+// -----------------------------
+// iOS
+// -----------------------------
+#ifdef PULSE_IOS
+#endif
+
+// -----------------------------
+// Web (Emscripten)
+// -----------------------------
+#ifdef PULSE_WEB
+#endif
+
+// -----------------------------
+// PlayStation 4
+// -----------------------------
+#ifdef PULSE_PLAYSTATION4
+#endif
+
+// -----------------------------
+// PlayStation 5
+// -----------------------------
+#ifdef PULSE_PLAYSTATION5
+#endif
+
+// -----------------------------
+// Xbox One
+// -----------------------------
+#ifdef PULSE_XBOXONE
+#endif
+
+// -----------------------------
+// Nintendo Switch 2
+// -----------------------------
+#ifdef PULSE_SWITCH2
+#endif
+    
 
 // --------------------
 // Editor/Build Mode Flags
@@ -55,7 +117,7 @@
 // --------------------
 // Graphics Includes (only in engine or editor build with OpenGL)
 // --------------------
-#ifdef WINDOW_PULSE_EXPORT
+#ifdef PULSE_GRAPHIC_OPENGL
     #include <glad.h>                       // OpenGL function loader
     #include <GLFW/glfw3.h>                 // Cross-platform windowing/input
     #include <glm/glm.hpp>                  // GLM core
@@ -68,9 +130,15 @@
 // Editor UI Integration (ImGui)
 // --------------------
 #ifdef ENGINE_EDITOR
+    #define IMGUI_DEFINE_MATH_OPERATORS
     #include "imgui.h"
+    #include "imgui_internal.h"
     #include "backends/imgui_impl_glfw.h"
     #include "backends/imgui_impl_opengl3.h"
+    #include "imgui-node/imgui_node_editor.h"
+    #include "imgui-node/imgui_node_editor_internal.h"
+namespace ed = ax::NodeEditor;
+
 #endif
 
 #include "PulseEngine/core/WindowContext/WindowContext.h"

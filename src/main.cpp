@@ -14,6 +14,7 @@
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
 #include "PulseEngine/CustomScripts/IScripts.h"
 #include "PulseEngine/core/FileManager/FileManager.h"
+#include "PulseEngine/core/Graphics/IGraphicsApi.h"
 
 #ifdef ENGINE_EDITOR
     #include "PulseEngineEditor/InterfaceEditor/InterfaceEditor.h"
@@ -60,6 +61,7 @@ int main()
     EDITOR_ONLY(
         InterfaceEditor* editor = new InterfaceEditor();
         engine->editor = editor;
+        editor->InitAfterEngine();
     )
     
 
@@ -69,14 +71,15 @@ int main()
         engine->PollEvents();
         engine->Update();
 
-        engine->RenderShadow();
+        engine->RenderShadow();        
         engine->Render();
+        
         EDITOR_ONLY(
             editor->Render();
         )
 
-        glfwSwapBuffers(engine->GetWindowContext()->GetGLFWWindow());
-        glfwPollEvents();
+        engine->graphicsAPI->SwapBuffers();
+        engine->graphicsAPI->PollEvents();
     }
     engine->Shutdown();
 

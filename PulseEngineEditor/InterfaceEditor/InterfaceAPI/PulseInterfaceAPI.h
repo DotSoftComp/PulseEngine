@@ -16,6 +16,16 @@
 
 class Entity;
 class Mesh;
+class Material;
+class IScript;
+class IModuleInterface;
+
+
+struct ContextMenuItem
+{
+    std::string label;
+    std::function<void()> onClick;
+};
 
 /**
  * @brief All the style needed to modify (push/pop) style for the element of the UI of the editor.
@@ -161,7 +171,7 @@ public:
      * @param windowName The name of the ImGui window.
      * @param imageSize The size to display the image.
      */
-    static void RenderCameraToInterface(Camera* camera, const std::string& windowName, const PulseEngine::Vector2& imageSize, std::vector<Entity*> entitiesToRender);
+    static void RenderCameraToInterface(PulseEngine::Vector2* previewData, Camera* camera, const std::string& windowName, const PulseEngine::Vector2& imageSize, std::vector<Entity*> entitiesToRender, Shader* shader = nullptr);
 
     /**
      * @brief Get the Selected Entity object
@@ -244,6 +254,24 @@ public:
 
     static void AddTransformModifier(Entity* entity, const std::string& modifierName);
     static void AddTransformModifierForMesh(Mesh* mesh, const std::string& modifierName);
+
+    static bool StartTreeNode(const std::string &name, bool *open);
+    static void EndTreeNode();
+
+    static void AddMaterialPreview(Material *&material, const PulseEngine::Vector2 &imageSize, const std::string &name = "Material Preview");
+
+    static void MaterialPicker(Material *&material);
+
+    static PulseEngine::Vector2 GetActualWindowSize();
+
+    static bool DragFloat(const char* label, float* value, float speed = 1.0f, float minVal = 0.0f, float maxVal = 0.0f, const char* format = "%.3f");
+
+    static bool DragFloat3(const char* label, float* values, float speed = 1.0f, float minVal = 0.0f, float maxVal = 0.0f, const char* format = "%.3f");
+
+    static void ChangeWindowState(IModuleInterface* script, bool state);
+
+    static void ShowContextMenu(const char* popupId, const std::vector<ContextMenuItem>& items);
+    static void OpenContextMenu(const char* popupId);
 };
 
 #endif

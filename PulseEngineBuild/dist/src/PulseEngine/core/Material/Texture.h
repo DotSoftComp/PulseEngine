@@ -13,6 +13,8 @@ public:
     void Bind(unsigned int slot = 0) const;
     void Unbind() const;
 
+    std::string GetPath() const { return path; }
+
     unsigned int id;
 private:
     std::string path;

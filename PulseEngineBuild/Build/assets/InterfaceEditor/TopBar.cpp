@@ -33,6 +33,20 @@
 #include "PulseEngine/core/coroutine/CoroutineManager.h"
 #include "PulseEngineEditor/InterfaceEditor/BuildGameCoroutine.h"
 #include "PulseEngine/CustomScripts/ScriptsLoader.h"
+#include <windows.h>
+#include <commdlg.h>
+#include "json.hpp"
+
+
+void ResetWorkingDirectoryToExe()
+{
+    char exePath[MAX_PATH];
+    GetModuleFileNameA(NULL, exePath, MAX_PATH);
+
+    std::filesystem::path exeDir = std::filesystem::path(exePath).parent_path();
+    std::filesystem::current_path(exeDir);
+}
+
 
 /**
  * @brief Update the top bar of the editor interface. It's actually the render of the bar in ImGui
@@ -49,13 +63,23 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
     if (ImGui::BeginMainMenuBar())
     {
         // === FILE MENU ===
-        if (ImGui::BeginMenu("File"))
+
+        if(ImGui::BeginMenu("Map"))
         {
             if (ImGui::MenuItem("New map"))
             {
                 requestOpenNewMapPopup = true;
                 strcpy(newMapName, "");
             }
+            if (ImGui::MenuItem("Save"))
+            {
+                SceneLoader::SaveSceneToFile(engine->actualMapName, engine);
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Build"))
+        {
+
             if (ImGui::MenuItem("Build game"))
             {     
                 ///
@@ -69,31 +93,14 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                 
             }
 
-            if (ImGui::MenuItem("Open"))
-            {
-                // TODO: Add open map logic
-            }
-
-            if (ImGui::MenuItem("Save"))
-            {
-                SceneLoader::SaveSceneToFile(engine->actualMapName, engine);
-            }
-
-            if (ImGui::MenuItem("Exit"))
-            {
-                // TODO: Add exit logic
-            }
-
             ImGui::EndMenu();
         }
 
         // === EDIT MENU ===
-        if (ImGui::BeginMenu("Edit"))
+        if (ImGui::BeginMenu("Add"))
         {
-            if (ImGui::MenuItem("Undo")) { /* TODO: Undo logic */ }
-            if (ImGui::MenuItem("Redo")) { /* TODO: Redo logic */ }
-
-            if (ImGui::BeginMenu("Add"))
+            
+            if (ImGui::BeginMenu("Primitive"))
             {
                 if (ImGui::MenuItem("Cube"))
                 {
@@ -131,45 +138,85 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                     cube->SetMuid(GenerateGUIDFromPathAndMap(finalName, engine->actualMapPath));
                     engine->entities.push_back(cube);
                 }
-                if (ImGui::MenuItem("Point light"))
-                {
-                    engine->lights.push_back(new PointLight(
-                        PulseEngine::Vector3(0.0f, 5.0f, 0.0f),
-                        PulseEngine::Color(1.0f, 1.0f, 1.0f),
-                        5.0f,
-                        5.0f,
-                        50.0f
-                    ));
-
-                }
-                if (ImGui::MenuItem("Directional light"))
-                {
-                    engine->lights.push_back(new DirectionalLight(
-                        1.0f,
-                        50.0f,
-                        glm::vec3(0.0f,0.0f,0.0f),
-                        PulseEngine::Vector3(0.0f, 0.0f, 0.0f),
-                        PulseEngine::Color(1.0f, 1.0f, 1.0f),
-                        1.0f,
-                        10.0f
-                    ));
-
-                }
-
                 ImGui::EndMenu();
             }
+            if (ImGui::MenuItem("Point light"))
+            {
+                engine->lights.push_back(new PointLight(
+                    PulseEngine::Vector3(0.0f, 5.0f, 0.0f),
+                    PulseEngine::Color(1.0f, 1.0f, 1.0f),
+                    5.0f,
+                    5.0f,
+                    50.0f
+                ));
 
+            }
+            if (ImGui::MenuItem("Directional light"))
+            {
+                engine->lights.push_back(new DirectionalLight(
+                    1.0f,
+                    50.0f,
+                    PulseEngine::Vector3(0.0f,0.0f,0.0f),
+                    PulseEngine::Vector3(0.0f, 0.0f, 0.0f),
+                    PulseEngine::Color(1.0f, 1.0f, 1.0f),
+                    1.0f,
+                    10.0f
+                ));
+
+            }            
+
+            if(ImGui::MenuItem("Import"))
+            {
+                char filePath[MAX_PATH] = "";
+
+                OPENFILENAME ofn = {};
+                ofn.lStructSize = sizeof(ofn);
+                ofn.hwndOwner = nullptr;
+                ofn.lpstrFile = filePath;
+                ofn.nMaxFile = sizeof(filePath);
+                ofn.lpstrFilter = "3D Models\0*.obj;*.fbx;*.glb\0Images\0*.png;*.jpeg\0All\0*.*\0";
+                ofn.nFilterIndex = 1;
+                ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+                if (GetOpenFileName(&ofn))
+                {
+                    // ResetWorkingDirectoryToExe();
+                    std::cout << "Selected file: " << filePath << std::endl;
+                    std::string name = std::string(filePath).substr(std::string(filePath).find_last_of("/\\") + 1);
+                    std::string assetPath = editor->currentDir.string() + "/" + name;
+
+                    std::string guidPath;
+                    switch(FileManager::GetFileType(filePath))
+                    {
+                        case FileType::MESH:
+                            std::cout << "importing mesh : " << name << std::endl;
+                            ImportMesh(editor, name, guidPath, filePath, assetPath);
+                            break;
+                        case FileType::TEXTURE:
+                            {
+                                std::cout << "Importing texture: " << name << std::endl;
+                                std::filesystem::current_path(FileManager::workingDirectory);
+                                    std::string copyCommand = "xcopy \"" + std::string(filePath) + "\" \"" + assetPath + "\" /Y";
+                                    system(copyCommand.c_str());
+                            }
+                            break;
+                    }
+                }
+            }
             ImGui::EndMenu();
         }
 
         // === VIEW MENU ===
         if (ImGui::BeginMenu("View"))
         {
-            if (ImGui::MenuItem("Scene")) { editor->windowStates["viewport"] = !editor->windowStates["viewport"]; }
-            if (ImGui::MenuItem("Entity Analyzer")) { editor->windowStates["EntityAnalyzer"] = !editor->windowStates["EntityAnalyzer"]; }
-            if (ImGui::MenuItem("Engine Config")) { editor->windowStates["EngineConfig"] = !editor->windowStates["EngineConfig"]; }
-            if (ImGui::MenuItem("Scene Data")) { editor->windowStates["SceneData"] = !editor->windowStates["SceneData"]; }
-            if (ImGui::MenuItem("Asset Manager")) { editor->windowStates["assetManager"] = !editor->windowStates["assetManager"]; }
+
+            for (auto& win : editor->windowStates)
+            {
+                if (ImGui::MenuItem(win.first.c_str()))
+                {
+                    win.second = !win.second;
+                }
+            }
 
             ImGui::EndMenu();
         }
@@ -214,6 +261,50 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
         }
 
         ImGui::EndPopup();
+    }
+}
+
+void TopBar::ImportMesh(InterfaceEditor *editor, std::string &name, std::string &guidPath, char filePath[260], std::string &meshPath)
+{
+    std::string fileStr = editor->currentDir.string() + "/" + name + ".pmesh";
+    std::string prefix = "PulseEngineEditor";
+    DeletePrefix(fileStr, prefix, guidPath);
+
+    std::cout << "GUID Path: " << guidPath << std::endl;
+    std::cout << "Name : " << name << std::endl;
+    std::cout << "fileStr : " << fileStr << std::endl;
+
+    std::filesystem::current_path(FileManager::workingDirectory);
+
+    GuidReader::InsertIntoCollection(guidPath);
+    std::string copyCommand = "xcopy \"" + std::string(filePath) + "\" \"" + meshPath + "\" /Y";
+    system(copyCommand.c_str());
+
+    DeletePrefix(meshPath, prefix, meshPath);
+    std::ofstream guidFile(fileStr);
+    nlohmann::json_abi_v3_12_0::json guidJson;
+    guidJson["Guid"] = GenerateGUIDFromPath(guidPath);
+    guidJson["Name"] = name;
+    guidJson["MeshPath"] = meshPath;
+    guidJson["CreationDate"] = std::time(nullptr);
+
+    guidFile << guidJson.dump(4);
+    guidFile.close();
+}
+
+void TopBar::DeletePrefix(std::string &fileStr, std::string &prefix, std::string &guidPath)
+{
+    if (fileStr.find(prefix) == 0)
+    {
+        guidPath = fileStr.substr(prefix.length());
+    }
+    else
+    {
+        guidPath = fileStr;
+    }
+    while(guidPath.length() > 0 && guidPath[0] == '\\')
+    {
+        guidPath.erase(0, 1);
     }
 }
 

@@ -1,0 +1,39 @@
+{
+    "entities": [
+        {
+            "Scripts": [
+                {
+                    "exposedVariables": [
+                        {
+                            "name": "speed",
+                            "type": 0,
+                            "value": 150
+                        }
+                    ],
+                    "guid": 4851508466907661696,
+                    "isEntityLinked": true,
+                    "name": "PulseScriptComponentPierre"
+                }
+            ],
+            "guid": 6925580104504655341,
+            "muid": 0,
+            "name": "Entities\\EntityPierre.pEntity",
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    ],
+    "sceneName": "Gameplay.pmap"
+}

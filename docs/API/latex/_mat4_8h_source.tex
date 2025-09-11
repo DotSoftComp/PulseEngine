@@ -6,142 +6,155 @@
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAT4PULSE\_H}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstring>}\ }
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }PulseEngine}
-\DoxyCodeLine{00007\ \{}
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{struct\ }PULSE\_ENGINE\_DLL\_API\ Mat4}
-\DoxyCodeLine{00013\ \ \ \ \ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ data[4][4];\ }
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ constructor\ initializes\ to\ identity\ matrix}}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ Mat4()}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2}{SetIdentity}}();}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constructor\ that\ sets\ the\ diagonal\ to\ a\ scalar\ value}}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Mat4(\textcolor{keywordtype}{float}\ scalar)}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ memset(data,\ 0,\ \textcolor{keyword}{sizeof}(data));}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[i][i]\ =\ scalar;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2}{SetIdentity}}()}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}PulseEngine/core/Math/Vector.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }PulseEngine}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{struct\ }PULSE\_ENGINE\_DLL\_API\ Mat4}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ data[4][4];\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ constructor\ initializes\ to\ identity\ matrix}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ Mat4()}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2}{SetIdentity}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constructor\ that\ sets\ the\ diagonal\ to\ a\ scalar\ value}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ Mat4(\textcolor{keywordtype}{float}\ scalar)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ memset(data,\ 0,\ \textcolor{keyword}{sizeof}(data));}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[i][i]\ =\ scalar;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ Mat4(\textcolor{keywordtype}{float}\ m00,\ \textcolor{keywordtype}{float}\ m01,\ \textcolor{keywordtype}{float}\ m02,\ \textcolor{keywordtype}{float}\ m03,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m10,\ \textcolor{keywordtype}{float}\ m11,\ \textcolor{keywordtype}{float}\ m12,\ \textcolor{keywordtype}{float}\ m13,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m20,\ \textcolor{keywordtype}{float}\ m21,\ \textcolor{keywordtype}{float}\ m22,\ \textcolor{keywordtype}{float}\ m23,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m30,\ \textcolor{keywordtype}{float}\ m31,\ \textcolor{keywordtype}{float}\ m32,\ \textcolor{keywordtype}{float}\ m33)}
 \DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ memset(data,\ 0,\ \textcolor{keyword}{sizeof}(data));}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[i][i]\ =\ 1.0f;}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a5a4c09a7112593d6f9e31de7680724d5}{operator[]}}(\textcolor{keywordtype}{int}\ row)}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[row];}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a7b3f3074509a0b6a9bddf4e919c2d43f}{operator[]}}(\textcolor{keywordtype}{int}\ row)\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00063\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[row];}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}()\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00073\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&data[0][0];}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6408391ca4308ac795ae1288533b062c}{Ptr}}()}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&data[0][0];}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f8ba01531909e358d2336bf5369e45e}{operator*}}(\textcolor{keyword}{const}\ Mat4\&\ other)\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00094\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(0.0f);}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 4;\ ++row)}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 4;\ ++col)}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.data[row][col]\ +=\ data[row][i]\ *\ other.data[i][col];}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa88ef30aac252732d6399db877f53301}{MultiplyPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ v)\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00116\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ data[0][0]\ *\ v.x\ +\ data[0][1]\ *\ v.y\ +\ data[0][2]\ *\ v.z\ +\ data[0][3];}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ data[1][0]\ *\ v.x\ +\ data[1][1]\ *\ v.y\ +\ data[1][2]\ *\ v.z\ +\ data[1][3];}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ z\ =\ data[2][0]\ *\ v.x\ +\ data[2][1]\ *\ v.y\ +\ data[2][2]\ *\ v.z\ +\ data[2][3];}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ w\ =\ data[3][0]\ *\ v.x\ +\ data[3][1]\ *\ v.y\ +\ data[3][2]\ *\ v.z\ +\ data[3][3];}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ data[0][0]\ =\ m00;\ data[0][1]\ =\ m01;\ data[0][2]\ =\ m02;\ data[0][3]\ =\ m03;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ data[1][0]\ =\ m10;\ data[1][1]\ =\ m11;\ data[1][2]\ =\ m12;\ data[1][3]\ =\ m13;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ data[2][0]\ =\ m20;\ data[2][1]\ =\ m21;\ data[2][2]\ =\ m22;\ data[2][3]\ =\ m23;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ data[3][0]\ =\ m30;\ data[3][1]\ =\ m31;\ data[3][2]\ =\ m32;\ data[3][3]\ =\ m33;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_abe48bb51325265c1dff4d35eb1033ed2}{SetIdentity}}()}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ memset(data,\ 0,\ \textcolor{keyword}{sizeof}(data));}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[i][i]\ =\ 1.0f;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a5a4c09a7112593d6f9e31de7680724d5}{operator[]}}(\textcolor{keywordtype}{int}\ row)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[row];}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a7b3f3074509a0b6a9bddf4e919c2d43f}{operator[]}}(\textcolor{keywordtype}{int}\ row)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00076\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[row];}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&data[0][0];}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6408391ca4308ac795ae1288533b062c}{Ptr}}()}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&data[0][0];}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f8ba01531909e358d2336bf5369e45e}{operator*}}(\textcolor{keyword}{const}\ Mat4\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00107\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(0.0f);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 4;\ ++row)}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 4;\ ++col)}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.data[row][col]\ +=\ data[row][i]\ *\ other.data[i][col];}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (w\ !=\ 0.0f\ \&\&\ w\ !=\ 1.0f)}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ /=\ w;}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ /=\ w;}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ z\ /=\ w;}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(x,\ y,\ z);}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_ae92ca35c7395fa61874275357eccb3d0}{MultiplyVector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ v)\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00138\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ data[0][0]\ *\ v.x\ +\ data[0][1]\ *\ v.y\ +\ data[0][2]\ *\ v.z;}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ data[1][0]\ *\ v.x\ +\ data[1][1]\ *\ v.y\ +\ data[1][2]\ *\ v.z;}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ z\ =\ data[2][0]\ *\ v.x\ +\ data[2][1]\ *\ v.y\ +\ data[2][2]\ *\ v.z;}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(x,\ y,\ z);}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6d0f39ab2572f84afb1aa39401c9dca8}{CreateTranslation}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ t)}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(1.0f);}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ result[0][3]\ =\ t.x;}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ result[1][3]\ =\ t.y;}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][3]\ =\ t.z;}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f79a73acaad927cd1dd5697b60e9999}{CreateScale}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ s)}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(1.0f);}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ result[0][0]\ =\ s.x;}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ result[1][1]\ =\ s.y;}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][2]\ =\ s.z;}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa7c78169f83a22a9048d7a1f53a8a46a}{CreateFromEulerAngles}}(\textcolor{keywordtype}{float}\ pitch,\ \textcolor{keywordtype}{float}\ yaw,\ \textcolor{keywordtype}{float}\ roll)}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ rotation\ matrices\ for\ each\ axis}}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cp\ =\ cosf(pitch),\ sp\ =\ sinf(pitch);}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ cosf(yaw),\ sy\ =\ sinf(yaw);}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cr\ =\ cosf(roll),\ sr\ =\ sinf(roll);}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ rx(1.0f);}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ rx[1][1]\ =\ cp;\ rx[1][2]\ =\ -\/sp;}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ rx[2][1]\ =\ sp;\ rx[2][2]\ =\ cp;}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ ry(1.0f);}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ ry[0][0]\ =\ cy;\ ry[0][2]\ =\ sy;}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ ry[2][0]\ =\ -\/sy;\ ry[2][2]\ =\ cy;}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ rz(1.0f);}
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ rz[0][0]\ =\ cr;\ rz[0][1]\ =\ -\/sr;}
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ rz[1][0]\ =\ sr;\ rz[1][1]\ =\ cr;}
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rz\ *\ ry\ *\ rx;\ \textcolor{comment}{//\ Note:\ order\ matters!}}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00206\ }
-\DoxyCodeLine{00207\ \ \ \ \ \};}
-\DoxyCodeLine{00208\ \}}
-\DoxyCodeLine{00209\ }
-\DoxyCodeLine{00210\ }
-\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa88ef30aac252732d6399db877f53301}{MultiplyPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ v)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00129\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ data[0][0]\ *\ v.x\ +\ data[0][1]\ *\ v.y\ +\ data[0][2]\ *\ v.z\ +\ data[0][3];}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ data[1][0]\ *\ v.x\ +\ data[1][1]\ *\ v.y\ +\ data[1][2]\ *\ v.z\ +\ data[1][3];}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ z\ =\ data[2][0]\ *\ v.x\ +\ data[2][1]\ *\ v.y\ +\ data[2][2]\ *\ v.z\ +\ data[2][3];}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ w\ =\ data[3][0]\ *\ v.x\ +\ data[3][1]\ *\ v.y\ +\ data[3][2]\ *\ v.z\ +\ data[3][3];}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (w\ !=\ 0.0f\ \&\&\ w\ !=\ 1.0f)}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ /=\ w;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ /=\ w;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ z\ /=\ w;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(x,\ y,\ z);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_ae92ca35c7395fa61874275357eccb3d0}{MultiplyVector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ v)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00151\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ data[0][0]\ *\ v.x\ +\ data[0][1]\ *\ v.y\ +\ data[0][2]\ *\ v.z;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ data[1][0]\ *\ v.x\ +\ data[1][1]\ *\ v.y\ +\ data[1][2]\ *\ v.z;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ z\ =\ data[2][0]\ *\ v.x\ +\ data[2][1]\ *\ v.y\ +\ data[2][2]\ *\ v.z;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(x,\ y,\ z);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a6d0f39ab2572f84afb1aa39401c9dca8}{CreateTranslation}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ t)}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(1.0f);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ result[0][3]\ =\ t.x;}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ result[1][3]\ =\ t.y;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][3]\ =\ t.z;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a8f79a73acaad927cd1dd5697b60e9999}{CreateScale}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ s)}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result(1.0f);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ result[0][0]\ =\ s.x;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ result[1][1]\ =\ s.y;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][2]\ =\ s.z;}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Mat4\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4_aa7c78169f83a22a9048d7a1f53a8a46a}{CreateFromEulerAngles}}(\textcolor{keywordtype}{float}\ pitch,\ \textcolor{keywordtype}{float}\ yaw,\ \textcolor{keywordtype}{float}\ roll)}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ rotation\ matrices\ for\ each\ axis}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cp\ =\ cosf(pitch),\ sp\ =\ sinf(pitch);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ cosf(yaw),\ sy\ =\ sinf(yaw);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cr\ =\ cosf(roll),\ sr\ =\ sinf(roll);}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ rx(1.0f);}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ rx[1][1]\ =\ cp;\ rx[1][2]\ =\ -\/sp;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ rx[2][1]\ =\ sp;\ rx[2][2]\ =\ cp;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ ry(1.0f);}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ ry[0][0]\ =\ cy;\ ry[0][2]\ =\ sy;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ ry[2][0]\ =\ -\/sy;\ ry[2][2]\ =\ cy;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ rz(1.0f);}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ rz[0][0]\ =\ cr;\ rz[0][1]\ =\ -\/sr;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ rz[1][0]\ =\ sr;\ rz[1][1]\ =\ cr;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rz\ *\ ry\ *\ rx;\ \textcolor{comment}{//\ Note:\ order\ matters!}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \};}
+\DoxyCodeLine{00221\ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

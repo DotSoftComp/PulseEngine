@@ -99,6 +99,8 @@ $(function(){initNavTree('namespace_pulse_engine_1_1_math_utils.html','',''); })
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0f831137f783fc249c3f5e6c5902e82d" id="r_a0f831137f783fc249c3f5e6c5902e82d"><td class="memItemLeft" align="right" valign="top"><a id="a0f831137f783fc249c3f5e6c5902e82d" name="a0f831137f783fc249c3f5e6c5902e82d"></a>
+<a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MultiplyPoint</b> (const <a class="el" href="struct_pulse_engine_1_1_mat4.html">Mat4</a> &amp;mat, const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;vec)</td></tr>
 <tr class="memitem:a44c3b6227858241c58fcc3bf839f5900" id="r_a44c3b6227858241c58fcc3bf839f5900"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44c3b6227858241c58fcc3bf839f5900">ToRadians</a> (float degrees)</td></tr>
 <tr class="memdesc:a44c3b6227858241c58fcc3bf839f5900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert degrees to radians.  <br /></td></tr>
 <tr class="memitem:acfecb92b970cefa26e8c08141090f4f0" id="r_acfecb92b970cefa26e8c08141090f4f0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfecb92b970cefa26e8c08141090f4f0">ToDegrees</a> (float radians)</td></tr>
@@ -109,6 +111,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a3e03e15e6cf50d03a659d67e1bdfcf1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make an object rotate, to look at a certain position.  <br /></td></tr>
 <tr class="memitem:a2cbbb2d07fe726c88c46c4fc07c49528" id="r_a2cbbb2d07fe726c88c46c4fc07c49528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cbbb2d07fe726c88c46c4fc07c49528">RotateAround</a> (const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;target, float yaw, float pitch, float radius)</td></tr>
 <tr class="memdesc:a2cbbb2d07fe726c88c46c4fc07c49528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Give an easy to use function to rotate an point around a target point in a 3D space with no complexity.  <br /></td></tr>
+<tr class="memitem:a4022950e79dc540cafa857fc5d280c25" id="r_a4022950e79dc540cafa857fc5d280c25"><td class="memItemLeft" align="right" valign="top"><a id="a4022950e79dc540cafa857fc5d280c25" name="a4022950e79dc540cafa857fc5d280c25"></a>
+<a class="el" href="struct_pulse_engine_1_1_mat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PerspectiveMat</b> (float fovRadians, float aspect, float nearPlane, float farPlane)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -123,6 +127,9 @@ constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b> = 3
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_pulse_engine_1_1_mat4.html">Mat4</a> PulseEngine::MathUtils::CreateRotationMatrix </td>
@@ -131,6 +138,11 @@ constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b> = 3
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create a rotation matrix from Euler angles (in radians). </p>
@@ -149,6 +161,9 @@ constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b> = 3
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> PulseEngine::MathUtils::LookAt </td>
@@ -166,6 +181,11 @@ constexpr float&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b> = 3
           <td class="paramtype">const <a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>up</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="struct_pulse_engine_1_1_vector3.html">Vector3</a>(0.0f,&#160;1.0f,&#160;0.0f)</span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Make an object rotate, to look at a certain position. </p>

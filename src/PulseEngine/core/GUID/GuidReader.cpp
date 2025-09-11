@@ -1,4 +1,5 @@
 #include "GuidReader.h"
+#include "Common/common.h"
 #include "PulseEngine/core/Entity/Entity.h"
 #include "json.hpp"
 #include "PulseEngine/core/Meshes/primitive/Primitive.h"
@@ -8,6 +9,10 @@
 #include "PulseEngine/core/GUID/GuidGenerator.h"
 #include "PulseEngine/CustomScripts/ScriptsLoader.h"
 #include "PulseEngine/CustomScripts/IScripts.h"
+#include "PulseEngine/core/Material/Material.h"
+#include "PulseEngine/core/Material/Texture.h"
+#include "PulseEngine/core/Material/MaterialManager.h"
+#include "PulseEngine/API/EntityAPI/EntityApi.h"
 
 #include <assimp/Importer.hpp>      // Assimp::Importer
 #include <assimp/scene.h>           // aiScene
@@ -18,12 +23,13 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
     
     static int count = 0;
     std::string name = "Entity_" + std::to_string(count++);
-    Entity* entity = new Entity(name, PulseEngine::Vector3(0.0f), nullptr, MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat"));
+    Entity* entity = new Entity(name, PulseEngine::Vector3(0.0f), nullptr, MaterialManager::loadMaterial("Materials/cube.mat"));
 
     nlohmann::json guidCollection;
     std::ifstream guidColFile(std::string(ASSET_PATH) +"Guid/guidCollectionEntities.puid");
     if(!guidColFile.is_open())
     {
+        EDITOR_ERROR("Guid collection file for entities couldn't be open : " + std::string(ASSET_PATH) +"Guid/guidCollectionEntities.puid")
         delete entity;
         return nullptr;
     }
@@ -37,7 +43,7 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
         std::ifstream entityFile(std::string(ASSET_PATH) + std::string(guidCollection[std::to_string(guid)]));
         if(!entityFile.is_open())
         {
-            
+            EDITOR_ERROR("Entity guid file couldn't be open : " + std::string(ASSET_PATH) + std::string(guidCollection[std::to_string(guid)]))
             delete entity;
             return nullptr;
         }
@@ -47,7 +53,7 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
     }
     else
     {
-        
+        EDITOR_ERROR("Guid " + std::to_string(guid) + " not found in guid collection file for entities : " + std::string(ASSET_PATH) +"Guid/guidCollectionEntities.puid")
         delete entity;
         return nullptr;
     }
@@ -55,6 +61,20 @@ Entity *GuidReader::GetEntityFromGuid(std::size_t guid)
 
 Entity *GuidReader::GetEntityFromJson(nlohmann::json_abi_v3_12_0::json &entityData, Entity *entity)
 {
+    if(entityData.contains("Guid"))
+    {
+        std::size_t entityGuid = 0;
+        if (entityData["Guid"].is_string())
+        {
+            entityGuid = std::stoull(entityData["Guid"].get<std::string>());
+        }
+        else if (entityData["Guid"].is_number_unsigned())
+        {
+            entityGuid = entityData["Guid"].get<std::size_t>();
+        }
+        entity->SetGuid(entityGuid);
+        EDITOR_LOG("Loading entity with GUID: " + std::to_string(entityGuid))
+    }
     if (entityData.contains("Meshes"))
     {
 
@@ -95,11 +115,12 @@ Entity *GuidReader::GetEntityFromJson(nlohmann::json_abi_v3_12_0::json &entityDa
 
                 if (msh)
                 {
-
+                    EDITOR_LOG("Loaded mesh: " + msh->GetName() + " with GUID: " + std::to_string(meshGuid))
                     entity->AddMesh(msh);
                 }
                 else
                 {
+                    EDITOR_ERROR("Failed to load mesh with GUID: " + std::to_string(meshGuid))
                 }
             }
             catch (const std::exception &e)
@@ -108,30 +129,81 @@ Entity *GuidReader::GetEntityFromJson(nlohmann::json_abi_v3_12_0::json &entityDa
             }
         }
     }
+    std::cout << "Entity has " << entity->GetMeshes().size() << " meshes." << std::endl;
     if (entityData.contains("Scripts"))
     {
 
         for (const auto &script : entityData["Scripts"])
         {
 
-            IScript *scriptLoaded = ScriptsLoader::GetScriptFromCallName(script);
+            IScript *scriptLoaded = ScriptsLoader::GetScriptFromCallName(script["Name"]);
             if (!scriptLoaded)
             {
 
                 continue;
             }
             scriptLoaded->isEntityLinked = true;
-            scriptLoaded->parent = entity;
+            scriptLoaded->SetGUID(script["Guid"].get<std::size_t>());
+            scriptLoaded->owner = new PulseEngine::EntityApi(entity);
             entity->AddScript(scriptLoaded);
         }
     }
 
+    std::cout << "Entity has " << entity->GetScripts().size() << " scripts." << std::endl;
+    if (entityData.contains("Material"))
+    {
+        nlohmann::json_abi_v3_12_0::json jsonFile;
+        Material* mat = nullptr;
+        for(auto& material : GuidReader::GetAllAvailableFiles("guidCollectionMaterials.puid"))
+        {
+            if(material.first == entityData["Material"])
+            {
+                mat = MaterialManager::loadMaterial(material.second);
+            }
+        }
+
+        entity->SetMaterial(mat);
+    }
+
+    std::cout << "Entity has material: " << (entity->GetMaterial() ? entity->GetMaterial()->GetName() : "None") << std::endl;
+
     return entity;
 }
 
+Material* GuidReader::GetMaterialFromJson(nlohmann::json_abi_v3_12_0::json &materialData)
+{
+    std::string vertPath = std::string(ASSET_PATH) + "shaders/basic.vert";
+    std::string fragPath = std::string(ASSET_PATH) + "shaders/basic.frag";
+    
+    Material* mat = new Material(materialData["name"], new Shader(vertPath, fragPath));
+    
+    // mat->roughness = materialData["roughness"].get<float>();
+    mat->specular = materialData["specular"].get<float>();
+    
+    auto colorArray = materialData["color"];
+    mat->color = PulseEngine::Vector3(
+        colorArray[0].get<float>(),
+        colorArray[1].get<float>(),
+        colorArray[2].get<float>()
+    );
+
+    for (auto it = materialData.begin(); it != materialData.end(); ++it)
+    {
+        const std::string& key = it.key();
+
+        if (key.size() >= 4 && key.compare(0, 4, "txt_") == 0)
+        {
+            std::shared_ptr<Texture> txt = std::make_shared<Texture>(it.value().get<std::string>());
+            mat->SetTexture(key.substr(4), txt);
+        }
+    } 
+
+    return mat;
+}
+
+
 Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
 {
-    return Primitive::Cube();
     std::string path = "";
     std::string meshPath = "";
     Assimp::Importer* importer = new Assimp::Importer();
@@ -140,7 +212,7 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
     std::ifstream guidColFile(std::string(ASSET_PATH) +"Guid/guidCollectionMeshes.puid");
     if(!guidColFile.is_open())
     {
-        
+        EDITOR_ERROR("Guid collection file for meshes couldn't be open : " + std::string(ASSET_PATH) +"Guid/guidCollectionMeshes.puid")
          return nullptr;
     }
     guidColFile >> guidCollection;
@@ -149,7 +221,7 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
         path = guidCollection[std::to_string(guid)].get<std::string>();
         if (path.empty())
         {
-            std::cerr << "Path for GUID " << guid << " is empty." << std::endl;
+            EDITOR_ERROR("Path for GUID " + std::to_string(guid) + " is empty.")
             return nullptr;
         }
         path = std::string(ASSET_PATH) + path;
@@ -163,21 +235,21 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
                 meshPath = fileData["MeshPath"].get<std::string>();
                 if(meshPath.empty())
                 {
-                    std::cerr << "Mesh path for GUID " << guid << " is empty." << std::endl;
+                    EDITOR_ERROR("Mesh path for GUID " + std::to_string(guid) + " is empty.")
                     return nullptr;
                 }
                 meshPath = std::string(ASSET_PATH) + meshPath;
             }
             else
             {
-                std::cerr << "MeshPath not found in JSON for GUID " << guid << "." << std::endl;
+                EDITOR_ERROR("MeshPath not found in JSON for GUID " + std::to_string(guid) + ".")
                 return nullptr;
             }
         }
     }
     else
     {
-        std::cerr << "GUID " << guid << " not found in collection." << std::endl;
+        EDITOR_ERROR("Guid " + std::to_string(guid) + " not found in guid collection file for meshes : " + std::string(ASSET_PATH) +"Guid/guidCollectionMeshes.puid")
         return nullptr;
     }
     //onced shared system implemented, we will use importer->ReadFileFromMemory() instead
@@ -220,8 +292,14 @@ Mesh* GuidReader::GetMeshFromGuid(std::size_t guid)
 
 std::size_t GuidReader::InsertIntoCollection(const std::string &filePath)
 {
-    std::string collectionType = FileManager::GetCollectionByExtension(filePath);
-    std::size_t guid = GenerateGUIDFromPath(filePath);
+    std::string path = filePath;
+    std::replace(path.begin(), path.end(), '\\', '/'); // Normalize path for consistency
+    const std::string prefix = "PulseEngineEditor/";
+    if (path.compare(0, prefix.size(), prefix) == 0) {
+        path = path.substr(prefix.size());
+    }
+    std::string collectionType = FileManager::GetCollectionByExtension(path);
+    std::size_t guid = GenerateGUIDFromPath(path);
 
 
     std::string collectionPath = GUID_COLLECTION_PATH + collectionType;
@@ -243,7 +321,7 @@ std::cout << "Full collection path: " << collectionPath << std::endl;
     }
 
     // Insert or update entry
-    jsonData[std::to_string(guid)] = filePath;
+    jsonData[std::to_string(guid)] = path;
 
     // Rewrite the entire file (create or update the file)
     std::ofstream outFile(collectionPath);

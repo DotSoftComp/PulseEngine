@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: LightData Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -139,8 +138,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetScale</b> (const <
 <tr class="memdesc:a1b6bb691c885cee40358dd8b91631fca inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the scale and updates the model matrix. <br /></td></tr>
 <tr class="memitem:a3065a8452704d2e95aea78a7c0d94a60 inherit pub_methods_class_entity" id="r_a3065a8452704d2e95aea78a7c0d94a60"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMaterial</b> (<a class="el" href="../../dc/dee/class_material.html">Material</a> *material)</td></tr>
-<tr class="memitem:a262dc5b8ec112fa7937c4a735656c8cb inherit pub_methods_class_entity" id="r_a262dc5b8ec112fa7937c4a735656c8cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#a262dc5b8ec112fa7937c4a735656c8cb">UpdateEntity</a> (float deltaTime) const</td></tr>
-<tr class="memdesc:a262dc5b8ec112fa7937c4a735656c8cb inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the entity's behavior/scripts.  <br /></td></tr>
+<tr class="memitem:ab594f805e44de92ec48746aa0ecf62eb inherit pub_methods_class_entity" id="r_ab594f805e44de92ec48746aa0ecf62eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#ab594f805e44de92ec48746aa0ecf62eb">UpdateEntity</a> (float deltaTime)</td></tr>
+<tr class="memdesc:ab594f805e44de92ec48746aa0ecf62eb inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the entity's behavior/scripts.  <br /></td></tr>
 <tr class="memitem:a873d4cef78f61d562d6637da7b0f6479 inherit pub_methods_class_entity" id="r_a873d4cef78f61d562d6637da7b0f6479"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawEntity</b> () const</td></tr>
 <tr class="memdesc:a873d4cef78f61d562d6637da7b0f6479 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the entity using its current mesh/material/shader. <br /></td></tr>
@@ -150,8 +149,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UseShader</b> () cons
 <tr class="memitem:a4f27a12aa63126cc65c83a85b80696a7 inherit pub_methods_class_entity" id="r_a4f27a12aa63126cc65c83a85b80696a7"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SimplyDrawMesh</b> () const</td></tr>
 <tr class="memdesc:a4f27a12aa63126cc65c83a85b80696a7 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the mesh without applying material/shader logic. <br /></td></tr>
-<tr class="memitem:a45a19f60c048e59c07f303039e213d7e inherit pub_methods_class_entity" id="r_a45a19f60c048e59c07f303039e213d7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#a45a19f60c048e59c07f303039e213d7e">DrawMeshWithShader</a> (GLuint shaderProgram) const</td></tr>
-<tr class="memdesc:a45a19f60c048e59c07f303039e213d7e inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style.  <br /></td></tr>
+<tr class="memitem:ae9834eb13c505d3589d39c0efa55f7b5 inherit pub_methods_class_entity" id="r_ae9834eb13c505d3589d39c0efa55f7b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#ae9834eb13c505d3589d39c0efa55f7b5">CalculateMeshMatrix</a> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *const &amp;mesh) const</td></tr>
+<tr class="memdesc:ae9834eb13c505d3589d39c0efa55f7b5 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the matrix of a mesh, based on the entity's transform and the mesh's local transform.  <br /></td></tr>
+<tr class="memitem:a891d789c2cacc2c3845ef55f102d91f6 inherit pub_methods_class_entity" id="r_a891d789c2cacc2c3845ef55f102d91f6"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>BindTexturesToShader</b> () const</td></tr>
+<tr class="memdesc:a891d789c2cacc2c3845ef55f102d91f6 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automaticaly bind all the textures of the material to the shader that is actual used. <br /></td></tr>
+<tr class="memitem:aafe66d024d193cd517594e9a5f8fab38 inherit pub_methods_class_entity" id="r_aafe66d024d193cd517594e9a5f8fab38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#aafe66d024d193cd517594e9a5f8fab38">DrawMeshWithShader</a> (unsigned int shaderProgram) const</td></tr>
+<tr class="memdesc:aafe66d024d193cd517594e9a5f8fab38 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style.  <br /></td></tr>
 <tr class="memitem:a2085d625fac4db71cd40b21dcfa1d626 inherit pub_methods_class_entity" id="r_a2085d625fac4db71cd40b21dcfa1d626"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>AddMesh</b> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *mesh)</td></tr>
 <tr class="memdesc:a2085d625fac4db71cd40b21dcfa1d626 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a mesh to the entity. <br /></td></tr>
@@ -177,19 +181,31 @@ const std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Ge
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetName</b> () const</td></tr>
 <tr class="memitem:a7caefeeda1a076aa68272704bc3c8676 inherit pub_methods_class_entity" id="r_a7caefeeda1a076aa68272704bc3c8676"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="../../dc/dee/class_material.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaterial</b> ()</td></tr>
-<tr class="memitem:a6ce7e4fad7b67981514e53480245b10e inherit pub_methods_class_entity" id="r_a6ce7e4fad7b67981514e53480245b10e"><td class="memItemLeft" align="right" valign="top">
-std::vector&lt; <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetScripts</b> ()</td></tr>
+<tr class="memitem:a40c692d844d73266471c030ca993547d inherit pub_methods_class_entity" id="r_a40c692d844d73266471c030ca993547d"><td class="memItemLeft" align="right" valign="top">
+std::vector&lt; <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetScripts</b> ()</td></tr>
+<tr class="memitem:ab50c476f2610d00e0b7160593bd58c86 inherit pub_methods_class_entity" id="r_ab50c476f2610d00e0b7160593bd58c86"><td class="memItemLeft" align="right" valign="top">
+std::vector&lt; <a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMeshes</b> ()</td></tr>
 <tr class="memitem:a739022014493ae446029b3f89866aa0b inherit pub_methods_class_entity" id="r_a739022014493ae446029b3f89866aa0b"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGuid</b> (std::size_t g)</td></tr>
 <tr class="memitem:a5b7f43f65ae09726ec85f524694e0b56 inherit pub_methods_class_entity" id="r_a5b7f43f65ae09726ec85f524694e0b56"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMuid</b> (std::size_t m)</td></tr>
 <tr class="memitem:a3c907130862ad55702fa982808af62bf inherit pub_methods_class_entity" id="r_a3c907130862ad55702fa982808af62bf"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetName</b> (const std::string &amp;name)</td></tr>
+<tr class="memitem:a6451d4eedc8f83e9717ecf2468669eab inherit pub_methods_class_entity" id="r_a6451d4eedc8f83e9717ecf2468669eab"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AddTag</b> (const std::string &amp;tag)</td></tr>
+<tr class="memitem:a43ca744dee3305b19134b71cfb597691 inherit pub_methods_class_entity" id="r_a43ca744dee3305b19134b71cfb597691"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveTag</b> (const std::string &amp;tag)</td></tr>
+<tr class="memitem:a1eafac519dcb9e8fef517daefa4fbeb0 inherit pub_methods_class_entity" id="r_a1eafac519dcb9e8fef517daefa4fbeb0"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasTag</b> (const std::string &amp;tag) const</td></tr>
+<tr class="memitem:a9473f87d63eddafe5a94864bf023bffb inherit pub_methods_class_entity" id="r_a9473f87d63eddafe5a94864bf023bffb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#a9473f87d63eddafe5a94864bf023bffb">Move</a> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;direction)</td></tr>
+<tr class="memdesc:a9473f87d63eddafe5a94864bf023bffb inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the entity -&gt; actualPostion + direction * deltaTime.  <br /></td></tr>
+<tr class="memitem:a072f39e0ab5bdceedb9cc6d786066d31 inherit pub_methods_class_entity" id="r_a072f39e0ab5bdceedb9cc6d786066d31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d96/class_entity.html#a072f39e0ab5bdceedb9cc6d786066d31">Rotate</a> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;rotation)</td></tr>
+<tr class="memdesc:a072f39e0ab5bdceedb9cc6d786066d31 inherit pub_methods_class_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the entity on the 3 axes from his actual rotation. -&gt; actualRotation + rotation * deltatime.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3447991b6929635cc30e682423df3ec4" id="r_a3447991b6929635cc30e682423df3ec4"><td class="memItemLeft" align="right" valign="top"><a id="a3447991b6929635cc30e682423df3ec4" name="a3447991b6929635cc30e682423df3ec4"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>lightSpaceMatrix</b></td></tr>
+<tr class="memitem:aec447adfb6650d95009ac6e47323da9b" id="r_aec447adfb6650d95009ac6e47323da9b"><td class="memItemLeft" align="right" valign="top"><a id="aec447adfb6650d95009ac6e47323da9b" name="aec447adfb6650d95009ac6e47323da9b"></a>
+<a class="el" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>lightSpaceMatrix</b></td></tr>
 <tr class="memitem:acfb3ffb3550c25797e3e37dcc71fcca4" id="r_acfb3ffb3550c25797e3e37dcc71fcca4"><td class="memItemLeft" align="right" valign="top"><a id="acfb3ffb3550c25797e3e37dcc71fcca4" name="acfb3ffb3550c25797e3e37dcc71fcca4"></a>
 <a class="el" href="../../d7/de0/struct_pulse_engine_1_1_color.html">PulseEngine::Color</a>&#160;</td><td class="memItemRight" valign="bottom"><b>color</b></td></tr>
 <tr class="memitem:ad3dbde00547467a1a9b42c33e8e2eb40" id="r_ad3dbde00547467a1a9b42c33e8e2eb40"><td class="memItemLeft" align="right" valign="top"><a id="ad3dbde00547467a1a9b42c33e8e2eb40" name="ad3dbde00547467a1a9b42c33e8e2eb40"></a>

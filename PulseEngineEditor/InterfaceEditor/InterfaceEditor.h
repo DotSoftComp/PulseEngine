@@ -15,6 +15,8 @@
 
 #include "Common/common.h"
 #include "Common/dllExport.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/NodeMenuRegistry.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/Node.h"
 #include <unordered_map>
 #include <string>
 #include <filesystem>
@@ -23,6 +25,9 @@ class PulseEngineBackend;
 class TopBar;
 class Entity;
 class IModuleInterface;
+class Texture;
+class Synapse;
+class NewFileManager;
 
 struct LoadingPopupData
 {
@@ -32,28 +37,46 @@ struct LoadingPopupData
 };
 
 
+
+
+
 class PULSE_ENGINE_DLL_API InterfaceEditor
 {
 private:
     friend class TopBar;
     TopBar* topbar;
     Entity* selectedEntity = nullptr;
-    std::unordered_map<std::string, bool> windowStates;
     std::vector<LoadingPopupData> loadingPopups;
     bool hasProjectSelected = true;
     std::vector<IModuleInterface*> modules;
+    Texture* folderIcon;
+    Texture* fileIcon;
+    NewFileManager* newFileManager;
+
+    std::unordered_map<std::string, Texture*> icons;
+    std::unordered_map<std::string, unsigned int> texturesLoaded;
+    Synapse* synapse = nullptr;
 
 public:
+    std::unordered_map<std::string, bool> windowStates;
+
     InterfaceEditor();
 
-    void Render();
+    void InitAfterEngine();
+
+#pragma region Main Windows renderer
+    void FileExplorerWindow();
     void EngineConfigWindow();
     void EntityAnalyzerWindow();
     void GenerateSceneDataWindow();
+#pragma endregion
+
+    void Render();
+
     void RenderFullscreenWelcomePanel();
 
-    void FileExplorerWindow();
-    void ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile);
+    void ShowFileGrid(const fs::path &currentDir, fs::path &selectedFile);
+    void NewFileCreation(const std::filesystem::path &currentDir, std::filesystem::path &selectedFile);
     std::vector<std::function<void(const ClickedFileData&)>> fileClickedCallbacks;
 
     void ShowLoadingPopup(std::function<void()> contentFunction, float progressPercent);

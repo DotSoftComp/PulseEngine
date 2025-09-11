@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: PulseEngineBackend Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -110,11 +109,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsRunning</b> ()</td>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>PollEvents</b> ()</td></tr>
 <tr class="memitem:a18738b2c673023591dc1ee3953788cbf" id="r_a18738b2c673023591dc1ee3953788cbf"><td class="memItemLeft" align="right" valign="top"><a id="a18738b2c673023591dc1ee3953788cbf" name="a18738b2c673023591dc1ee3953788cbf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
-<tr class="memitem:a7e2d21372f73d5a6066749523e1c4863" id="r_a7e2d21372f73d5a6066749523e1c4863"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e2d21372f73d5a6066749523e1c4863">Render</a> ()</td></tr>
+<tr class="memitem:a7e2d21372f73d5a6066749523e1c4863" id="r_a7e2d21372f73d5a6066749523e1c4863"><td class="memItemLeft" align="right" valign="top"><a id="a7e2d21372f73d5a6066749523e1c4863" name="a7e2d21372f73d5a6066749523e1c4863"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Render</b> ()</td></tr>
+<tr class="memitem:a10dcf1efcffae6c67c4b34e8792d78a0" id="r_a10dcf1efcffae6c67c4b34e8792d78a0"><td class="memItemLeft" align="right" valign="top"><a id="a10dcf1efcffae6c67c4b34e8792d78a0" name="a10dcf1efcffae6c67c4b34e8792d78a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SpecificRender</b> (Camera *cam, int specificVBO, std::vector&lt; <a class="el" href="../../d2/d96/class_entity.html">Entity</a> * &gt; entitiesToRender, <a class="el" href="../../db/d8f/struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> viewportSize=<a class="el" href="../../db/d8f/struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a>(800, 600), Shader *specificShader=nullptr)</td></tr>
 <tr class="memitem:aa2e2fe51be802e8be5c29f4b7a9658ca" id="r_aa2e2fe51be802e8be5c29f4b7a9658ca"><td class="memItemLeft" align="right" valign="top"><a id="aa2e2fe51be802e8be5c29f4b7a9658ca" name="aa2e2fe51be802e8be5c29f4b7a9658ca"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RenderShadow</b> ()</td></tr>
 <tr class="memitem:a48fbefe3cb033f25ea12ed973df661e2" id="r_a48fbefe3cb033f25ea12ed973df661e2"><td class="memItemLeft" align="right" valign="top"><a id="a48fbefe3cb033f25ea12ed973df661e2" name="a48fbefe3cb033f25ea12ed973df661e2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Shutdown</b> ()</td></tr>
+<tr class="memitem:a140f2fa2d520e86eed144a64c42dc982" id="r_a140f2fa2d520e86eed144a64c42dc982"><td class="memItemLeft" align="right" valign="top"><a id="a140f2fa2d520e86eed144a64c42dc982" name="a140f2fa2d520e86eed144a64c42dc982"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGridQuad</b> (<a class="el" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a> viewCam, const <a class="el" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a> &amp;specificProjection)</td></tr>
 <tr class="memitem:a900751fee4b564cebe4fc3c3f8d82798" id="r_a900751fee4b564cebe4fc3c3f8d82798"><td class="memItemLeft" align="right" valign="top"><a id="a900751fee4b564cebe4fc3c3f8d82798" name="a900751fee4b564cebe4fc3c3f8d82798"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearScene</b> ()</td></tr>
 <tr class="memitem:a52db1fbd5ef9f7deee60e4d50d0953f9" id="r_a52db1fbd5ef9f7deee60e4d50d0953f9"><td class="memItemLeft" align="right" valign="top"><a id="a52db1fbd5ef9f7deee60e4d50d0953f9" name="a52db1fbd5ef9f7deee60e4d50d0953f9"></a>
@@ -141,15 +145,23 @@ const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Ge
 const void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGameVersion</b> (const std::string &amp;version)</td></tr>
 <tr class="memitem:a7bae578888896a385cf28eab118b929c" id="r_a7bae578888896a385cf28eab118b929c"><td class="memItemLeft" align="right" valign="top"><a id="a7bae578888896a385cf28eab118b929c" name="a7bae578888896a385cf28eab118b929c"></a>
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetGameVersion</b> () const</td></tr>
+<tr class="memitem:a693a6691bd31eb07dc0629e8dfe332b5" id="r_a693a6691bd31eb07dc0629e8dfe332b5"><td class="memItemLeft" align="right" valign="top"><a id="a693a6691bd31eb07dc0629e8dfe332b5" name="a693a6691bd31eb07dc0629e8dfe332b5"></a>
+const float&#160;</td><td class="memItemRight" valign="bottom"><b>GetDeltaTime</b> ()</td></tr>
+<tr class="memitem:adef93cdf73e40d6ee8d91ac95c4c74af" id="r_adef93cdf73e40d6ee8d91ac95c4c74af"><td class="memItemLeft" align="right" valign="top"><a id="adef93cdf73e40d6ee8d91ac95c4c74af" name="adef93cdf73e40d6ee8d91ac95c4c74af"></a>
+<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetCameraPosition</b> ()</td></tr>
+<tr class="memitem:a39bcd9ea75c6da3b5fc2228c9e7fa0a8" id="r_a39bcd9ea75c6da3b5fc2228c9e7fa0a8"><td class="memItemLeft" align="right" valign="top"><a id="a39bcd9ea75c6da3b5fc2228c9e7fa0a8" name="a39bcd9ea75c6da3b5fc2228c9e7fa0a8"></a>
+<a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetCameraRotation</b> ()</td></tr>
+<tr class="memitem:ab6f8b19ab2bf9b085c3edc338a0470c1" id="r_ab6f8b19ab2bf9b085c3edc338a0470c1"><td class="memItemLeft" align="right" valign="top"><a id="ab6f8b19ab2bf9b085c3edc338a0470c1" name="ab6f8b19ab2bf9b085c3edc338a0470c1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EDITOR_ONLY</b> (static <a class="el" href="../../d7/d53/class_interface_editor.html">InterfaceEditor</a> *editor;) Shader *shadowShader</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf44e18e17a9ada2e62124a268679138" id="r_aaf44e18e17a9ada2e62124a268679138"><td class="memItemLeft" align="right" valign="top"><a id="aaf44e18e17a9ada2e62124a268679138" name="aaf44e18e17a9ada2e62124a268679138"></a>
 static <a class="el" href="../../da/d08/class_pulse_engine_backend.html">PulseEngineBackend</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetInstance</b> ()</td></tr>
-<tr class="memitem:a645bcea92e20bb203fa0276fce63b05a" id="r_a645bcea92e20bb203fa0276fce63b05a"><td class="memItemLeft" align="right" valign="top"><a id="a645bcea92e20bb203fa0276fce63b05a" name="a645bcea92e20bb203fa0276fce63b05a"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>FramebufferSizeCallback</b> (GLFWwindow *window, int width, int height)</td></tr>
 <tr class="memitem:a56c038f843921d37b197faa01345f5c9" id="r_a56c038f843921d37b197faa01345f5c9"><td class="memItemLeft" align="right" valign="top"><a id="a56c038f843921d37b197faa01345f5c9" name="a56c038f843921d37b197faa01345f5c9"></a>
 static Camera *&#160;</td><td class="memItemRight" valign="bottom"><b>GetActiveCamera</b> ()</td></tr>
+<tr class="memitem:ad9c743435f24a47207b13b0878b4a414" id="r_ad9c743435f24a47207b13b0878b4a414"><td class="memItemLeft" align="right" valign="top"><a id="ad9c743435f24a47207b13b0878b4a414" name="ad9c743435f24a47207b13b0878b4a414"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>SetActiveCamera</b> (Camera *camera)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -167,6 +179,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>actualMapPath<
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>actualMapName</b> = &quot;defaultMap.pmap&quot;</td></tr>
 <tr class="memitem:ab7f5cc5db29e1bafb138f43a6fb784db" id="r_ab7f5cc5db29e1bafb138f43a6fb784db"><td class="memItemLeft" align="right" valign="top"><a id="ab7f5cc5db29e1bafb138f43a6fb784db" name="ab7f5cc5db29e1bafb138f43a6fb784db"></a>
 <a class="el" href="../../d3/d22/class_coroutine_manager.html">CoroutineManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>coroutineManager</b> = nullptr</td></tr>
+<tr class="memitem:a457b5b8ae392a62ccccdbfd506d3d97b" id="r_a457b5b8ae392a62ccccdbfd506d3d97b"><td class="memItemLeft" align="right" valign="top"><a id="a457b5b8ae392a62ccccdbfd506d3d97b" name="a457b5b8ae392a62ccccdbfd506d3d97b"></a>
+Shader *&#160;</td><td class="memItemRight" valign="bottom"><b>pointLightShadowShader</b></td></tr>
+<tr class="memitem:ae570d0bbab3937927f5a05ff69f6fbb4" id="r_ae570d0bbab3937927f5a05ff69f6fbb4"><td class="memItemLeft" align="right" valign="top"><a id="ae570d0bbab3937927f5a05ff69f6fbb4" name="ae570d0bbab3937927f5a05ff69f6fbb4"></a>
+Shader *&#160;</td><td class="memItemRight" valign="bottom"><b>debugShader</b></td></tr>
+<tr class="memitem:a9cfe67fc55d7c0705b44815a3f80228f" id="r_a9cfe67fc55d7c0705b44815a3f80228f"><td class="memItemLeft" align="right" valign="top"><a id="a9cfe67fc55d7c0705b44815a3f80228f" name="a9cfe67fc55d7c0705b44815a3f80228f"></a>
+std::unordered_map&lt; std::string, <a class="el" href="../../d7/d88/class_guid_collection.html">GuidCollection</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>guidCollections</b></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -191,24 +209,6 @@ static <a class="el" href="../../d0/d58/class_i_graphics_a_p_i.html">IGraphicsAP
       </table>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>For renderer, we wont use dynamic DLL to load the graphic API, we will use inside the game engine dll one. So we need to create a game engine dll for each platform.</dd></dl>
-
-</div>
-</div>
-<a id="a7e2d21372f73d5a6066749523e1c4863" name="a7e2d21372f73d5a6066749523e1c4863"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e2d21372f73d5a6066749523e1c4863">&#9670;&#160;</a></span>Render()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void PulseEngineBackend::Render </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000003">Todo</a></b></dt><dd>make SetMat4() and others from glm:: to PulseEngine::</dd></dl>
 
 </div>
 </div>

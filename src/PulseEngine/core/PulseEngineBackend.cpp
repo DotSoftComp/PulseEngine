@@ -1,7 +1,6 @@
 #include "PulseEngineBackend.h"
 #include "Common/common.h"
 #include "camera.h"
-#include "PulseEngine/core/Inputs/Mouse.h"
 #include "PulseEngine/core/Entity/Entity.h"
 #include "PulseEngine/core/Material/Material.h"
 #include "PulseEngine/core/GUID/GuidGenerator.h"
@@ -16,7 +15,6 @@
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
 #include "PulseEngine/core/Lights/PointLight/PointLight.h"
 #include "PulseEngine/CustomScripts/ScriptsLoader.h"
-#include "PulseEngine/core/Graphics/OpenGLAPI/OpenGLApi.h"
 #include "PulseEngine/core/WindowContext/WindowContext.h"
 #include "PulseEngine/core/Graphics/IGraphicsApi.h"
 #include "PulseEngine/core/Physics/Collider/Collider.h"
@@ -25,8 +23,16 @@
 #include "PulseEngine/core/Physics/CollisionManager.h"
 #include "PulseEngine/core/coroutine/CoroutineManager.h"
 #include "PulseEngine/core/coroutine/Coroutine.h"
+#include "PulseEngine/core/GUID/GuidCollection.h"
+#include "PulseEngine/core/ExecutableManager/PulseExecutable.h"
+#include "PulseEngine/core/Input/InputSystem.h"
+
+#include "PulseEngine/core/Math/MathUtils.h"
 
 
+#ifdef PULSE_GRAPHIC_OPENGL
+#include "PulseEngine/core/Graphics/OpenGLAPI/OpenGLApi.h"
+#endif
 
 #include "Common/dllExport.h"
 
@@ -34,8 +40,10 @@ Camera* PulseEngineBackend::activeCamera = new Camera();
 IGraphicsAPI* PulseEngineBackend::graphicsAPI = nullptr;
 PulseEngineBackend* PulseEngineBackend::instance = nullptr;
 float PulseEngineBackend::deltaTime = 0.0f;
-InterfaceEditor* PulseEngineBackend::editor = nullptr;
 
+#ifdef ENGINE_EDITOR
+InterfaceEditor* PulseEngineBackend::editor = nullptr;
+#endif
 
 PulseEngineBackend::PulseEngineBackend() { }
 
@@ -53,7 +61,7 @@ int PulseEngineBackend::Initialize()
      * @note For renderer, we wont use dynamic DLL to load the graphic API, we will use inside the game engine dll one. So we need to create a game engine dll for each platform.
      * 
      */
-    #ifdef WINDOW_PULSE_EXPORT
+    #ifdef PULSE_GRAPHIC_OPENGL
     graphicsAPI = new OpenGLAPI();
     #endif
 
@@ -65,23 +73,36 @@ int PulseEngineBackend::Initialize()
     std::cout << "Graphics API loaded successfully." << std::endl;
     graphicsAPI->InitializeApi(GetWindowName("editor").c_str(), &width, &height, this);
     
+    #ifdef PULSE_GRAPHIC_OPENGL
     windowContext->SetGLFWWindow(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
+    #endif
 
     // coroutine manager, give the possibility to add async tasks to the engine
     coroutineManager = new CoroutineManager();
     std::cout << "CoroutineManager created." << std::endl;
 
+    inputSystem = new InputSystem;
+
 
     // lights.push_back(new DirectionalLight(1.0f, 10.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(3.0f, 3.0f, 0.0f), glm::vec3(1.0f), 10, 1));
     // lights.back()->InitShadowMap(DEFAULT_SHADOW_MAP_RES);
 
-    shadowShader = new Shader(std::string(ASSET_PATH) + "shaders/depthMap/Depth.vert", std::string(ASSET_PATH) + "shaders/depthMap/Depth.frag");
+    shadowShader = new Shader(std::string(ASSET_PATH) + "shaders/directionalDepth/dirDepth.vert", std::string(ASSET_PATH) + "shaders/directionalDepth/dirDepth.frag");
+    pointLightShadowShader = new Shader(std::string(ASSET_PATH) + "shaders/pointDepth/pointDepth.vert", std::string(ASSET_PATH) + "shaders/pointDepth/pointDepth.frag", std::string(ASSET_PATH) + "shaders/pointDepth/pointDepth.glsl");
     debugShader = new Shader(std::string(ASSET_PATH) +"shaders/debug.vert", std::string(ASSET_PATH) + "shaders/debug.frag");
     std::cout << "Shaders loaded." << std::endl;
     
     // === insert base item to the collection ===
     GuidReader::InsertIntoCollection("Entities/simpleActor.pEntity");    
     GuidReader::InsertIntoCollection("Entities/primitiveCube.pEntity"); 
+
+    // === initialize each collection found in the asset folder ===
+    std::vector<std::filesystem::path> guidFiles = FileManager::GetFilesInDirectoryWithExtension(std::string(ASSET_PATH) + "Guid", ".puid");
+    for (const auto& file : guidFiles) 
+    {
+        EDITOR_LOG("Guid/" + file.filename().string());
+        guidCollections[file.filename().string()] = new GuidCollection("Guid/" + file.filename().string());
+    }
     
     
     EDITOR_ONLY(
@@ -95,7 +116,10 @@ int PulseEngineBackend::Initialize()
 
     std::string firstScene = engineConfig["GameData"]["FirstScene"];
     std::cout << "Loading first scene: " << firstScene << std::endl;
-    SceneLoader::LoadScene(std::string(ASSET_PATH) + firstScene, this);
+    SceneLoader::LoadScene(firstScene, this);
+
+    discordLauncher = new PulseExecutable ("DiscordPresence/DiscordPresence.exe", "DiscordPipeTest");
+    Sleep(1500);
 
     std::cout << "Initialization complete." << std::endl;
     return 0;
@@ -103,10 +127,7 @@ int PulseEngineBackend::Initialize()
 
 
 
-void PulseEngineBackend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
+
 
 std::string PulseEngineBackend::GetWindowName(const std::string &location)
 {
@@ -116,6 +137,9 @@ std::string PulseEngineBackend::GetWindowName(const std::string &location)
 
 void PulseEngineBackend::SetWindowName(const std::string &location)
 {
+    DWORD bytesWritten;
+    std::string message = "[set_presence]" + location;
+    if(discordLauncher) discordLauncher->SendExeMessage(message);
     graphicsAPI->SetWindowTitle(GetWindowName(location).c_str());
 }
 
@@ -127,23 +151,22 @@ bool PulseEngineBackend::IsRunning()
 void PulseEngineBackend::PollEvents()
 {
     graphicsAPI->PollEvents();
-    ProcessInput(static_cast<GLFWwindow*>(graphicsAPI->GetNativeHandle()));
 }
 
 void PulseEngineBackend::Update()
 {
-    float currentFrame = glfwGetTime();
+    float currentFrame = PulseEngineGraphicsAPI->GetTime();
+    inputSystem->newFrame();
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     view = GetActiveCamera()->GetViewMatrix();
-    projection = glm::perspective(glm::radians(GetActiveCamera()->Zoom), static_cast<float>(width) / static_cast<float>(height), 0.1f, 1000.0f);
+    projection = PulseEngine::MathUtils::PerspectiveMat(PulseEngine::MathUtils::ToRadians(GetActiveCamera()->Zoom), static_cast<float>(width) / static_cast<float>(height), 0.1f, 1000.0f);
     mapLoading -= deltaTime;
     for (auto& light : lights) 
     {
         light->RecalculateLightSpaceMatrix();
     }
 
-    IN_GAME_ONLY(
     for (size_t i = 0; i < entities.size(); ++i)
     {
         Entity* entityA = entities[i];
@@ -156,7 +179,7 @@ void PulseEngineBackend::Update()
             CollisionManager::ManageCollision(dynamic_cast<Collider*>(entityA->collider), dynamic_cast<Collider*>(entityB->collider));                
         }
     }
-    )
+    
 
     coroutineManager->UpdateAll(deltaTime);
 }
@@ -171,36 +194,95 @@ void PulseEngineBackend::Render()
         Shader* shader = entity->GetMaterial()->GetShader();
 
         shader->Use();
-        //here we need to use specific shader setter for each graphic api.
-        /**
-         * @todo make SetMat4() and others from glm:: to PulseEngine::
-         * 
-         */
-        #ifdef WINDOW_PULSE_EXPORT
         shader->SetMat4("projection", projection);
-        shader->SetMat4("view", glm::mat4(view[0][0], view[0][1], view[0][2], view[0][3],
-                          view[1][0], view[1][1], view[1][2], view[1][3],
-                          view[2][0], view[2][1], view[2][2], view[2][3],
-                          view[3][0], view[3][1], view[3][2], view[3][3]));
-        shader->SetVec3("viewPos", glm::vec3(GetActiveCamera()->Position.x, GetActiveCamera()->Position.y, GetActiveCamera()->Position.z));
-        #endif
-        LightManager::BindLightsToShader(shader, this, entity);
+        shader->SetMat4("view", view);
+        shader->SetVec3("viewPos", GetActiveCamera()->Position);
 
+        LightManager::BindLightsToShader(shader, this, entity);
+        // for (size_t i = 0; i < lights.size(); ++i)
+        // {
+        //     DirectionalLight* dLight = dynamic_cast<DirectionalLight*>(lights[i]);
+        //     if (!dLight)
+        //         continue;
+        
+        //     dLight->BindToShader(*shader, -1);
+        
+        //     if (dLight->castsShadow)
+        //     {            PulseEngineGraphicsAPI->ActivateTexture(0);
+        //         PulseEngineGraphicsAPI->BindTexture(TEXTURE_2D, dLight->depthMapTex);
+            
+        //         shader->SetInt("dirLight.shadowMap", 0);
+        //     }
+        
+        //     break; // Only one directional light supported
+        // }
         entity->DrawEntity();
     }
 
         // Draw grid quad in editor only
     EDITOR_ONLY(
-        DrawGridQuad(view);
+        DrawGridQuad(view, projection);
     )
 
+if (lights.size() > 0)
+{
+    DirectionalLight* dLight = dynamic_cast<DirectionalLight*>(lights[0]);
+    if (dLight && dLight->castsShadow)
+    {
+        // Static VAO/VBO pour ne créer qu'une seule fois
+        static unsigned int quadVAO = 0, quadVBO = 0, quadEBO = 0;
+        if (quadVAO == 0)
+        {
+            float quadVertices[] = {
+                // positions   // texCoords
+               -0.9f, -0.9f,  0.0f, 0.0f,
+               -0.5f, -0.9f,  1.0f, 0.0f,
+               -0.5f, -0.5f,  1.0f, 1.0f,
+               -0.9f, -0.5f,  0.0f, 1.0f
+            };
+            unsigned int quadIndices[] = { 0, 1, 2, 2, 3, 0 };
+
+            glGenVertexArrays(1, &quadVAO);
+            glGenBuffers(1, &quadVBO);
+            glGenBuffers(1, &quadEBO);
+
+            glBindVertexArray(quadVAO);
+
+            glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quadEBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndices), quadIndices, GL_STATIC_DRAW);
+
+            // position
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
+            // texCoords
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+            glEnableVertexAttribArray(1);
+
+            glBindVertexArray(0);
+        }
+
+        // Draw quad
+        debugShader->Use();
+        PulseEngineGraphicsAPI->ActivateTexture(10);
+        PulseEngineGraphicsAPI->BindTexture(TEXTURE_2D, dLight->depthMapTex);
+        debugShader->SetInt("depthMap", 10);
+
+    glBindVertexArray(quadVAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+    }
+}
 
     graphicsAPI->EndFrame();
 }
 
 // Draws a large quad at y=0 using a grid shader
-void PulseEngineBackend::DrawGridQuad(PulseEngine::Mat4 viewCam)
+void PulseEngineBackend::DrawGridQuad(PulseEngine::Mat4 viewCam,const PulseEngine::Mat4& specificProjection )
 {
+    #ifdef PULSE_GRAPHIC_OPENGL
     static unsigned int quadVAO = 0, quadVBO = 0;
     if (quadVAO == 0) {
         float yOffset = -0.001f; // Slightly below y=0 to avoid z-fighting
@@ -230,12 +312,9 @@ void PulseEngineBackend::DrawGridQuad(PulseEngine::Mat4 viewCam)
     }
 
     gridShader->Use();
-    gridShader->SetMat4("model", glm::mat4(1.0f));
-    gridShader->SetMat4("view", glm::mat4(viewCam[0][0], viewCam[0][1], viewCam[0][2], viewCam[0][3],
-                          viewCam[1][0], viewCam[1][1], viewCam[1][2], viewCam[1][3],
-                          viewCam[2][0], viewCam[2][1], viewCam[2][2], viewCam[2][3],
-                          viewCam[3][0], viewCam[3][1], viewCam[3][2], viewCam[3][3]));
-    gridShader->SetMat4("projection", projection);
+    gridShader->SetMat4("model", PulseEngine::Mat4(1.0f));
+    gridShader->SetMat4("view", viewCam);
+    gridShader->SetMat4("projection", specificProjection);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -249,45 +328,50 @@ void PulseEngineBackend::DrawGridQuad(PulseEngine::Mat4 viewCam)
 
     glDepthMask(GL_TRUE);       
     glDisable(GL_BLEND);
+    #endif
 }
 
 
 
-void PulseEngineBackend::SpecificRender(Camera *cam, int specificVBO, std::vector<Entity*> entitiesToRender)
+void PulseEngineBackend::SpecificRender(Camera *cam, int specificVBO, std::vector<Entity*> entitiesToRender, PulseEngine::Vector2 viewportSize,Shader* specificShader)
 {
     if (!cam) return;
 
     // Calculate view and projection matrices for the specific camera
     PulseEngine::Mat4 specificView = cam->GetViewMatrix();
-    glm::mat4 specificProjection = glm::perspective(glm::radians(cam->Zoom), static_cast<float>(800) / static_cast<float>(600), 0.1f, 1000.0f);
-
-        glBindFramebuffer(GL_FRAMEBUFFER, specificVBO);
-        glViewport(0, 0, 800, 600);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    float aspectRatio = static_cast<float>(viewportSize.x) / static_cast<float>(viewportSize.y);
+    PulseEngine::Mat4 specificProjection = PulseEngine::MathUtils::PerspectiveMat(
+        PulseEngine::MathUtils::ToRadians(cam->Zoom),
+        aspectRatio,
+        0.1f,
+        1000.0f
+    );
+    PulseEngineGraphicsAPI->SpecificStartFrame(specificVBO, viewportSize);
     
 
     for (Entity* entity : entitiesToRender)
     {
         if (!IsRenderable(entity)) continue;
-        Shader* shader = entity->GetMaterial()->GetShader();
+        Shader* shader = specificShader ? specificShader : entity->GetMaterial()->GetShader();
 
         shader->Use();
-        #ifdef WINDOW_PULSE_EXPORT
+        shader->SetMat4("view", specificView);
         shader->SetMat4("projection", specificProjection);
-        shader->SetMat4("view", glm::mat4(specificView[0][0], specificView[0][1], specificView[0][2], specificView[0][3],
-                          specificView[1][0], specificView[1][1], specificView[1][2], specificView[1][3],
-                          specificView[2][0], specificView[2][1], specificView[2][2], specificView[2][3],
-                          specificView[3][0], specificView[3][1], specificView[3][2], specificView[3][3]));
-        shader->SetVec3("viewPos", glm::vec3(cam->Position.x, cam->Position.y, cam->Position.z));
-        #endif
+        shader->SetVec3("viewPos", cam->Position);
+
         LightManager::BindLightsToShader(shader, this, entity);
 
-        entity->DrawEntity(); 
+        if(!specificShader) entity->DrawEntity();
+        else
+        {
+            entity->BindTexturesToShader();
+            shader->SetMat4("model", entity->GetMatrix());
+            entity->DrawMeshWithShader(shader->getProgramID());
+        } 
     }
         // Draw grid quad in editor only
     EDITOR_ONLY(
-        DrawGridQuad(specificView);
+        DrawGridQuad(specificView, specificProjection);
     )
 
     graphicsAPI->EndFrame();
@@ -301,6 +385,7 @@ void PulseEngineBackend::RenderShadow()
     shadowShader->Use();
     for (int i = 0; i < lights.size(); ++i)
     {
+        
         lights[i]->RenderShadowMap(*shadowShader, *this);
     }
 }
@@ -308,6 +393,7 @@ void PulseEngineBackend::RenderShadow()
 void PulseEngineBackend::Shutdown()
 {    
     graphicsAPI->ShutdownApi();
+    discordLauncher->Terminate();
 }
 
 void PulseEngineBackend::ClearScene()
@@ -336,37 +422,37 @@ void PulseEngineBackend::ProcessInput(GLFWwindow* window)
     // if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) activeCamera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
-glm::vec3 PulseEngineBackend::CalculateLighting(const glm::vec3 &position, const glm::vec3 &normal, const glm::vec3 &viewPos, const LightData& light)
-{
-#ifndef WINDOW_PULSE_EXPORT
-    // Calculate the direction from the object to the light
-    glm::vec3 lightDir = glm::normalize(glm::vec3(light.GetPosition().x, light.GetPosition().y, light.GetPosition().z) - position);
+// glm::vec3 PulseEngineBackend::CalculateLighting(const glm::vec3 &position, const glm::vec3 &normal, const glm::vec3 &viewPos, const LightData& light)
+// {
+// #ifndef PULSE_GRAPHIC_OPENGL
+//     // Calculate the direction from the object to the light
+//     glm::vec3 lightDir = glm::normalize(glm::vec3(light.GetPosition().x, light.GetPosition().y, light.GetPosition().z) - position);
 
-    // Diffuse lighting: Lambertian reflectance (dot product of normal and light direction)
-    float diff = glm::max(glm::dot(normal, lightDir), 0.0f);
+//     // Diffuse lighting: Lambertian reflectance (dot product of normal and light direction)
+//     float diff = glm::max(glm::dot(normal, lightDir), 0.0f);
 
-    // Specular lighting: Blinn-Phong reflection model
-    glm::vec3 reflectDir = glm::reflect(-lightDir, normal);
-    glm::vec3 viewDir = glm::normalize(viewPos - position);
-    float spec = pow(glm::max(glm::dot(viewDir, reflectDir), 0.0f), 32); // 32 is the shininess
+//     // Specular lighting: Blinn-Phong reflection model
+//     glm::vec3 reflectDir = glm::reflect(-lightDir, normal);
+//     glm::vec3 viewDir = glm::normalize(viewPos - position);
+//     float spec = pow(glm::max(glm::dot(viewDir, reflectDir), 0.0f), 32); // 32 is the shininess
 
-    // Apply attenuation (optional for point lights)
-    float distance = glm::length(glm::vec3(light.GetPosition().x, light.GetPosition().y, light.GetPosition().z) - position);
-    float attenuation = 1.0f / (1.0f + light.attenuation * distance * distance);
+//     // Apply attenuation (optional for point lights)
+//     float distance = glm::length(glm::vec3(light.GetPosition().x, light.GetPosition().y, light.GetPosition().z) - position);
+//     float attenuation = 1.0f / (1.0f + light.attenuation * distance * distance);
 
-    // Final color calculation (ambient + diffuse + specular)
-    glm::vec3 ambientColor = glm::vec3(light.GetColor().r, light.GetColor().g, light.GetColor().b);
-    glm::vec3 ambient = 0.1f * ambientColor; // Ambient light
-    glm::vec3 diffuse = diff * ambientColor * light.intensity;
-    glm::vec3 specular = spec * ambientColor * light.intensity;
+//     // Final color calculation (ambient + diffuse + specular)
+//     glm::vec3 ambientColor = glm::vec3(light.GetColor().r, light.GetColor().g, light.GetColor().b);
+//     glm::vec3 ambient = 0.1f * ambientColor; // Ambient light
+//     glm::vec3 diffuse = diff * ambientColor * light.intensity;
+//     glm::vec3 specular = spec * ambientColor * light.intensity;
 
-    // Combine all lighting effects, considering attenuation for point lights
-    glm::vec3 finalColor = (ambient + diffuse + specular) * attenuation;
+//     // Combine all lighting effects, considering attenuation for point lights
+//     glm::vec3 finalColor = (ambient + diffuse + specular) * attenuation;
     
-    return finalColor;
-    #endif
-    return  glm::vec3(1.0f, 1.0f, 1.0f); // Default color if not in export mode
-}
+//     return finalColor;
+//     #endif
+//     return  glm::vec3(1.0f, 1.0f, 1.0f); // Default color if not in export mode
+// }
 
 bool PulseEngineBackend::IsRenderable(Entity *entity) const
 {
@@ -392,3 +478,4 @@ PulseEngine::Vector3 PulseEngineBackend::GetCameraRotation()
 {
     return PulseEngine::Vector3(GetActiveCamera()->Pitch, GetActiveCamera()->Yaw, 0.0f);
 }
+

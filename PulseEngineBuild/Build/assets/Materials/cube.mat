@@ -1,7 +1,14 @@
 {
-  "name": "cube",
-  "color": [0.8, 0.4, 0.4],
-  "specular": 0.1,
-  "roughness": 0.0,
-  "albedo": "Textures/albedo.jpg"
+    "albedo": "Textures/TEX_Player_Starship.png",
+    "color": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929
+    ],
+    "guid": "15061499069030162973",
+    "height": "Textures/TEX_Player_Starship.png",
+    "name": "cube",
+    "normal": "Textures/player_NM.png",
+    "roughness": "Textures/player_RN.png",
+    "specular": 1.0
 }

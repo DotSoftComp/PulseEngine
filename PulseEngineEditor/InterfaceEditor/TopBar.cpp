@@ -23,6 +23,7 @@
 #include "PulseEngine/core/Material/Material.h"
 #include "PulseEngine/core/GUID/GuidGenerator.h"
 #include "PulseEngine/core/GUID/GuidReader.h"
+#include "PulseEngine/core/GUID/GuidCollection.h"
 #include "PulseEngine/core/SceneLoader/SceneLoader.h"
 #include "PulseEngineEditor/InterfaceEditor/InterfaceEditor.h"
 #include <glm/glm.hpp>
@@ -35,6 +36,7 @@
 #include "PulseEngine/CustomScripts/ScriptsLoader.h"
 #include <windows.h>
 #include <commdlg.h>
+#include "json.hpp"
 
 
 void ResetWorkingDirectoryToExe()
@@ -72,7 +74,7 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             }
             if (ImGui::MenuItem("Save"))
             {
-                SceneLoader::SaveSceneToFile(engine->actualMapName, engine);
+                SceneLoader::SaveSceneToFile(engine->actualMapName, engine->actualMapPath, engine);
             }
             ImGui::EndMenu();
         }
@@ -87,8 +89,13 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             if(ImGui::MenuItem("Compile user scripts"))
             {
                 ScriptsLoader::FreeDll(); 
+                ScriptsLoader::scriptMap.clear();
+
+                SceneLoader::SaveSceneToFile(PulseEngineInstance->actualMapName, PulseEngineInstance->actualMapPath, PulseEngineInstance);
+                PulseEngineInstance->ClearScene();
                 CompileUserScripts(editor, "CustomScripts.dll");
                 ScriptsLoader::LoadDLL();
+                SceneLoader::LoadScene(PulseEngineInstance->actualMapPath, PulseEngineInstance);
                 
             }
 
@@ -124,14 +131,14 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                         }
                     }
 
-                    GuidReader::InsertIntoCollection("Entities/primitiveCube.pEntity");
+                    PulseEngineInstance->guidCollections["guidCollectionEntities.puid"]->InsertFile("Entities/primitiveCube.pEntity");
                 
                     // Create entity with unique name
                     Entity* cube = new Entity(
                         finalName,
                         PulseEngine::Vector3(0.0f),
                         Primitive::Cube(),
-                        MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat")
+                        MaterialManager::loadMaterial("Materials/cube.mat")
                     );
                     cube->SetGuid(GenerateGUIDFromPath("Entities/primitiveCube.pEntity"));
                     cube->SetMuid(GenerateGUIDFromPathAndMap(finalName, engine->actualMapPath));
@@ -154,8 +161,8 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
             {
                 engine->lights.push_back(new DirectionalLight(
                     1.0f,
-                    50.0f,
-                    glm::vec3(0.0f,0.0f,0.0f),
+                    250.0f,
+                    PulseEngine::Vector3(0.0f,0.0f,0.0f),
                     PulseEngine::Vector3(0.0f, 0.0f, 0.0f),
                     PulseEngine::Color(1.0f, 1.0f, 1.0f),
                     1.0f,
@@ -173,7 +180,7 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                 ofn.hwndOwner = nullptr;
                 ofn.lpstrFile = filePath;
                 ofn.nMaxFile = sizeof(filePath);
-                ofn.lpstrFilter = "3D Models\0*.obj;*.fbx;*.glb\0All\0*.*\0";
+                ofn.lpstrFilter = "3D Models\0*.obj;*.fbx;*.glb\0Images\0*.png;*.jpeg\0All\0*.*\0";
                 ofn.nFilterIndex = 1;
                 ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
@@ -182,29 +189,31 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
                     // ResetWorkingDirectoryToExe();
                     std::cout << "Selected file: " << filePath << std::endl;
                     std::string name = std::string(filePath).substr(std::string(filePath).find_last_of("/\\") + 1);
-                    std::string fileStr = editor->currentDir.string() + "/" + name + ".pmesh"; 
+                    std::string assetPath = editor->currentDir.string() + "/" + name;
 
-                    std::string prefix = "PulseEngineEditor/";
                     std::string guidPath;
-                    if (fileStr.find(prefix) == 0)
+                    switch(FileManager::GetFileType(filePath))
                     {
-                        guidPath = fileStr.substr(prefix.length());
+                        case FileType::MESH:
+                            std::cout << "importing mesh : " << name << std::endl;
+                            ImportMesh(editor, name, guidPath, filePath, assetPath);
+                            break;
+                        case FileType::TEXTURE:
+                            {
+                                std::cout << "Importing texture: " << name << std::endl;
+                                std::filesystem::current_path(FileManager::workingDirectory);
+                                    std::string copyCommand = "xcopy \"" + std::string(filePath) + "\" \"" + assetPath + "\" /Y";
+                                    system(copyCommand.c_str());
+
+                                std::string fileStr = editor->currentDir.string() + "/" + name;
+                                std::string prefix = "PulseEngineEditor";
+                                DeletePrefix(fileStr, prefix, guidPath);
+
+                                GuidReader::InsertIntoCollection(guidPath);
+                                
+                            }
+                            break;
                     }
-                    else
-                    {
-                        guidPath = fileStr; 
-                    }
-
-                    std::cout << "GUID Path: " << guidPath << std::endl;
-                    std::cout << "Name : " << name << std::endl;
-                    std::cout << "fileStr : " << fileStr << std::endl;
-
-                    std::filesystem::current_path(FileManager::workingDirectory);
-
-                    GuidReader::InsertIntoCollection(guidPath);
-
-                    std::ofstream guidFile(fileStr);
-                    guidFile.close();
                 }
             }
             ImGui::EndMenu();
@@ -268,6 +277,50 @@ void TopBar::UpdateBar(PulseEngineBackend* engine, InterfaceEditor* editor)
     }
 }
 
+void TopBar::ImportMesh(InterfaceEditor *editor, std::string &name, std::string &guidPath, char filePath[260], std::string &meshPath)
+{
+    std::string fileStr = editor->currentDir.string() + "/" + name + ".pmesh";
+    std::string prefix = "PulseEngineEditor";
+    DeletePrefix(fileStr, prefix, guidPath);
+
+    std::cout << "GUID Path: " << guidPath << std::endl;
+    std::cout << "Name : " << name << std::endl;
+    std::cout << "fileStr : " << fileStr << std::endl;
+
+    std::filesystem::current_path(FileManager::workingDirectory);
+
+    GuidReader::InsertIntoCollection(guidPath);
+    std::string copyCommand = "xcopy \"" + std::string(filePath) + "\" \"" + meshPath + "\" /Y";
+    system(copyCommand.c_str());
+
+    DeletePrefix(meshPath, prefix, meshPath);
+    std::ofstream guidFile(fileStr);
+    nlohmann::json_abi_v3_12_0::json guidJson;
+    guidJson["Guid"] = GenerateGUIDFromPath(guidPath);
+    guidJson["Name"] = name;
+    guidJson["MeshPath"] = meshPath;
+    guidJson["CreationDate"] = std::time(nullptr);
+
+    guidFile << guidJson.dump(4);
+    guidFile.close();
+}
+
+void TopBar::DeletePrefix(std::string &fileStr, std::string &prefix, std::string &guidPath)
+{
+    if (fileStr.find(prefix) == 0)
+    {
+        guidPath = fileStr.substr(prefix.length());
+    }
+    else
+    {
+        guidPath = fileStr;
+    }
+    while(guidPath.length() > 0 && guidPath[0] == '\\')
+    {
+        guidPath.erase(0, 1);
+    }
+}
+
 void TopBar::BuildGameToWindow(PulseEngineBackend *engine, InterfaceEditor* editor)
 {
     std::cout << "=== Building game to window ===" << std::endl;
@@ -300,19 +353,16 @@ void TopBar::CompileUserScripts(InterfaceEditor * editor, std::string output )
                     //Lets work on the custom files scripts now
                 std::string compiler = "g++";
                 std::string stdVersion = "-std=c++17";
-                std::string defines = "-DBUILDING_DLL -DWINDOW_PULSE_EXPORT";
+                std::string defines = "-DBUILDING_DLL -DPULSE_GRAPHIC_OPENGL -DPULSE_WINDOWS";
                 std::string flags = "-shared -Wall -g -mconsole " + defines;
                 std::string includeDirs = R"(-IUserScripts -Idist\src\PulseEngine\CustomScripts -Idist\include -Idist\src -Idist/src/dllexport -Ldist)";
                 std::string libs = "-lPulseEngine";
 
                 // Gather source files
                 std::string sources;
-                for (const auto& entry : std::filesystem::directory_iterator("UserScripts"))
+                for (const auto& entry : std::filesystem::directory_iterator("PulseEngineEditor"))
                 {
-                    if (entry.path().extension() == ".cpp")
-                    {
-                        sources += entry.path().string() + " ";
-                    }
+                    AnalyzeEntry(entry, sources);
                 }
             
                 // Final compilation command
@@ -335,6 +385,22 @@ void TopBar::CompileUserScripts(InterfaceEditor * editor, std::string output )
                 }
 }
 
+void TopBar::AnalyzeEntry(const std::filesystem::directory_entry & entry, std::string &sources)
+{
+    if (entry.is_directory())
+    {
+        for (const auto& subEntry : std::filesystem::directory_iterator(entry.path()))
+        {
+            AnalyzeEntry(subEntry, sources);
+        }
+    }
+    else if (entry.path().extension() == ".cpp")
+    {
+        sources += entry.path().string() + " ";
+    }
+}
+
+
 void TopBar::GenerateExecutableForWindow(PulseEngineBackend * engine)
 {
     std::cout << "=== Creating the executable for window ===" << std::endl;
@@ -343,14 +409,14 @@ void TopBar::GenerateExecutableForWindow(PulseEngineBackend * engine)
     std::string gameName = engineConfig["GameData"]["Name"].get<std::string>();
     std::string gameVersion = engineConfig["GameData"]["version"].get<std::string>();
 
-    std::string defineGameName = "-DGAME_NAME=\\\"" + gameName + "\\\"";
-    std::string defineGameVersion = "-DGAME_VERSION=\\\"" + gameVersion + "\\\"";
+    std::string defineGameName = "";
+    std::string defineGameVersion = "";
 
     std::string compileCommand =
         "g++ -Idist/src -Idist/include dist/main.cpp "
         "-Ldist/Build -lPulseEngine "
         "-LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 "
-        "-DWINDOW_PULSE_EXPORT " +
+        "-DPULSE_GRAPHIC_OPENGL -DPULSE_WINDOWS " +
         defineGameName + " " + defineGameVersion + " "
                                                    "-o Build/Game.exe";
     std::cout << "Compile command: " << compileCommand << std::endl;

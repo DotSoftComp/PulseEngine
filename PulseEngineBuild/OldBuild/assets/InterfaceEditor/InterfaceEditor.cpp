@@ -268,7 +268,7 @@ void InterfaceEditor::GenerateSceneDataWindow(PulseEngineBackend *engine)
         ImGui::Spacing();
         if (ImGui::Button("Save", ImVec2(120, 0)))
         {
-            SceneLoader::SaveSceneToFile(sceneName, engine);
+            // SceneLoader::SaveSceneToFile(sceneName, engine);
             ImGui::CloseCurrentPopup();
             openPopup = false;
         }

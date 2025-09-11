@@ -15,114 +15,19 @@
 #include "PulseEngine/ModuleLoader/IModule/IModule.h"
 #include "PulseEngine/ModuleLoader/IModuleInterface/IModuleInterface.h"
 #include "PulseEngine/ModuleLoader/ModuleLoader.h"
+#include "PulseEngine/core/FileManager/FileManager.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/NodeMenuRegistry.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/Node.h"
+#include "PulseEngineEditor/InterfaceEditor/Synapse/Synapse.h"
+#include "PulseEngineEditor/InterfaceEditor/NewFileCreator/NewFileManager.h"
 #include <glm/gtc/type_ptr.hpp>
+
 #include "imgui/imgui.h"
+
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
-
-void InterfaceEditor::ShowFileGrid(const fs::path& currentDir, fs::path& selectedFile)
-{
-    static float thumbnailSize = 64.0f;
-    static float padding = 16.0f;
-
-    float cellSize = thumbnailSize + padding;
-    float panelWidth = ImGui::GetContentRegionAvail().x;
-    int columnCount = (int)(panelWidth / cellSize);
-    if (columnCount < 1)
-        columnCount = 1;
-
-    ImGui::Columns(columnCount, nullptr, false);
-
-    for (const auto& entry : fs::directory_iterator(currentDir))
-    {
-        const bool isDir = entry.is_directory();
-        const std::string name = entry.path().filename().string();
-
-        ImGui::PushID(name.c_str());
-
-        ImGui::BeginGroup();
-
-        if (isDir)
-        {
-            ImGui::Button("📁", ImVec2(thumbnailSize, thumbnailSize));
-        }
-        else
-        {
-            ImGui::Button("📄", ImVec2(thumbnailSize, thumbnailSize));
-        }
-
-        if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0))
-        {
-            if (isDir)
-            {
-                // Navigate into directory
-                selectedFile = entry.path();
-
-            }
-            else
-            {
-                for (auto& callback : fileClickedCallbacks)
-                {
-                    ClickedFileData clickedFileData;
-                    clickedFileData.name = entry.path();
-                    clickedFileData.path = currentDir;
-                    callback(clickedFileData);
-                }
-                selectedFile = entry.path();
-            }
-        }
-
-        ImGui::TextWrapped("%s", name.c_str());
-
-        ImGui::EndGroup();
-
-        ImGui::NextColumn();
-        ImGui::PopID();
-    }
-
-    ImGui::Columns(1);
-}
-
-void InterfaceEditor::FileExplorerWindow()
-{
-
-
-    ImGui::Begin("Asset Manager");
-
-    // Show breadcrumb-style navigation
-    ImGui::Text("Path: %s", currentDir.string().c_str());
-
-    if (ImGui::Button("back"))
-    {    
-        if (currentDir.has_parent_path())
-        {            
-            currentDir = currentDir.parent_path();
-            selected.clear();
-        }
-    }
-
-    ImGui::Separator();
-
-    ShowFileGrid(currentDir, selected);
-
-    if (!selected.empty())
-    {
-        if (fs::is_directory(selected))
-        {
-            currentDir = selected;
-            selected.clear(); 
-        }
-        else
-        {
-            ImGui::Text("Selected file: %s", selected.filename().string().c_str());
-        }
-    }
-
-
-    ImGui::End();
-}
 InterfaceEditor::InterfaceEditor()
 {    
     topbar = new TopBar();
@@ -134,17 +39,28 @@ InterfaceEditor::InterfaceEditor()
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.IniFilename = "PulseEditorGUI.ini";
-
+    
+    ImFont* dmSansFont = io.Fonts->AddFontFromFileTTF((std::string(ASSET_PATH) + "fonts/EngineFont.ttf").c_str(), 18.0f);
+    io.FontDefault = dmSansFont;    
     ImGui::StyleColorsDark(); 
+
+    synapse = new Synapse("");
+    newFileManager = new NewFileManager();
+
+    synapse->Init();
+
+
+    icons["folder"] = new Texture(("InterfaceEditor/icon/folder.png"));
+    icons["file"] = new Texture(("InterfaceEditor/icon/file.png"));
+    icons["entityFile"] = new Texture(("InterfaceEditor/icon/entityFile.png"));
+    icons["modelFile"] = new Texture(("InterfaceEditor/icon/modelFile.png"));
+    icons["scene"] = new Texture(("InterfaceEditor/icon/scene.png"));
+    icons["cpp"] = new Texture(("InterfaceEditor/icon/cpp.png"));
+    icons["h"] = new Texture(("InterfaceEditor/icon/h.png"));
+    icons["synapse"] = new Texture(("InterfaceEditor/icon/synapse.png"));
 
     ImGui_ImplGlfw_InitForOpenGL(PulseEngineInstance->GetWindowContext()->GetGLFWWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 460");
-
-    windowStates["EntityAnalyzer"] = true;
-    windowStates["viewport"] = true;
-    windowStates["EngineConfig"] = false;
-    windowStates["SceneData"] = false;
-    windowStates["assetManager"] = false;
 
     std::vector<std::string> filenames;
 
@@ -166,7 +82,16 @@ InterfaceEditor::InterfaceEditor()
         }
     }
 
+    windowStates["EntityAnalyzer"] = true;
+    windowStates["viewport"] = true;
+    windowStates["EngineConfig"] = true;
+    windowStates["SceneData"] = true;
+    windowStates["assetManager"] = true;
+
     
+
+
+
     ImGuiStyle& style = ImGui::GetStyle();
     style.WindowRounding = 6.0f;
     style.FrameRounding = 5.0f;
@@ -183,55 +108,86 @@ InterfaceEditor::InterfaceEditor()
     style.ItemSpacing = ImVec2(10.0f, 8.0f);
     style.ItemInnerSpacing = ImVec2(8.0f, 6.0f);
     
+    
+ImVec4 orangeAccent      = ImVec4(1.00f, 0.55f, 0.20f, 1.00f); // Warm orange
+ImVec4 orangeAccentHover = ImVec4(1.00f, 0.65f, 0.30f, 1.00f); // Slightly brighter on hover
+ImVec4 orangeAccentActive= ImVec4(1.00f, 0.45f, 0.10f, 1.00f); // Slightly darker on press
     // Couleurs
-    style.Colors[ImGuiCol_Text]                   = ImVec4(0.96f, 0.97f, 1.00f, 1.00f);  // Texte plus lumineux
-    style.Colors[ImGuiCol_TextDisabled]          = ImVec4(0.60f, 0.60f, 0.64f, 1.00f);  // Texte désactivé plus doux
-    style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.08f, 0.09f, 0.11f, 1.00f);  // Fond très sombre
-    style.Colors[ImGuiCol_ChildBg]               = ImVec4(0.12f, 0.13f, 0.15f, 1.00f);  // Fond des enfants un peu plus clair
-    style.Colors[ImGuiCol_PopupBg]               = ImVec4(0.06f, 0.06f, 0.07f, 0.94f);  // Fond popup un peu plus sombre
-    style.Colors[ImGuiCol_Border]                = ImVec4(0.25f, 0.25f, 0.27f, 0.60f);  // Bordures plus discrètes
-    style.Colors[ImGuiCol_BorderShadow]          = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);  // Pas d'ombre de bordure
-    
-    style.Colors[ImGuiCol_FrameBg]               = ImVec4(0.16f, 0.17f, 0.19f, 1.00f);  // Fond des cadres
-    style.Colors[ImGuiCol_FrameBgHovered]        = ImVec4(0.20f, 0.21f, 0.23f, 1.00f);  // Survol des cadres
-    style.Colors[ImGuiCol_FrameBgActive]         = ImVec4(0.24f, 0.25f, 0.27f, 1.00f);  // Cadres actifs
-    
-    style.Colors[ImGuiCol_TitleBg]               = ImVec4(0.09f, 0.10f, 0.12f, 1.00f);  // Fond du titre
-    style.Colors[ImGuiCol_TitleBgActive]         = ImVec4(0.14f, 0.15f, 0.16f, 1.00f);  // Titre actif
-    style.Colors[ImGuiCol_TitleBgCollapsed]      = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);  // Titre réduit
-    
-    style.Colors[ImGuiCol_MenuBarBg]             = ImVec4(0.13f, 0.13f, 0.14f, 1.00f);  // Fond barre de menu
-    style.Colors[ImGuiCol_ScrollbarBg]           = ImVec4(0.08f, 0.08f, 0.08f, 0.53f);  // Fond des barres de défilement
-    style.Colors[ImGuiCol_ScrollbarGrab]         = ImVec4(0.33f, 0.33f, 0.33f, 1.00f);  // Barre de défilement
-    style.Colors[ImGuiCol_ScrollbarGrabHovered]  = ImVec4(0.43f, 0.43f, 0.43f, 1.00f);  // Survol barre de défilement
-    style.Colors[ImGuiCol_ScrollbarGrabActive]   = ImVec4(0.53f, 0.53f, 0.53f, 1.00f);  // Actif barre de défilement
-    
-    style.Colors[ImGuiCol_CheckMark]             = ImVec4(0.30f, 0.60f, 1.00f, 1.00f);  // Coche bleue plus lumineuse
-    style.Colors[ImGuiCol_SliderGrab]            = ImVec4(0.30f, 0.60f, 1.00f, 1.00f);  // Curseur du slider
-    style.Colors[ImGuiCol_SliderGrabActive]      = ImVec4(0.38f, 0.65f, 1.00f, 1.00f);  // Curseur actif du slider
-    
-    style.Colors[ImGuiCol_Button]                = ImVec4(0.22f, 0.23f, 0.27f, 1.00f);  // Fond des boutons
-    style.Colors[ImGuiCol_ButtonHovered]         = ImVec4(0.28f, 0.30f, 0.33f, 1.00f);  // Survol des boutons
-    style.Colors[ImGuiCol_ButtonActive]          = ImVec4(0.33f, 0.35f, 0.38f, 1.00f);  // Bouton actif
-    
-    style.Colors[ImGuiCol_Header]                = ImVec4(0.24f, 0.25f, 0.27f, 1.00f);  // Fond des en-têtes
-    style.Colors[ImGuiCol_HeaderHovered]         = ImVec4(0.30f, 0.32f, 0.35f, 1.00f);  // Survol des en-têtes
-    style.Colors[ImGuiCol_HeaderActive]          = ImVec4(0.36f, 0.38f, 0.41f, 1.00f);  // En-têtes actifs
-    
-    style.Colors[ImGuiCol_Separator]             = ImVec4(0.40f, 0.40f, 0.43f, 0.60f);  // Séparateur discret
-    style.Colors[ImGuiCol_SeparatorHovered]      = ImVec4(0.45f, 0.45f, 0.48f, 1.00f);  // Survol séparateur
-    style.Colors[ImGuiCol_SeparatorActive]       = ImVec4(0.50f, 0.50f, 0.54f, 1.00f);  // Séparateur actif
-    
-    style.Colors[ImGuiCol_ResizeGrip]            = ImVec4(0.26f, 0.60f, 0.98f, 0.20f);  // Grip de redimensionnement
-    style.Colors[ImGuiCol_ResizeGripHovered]     = ImVec4(0.26f, 0.60f, 0.98f, 0.50f);  // Survol grip
-    style.Colors[ImGuiCol_ResizeGripActive]      = ImVec4(0.26f, 0.60f, 0.98f, 0.80f);  // Actif grip
-    
-    style.Colors[ImGuiCol_Tab]                   = ImVec4(0.18f, 0.19f, 0.20f, 1.00f);  // Fond des onglets
-    style.Colors[ImGuiCol_TabHovered]            = ImVec4(0.28f, 0.30f, 0.33f, 1.00f);  // Survol des onglets
-    style.Colors[ImGuiCol_TabActive]             = ImVec4(0.24f, 0.26f, 0.29f, 1.00f);  // Onglet actif
-    style.Colors[ImGuiCol_TabUnfocused]          = ImVec4(0.18f, 0.18f, 0.18f, 1.00f); // Onglet non sélectionné
-    style.Colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.20f, 0.22f, 0.24f, 1.00f); // Onglet non actif
-    
+// Textes
+style.Colors[ImGuiCol_Text]                   = ImVec4(0.92f, 0.95f, 1.00f, 1.00f); // Blanc bleuté, doux
+style.Colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.55f, 0.65f, 1.00f);
+
+// Fond général
+style.Colors[ImGuiCol_WindowBg]               = ImVec4(0.04f, 0.05f, 0.07f, 1.00f); // Très sombre
+style.Colors[ImGuiCol_ChildBg]                = ImVec4(0.07f, 0.08f, 0.10f, 1.00f);
+style.Colors[ImGuiCol_PopupBg]                = ImVec4(0.05f, 0.06f, 0.07f, 0.98f);
+
+// Bordures
+style.Colors[ImGuiCol_Border]                 = ImVec4(0.18f, 0.20f, 0.24f, 0.50f);
+style.Colors[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+
+// Cadres
+style.Colors[ImGuiCol_FrameBg]                = ImVec4(0.12f, 0.13f, 0.16f, 1.00f);
+style.Colors[ImGuiCol_FrameBgHovered]         = ImVec4(0.16f, 0.18f, 0.22f, 1.00f);
+style.Colors[ImGuiCol_FrameBgActive]          = ImVec4(0.18f, 0.20f, 0.25f, 1.00f);
+
+// Titres et barres
+style.Colors[ImGuiCol_TitleBg]                = ImVec4(0.06f, 0.07f, 0.08f, 1.00f);
+style.Colors[ImGuiCol_TitleBgActive]          = ImVec4(0.10f, 0.12f, 0.14f, 1.00f);
+style.Colors[ImGuiCol_TitleBgCollapsed]       = ImVec4(0.03f, 0.03f, 0.04f, 1.00f);
+
+style.Colors[ImGuiCol_MenuBarBg]              = ImVec4(0.07f, 0.08f, 0.09f, 1.00f);
+
+// Scrollbars
+style.Colors[ImGuiCol_ScrollbarBg]            = ImVec4(0.05f, 0.05f, 0.05f, 0.50f);
+style.Colors[ImGuiCol_ScrollbarGrab]          = ImVec4(0.26f, 0.36f, 0.56f, 0.90f);
+style.Colors[ImGuiCol_ScrollbarGrabHovered]   = ImVec4(0.36f, 0.46f, 0.66f, 0.90f);
+style.Colors[ImGuiCol_ScrollbarGrabActive]    = ImVec4(0.46f, 0.56f, 0.76f, 1.00f);
+
+// Coche et sliders
+style.Colors[ImGuiCol_CheckMark]              = ImVec4(0.38f, 0.70f, 1.00f, 1.00f);
+style.Colors[ImGuiCol_SliderGrab]             = ImVec4(0.35f, 0.65f, 1.00f, 1.00f);
+style.Colors[ImGuiCol_SliderGrabActive]       = ImVec4(0.45f, 0.75f, 1.00f, 1.00f);
+
+// Boutons
+style.Colors[ImGuiCol_Button]                 = ImVec4(0.16f, 0.18f, 0.22f, 1.00f);
+style.Colors[ImGuiCol_ButtonHovered]          = ImVec4(0.24f, 0.28f, 0.34f, 1.00f);
+style.Colors[ImGuiCol_ButtonActive]           = ImVec4(0.30f, 0.36f, 0.42f, 1.00f);
+
+// Headers (ex: TreeNode)
+style.Colors[ImGuiCol_Header]                 = ImVec4(0.20f, 0.22f, 0.26f, 1.00f);
+style.Colors[ImGuiCol_HeaderHovered]          = ImVec4(0.28f, 0.32f, 0.38f, 1.00f);
+style.Colors[ImGuiCol_HeaderActive]           = ImVec4(0.34f, 0.40f, 0.48f, 1.00f);
+
+// Séparateurs
+style.Colors[ImGuiCol_Separator]              = ImVec4(0.22f, 0.24f, 0.28f, 0.60f);
+style.Colors[ImGuiCol_SeparatorHovered]       = ImVec4(0.32f, 0.34f, 0.38f, 1.00f);
+style.Colors[ImGuiCol_SeparatorActive]        = ImVec4(0.38f, 0.40f, 0.46f, 1.00f);
+
+// Resize grip
+style.Colors[ImGuiCol_ResizeGrip]             = ImVec4(0.30f, 0.60f, 1.00f, 0.30f);
+style.Colors[ImGuiCol_ResizeGripHovered]      = ImVec4(0.30f, 0.60f, 1.00f, 0.60f);
+style.Colors[ImGuiCol_ResizeGripActive]       = ImVec4(0.30f, 0.60f, 1.00f, 0.90f);
+
+// Tabs
+style.Colors[ImGuiCol_Tab]                    = ImVec4(0.14f, 0.16f, 0.20f, 1.00f);
+style.Colors[ImGuiCol_TabHovered]             = ImVec4(0.24f, 0.28f, 0.32f, 1.00f);
+style.Colors[ImGuiCol_TabActive]              = orangeAccent;
+style.Colors[ImGuiCol_TabUnfocused]           = ImVec4(0.12f, 0.14f, 0.18f, 1.00f);
+style.Colors[ImGuiCol_TabUnfocusedActive]     = ImVec4(0.18f, 0.20f, 0.24f, 1.00f);
+
+
+
+NodeMenuRegistry::Get().AddCategory("Input/Keyboard", "OnKeyPressed", []()
+{
+    // Code to spawn node
+});
+
+NodeMenuRegistry::Get().AddCategory("Mathematical/Basic", "Add", []()
+{
+    // Code to spawn add node
+});
+
 }
 
 void RenderMainDockSpace()
@@ -247,6 +203,7 @@ void RenderMainDockSpace()
         ImGui::SetNextWindowPos(viewport->Pos);
         ImGui::SetNextWindowSize(viewport->Size);
         ImGui::SetNextWindowViewport(viewport->ID);
+        
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
         window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
@@ -285,11 +242,15 @@ void InterfaceEditor::RenderFullscreenWelcomePanel()
 }
 
 
+
 void InterfaceEditor::Render()
-{        
+{       
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    synapse->Render();
+
     RenderMainDockSpace();
 
     if(!hasProjectSelected)
@@ -300,28 +261,21 @@ void InterfaceEditor::Render()
     {
         for(auto mod : modules)
         {
-            if(windowStates[mod->GetName()]) mod->Render();
+            if(windowStates[mod->GetName()])
+                mod->Render();
         }
 
         if(windowStates["SceneData"]) GenerateSceneDataWindow();
-
         if(windowStates["EntityAnalyzer"]) EntityAnalyzerWindow();
+        if(windowStates["EngineConfig"]) EngineConfigWindow();
 
-        if (windowStates["EngineConfig"])
-        {
-            EngineConfigWindow();
-        }
-        if (windowStates["assetManager"])
+        if(windowStates["assetManager"])
         {
             ImGui::Begin("Asset Manager", &windowStates["assetManager"]);
             static fs::path selectedFile;
             FileExplorerWindow();
-
-            ImGui::Text("Asset Manager");
             ImGui::End();
         }
-
-
 
         topbar->UpdateBar(PulseEngineInstance, this);
 
@@ -330,12 +284,21 @@ void InterfaceEditor::Render()
             ShowLoadingPopup(popup.contentFunction, popup.progressPercent);
         }
     }
-    // Rendu de la frame
-    ImGui::Render();
-    ImGui::UpdatePlatformWindows();
-    ImGui::RenderPlatformWindowsDefault();
 
+    // ✅ Fin de la frame
+    ImGui::Render();
+    // ImGui::UpdatePlatformWindows();
+    // ImGui::RenderPlatformWindowsDefault();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    // Render additional viewports (if multi-viewport enabled)
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    {
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        ImGui::UpdatePlatformWindows();             // Create/Update additional platform windows
+        ImGui::RenderPlatformWindowsDefault();      // Render them
+        glfwMakeContextCurrent(backup_current_context);  // Restore original context
+    }
 }
 
 void InterfaceEditor::EngineConfigWindow()
@@ -491,35 +454,39 @@ void InterfaceEditor::EntityAnalyzerWindow()
                 ImGui::TreePop();
             }
         }
-
+        int counter = 0;
+        std::cout << "Number of scripts on entity " << selectedEntity->GetScripts().size() << std::endl;
         for (auto& s : selectedEntity->GetScripts())
         {
-            std::cout << "Script name: " << s->GetName() << std::endl;
-            if(!s->isEntityLinked) ImGui::Text("Only on this entity !");
-                if (ImGui::TreeNode(s->GetName()))
+            int varCounter = 0;
+            if(!s->isEntityLinked) ImGui::Text("Only on this entity ! ###OnlyThis%s", s->GetName());
+            std::string treeNodeLabel = s->GetName() + std::string("###") + s->GetName() + "_" + std::to_string(counter);
+            if (ImGui::TreeNode(treeNodeLabel.c_str()))
+            {
+                std::cout << "script variable quantity : " << s->GetExposedVariables().size() << std::endl;
+                for (auto& var : s->GetExposedVariables())
                 {
-                    for (auto& var : s->GetExposedVariables())
+                    std::string label = var.name + "###" + s->GetName() + "_" + std::to_string(counter) + "_" + var.name + "_" + std::to_string(varCounter);
+                
+                    switch (var.type)
                     {
-                        std::cout << "Variable name: " << var.name << std::endl;
-                        std::string label = var.name + "##" + s->GetName(); 
-                    
-                        switch (var.type)
-                        {
-                            case ExposedVariable::Type::INT:
-                                ImGui::InputInt(label.c_str(), reinterpret_cast<int*>(var.ptr));
-                                break;
-                            case ExposedVariable::Type::FLOAT:
-                                ImGui::InputFloat(label.c_str(), reinterpret_cast<float*>(var.ptr));
-                                break;
-                            case ExposedVariable::Type::BOOL:
-                                ImGui::Checkbox(label.c_str(), reinterpret_cast<bool*>(var.ptr));
-                                break;
-                            case ExposedVariable::Type::STRING:
-                                break;
-                        }
+                        case ExposedVariable::Type::INT:
+                            ImGui::InputInt(label.c_str(), reinterpret_cast<int*>(var.ptr));
+                            break;
+                        case ExposedVariable::Type::FLOAT:
+                            ImGui::InputFloat(label.c_str(), reinterpret_cast<float*>(var.ptr));
+                            break;
+                        case ExposedVariable::Type::BOOL:
+                            ImGui::Checkbox(label.c_str(), reinterpret_cast<bool*>(var.ptr));
+                            break;
+                        case ExposedVariable::Type::STRING:
+                            break;
                     }
-                    ImGui::TreePop();
                 }
+                ImGui::TreePop();
+            }
+            counter++;
+            varCounter++;
 
         }
 
@@ -562,100 +529,167 @@ void InterfaceEditor::GenerateSceneDataWindow()
 {
     ImGui::Begin("Scene Manager");
 
-    ImGui::Text("Scene Management");
+    ImGui::TextColored(ImVec4(0.1f, 0.6f, 0.9f, 1.0f), "Scene Management");
     ImGui::Separator();
 
-    if (ImGui::Button("Clear Scene", ImVec2(-1, 0))) // Full-width button
+    // Clear Scene Button
+    if (ImGui::Button("Clear Scene", ImVec2(-1, 0)))
     {
         selectedEntity = nullptr;
         PulseEngineInstance->ClearScene();
     }
 
     ImGui::Spacing();
+    ImGui::Text("Scene Contents");
+    ImGui::Separator();
 
-    ImGui::Text("Scene");
-    // Create a scrollable zone for displaying entities
-    ImGui::BeginChild("Scene Entities", ImVec2(250, -1), true, ImGuiWindowFlags_HorizontalScrollbar);
+    // Scroll area for Entities + Lights
+    ImGui::BeginChild("SceneEntitiesScroll", ImVec2(0, 300), true);
 
-    ImGui::Text("Entities:");
+    // --- ENTITIES SECTION ---
+    ImGui::Text("Entities");
+    ImGui::Separator();
 
-    for (size_t i = 0; i < PulseEngineInstance->entities.size(); i++)
+    // Collect entities to safely delete after iteration
+    std::vector<size_t> entitiesToDelete;
+
+    for (size_t i = 0; i < PulseEngineInstance->entities.size(); ++i)
     {
-        if(!PulseEngineInstance->entities[i]) continue;
-        std::string entityLabel = "Entity: " + PulseEngineInstance->entities[i]->GetName() + "_"  + std::to_string(i) +  "##" + std::to_string(i);
-        std::string deleteButtonLabel = "X##" + std::to_string(i);
+        auto entity = PulseEngineInstance->entities[i];
+        if (!entity)
+            continue;
 
-        if (ImGui::Button(entityLabel.c_str()))
+        // Compose label with persistent ID: use entity GUID or pointer address
+        std::string label = entity->GetName() + "##Entity_" + std::to_string(reinterpret_cast<uintptr_t>(entity));
+
+        // Highlight if selected
+        if (selectedEntity == entity)
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.9f, 0.2f, 0.2f, 0.7f));
+        else
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.15f, 0.15f, 0.15f, 1.0f));
+
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.1f, 0.75f, 0.95f, 0.9f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.05f, 0.45f, 0.7f, 1.0f));
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.0f);
+
+        // Full width button but leave room for delete button on right
+        float fullWidth = ImGui::GetContentRegionAvail().x;
+        float deleteBtnWidth = 24.0f;
+        float entityBtnWidth = fullWidth - deleteBtnWidth - 8.0f; // 8 for spacing
+
+        if (ImGui::Button(label.c_str(), ImVec2(entityBtnWidth, 0)))
         {
-            selectedEntity = PulseEngineInstance->entities[i];
+            selectedEntity = entity;
         }
+
+        ImGui::PopStyleColor(3);
+        ImGui::PopStyleVar();
 
         ImGui::SameLine();
-        ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::GetStyle().FramePadding.x * 3 - 5); // Move cursor to the right
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.8f, 0.1f, 0.1f, 1.0f)); // Red background
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.0f, 0.2f, 0.2f, 1.0f)); // Brighter red on hover
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.6f, 0.0f, 0.0f, 1.0f)); // Darker red when active
-        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6.0f, 6.0f)); // Smaller padding for square button
 
-        if (ImGui::Button(deleteButtonLabel.c_str()))
+        // Show delete button only on hover of entity button for cleaner UI
+        bool isHovered = ImGui::IsItemHovered();
+        ImGui::PushStyleColor(ImGuiCol_Button, isHovered ? ImVec4(0.9f, 0.2f, 0.2f, 1.0f) : ImVec4(0.6f, 0.1f, 0.1f, 0.7f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.7f, 0.0f, 0.0f, 1.0f));
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+
+        if (ImGui::Button("X", ImVec2(deleteBtnWidth, 0)))
         {
-            if (selectedEntity == PulseEngineInstance->entities[i])
-            {
+            entitiesToDelete.push_back(i);
+            if (selectedEntity == entity)
                 selectedEntity = nullptr;
-            }
-            PulseEngineInstance->DeleteEntity(PulseEngineInstance->entities[i]);
         }
 
-        ImGui::PopStyleVar();
+        ImGui::PopStyleVar(2);
         ImGui::PopStyleColor(3);
 
-        ImGui::Separator();
+        ImGui::Spacing();
     }
 
-    ImGui::Text("Lights:");
+    // Delete entities after loop to avoid invalidating vector while iterating
+    for (auto it = entitiesToDelete.rbegin(); it != entitiesToDelete.rend(); ++it)
+    {
+        PulseEngineInstance->DeleteEntity(PulseEngineInstance->entities[*it]);
+    }
+
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    // --- LIGHTS SECTION ---
+    ImGui::Text("Lights");
+    ImGui::Separator();
+
+    std::vector<size_t> lightsToDelete;
+
     for (size_t i = 0; i < PulseEngineInstance->lights.size(); ++i)
     {
-        auto& light = PulseEngineInstance->lights[i];
-        std::string lightLabel = "Light: " + std::to_string(i + 1) + "##" + std::to_string(i);
+        auto light = PulseEngineInstance->lights[i];
+        if (!light)
+            continue;
 
-        if (ImGui::Button(lightLabel.c_str()))
+        std::string label = "Light #" + std::to_string(i + 1) + "##Light_" + std::to_string(reinterpret_cast<uintptr_t>(light));
+
+        if (selectedEntity == light)
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 0.5f, 0.0f, 0.7f));
+        else
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.15f, 0.15f, 0.15f, 1.0f));
+
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.1f, 0.75f, 0.95f, 0.9f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.05f, 0.45f, 0.7f, 1.0f));
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.0f);
+
+        float fullWidth = ImGui::GetContentRegionAvail().x;
+        float deleteBtnWidth = 24.0f;
+        float lightBtnWidth = fullWidth - deleteBtnWidth - 8.0f;
+
+        if (ImGui::Button(label.c_str(), ImVec2(lightBtnWidth, 0)))
         {
             selectedEntity = light;
         }
 
-        ImGui::SameLine();
-        ImGui::SetCursorPosX(ImGui::GetWindowContentRegionMax().x - ImGui::GetStyle().FramePadding.x * 3 - 5); // Move cursor to the right
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.8f, 0.1f, 0.1f, 1.0f)); // Red background
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.0f, 0.2f, 0.2f, 1.0f)); // Brighter red on hover
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.6f, 0.0f, 0.0f, 1.0f)); // Darker red when active
-        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6.0f, 6.0f)); // Smaller padding for square button
+        ImGui::PopStyleColor(3);
+        ImGui::PopStyleVar();
 
-        std::string deleteButtonLabel = "X##LightDelete" + std::to_string(i);
-        if (ImGui::Button(deleteButtonLabel.c_str()))
+        ImGui::SameLine();
+
+        bool isHovered = ImGui::IsItemHovered();
+        ImGui::PushStyleColor(
+            ImGuiCol_Button, 
+            isHovered ? ImVec4(1.0f, 0.5f, 0.0f, 1.0f) : ImVec4(0.6f, 0.3f, 0.0f, 0.7f)
+        );
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.7f, 0.0f, 0.0f, 1.0f));
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+
+        std::string deleteButtonLabel = "X##delete" + std::to_string(i);
+        if (ImGui::Button(deleteButtonLabel.c_str(), ImVec2(deleteBtnWidth, 0)))
         {
+            lightsToDelete.push_back(i);
             if (selectedEntity == light)
-            {
                 selectedEntity = nullptr;
-            }
-            // Remove from vector after deletion
-            PulseEngineInstance->lights.erase(PulseEngineInstance->lights.begin() + i);
-            --i; // Adjust index after erase
-            ImGui::PopStyleVar();
-            ImGui::PopStyleColor(3);
-            ImGui::Separator();
-            continue;
         }
 
-        ImGui::PopStyleVar();
+        ImGui::PopStyleVar(2);
         ImGui::PopStyleColor(3);
 
-        ImGui::Separator();
+        ImGui::Spacing();
+    }
+
+    for (auto it = lightsToDelete.rbegin(); it != lightsToDelete.rend(); ++it)
+    {
+        PulseEngineInstance->lights.erase(PulseEngineInstance->lights.begin() + *it);
     }
 
     ImGui::EndChild();
 
+
     ImGui::End();
 }
+
+
 
 void InterfaceEditor::ShowLoadingPopup(std::function<void()> contentFunction, float progressPercent)
 {
@@ -689,4 +723,12 @@ void InterfaceEditor::ShowLoadingPopup(std::function<void()> contentFunction, fl
     }
 
     ImGui::End();
+}
+
+void InterfaceEditor::InitAfterEngine()
+{
+    for(auto& module : modules)
+    {
+        module->Initialize();
+    }
 }

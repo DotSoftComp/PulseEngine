@@ -15,76 +15,371 @@
 \DoxyCodeLine{00015\ \ \ \ \ \{}
 \DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ PI\ =\ 3.14159265358979323846f;}
 \DoxyCodeLine{00017\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(\textcolor{keywordtype}{float}\ degrees)}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ degrees\ *\ (PI\ /\ 180.0f);}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}{ToDegrees}}(\textcolor{keywordtype}{float}\ radians)}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ radians\ *\ (180.0f\ /\ PI);}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac}{CreateRotationMatrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ euler)}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ pitch\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.x);\ \textcolor{comment}{//\ X-\/axis}}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yaw\ \ \ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.y);\ \textcolor{comment}{//\ Y-\/axis}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ roll\ \ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.z);\ \textcolor{comment}{//\ Z-\/axis}}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ cosf(pitch),\ sx\ =\ sinf(pitch);}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ cosf(yaw),\ \ \ sy\ =\ sinf(yaw);}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cz\ =\ cosf(roll),\ \ sz\ =\ sinf(roll);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ mat;}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][0]\ =\ cy\ *\ cz;}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][1]\ =\ sx\ *\ sy\ *\ cz\ -\/\ cx\ *\ sz;}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][2]\ =\ cx\ *\ sy\ *\ cz\ +\ sx\ *\ sz;}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][3]\ =\ 0.0f;}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][0]\ =\ cy\ *\ sz;}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][1]\ =\ sx\ *\ sy\ *\ sz\ +\ cx\ *\ cz;}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][2]\ =\ cx\ *\ sy\ *\ sz\ -\/\ sx\ *\ cz;}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][3]\ =\ 0.0f;}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][0]\ =\ -\/sy;}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][1]\ =\ sx\ *\ cy;}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][2]\ =\ cx\ *\ cy;}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][3]\ =\ 0.0f;}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][0]\ =\ 0.0f;}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][1]\ =\ 0.0f;}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][2]\ =\ 0.0f;}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][3]\ =\ 1.0f;}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat;}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}{LookAt}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ position,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ up\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,\ 1.0f,\ 0.0f))}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ zaxis\ =\ (position\ -\/\ target).Normalized();\ \textcolor{comment}{//\ Forward\ vector}}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ xaxis\ =\ up.Cross(zaxis).Normalized();\ \ \ \ \textcolor{comment}{//\ Right\ vector}}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ yaxis\ =\ zaxis.Cross(xaxis);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Up\ vector}}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(xaxis.x,\ yaxis.y,\ zaxis.z);}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}{RotateAround}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keywordtype}{float}\ yaw,\ \textcolor{keywordtype}{float}\ pitch,\ \textcolor{keywordtype}{float}\ radius)}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yawRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(yaw);}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ pitchRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(pitch);}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ offset;}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ offset.x\ =\ radius\ *\ cosf(pitchRad)\ *\ cosf(yawRad);}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ offset.y\ =\ radius\ *\ sinf(pitchRad);}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ offset.z\ =\ radius\ *\ cosf(pitchRad)\ *\ sinf(yawRad);}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ target\ -\/\ offset;}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00119\ \ \ \ \ \}}
-\DoxyCodeLine{00120\ \}}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ MultiplyPoint(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\&\ mat,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ vec)}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][0]\ *\ vec.x\ +\ mat[0][1]\ *\ vec.y\ +\ mat[0][2]\ *\ vec.z,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][0]\ *\ vec.x\ +\ mat[1][1]\ *\ vec.y\ +\ mat[1][2]\ *\ vec.z,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][0]\ *\ vec.x\ +\ mat[2][1]\ *\ vec.y\ +\ mat[2][2]\ *\ vec.z}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(\textcolor{keywordtype}{float}\ degrees)}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ degrees\ *\ (PI\ /\ 180.0f);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_acfecb92b970cefa26e8c08141090f4f0}{ToDegrees}}(\textcolor{keywordtype}{float}\ radians)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ radians\ *\ (180.0f\ /\ PI);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a11e59009707d3837a7c695e7c90e7cac}{CreateRotationMatrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ euler)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ pitch\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.x);\ \textcolor{comment}{//\ X-\/axis}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yaw\ \ \ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.y);\ \textcolor{comment}{//\ Y-\/axis}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ roll\ \ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(euler.z);\ \textcolor{comment}{//\ Z-\/axis}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ cosf(pitch),\ sx\ =\ sinf(pitch);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ cosf(yaw),\ \ \ sy\ =\ sinf(yaw);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cz\ =\ cosf(roll),\ \ sz\ =\ sinf(roll);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ mat;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][0]\ =\ cy\ *\ cz;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][1]\ =\ sx\ *\ sy\ *\ cz\ -\/\ cx\ *\ sz;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][2]\ =\ cx\ *\ sy\ *\ cz\ +\ sx\ *\ sz;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ mat[0][3]\ =\ 0.0f;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][0]\ =\ cy\ *\ sz;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][1]\ =\ sx\ *\ sy\ *\ sz\ +\ cx\ *\ cz;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][2]\ =\ cx\ *\ sy\ *\ sz\ -\/\ sx\ *\ cz;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ mat[1][3]\ =\ 0.0f;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][0]\ =\ -\/sy;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][1]\ =\ sx\ *\ cy;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][2]\ =\ cx\ *\ cy;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ mat[2][3]\ =\ 0.0f;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][0]\ =\ 0.0f;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][1]\ =\ 0.0f;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][2]\ =\ 0.0f;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ mat[3][3]\ =\ 1.0f;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a3e03e15e6cf50d03a659d67e1bdfcf1b}{LookAt}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ position,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ up\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(0.0f,\ 1.0f,\ 0.0f))}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ zaxis\ =\ (position\ -\/\ target).Normalized();\ \textcolor{comment}{//\ Forward\ vector}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ xaxis\ =\ up.Cross(zaxis).Normalized();\ \ \ \ \textcolor{comment}{//\ Right\ vector}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ yaxis\ =\ zaxis.Cross(xaxis);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Up\ vector}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}(xaxis.x,\ yaxis.y,\ zaxis.z);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a2cbbb2d07fe726c88c46c4fc07c49528}{RotateAround}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\&\ target,\ \textcolor{keywordtype}{float}\ yaw,\ \textcolor{keywordtype}{float}\ pitch,\ \textcolor{keywordtype}{float}\ radius)}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ yawRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(yaw);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ pitchRad\ =\ \mbox{\hyperlink{namespace_pulse_engine_1_1_math_utils_a44c3b6227858241c58fcc3bf839f5900}{ToRadians}}(pitch);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Vector3}}\ offset;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ offset.x\ =\ radius\ *\ cosf(pitchRad)\ *\ cosf(yawRad);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ offset.y\ =\ radius\ *\ sinf(pitchRad);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ offset.z\ =\ radius\ *\ cosf(pitchRad)\ *\ sinf(yawRad);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ target\ -\/\ offset;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ PerspectiveMat(\textcolor{keywordtype}{float}\ fovRadians,\ \textcolor{keywordtype}{float}\ aspect,\ \textcolor{keywordtype}{float}\ nearPlane,\ \textcolor{keywordtype}{float}\ farPlane)}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ tanHalfFov\ =\ tanf(fovRadians\ /\ 2.0f);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}\ result\ =\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{Mat4}}(0.0f);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ result[0][0]\ =\ 1.0f\ /\ (aspect\ *\ tanHalfFov);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ result[1][1]\ =\ 1.0f\ /\ (tanHalfFov);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][2]\ =\ -\/(farPlane\ +\ nearPlane)\ /\ (farPlane\ -\/\ nearPlane);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ result[2][3]\ =\ -\/1.0f;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ result[3][2]\ =\ -\/(2.0f\ *\ farPlane\ *\ nearPlane)\ /\ (farPlane\ -\/\ nearPlane);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keyword}{namespace\ }Matrix}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{PulseEngine::Mat4}}\ Identity()}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_pulse_engine_1_1_mat4}{PulseEngine::Mat4}}\ mat;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ m\ =\ mat.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(m,\ 0,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})\ *\ 16);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ =\ m[5]\ =\ m[10]\ =\ m[15]\ =\ 1.0f;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ PulseEngine::Mat4\ Translate(\textcolor{keyword}{const}\ PulseEngine::Mat4\&\ mat,\ \textcolor{keyword}{const}\ PulseEngine::Vector3\&\ pos)}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PulseEngine::Mat4\ result\ =\ mat;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ m\ =\ result.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ +=\ pos.x;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ +=\ pos.y;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[14]\ +=\ pos.z;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ PulseEngine::Mat4\ RotateX(\textcolor{keyword}{const}\ PulseEngine::Mat4\&\ mat,\ \textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PulseEngine::Mat4\ rot\ =\ Identity();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ r\ =\ rot.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ c\ =\ cos(angle);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ sin(angle);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[5]\ =\ c;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[6]\ =\ s;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[9]\ =\ -\/s;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[10]\ =\ c;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat\ *\ rot;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ PulseEngine::Mat4\ RotateY(\textcolor{keyword}{const}\ PulseEngine::Mat4\&\ mat,\ \textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PulseEngine::Mat4\ rot\ =\ Identity();}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ r\ =\ rot.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ c\ =\ cos(angle);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ sin(angle);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[0]\ =\ c;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[2]\ =\ -\/s;}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[8]\ =\ s;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[10]\ =\ c;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat\ *\ rot;}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ PulseEngine::Mat4\ RotateZ(\textcolor{keyword}{const}\ PulseEngine::Mat4\&\ mat,\ \textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PulseEngine::Mat4\ rot\ =\ Identity();}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ r\ =\ rot.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ c\ =\ cos(angle);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ sin(angle);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[0]\ =\ c;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[1]\ =\ s;}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[4]\ =\ -\/s;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r[5]\ =\ c;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat\ *\ rot;}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ PulseEngine::Mat4\ Scale(\textcolor{keyword}{const}\ PulseEngine::Mat4\&\ mat,\ \textcolor{keyword}{const}\ PulseEngine::Vector3\&\ scale)}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PulseEngine::Mat4\ result\ =\ mat;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ m\ =\ result.\mbox{\hyperlink{struct_pulse_engine_1_1_mat4_a3d9eb151817805f2e144b7502f729220}{Ptr}}();}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ *=\ scale.x;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ *=\ scale.y;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[10]\ *=\ scale.z;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ Mat4\ Orthographic(\textcolor{keywordtype}{float}\ left,\ \textcolor{keywordtype}{float}\ right,\ \textcolor{keywordtype}{float}\ bottom,\ \textcolor{keywordtype}{float}\ top,\ \textcolor{keywordtype}{float}\ nearVal,\ \textcolor{keywordtype}{float}\ farVal)}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result\ =\ Identity();}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[0][0]\ =\ 2.0f\ /\ (right\ -\/\ left);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[1][1]\ =\ 2.0f\ /\ (top\ -\/\ bottom);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[2][2]\ =\ -\/2.0f\ /\ (farVal\ -\/\ nearVal);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][0]\ =\ -\/(right\ +\ left)\ /\ (right\ -\/\ left);}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][1]\ =\ -\/(top\ +\ bottom)\ /\ (top\ -\/\ bottom);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][2]\ =\ -\/(farVal\ +\ nearVal)\ /\ (farVal\ -\/\ nearVal);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ Mat4\ LookAt(\textcolor{keyword}{const}\ Vector3\&\ eye,\ \textcolor{keyword}{const}\ Vector3\&\ center,\ \textcolor{keyword}{const}\ Vector3\&\ up)}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ f\ =\ Normalize(center\ -\/\ eye);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ s\ =\ Normalize(Cross(f,\ up));}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ u\ =\ Cross(s,\ f);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result\ =\ Identity();}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[0][0]\ =\ s.x;}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[1][0]\ =\ s.y;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[2][0]\ =\ s.z;}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[0][1]\ =\ u.x;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[1][1]\ =\ u.y;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[2][1]\ =\ u.z;}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[0][2]\ =\ -\/f.x;}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[1][2]\ =\ -\/f.y;}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[2][2]\ =\ -\/f.z;}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][0]\ =\ -\/Dot(s,\ eye);}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][1]\ =\ -\/Dot(u,\ eye);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[3][2]\ =\ Dot(f,\ eye);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ Mat4\ Inverse(\textcolor{keyword}{const}\ Mat4\&\ data)}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ m\ =\ \&data[0][0];}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ inv[16],\ det;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[0]\ =\ m[5]\ \ *\ m[10]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ \ *\ m[11]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[6]\ \ *\ m[15]\ +\ }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[7]\ \ *\ m[14]\ +}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[6]\ \ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[7]\ \ *\ m[10];}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[1]\ =\ -\/m[1]\ \ *\ m[10]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ \ *\ m[11]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[2]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[3]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[2]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[3]\ *\ m[10];}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[2]\ =\ m[1]\ \ *\ m[6]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ \ *\ m[7]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ \ *\ m[2]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ \ *\ m[3]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[2]\ *\ m[7]\ -\/\ }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[13]\ *\ m[3]\ *\ m[6];}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[3]\ =\ -\/m[1]\ \ *\ m[6]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[1]\ \ *\ m[7]\ *\ m[10]\ +\ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ \ *\ m[2]\ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[5]\ \ *\ m[3]\ *\ m[10]\ -\/\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[2]\ *\ m[7]\ +\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[9]\ \ *\ m[3]\ *\ m[6];}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[4]\ =\ -\/m[4]\ \ *\ m[10]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[11]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[6]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[7]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[6]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[7]\ *\ m[10];}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[5]\ =\ m[0]\ \ *\ m[10]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[11]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[2]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[3]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[2]\ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[3]\ *\ m[10];}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[6]\ =\ -\/m[0]\ \ *\ m[6]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[7]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[2]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[3]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[2]\ *\ m[7]\ +\ }
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[3]\ *\ m[6];}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[7]\ =\ m[0]\ \ *\ m[6]\ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[7]\ *\ m[10]\ -\/\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[2]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[3]\ *\ m[10]\ +\ }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[2]\ *\ m[7]\ -\/\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[3]\ *\ m[6];}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[8]\ =\ m[4]\ \ *\ m[9]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[11]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[5]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[7]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[5]\ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[7]\ *\ m[9];}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[9]\ =\ -\/m[0]\ \ *\ m[9]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[11]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[1]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[3]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[1]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[3]\ *\ m[9];}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[10]\ =\ m[0]\ \ *\ m[5]\ *\ m[15]\ -\/\ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[7]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[1]\ *\ m[15]\ +\ }
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[3]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[1]\ *\ m[7]\ -\/\ }
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[3]\ *\ m[5];}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[11]\ =\ -\/m[0]\ \ *\ m[5]\ *\ m[11]\ +\ }
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[7]\ *\ m[9]\ +\ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[1]\ *\ m[11]\ -\/\ }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[3]\ *\ m[9]\ -\/\ }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[1]\ *\ m[7]\ +\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[3]\ *\ m[5];}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[12]\ =\ -\/m[4]\ \ *\ m[9]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[10]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[5]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[6]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[5]\ *\ m[10]\ +\ }
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[6]\ *\ m[9];}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[13]\ =\ m[0]\ \ *\ m[9]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[10]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[1]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[2]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[1]\ *\ m[10]\ -\/\ }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[2]\ *\ m[9];}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[14]\ =\ -\/m[0]\ \ *\ m[5]\ *\ m[14]\ +\ }
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[6]\ *\ m[13]\ +\ }
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[1]\ *\ m[14]\ -\/\ }
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[2]\ *\ m[13]\ -\/\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[1]\ *\ m[6]\ +\ }
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[12]\ *\ m[2]\ *\ m[5];}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inv[15]\ =\ m[0]\ \ *\ m[5]\ *\ m[10]\ -\/\ }
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[0]\ \ *\ m[6]\ *\ m[9]\ -\/\ }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[1]\ *\ m[10]\ +\ }
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[4]\ \ *\ m[2]\ *\ m[9]\ +\ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[1]\ *\ m[6]\ -\/\ }
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[8]\ \ *\ m[2]\ *\ m[5];}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ det\ =\ m[0]\ *\ inv[0]\ +\ m[1]\ *\ inv[4]\ +\ m[2]\ *\ inv[8]\ +\ m[3]\ *\ inv[12];}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (det\ ==\ 0)}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Matrix\ is\ singular\ and\ cannot\ be\ inverted."{}});}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ det\ =\ 1.0f\ /\ det;}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ i++)}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((\textcolor{keywordtype}{float}*)result.data)[i]\ =\ inv[i]\ *\ det;}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ Mat4\ Transpose(\textcolor{keyword}{const}\ Mat4\&\ data)}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result;}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ ++j)}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.data[i][j]\ =\ data[j][i];}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ Mat4\ MakeMat4(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ ptr)}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mat4\ result;}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 4;\ ++col)}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 4;\ ++row)}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.data[row][col]\ =\ ptr[col\ *\ 4\ +\ row];\ \textcolor{comment}{//\ Column-\/major\ interpretation}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00414\ \ \ \ \ \}}
+\DoxyCodeLine{00415\ \}}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

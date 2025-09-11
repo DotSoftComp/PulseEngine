@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['todegrees_0',['ToDegrees',['../namespace_pulse_engine_1_1_math_utils.html#acfecb92b970cefa26e8c08141090f4f0',1,'PulseEngine::MathUtils']]],
-  ['toradians_1',['ToRadians',['../namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900',1,'PulseEngine::MathUtils']]],
-  ['transpose_2',['Transpose',['../struct_pulse_engine_1_1_mat3.html#a694b6b311b191110cffb56c20034c727',1,'PulseEngine::Mat3']]]
+  ['sameline_0',['SameLine',['../class_pulse_interface_a_p_i.html#a73d8cb1a2d955e62ae01df83831f9ab8',1,'PulseInterfaceAPI']]],
+  ['selectable_1',['Selectable',['../class_pulse_interface_a_p_i.html#ab2a238fd234898097cbc5379d28f9a1e',1,'PulseInterfaceAPI']]],
+  ['separator_2',['Separator',['../class_pulse_interface_a_p_i.html#a08f3a4872b83ee1dfae61321effb666b',1,'PulseInterfaceAPI']]],
+  ['setidentity_3',['SetIdentity',['../struct_pulse_engine_1_1_mat4.html#abe48bb51325265c1dff4d35eb1033ed2',1,'PulseEngine::Mat4']]]
 ];

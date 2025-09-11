@@ -1,8 +1,24 @@
 {
-    "Meshes" : [
-        "13048877946440285959"
-    ],
-    "Scripts" : [
-        "CreateCustomScriptA"
+    "Material": "15061499069030162973",
+    "Meshes": [
+        {
+            "Guid": "14047066280545125587",
+            "Name": "Models/player.obj.pmesh",
+            "Position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
     ]
 }

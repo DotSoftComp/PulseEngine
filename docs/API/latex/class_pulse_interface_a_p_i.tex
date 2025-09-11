@@ -28,7 +28,7 @@ static void {\bfseries Push\+Style\+Color} (Pulse\+Engine\+Style syle, const \mb
 \Hypertarget{class_pulse_interface_a_p_i_a0bed2108eb9697cba14fe6490abbcf47}\label{class_pulse_interface_a_p_i_a0bed2108eb9697cba14fe6490abbcf47} 
 static void {\bfseries Pop\+Style\+Color} (int amount=1)
 \item 
-static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}{Render\+Camera\+To\+Interface}} (Camera \texorpdfstring{$\ast$}{*}camera, const std\+::string \&window\+Name, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&image\+Size, std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$ entities\+To\+Render)
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a06f9e09a4af72f2ba639fbb654a6ebd7}{Render\+Camera\+To\+Interface}} (\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \texorpdfstring{$\ast$}{*}preview\+Data, Camera \texorpdfstring{$\ast$}{*}camera, const std\+::string \&window\+Name, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&image\+Size, std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$ entities\+To\+Render, Shader \texorpdfstring{$\ast$}{*}shader=nullptr)
 \begin{DoxyCompactList}\small\item\em Renders the scene from a specific camera and displays it in an interface window. \end{DoxyCompactList}\item 
 static Entity \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pulse_interface_a_p_i_a1a8f210e46bd5a955a870713fb856379}{Get\+Selected\+Entity}} ()
 \begin{DoxyCompactList}\small\item\em Get the Selected Entity object. \end{DoxyCompactList}\item 
@@ -38,12 +38,77 @@ static bool {\bfseries Is\+Current\+Window\+Focused} ()
 static \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \mbox{\hyperlink{class_pulse_interface_a_p_i_abedd65e627db2c45d8f286a8b96d50ed}{Mouse\+In}} ()
 \begin{DoxyCompactList}\small\item\em Get the current mouse position in the interface window. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \mbox{\hyperlink{class_pulse_interface_a_p_i_a8c0986447843f2afb25ec2bb9101094f}{Mouse\+Delta}} ()
-\begin{DoxyCompactList}\small\item\em Get the current mouse delta in the interface window. for more detail \+: the delta is the difference between the last frame and the current frame mouse position. it is useful to know how much the mouse has moved since the last frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the current mouse delta in the interface window. for more detail \+: the delta is the difference between the last frame and the current frame mouse position. it is useful to know how much the mouse has moved since the last frame. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_a5bf434be03bec81a3f62c66708527caa}{Add\+Function\+To\+File\+Clicked\+Callbacks}} (std\+::function$<$ void(const Clicked\+File\+Data \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Permit an easy way to add callback when a files is clicked in the file explorer. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_pulse_interface_a_p_i_ab75fad842d336359f18d7cd825e78c42}{Begin\+Child}} (const std\+::string \&name, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&size, bool border=false)
+\begin{DoxyCompactList}\small\item\em Begin a child window with a specific name, size, border, and flags. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_a25c2eeabe4f3606b453c37e538e986b9}\label{class_pulse_interface_a_p_i_a25c2eeabe4f3606b453c37e538e986b9} 
+static void {\bfseries End\+Child} ()
+\begin{DoxyCompactList}\small\item\em End the current child window. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_pulse_interface_a_p_i_a8eda8de279e71a465dbc226e722c0f0a}{Begin\+Combo}} (const std\+::string \&label, const std\+::string \&preview\+Value)
+\begin{DoxyCompactList}\small\item\em Begin a combo box with a specific label and preview value. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_abcb58eb5c098f748c875bf34422c917a}\label{class_pulse_interface_a_p_i_abcb58eb5c098f748c875bf34422c917a} 
+static void {\bfseries End\+Combo} ()
+\begin{DoxyCompactList}\small\item\em end the actual combo \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_pulse_interface_a_p_i_ab2a238fd234898097cbc5379d28f9a1e}{Selectable}} (const std\+::string \&label, bool selected=false, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&size=\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}}(0, 0))
+\begin{DoxyCompactList}\small\item\em Add a selectable item to the current combo box. \end{DoxyCompactList}\item 
+\Hypertarget{class_pulse_interface_a_p_i_afe75cfdcd9d93655742abb3d0f3b8d4d}\label{class_pulse_interface_a_p_i_afe75cfdcd9d93655742abb3d0f3b8d4d} 
+static void {\bfseries Add\+Transform\+Modifier} (Entity \texorpdfstring{$\ast$}{*}entity, const std\+::string \&modifier\+Name)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a40a8a3d5193b791ce0c83e40228c9ebb}\label{class_pulse_interface_a_p_i_a40a8a3d5193b791ce0c83e40228c9ebb} 
+static void {\bfseries Add\+Transform\+Modifier\+For\+Mesh} (Mesh \texorpdfstring{$\ast$}{*}mesh, const std\+::string \&modifier\+Name)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a5c7dc50176367dc5b6d5c27cbc366661}\label{class_pulse_interface_a_p_i_a5c7dc50176367dc5b6d5c27cbc366661} 
+static bool {\bfseries Start\+Tree\+Node} (const std\+::string \&name, bool \texorpdfstring{$\ast$}{*}open)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a3a9dc9e660af840eb6231042ca20ad27}\label{class_pulse_interface_a_p_i_a3a9dc9e660af840eb6231042ca20ad27} 
+static void {\bfseries End\+Tree\+Node} ()
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_ae292d52e4ae7471b7e6ab3947c9af538}\label{class_pulse_interface_a_p_i_ae292d52e4ae7471b7e6ab3947c9af538} 
+static void {\bfseries Add\+Material\+Preview} (Material \texorpdfstring{$\ast$}{*}\&material, const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&image\+Size, const std\+::string \&name="{}Material Preview"{})
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a0261e6a51c40660ec66ed80f6f9cce73}\label{class_pulse_interface_a_p_i_a0261e6a51c40660ec66ed80f6f9cce73} 
+static void {\bfseries Material\+Picker} (Material \texorpdfstring{$\ast$}{*}\&material)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a6edb8fcffbc5b57a82d554ad9a5374d3}\label{class_pulse_interface_a_p_i_a6edb8fcffbc5b57a82d554ad9a5374d3} 
+static \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} {\bfseries Get\+Actual\+Window\+Size} ()
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_adee72cfa7cdf15db51449eb90024e705}\label{class_pulse_interface_a_p_i_adee72cfa7cdf15db51449eb90024e705} 
+static bool {\bfseries Drag\+Float} (const char \texorpdfstring{$\ast$}{*}label, float \texorpdfstring{$\ast$}{*}value, float speed=1.\+0f, float min\+Val=0.\+0f, float max\+Val=0.\+0f, const char \texorpdfstring{$\ast$}{*}format="{}\%.\+3f"{})
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_aa26ef9adb64d040da476b36f864cbd0d}\label{class_pulse_interface_a_p_i_aa26ef9adb64d040da476b36f864cbd0d} 
+static bool {\bfseries Drag\+Float3} (const char \texorpdfstring{$\ast$}{*}label, float \texorpdfstring{$\ast$}{*}values, float speed=1.\+0f, float min\+Val=0.\+0f, float max\+Val=0.\+0f, const char \texorpdfstring{$\ast$}{*}format="{}\%.\+3f"{})
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a9ca2d17c72a75343522869c8ead70f00}\label{class_pulse_interface_a_p_i_a9ca2d17c72a75343522869c8ead70f00} 
+static void {\bfseries Change\+Window\+State} (IModule\+Interface \texorpdfstring{$\ast$}{*}script, bool state)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a34ad5b367f4d12e57621e503f7dd8d22}\label{class_pulse_interface_a_p_i_a34ad5b367f4d12e57621e503f7dd8d22} 
+static void {\bfseries Show\+Context\+Menu} (const char \texorpdfstring{$\ast$}{*}popup\+Id, const std\+::vector$<$ \mbox{\hyperlink{struct_context_menu_item}{Context\+Menu\+Item}} $>$ \&items)
+\item 
+\Hypertarget{class_pulse_interface_a_p_i_a4310c15c6a0d7e609eb30640b6872b02}\label{class_pulse_interface_a_p_i_a4310c15c6a0d7e609eb30640b6872b02} 
+static void {\bfseries Open\+Context\+Menu} (const char \texorpdfstring{$\ast$}{*}popup\+Id)
+\end{DoxyCompactItemize}
 
 
 \label{doc-func-members}
 \Hypertarget{class_pulse_interface_a_p_i_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_pulse_interface_a_p_i_a5bf434be03bec81a3f62c66708527caa}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!AddFunctionToFileClickedCallbacks@{AddFunctionToFileClickedCallbacks}}
+\index{AddFunctionToFileClickedCallbacks@{AddFunctionToFileClickedCallbacks}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{AddFunctionToFileClickedCallbacks()}{AddFunctionToFileClickedCallbacks()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a5bf434be03bec81a3f62c66708527caa} 
+void Pulse\+Interface\+API\+::\+Add\+Function\+To\+File\+Clicked\+Callbacks (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const Clicked\+File\+Data \&)$>$}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Permit an easy way to add callback when a files is clicked in the file explorer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & the function to call \\
+\hline
+\end{DoxyParams}
 \Hypertarget{class_pulse_interface_a_p_i_a6e464ec7fa412401672f151e7b2b4791}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!AddSpace@{AddSpace}}
 \index{AddSpace@{AddSpace}!PulseInterfaceAPI@{PulseInterfaceAPI}}
 \doxysubsubsection{\texorpdfstring{AddSpace()}{AddSpace()}}
@@ -59,6 +124,49 @@ Add space for a certain number of "{}line"{}.
 {\em amount} & amount of line to space. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_ab75fad842d336359f18d7cd825e78c42}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!BeginChild@{BeginChild}}
+\index{BeginChild@{BeginChild}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{BeginChild()}{BeginChild()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_ab75fad842d336359f18d7cd825e78c42} 
+void Pulse\+Interface\+API\+::\+Begin\+Child (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{size}{, }\item[{bool}]{border}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Begin a child window with a specific name, size, border, and flags. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the child window. \\
+\hline
+{\em size} & The size of the child window. \\
+\hline
+{\em border} & Whether to show a border. \\
+\hline
+{\em flags} & Additional flags for the child window. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_a8eda8de279e71a465dbc226e722c0f0a}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!BeginCombo@{BeginCombo}}
+\index{BeginCombo@{BeginCombo}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{BeginCombo()}{BeginCombo()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a8eda8de279e71a465dbc226e722c0f0a} 
+bool Pulse\+Interface\+API\+::\+Begin\+Combo (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{label}{, }\item[{const std\+::string \&}]{preview\+Value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Begin a combo box with a specific label and preview value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em label} & The label for the combo box. \\
+\hline
+{\em preview\+Value} & The preview value displayed in the combo box. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the combo box is open. 
+
+false If the combo box is closed. 
+\end{DoxyReturn}
 \Hypertarget{class_pulse_interface_a_p_i_a4a9887101dac3d46d832d6a210246d70}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!Button@{Button}}
 \index{Button@{Button}!PulseInterfaceAPI@{PulseInterfaceAPI}}
 \doxysubsubsection{\texorpdfstring{Button()}{Button()}}
@@ -156,11 +264,11 @@ Inform the engine that its the beginning of a window. this didnt tell to opent t
 {\em name} & Name of the window to show on top. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!RenderCameraToInterface@{RenderCameraToInterface}}
+\Hypertarget{class_pulse_interface_a_p_i_a06f9e09a4af72f2ba639fbb654a6ebd7}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!RenderCameraToInterface@{RenderCameraToInterface}}
 \index{RenderCameraToInterface@{RenderCameraToInterface}!PulseInterfaceAPI@{PulseInterfaceAPI}}
 \doxysubsubsection{\texorpdfstring{RenderCameraToInterface()}{RenderCameraToInterface()}}
-{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a5ab89e51c3584bf64e11cbdcbfbfb749} 
-void Pulse\+Interface\+API\+::\+Render\+Camera\+To\+Interface (\begin{DoxyParamCaption}\item[{Camera \texorpdfstring{$\ast$}{*}}]{camera}{, }\item[{const std\+::string \&}]{window\+Name}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{image\+Size}{, }\item[{std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$}]{entities\+To\+Render}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_a06f9e09a4af72f2ba639fbb654a6ebd7} 
+void Pulse\+Interface\+API\+::\+Render\+Camera\+To\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \texorpdfstring{$\ast$}{*}}]{preview\+Data}{, }\item[{Camera \texorpdfstring{$\ast$}{*}}]{camera}{, }\item[{const std\+::string \&}]{window\+Name}{, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{image\+Size}{, }\item[{std\+::vector$<$ Entity \texorpdfstring{$\ast$}{*} $>$}]{entities\+To\+Render}{, }\item[{Shader \texorpdfstring{$\ast$}{*}}]{shader}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -175,6 +283,30 @@ Renders the scene from a specific camera and displays it in an interface window.
 {\em image\+Size} & The size to display the image. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{class_pulse_interface_a_p_i_ab2a238fd234898097cbc5379d28f9a1e}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!Selectable@{Selectable}}
+\index{Selectable@{Selectable}!PulseInterfaceAPI@{PulseInterfaceAPI}}
+\doxysubsubsection{\texorpdfstring{Selectable()}{Selectable()}}
+{\footnotesize\ttfamily \label{class_pulse_interface_a_p_i_ab2a238fd234898097cbc5379d28f9a1e} 
+bool Pulse\+Interface\+API\+::\+Selectable (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{label}{, }\item[{bool}]{selected}{ = {\ttfamily false}, }\item[{const \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}} \&}]{size}{ = {\ttfamily \mbox{\hyperlink{struct_pulse_engine_1_1_vector2}{Pulse\+Engine\+::\+Vector2}}(0,~0)}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Add a selectable item to the current combo box. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em label} & The label for the selectable item. \\
+\hline
+{\em selected} & Whether the item is selected. \\
+\hline
+{\em size} & The size of the item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the item was clicked. 
+
+false If the item was not clicked. 
+\end{DoxyReturn}
 \Hypertarget{class_pulse_interface_a_p_i_a5f6e22be2e22745b9d3172e63b72adbe}\index{PulseInterfaceAPI@{PulseInterfaceAPI}!WriteText@{WriteText}}
 \index{WriteText@{WriteText}!PulseInterfaceAPI@{PulseInterfaceAPI}}
 \doxysubsubsection{\texorpdfstring{WriteText()}{WriteText()}}

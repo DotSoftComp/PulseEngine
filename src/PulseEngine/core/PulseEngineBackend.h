@@ -30,8 +30,12 @@ class Camera;
 class InterfaceEditor;
 class LightManager;
 class CoroutineManager;
-
+class GLFWwindow;
+class Shader;
+class GuidCollection;
+class PulseExecutable;
 class IGraphicsAPI;
+class InputSystem;
 
 /**
  * @brief PulseEngineBackend is the main class of the Pulse Engine.
@@ -55,11 +59,13 @@ public:
     void PollEvents(); 
     void Update(); 
     void Render(); 
-    void SpecificRender(Camera* cam, int specificVBO, std::vector<Entity*> entitiesToRender);
+    void SpecificRender(Camera* cam, int specificVBO, std::vector<Entity*> entitiesToRender, 
+        PulseEngine::Vector2 viewportSize = PulseEngine::Vector2(800,600),
+        Shader* specificShader = nullptr );
     void RenderShadow(); 
     void Shutdown(); 
     // Editor grid quad rendering
-    void DrawGridQuad(PulseEngine::Mat4 viewCam);
+    void DrawGridQuad(PulseEngine::Mat4 viewCam,const PulseEngine::Mat4& specificProjection  );
     void ClearScene();
     void DeleteEntity(Entity* entity);
 
@@ -67,7 +73,6 @@ public:
     WindowContext* GetWindowContext() { return windowContext; }
 
     // === static functions ===
-    static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
     static Camera* GetActiveCamera() {return activeCamera;}
     static void SetActiveCamera(Camera* camera) { activeCamera = camera; }
 
@@ -97,12 +102,20 @@ public:
     PulseEngine::Vector3 GetCameraPosition();
     PulseEngine::Vector3 GetCameraRotation();
 
+
     static IGraphicsAPI* graphicsAPI;
     CoroutineManager* coroutineManager = nullptr;
 
     EDITOR_ONLY(
         static InterfaceEditor* editor;
     )
+    
+    Shader* shadowShader;
+    Shader* pointLightShadowShader;
+    Shader* debugShader;
+
+    std::unordered_map<std::string, GuidCollection*> guidCollections;
+    InputSystem* inputSystem;
 private:
     WindowContext* windowContext = nullptr;
 
@@ -112,8 +125,8 @@ private:
     std::string gameVersion = "0.0.1";
 
     std::string engine = "Pulse Engine";
-    std::string version = "V0.1.0";
-    std::string devMonth = "July 2025";
+    std::string version = "V0.1.1";
+    std::string devMonth = "September 2025";
     std::string company = "Pulse Software";
 
     static float deltaTime;
@@ -123,16 +136,16 @@ private:
     static Camera* activeCamera;
 
     PulseEngine::Mat4 view;
-    glm::mat4 projection;
+    PulseEngine::Mat4 projection;
 
-    Shader* shadowShader;
-    Shader* debugShader;
 
     nlohmann::json_abi_v3_12_0::json engineConfig;
 
+    PulseExecutable* discordLauncher = nullptr; 
+
 
     void ProcessInput(GLFWwindow* window);
-    glm::vec3 CalculateLighting(const glm::vec3& position, const glm::vec3& normal, const glm::vec3& viewPos, const LightData& light);
+    // glm::vec3 CalculateLighting(const glm::vec3& position, const glm::vec3& normal, const glm::vec3& viewPos, const LightData& light);
     bool IsRenderable(Entity* entity) const;
     PulseEngineBackend();
     PulseEngineBackend(const PulseEngineBackend&) = delete; // Disable copy constructor

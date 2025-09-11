@@ -4,6 +4,7 @@
 typedef IScript* (*CreateScriptFunc)();
 
 HMODULE ScriptsLoader::customScriptDll = nullptr;
+HMODULE ScriptsLoader::pulseCustomScriptDll = nullptr;
 std::map<std::string, CreateScriptFunc> ScriptsLoader::scriptMap;
 
 
@@ -31,6 +32,7 @@ void ScriptsLoader::LoadDLL()
     std::string dllDirectory = "";
     EDITOR_ONLY(dllDirectory = "";)
     customScriptDll = LoadLibrary("CustomScripts.dll");
+    pulseCustomScriptDll = LoadLibrary("pulseCustomScripts.dll");
     if (customScriptDll == nullptr) 
     {
         DWORD error = GetLastError(); // Récupère l'erreur système
@@ -38,8 +40,18 @@ void ScriptsLoader::LoadDLL()
     }
     else
     {
-        LoadExportedFunctions();
+        LoadExportedFunctions(customScriptDll);
         std::cout << "CustomScripts.dll loaded without errors" << std::endl;
+    }
+    if (pulseCustomScriptDll == nullptr) 
+    {
+        DWORD error = GetLastError(); // Récupère l'erreur système
+        std::cerr << "Error loading pulseCustomScript.dll, error code: " << error << std::endl;
+    }
+    else
+    {
+        LoadExportedFunctions(pulseCustomScriptDll);
+        std::cout << "pulseCustomScript.dll loaded without errors" << std::endl;
     }
 }
 
@@ -49,10 +61,10 @@ void ScriptsLoader::FreeDll()
         customScriptDll = nullptr; // Réinitialise le handle de la DLL
 }
 
-void ScriptsLoader::LoadExportedFunctions()
+void ScriptsLoader::LoadExportedFunctions(HMODULE dll)
 {
     DWORD size;
-    BYTE* base = (BYTE*)customScriptDll;
+    BYTE* base = (BYTE*)dll;
 
     IMAGE_DOS_HEADER* dosHeader = (IMAGE_DOS_HEADER*)base;
     IMAGE_NT_HEADERS* ntHeaders = (IMAGE_NT_HEADERS*)(base + dosHeader->e_lfanew);
@@ -70,7 +82,7 @@ void ScriptsLoader::LoadExportedFunctions()
         // Si le nom commence par "PulseScript"
         if (std::string(funcName).rfind("PulseScript", 0) == 0)
         {
-            FARPROC proc = GetProcAddress(customScriptDll, funcName);
+            FARPROC proc = GetProcAddress(dll, funcName);
             if (proc)
             {
                 scriptMap[funcName] = (CreateScriptFunc)proc;

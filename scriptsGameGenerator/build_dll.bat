@@ -1,7 +1,7 @@
 @echo off
 echo === Compilation of PulseEngine.dll for Window ===
 
-g++ -shared ^
+g++ -shared -Wl,--out-implib,distribuables/libPulseEngine.a ^
 -o distribuables/PulseEngine.dll ^
 src/main.cpp ^
 src/glad.c ^
@@ -34,6 +34,11 @@ src\PulseEngine\ModuleLoader\ModuleLoader.cpp ^
 src\PulseEngine\API\EngineApi.cpp ^
 src\PulseEngine\API\GameEntity.cpp ^
 src\PulseEngine\core\Math\Transform\Transform.cpp ^
+src\PulseEngine\core\GUID\GuidCollection.cpp ^
+src\PulseEngine\core\ExecutableManager\ExecutableLauncher.cpp ^
+src\PulseEngine\core\ExecutableManager\PulseExecutable.cpp ^
+src\PulseEngine\core\ExecutableManager\ExecutableCommunication.cpp ^
+src\PulseEngine\API\EntityAPI\EntityApi.cpp ^
 -I. ^
 -Iinclude ^
 -I./src -Iexternal/assimp/include ^
@@ -46,7 +51,8 @@ src\PulseEngine\core\Math\Transform\Transform.cpp ^
 -lopengl32 ^
 -lm -lassimp ^
 -DBUILDING_DLL ^
--DWINDOW_PULSE_EXPORT
+-DPULSE_GRAPHIC_OPENGL ^
+-DPULSE_WINDOWS
 
 if %errorlevel% neq 0 (
   echo ❌ Erreur de compilation.

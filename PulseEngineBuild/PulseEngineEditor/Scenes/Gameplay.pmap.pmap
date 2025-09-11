@@ -1,0 +1,26 @@
+{
+    "entities": [
+        {
+            "Scripts": [],
+            "guid": 4999045609554485032,
+            "muid": 662031816869141367,
+            "name": "Cube",
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    ],
+    "sceneName": "Gameplay.pmap"
+}

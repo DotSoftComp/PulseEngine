@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚫_20contributing_0',['🚫 Contributing',['../index.html#autotoc_md12',1,'']]]
+  ['🚀_202025_20roadmap_0',['🚀 2025 Roadmap',['../index.html#autotoc_md4',1,'']]]
 ];

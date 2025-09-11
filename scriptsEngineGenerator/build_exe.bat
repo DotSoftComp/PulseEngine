@@ -13,7 +13,7 @@ imgui/backends/imgui_impl_opengl3.cpp ^
 -LPulseEngineBuild -lPulseEngineEditor  ^
 -LC:/path/to/glfw/lib -lglfw3 -lgdi32 -lopengl32 ^
 -DENGINE_EDITOR ^
--DWINDOW_PULSE_EXPORT ^
+-DPULSE_EXPORT_OPENGL ^
 -o PulseEngineBuild/PulseEditor.exe
 
 if %errorlevel% neq 0 (

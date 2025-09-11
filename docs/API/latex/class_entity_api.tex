@@ -1,0 +1,68 @@
+\doxysection{Entity\+Api Class Reference}
+\hypertarget{class_entity_api}{}\label{class_entity_api}\index{EntityApi@{EntityApi}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_entity_api_a6400c719da983bdafdc116261370cef0}\label{class_entity_api_a6400c719da983bdafdc116261370cef0} 
+{\bfseries Entity\+Api} (Entity \texorpdfstring{$\ast$}{*}e)
+\item 
+\Hypertarget{class_entity_api_a08b0fc722beafa1c642df41ae7e480c4}\label{class_entity_api_a08b0fc722beafa1c642df41ae7e480c4} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} {\bfseries Get\+Position} ()
+\item 
+\Hypertarget{class_entity_api_af94705409e3ba1f0f8c9d4aa69d30f61}\label{class_entity_api_af94705409e3ba1f0f8c9d4aa69d30f61} 
+\mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} {\bfseries Get\+Rotation} ()
+\item 
+\Hypertarget{class_entity_api_a13dd977a97128f64924362d6261b9ab4}\label{class_entity_api_a13dd977a97128f64924362d6261b9ab4} 
+void {\bfseries Set\+Position} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} \&pos)
+\item 
+\Hypertarget{class_entity_api_a4e95bd647cade6297e81997da21a7103}\label{class_entity_api_a4e95bd647cade6297e81997da21a7103} 
+void {\bfseries Set\+Rotation} (const \mbox{\hyperlink{struct_pulse_engine_1_1_vector3}{Pulse\+Engine\+::\+Vector3}} \&rot)
+\item 
+{\footnotesize template$<$typename Class\+Script$>$ }\\Class\+Script \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_api_aa372883242e50aafa39d2f3c77ccedaf}{Get\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Get a specific component from the entity. The component wanted need to be a derivated class from "{}\+IScript"{} if not, it will never be possible to get a specific component. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Class\+Script$>$ }\\Class\+Script \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_api_a69c1094377bf6c56c9145d47d84f39bd}{Add\+Component}} ()
+\begin{DoxyCompactList}\small\item\em To easily add a component into the entity. \end{DoxyCompactList}\item 
+\Hypertarget{class_entity_api_abed29939e5777f39070c8819d1edecc6}\label{class_entity_api_abed29939e5777f39070c8819d1edecc6} 
+void {\bfseries Add\+Script} (IScript \texorpdfstring{$\ast$}{*}script)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_entity_api_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_entity_api_a69c1094377bf6c56c9145d47d84f39bd}\index{EntityApi@{EntityApi}!AddComponent@{AddComponent}}
+\index{AddComponent@{AddComponent}!EntityApi@{EntityApi}}
+\doxysubsubsection{\texorpdfstring{AddComponent()}{AddComponent()}}
+{\footnotesize\ttfamily \label{class_entity_api_a69c1094377bf6c56c9145d47d84f39bd} 
+template$<$typename Class\+Script$>$ \\
+Class\+Script \texorpdfstring{$\ast$}{*} Entity\+Api\+::\+Add\+Component (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+To easily add a component into the entity. 
+
+\begin{DoxyNote}{Note}
+Class\+Script need to be a derivated class from "{}\+IScript"{}, if not, the component will not be added to the entity.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Class\+Script} & the component class name you want to add. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Class\+Script\texorpdfstring{$\ast$}{*} the generated component that is added to the entity, to easily access it. 
+\end{DoxyReturn}
+\Hypertarget{class_entity_api_aa372883242e50aafa39d2f3c77ccedaf}\index{EntityApi@{EntityApi}!GetComponent@{GetComponent}}
+\index{GetComponent@{GetComponent}!EntityApi@{EntityApi}}
+\doxysubsubsection{\texorpdfstring{GetComponent()}{GetComponent()}}
+{\footnotesize\ttfamily \label{class_entity_api_aa372883242e50aafa39d2f3c77ccedaf} 
+template$<$typename Class\+Script$>$ \\
+Class\+Script \texorpdfstring{$\ast$}{*} Entity\+Api\+::\+Get\+Component (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a specific component from the entity. The component wanted need to be a derivated class from "{}\+IScript"{} if not, it will never be possible to get a specific component. 
+
+\begin{DoxyReturn}{Returns}
+T\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}

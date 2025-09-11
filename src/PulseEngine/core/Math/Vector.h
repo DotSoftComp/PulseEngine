@@ -100,8 +100,7 @@ namespace PulseEngine
         Vector3 Normalized() const
         {
             float length = std::sqrt(x * x + y * y + z * z);
-            if (length == 0.0f)
-            throw std::runtime_error("Cannot normalize zero-length vector");
+            if (length == 0.0f) return Vector3(0, 1, 0); // Avoid division by zero
             return Vector3(x / length, y / length, z / length);
         }
 
@@ -118,6 +117,73 @@ namespace PulseEngine
         {
             return x * other.x + y * other.y + z * other.z;
         }
+    };
+
+    struct Vector4
+    {
+        float x, y, z, a;
+
+        Vector4() : x(0), y(0), z(0), a(0) {}
+        Vector4(float scalar) : x(scalar), y(scalar), z(scalar), a(scalar) {}
+        Vector4(float ax, float ay, float az, float aa) : x(ax), y(ay), z(az), a(aa) {}
+        
+        const float& operator[] (int index) const
+        {
+            switch (index)
+            {
+                case 0: return x;
+                case 1: return y;
+                case 2: return z;
+                case 3: return a;
+                default: throw std::out_of_range("Index out of range for Vector4");
+            }
+        }
+
+        float& operator[] (int index)
+        {
+            switch (index)
+            {
+                case 0: return x;
+                case 1: return y;
+                case 2: return z;
+                case 3: return a;
+                default: throw std::out_of_range("Index out of range for Vector4");
+            }
+        }
+    };
+
+    struct iVector4
+    {
+        int x, y, z, a;
+
+        iVector4() : x(0), y(0), z(0), a(0) {}
+        iVector4(int scalar) : x(scalar), y(scalar), z(scalar), a(scalar) {}
+        iVector4(int ax, int ay, int az, int aa) : x(ax), y(ay), z(az), a(aa) {}
+        
+        const int& operator[] (int index) const
+        {
+            switch (index)
+            {
+                case 0: return x;
+                case 1: return y;
+                case 2: return z;
+                case 3: return a;
+                default: throw std::out_of_range("Index out of range for iVector4");
+            }
+        }
+
+        int& operator[] (int index)
+        {
+            switch (index)
+            {
+                case 0: return x;
+                case 1: return y;
+                case 2: return z;
+                case 3: return a;
+                default: throw std::out_of_range("Index out of range for iVector4");
+            }
+        }
+
     };
 }
 

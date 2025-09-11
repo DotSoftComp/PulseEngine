@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: Entity Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -130,8 +129,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetScale</b> (const <
 <tr class="memdesc:a1b6bb691c885cee40358dd8b91631fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the scale and updates the model matrix. <br /></td></tr>
 <tr class="memitem:a3065a8452704d2e95aea78a7c0d94a60" id="r_a3065a8452704d2e95aea78a7c0d94a60"><td class="memItemLeft" align="right" valign="top"><a id="a3065a8452704d2e95aea78a7c0d94a60" name="a3065a8452704d2e95aea78a7c0d94a60"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMaterial</b> (<a class="el" href="../../dc/dee/class_material.html">Material</a> *material)</td></tr>
-<tr class="memitem:a262dc5b8ec112fa7937c4a735656c8cb" id="r_a262dc5b8ec112fa7937c4a735656c8cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a262dc5b8ec112fa7937c4a735656c8cb">UpdateEntity</a> (float deltaTime) const</td></tr>
-<tr class="memdesc:a262dc5b8ec112fa7937c4a735656c8cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the entity's behavior/scripts.  <br /></td></tr>
+<tr class="memitem:ab594f805e44de92ec48746aa0ecf62eb" id="r_ab594f805e44de92ec48746aa0ecf62eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab594f805e44de92ec48746aa0ecf62eb">UpdateEntity</a> (float deltaTime)</td></tr>
+<tr class="memdesc:ab594f805e44de92ec48746aa0ecf62eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the entity's behavior/scripts.  <br /></td></tr>
 <tr class="memitem:a873d4cef78f61d562d6637da7b0f6479" id="r_a873d4cef78f61d562d6637da7b0f6479"><td class="memItemLeft" align="right" valign="top"><a id="a873d4cef78f61d562d6637da7b0f6479" name="a873d4cef78f61d562d6637da7b0f6479"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawEntity</b> () const</td></tr>
 <tr class="memdesc:a873d4cef78f61d562d6637da7b0f6479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the entity using its current mesh/material/shader. <br /></td></tr>
@@ -141,8 +140,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UseShader</b> () cons
 <tr class="memitem:a4f27a12aa63126cc65c83a85b80696a7" id="r_a4f27a12aa63126cc65c83a85b80696a7"><td class="memItemLeft" align="right" valign="top"><a id="a4f27a12aa63126cc65c83a85b80696a7" name="a4f27a12aa63126cc65c83a85b80696a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SimplyDrawMesh</b> () const</td></tr>
 <tr class="memdesc:a4f27a12aa63126cc65c83a85b80696a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the mesh without applying material/shader logic. <br /></td></tr>
-<tr class="memitem:a45a19f60c048e59c07f303039e213d7e" id="r_a45a19f60c048e59c07f303039e213d7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45a19f60c048e59c07f303039e213d7e">DrawMeshWithShader</a> (GLuint shaderProgram) const</td></tr>
-<tr class="memdesc:a45a19f60c048e59c07f303039e213d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style.  <br /></td></tr>
+<tr class="memitem:ae9834eb13c505d3589d39c0efa55f7b5" id="r_ae9834eb13c505d3589d39c0efa55f7b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9834eb13c505d3589d39c0efa55f7b5">CalculateMeshMatrix</a> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *const &amp;mesh) const</td></tr>
+<tr class="memdesc:ae9834eb13c505d3589d39c0efa55f7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the matrix of a mesh, based on the entity's transform and the mesh's local transform.  <br /></td></tr>
+<tr class="memitem:a891d789c2cacc2c3845ef55f102d91f6" id="r_a891d789c2cacc2c3845ef55f102d91f6"><td class="memItemLeft" align="right" valign="top"><a id="a891d789c2cacc2c3845ef55f102d91f6" name="a891d789c2cacc2c3845ef55f102d91f6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>BindTexturesToShader</b> () const</td></tr>
+<tr class="memdesc:a891d789c2cacc2c3845ef55f102d91f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Automaticaly bind all the textures of the material to the shader that is actual used. <br /></td></tr>
+<tr class="memitem:aafe66d024d193cd517594e9a5f8fab38" id="r_aafe66d024d193cd517594e9a5f8fab38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafe66d024d193cd517594e9a5f8fab38">DrawMeshWithShader</a> (unsigned int shaderProgram) const</td></tr>
+<tr class="memdesc:aafe66d024d193cd517594e9a5f8fab38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style.  <br /></td></tr>
 <tr class="memitem:a2085d625fac4db71cd40b21dcfa1d626" id="r_a2085d625fac4db71cd40b21dcfa1d626"><td class="memItemLeft" align="right" valign="top"><a id="a2085d625fac4db71cd40b21dcfa1d626" name="a2085d625fac4db71cd40b21dcfa1d626"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>AddMesh</b> (<a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *mesh)</td></tr>
 <tr class="memdesc:a2085d625fac4db71cd40b21dcfa1d626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a mesh to the entity. <br /></td></tr>
@@ -168,14 +172,26 @@ const std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Ge
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetName</b> () const</td></tr>
 <tr class="memitem:a7caefeeda1a076aa68272704bc3c8676" id="r_a7caefeeda1a076aa68272704bc3c8676"><td class="memItemLeft" align="right" valign="top"><a id="a7caefeeda1a076aa68272704bc3c8676" name="a7caefeeda1a076aa68272704bc3c8676"></a>
 <a class="el" href="../../dc/dee/class_material.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaterial</b> ()</td></tr>
-<tr class="memitem:a6ce7e4fad7b67981514e53480245b10e" id="r_a6ce7e4fad7b67981514e53480245b10e"><td class="memItemLeft" align="right" valign="top"><a id="a6ce7e4fad7b67981514e53480245b10e" name="a6ce7e4fad7b67981514e53480245b10e"></a>
-std::vector&lt; <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetScripts</b> ()</td></tr>
+<tr class="memitem:a40c692d844d73266471c030ca993547d" id="r_a40c692d844d73266471c030ca993547d"><td class="memItemLeft" align="right" valign="top"><a id="a40c692d844d73266471c030ca993547d" name="a40c692d844d73266471c030ca993547d"></a>
+std::vector&lt; <a class="el" href="../../d7/da4/class_i_script.html">IScript</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetScripts</b> ()</td></tr>
+<tr class="memitem:ab50c476f2610d00e0b7160593bd58c86" id="r_ab50c476f2610d00e0b7160593bd58c86"><td class="memItemLeft" align="right" valign="top"><a id="ab50c476f2610d00e0b7160593bd58c86" name="ab50c476f2610d00e0b7160593bd58c86"></a>
+std::vector&lt; <a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMeshes</b> ()</td></tr>
 <tr class="memitem:a739022014493ae446029b3f89866aa0b" id="r_a739022014493ae446029b3f89866aa0b"><td class="memItemLeft" align="right" valign="top"><a id="a739022014493ae446029b3f89866aa0b" name="a739022014493ae446029b3f89866aa0b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGuid</b> (std::size_t g)</td></tr>
 <tr class="memitem:a5b7f43f65ae09726ec85f524694e0b56" id="r_a5b7f43f65ae09726ec85f524694e0b56"><td class="memItemLeft" align="right" valign="top"><a id="a5b7f43f65ae09726ec85f524694e0b56" name="a5b7f43f65ae09726ec85f524694e0b56"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMuid</b> (std::size_t m)</td></tr>
 <tr class="memitem:a3c907130862ad55702fa982808af62bf" id="r_a3c907130862ad55702fa982808af62bf"><td class="memItemLeft" align="right" valign="top"><a id="a3c907130862ad55702fa982808af62bf" name="a3c907130862ad55702fa982808af62bf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetName</b> (const std::string &amp;name)</td></tr>
+<tr class="memitem:a6451d4eedc8f83e9717ecf2468669eab" id="r_a6451d4eedc8f83e9717ecf2468669eab"><td class="memItemLeft" align="right" valign="top"><a id="a6451d4eedc8f83e9717ecf2468669eab" name="a6451d4eedc8f83e9717ecf2468669eab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AddTag</b> (const std::string &amp;tag)</td></tr>
+<tr class="memitem:a43ca744dee3305b19134b71cfb597691" id="r_a43ca744dee3305b19134b71cfb597691"><td class="memItemLeft" align="right" valign="top"><a id="a43ca744dee3305b19134b71cfb597691" name="a43ca744dee3305b19134b71cfb597691"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveTag</b> (const std::string &amp;tag)</td></tr>
+<tr class="memitem:a1eafac519dcb9e8fef517daefa4fbeb0" id="r_a1eafac519dcb9e8fef517daefa4fbeb0"><td class="memItemLeft" align="right" valign="top"><a id="a1eafac519dcb9e8fef517daefa4fbeb0" name="a1eafac519dcb9e8fef517daefa4fbeb0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasTag</b> (const std::string &amp;tag) const</td></tr>
+<tr class="memitem:a9473f87d63eddafe5a94864bf023bffb" id="r_a9473f87d63eddafe5a94864bf023bffb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9473f87d63eddafe5a94864bf023bffb">Move</a> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;direction)</td></tr>
+<tr class="memdesc:a9473f87d63eddafe5a94864bf023bffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the entity -&gt; actualPostion + direction * deltaTime.  <br /></td></tr>
+<tr class="memitem:a072f39e0ab5bdceedb9cc6d786066d31" id="r_a072f39e0ab5bdceedb9cc6d786066d31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a072f39e0ab5bdceedb9cc6d786066d31">Rotate</a> (const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;rotation)</td></tr>
+<tr class="memdesc:a072f39e0ab5bdceedb9cc6d786066d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the entity on the 3 axes from his actual rotation. -&gt; actualRotation + rotation * deltatime.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -238,8 +254,34 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a45a19f60c048e59c07f303039e213d7e" name="a45a19f60c048e59c07f303039e213d7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45a19f60c048e59c07f303039e213d7e">&#9670;&#160;</a></span>DrawMeshWithShader()</h2>
+<a id="ae9834eb13c505d3589d39c0efa55f7b5" name="ae9834eb13c505d3589d39c0efa55f7b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9834eb13c505d3589d39c0efa55f7b5">&#9670;&#160;</a></span>CalculateMeshMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::CalculateMeshMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/dbe/class_mesh.html">Mesh</a> *const &amp;</td>          <td class="paramname"><span class="paramname"><em>mesh</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the matrix of a mesh, based on the entity's transform and the mesh's local transform. </p>
+<p>this is used in the update, to know the matrix of each mesh of the entity.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mesh</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aafe66d024d193cd517594e9a5f8fab38" name="aafe66d024d193cd517594e9a5f8fab38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe66d024d193cd517594e9a5f8fab38">&#9670;&#160;</a></span>DrawMeshWithShader()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,14 +289,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Entity::DrawMeshWithShader </td>
           <td>(</td>
-          <td class="paramtype">GLuint</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span></td><td>)</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>shaderProgram</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style. </p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000002">Todo</a></b></dt><dd>Consider removing GLuint and use a custom "int" for modularity between each graphics API. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">shaderProgram</td><td></td></tr>
@@ -292,8 +333,58 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a262dc5b8ec112fa7937c4a735656c8cb" name="a262dc5b8ec112fa7937c4a735656c8cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a262dc5b8ec112fa7937c4a735656c8cb">&#9670;&#160;</a></span>UpdateEntity()</h2>
+<a id="a9473f87d63eddafe5a94864bf023bffb" name="a9473f87d63eddafe5a94864bf023bffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9473f87d63eddafe5a94864bf023bffb">&#9670;&#160;</a></span>Move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::Move </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>direction</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move the entity -&gt; actualPostion + direction * deltaTime. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td>the direction of the entity, the movement wanted in 1 second. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a072f39e0ab5bdceedb9cc6d786066d31" name="a072f39e0ab5bdceedb9cc6d786066d31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a072f39e0ab5bdceedb9cc6d786066d31">&#9670;&#160;</a></span>Rotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::Rotate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rotation</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rotate the entity on the 3 axes from his actual rotation. -&gt; actualRotation + rotation * deltatime. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rotation</td><td>the rotation to add to the entity, wanted in 1 second. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab594f805e44de92ec48746aa0ecf62eb" name="ab594f805e44de92ec48746aa0ecf62eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab594f805e44de92ec48746aa0ecf62eb">&#9670;&#160;</a></span>UpdateEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +393,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void Entity::UpdateEntity </td>
           <td>(</td>
           <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>deltaTime</em></span></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

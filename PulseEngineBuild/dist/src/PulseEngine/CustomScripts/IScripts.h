@@ -10,9 +10,10 @@
 #define EXPOSE_VAR(var, typeEnum) ExposedVariable(#var, ExposedVariable::Type::typeEnum, reinterpret_cast<void*>(&var))
 #define REGISTER_VAR(var) RegisterRuntimeVariable(#var, reinterpret_cast<void*>(&var))
 
-
-
-class Entity;
+namespace PulseEngine
+{
+    class EntityApi;
+}
 
 struct ExposedVariable
 {
@@ -34,14 +35,22 @@ struct ExposedVariable
 
 class PULSE_ENGINE_DLL_API IScript
 {
+private:
+    std::size_t guid;
 public:
     virtual void OnStart() = 0;
     virtual void OnUpdate() = 0;
+    virtual void OnRender() = 0;
     virtual ~IScript() = default;
     virtual const char* GetName() const = 0;
     std::vector<ExposedVariable> GetExposedVariables() {return exposedVariables; }
-    Entity* parent;
+    std::size_t GetGUID() const { return guid; }
+    void SetGUID(std::size_t newGuid) { guid = newGuid; }
+
+    PulseEngine::EntityApi* owner;
     bool isEntityLinked = false;
+
+
     std::vector<ExposedVariable> exposedVariables;
     std::unordered_map<std::string, void*> runtimeVariables;
     void AddExposedVariable(const ExposedVariable& var)

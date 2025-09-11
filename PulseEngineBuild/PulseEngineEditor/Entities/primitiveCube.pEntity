@@ -1,45 +1,12 @@
 {
-    "Meshes": [
+    "Meshes" : [
         {
             "Guid": "13048877946440285959",
-            "Name": "primitiveCube.pmesh",
-            "Position": [
-                -2.0,
-                2.0,
-                -2.0
-            ],
-            "Rotation": [
-                0.0,
-                45.0,
-                0.0
-            ],
-            "Scale": [
-                1.0,
-                1.0,
-                1.0
-            ]
-        },
-        {
-            "Guid": "13048877946440285959",
-            "Name": "primitiveCube.pmesh",
-            "Position": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "Rotation": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "Scale": [
-                1.0,
-                1.0,
-                1.0
-            ]
+            "MeshPath": "model.fbx",
+            "Position": [0.0,0.0,0.0],
+            "Rotation": [0.0,0.0,0.0],
+            "Scale": [1.0,1.0,1.0],
+            "Name" : "Cube"
         }
-    ],
-    "Scripts": [
-        "PulseScriptA"
     ]
 }

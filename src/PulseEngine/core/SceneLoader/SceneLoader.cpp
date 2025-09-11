@@ -11,6 +11,7 @@
 #include "PulseEngine/core/Lights/Lights.h"
 #include "PulseEngine/core/Lights/DirectionalLight/DirectionalLight.h"
 #include "PulseEngine/core/Lights/PointLight/PointLight.h"
+#include "PulseEngine/API/EntityAPI/EntityApi.h"
 
 #include <iostream>
 #include <assimp/Importer.hpp>      // Assimp::Importer
@@ -20,10 +21,10 @@
 #pragma region SceneLoader
 void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* backend)
 {
-    std::ifstream scene(mapName);
+    std::ifstream scene(std::string(ASSET_PATH) + mapName);
     if (!scene.is_open())
     {
-        std::cout << "Couldn't open map " << mapName << std::endl;
+        std::cout << "Couldn't open map " << std::string(ASSET_PATH) + mapName << std::endl;
         return;
     }
     backend->ClearScene();
@@ -46,7 +47,20 @@ void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* back
         {
             for(auto& script : entityData["Scripts"])
             {
-                LoadEntityScript(script, entity);
+                IScript* existingScript = nullptr;
+                if(script["isEntityLinked"].get<bool>())
+                {
+                    for(auto& entityScript : entity->GetScripts())
+                    {
+                        if(entityScript->GetGUID() == script["guid"].get<std::size_t>())
+                        {
+                            existingScript = entityScript;
+                            break;
+                        }
+                    }
+                }
+                LoadEntityScript(script, entity, existingScript);
+                
             }
             std::cout << "adding the entity to the backend" << std::endl;
             std::cout << "entity guid: " << entity->GetGuid() << std::endl;
@@ -67,8 +81,7 @@ void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* back
         {
             light = new DirectionalLight(lightData["nearPlane"].get<float>(),
                                          lightData["farPlane"].get<float>(),
-                                         /*** @todo remove the glm::vec3 and make it a pulseengine::vector3*/
-                                         glm::vec3(lightData["target"][0].get<float>(), 
+                                         PulseEngine::Vector3(lightData["target"][0].get<float>(), 
                                                               lightData["target"][1].get<float>(),
                                                               lightData["target"][2].get<float>()),
                                          PulseEngine::Vector3(lightData["position"][0].get<float>(),
@@ -100,9 +113,19 @@ void SceneLoader::LoadScene(const std::string &mapName, PulseEngineBackend* back
     }
 
     std::cout << "Scene " << mapName << " loaded successfully." << std::endl;
+    PulseEngineInstance->actualMapPath = mapName;
+    // Set actualMapName to the substring after the last "/"
+    size_t lastSlash = mapName.find_last_of("/\\");
+    if (lastSlash != std::string::npos && lastSlash + 1 < mapName.size()) {
+        PulseEngineInstance->actualMapName = mapName.substr(lastSlash + 1);
+    } else {
+        PulseEngineInstance->actualMapName = mapName;
+    }
+
+    PulseEngineInstance->SetWindowName(PulseEngineInstance->actualMapName);
 }
 
-void SceneLoader::LoadEntityScript(const nlohmann::json_abi_v3_12_0::json &script, Entity *entity)
+void SceneLoader::LoadEntityScript(const nlohmann::json_abi_v3_12_0::json &script, Entity *entity, IScript* existingScript)
 {
     std::string scriptName = script["name"].get<std::string>();
     std::vector<ExposedVariable *> exposedVariables;
@@ -110,14 +133,14 @@ void SceneLoader::LoadEntityScript(const nlohmann::json_abi_v3_12_0::json &scrip
     {
         ExtractExposedVariable(var, exposedVariables);
     }
-    IScript *scriptInstance = ScriptsLoader::GetScriptFromCallName(scriptName);
+    IScript *scriptInstance = existingScript ? existingScript : ScriptsLoader::GetScriptFromCallName(scriptName);
     if (scriptInstance)
     {
-        scriptInstance->isEntityLinked = false;
-        scriptInstance->parent = entity;
+        if(!existingScript) scriptInstance->isEntityLinked = false;
+        if(!existingScript) scriptInstance->owner = new PulseEngine::EntityApi(entity);
         for (const auto &var : exposedVariables)
         {
-            scriptInstance->AddExposedVariable(*var);
+            if(!existingScript) scriptInstance->AddExposedVariable(*var);
             void *dst = scriptInstance->GetVariableByName(var->name);
             if (dst)
             {
@@ -140,8 +163,10 @@ void SceneLoader::LoadEntityScript(const nlohmann::json_abi_v3_12_0::json &scrip
 
             std::cout << "Exposed variable name: " + var->name << std::endl;
         }
-        entity->AddScript(scriptInstance);
-        scriptInstance->OnStart();
+        if(!existingScript) {
+            entity->AddScript(scriptInstance);
+            scriptInstance->OnStart();
+        }
         std::cout << "Script " << scriptName << " loaded." << std::endl;
     }
     else
@@ -218,7 +243,7 @@ Entity* SceneLoader::LoadEntityBaseData(const nlohmann::json_abi_v3_12_0::json &
     entity->SetRotation(rotation);
     entity->SetScale(scale);
     entity->SetName(name);
-    entity->SetMaterial(MaterialManager::loadMaterial(std::string(ASSET_PATH) + "Materials/cube.mat"));
+    // entity->SetMaterial(MaterialManager::loadMaterial("Materials/cube.mat"));
     std::cout << "Entity base data loaded and properties set." << std::endl;
     return entity;
 }
@@ -282,7 +307,7 @@ const aiScene* SceneLoader::LoadSceneFromAssimp(std::string path)
 #pragma endregion
 
 #pragma region SaveScene
-void SceneLoader::SaveSceneToFile(const std::string &mapName, PulseEngineBackend *backend)
+void SceneLoader::SaveSceneToFile(const std::string &mapName, const std::string& mapPath, PulseEngineBackend *backend)
 {
     nlohmann::json sceneData;
 
@@ -331,10 +356,10 @@ void SceneLoader::SaveSceneToFile(const std::string &mapName, PulseEngineBackend
     }
 
     // Write to file
-    std::ofstream sceneFile(std::string(ASSET_PATH) + "Scenes/" + std::string(mapName) + ".pmap");
+    std::ofstream sceneFile(std::string(ASSET_PATH) + mapPath);
     if (!sceneFile.is_open())
     {
-        std::cout << "Couldn't open file to save map " << mapName << std::endl;
+        std::cout << "Couldn't open file to save map " << mapPath << std::endl;
         return;
     }
 
@@ -375,11 +400,12 @@ void SceneLoader::SaveEntities(Entity *const &entity, nlohmann::json_abi_v3_12_0
                 break;
             }
             scriptData["exposedVariables"].push_back(varDt);
+            scriptData["guid"] = script->GetGUID();
+            scriptData["isEntityLinked"] = script->isEntityLinked;
         }
 
         // Add the script name to the JSON array
-        if (!script->isEntityLinked)
-            scriptsData.push_back(scriptData);
+        scriptsData.push_back(scriptData);
     }
 
     // Add the scripts to the entity data

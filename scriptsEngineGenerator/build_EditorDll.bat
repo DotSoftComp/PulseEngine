@@ -22,7 +22,7 @@ imgui/backends/imgui_impl_opengl3.cpp ^
 -I. -Iinclude -Iimgui -I./src -IE:/Editor/Include ^
 -LPulseEngineBuild -Lexternal/assimp/lib -Lexternal/assimp/lib/x64 -LD:/MSYS2/mingw64/lib ^
 -lPulseEngine -lglfw3 -lopengl32 -lm -lassimp ^
--DBUILDING_DLL -DENGINE_EDITOR -DWINDOW_PULSE_EXPORT
+-DBUILDING_DLL -DENGINE_EDITOR -DPULSE_EXPORT_OPENGL
 
 if %errorlevel% neq 0 (
     echo Editor build failed!

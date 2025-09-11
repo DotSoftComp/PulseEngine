@@ -1,7 +1,7 @@
 var struct_keyframe =
 [
-    [ "position", "d1/dd4/struct_keyframe.html#a8d2476c2fbb74db3759ca694c63ca2ba", null ],
-    [ "rotation", "d1/dd4/struct_keyframe.html#a64f8dde777590e639c4e3a6a19e32fda", null ],
-    [ "scale", "d1/dd4/struct_keyframe.html#a2b7f83b7895d1998ecc1a92d74afbcd0", null ],
+    [ "position", "d1/dd4/struct_keyframe.html#a97aeefd7058f4c9721eb348e6ad41592", null ],
+    [ "rotation", "d1/dd4/struct_keyframe.html#ae00ef521cb29b277f4c76645c7b25854", null ],
+    [ "scale", "d1/dd4/struct_keyframe.html#a035b0f47fd85653be646c27734282329", null ],
     [ "time", "d1/dd4/struct_keyframe.html#a37d057994189be22defc5bf05ab255ad", null ]
 ];

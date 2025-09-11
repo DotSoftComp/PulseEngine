@@ -21,12 +21,6 @@
 #include <chrono>
 #include <iomanip>
 #include <ctime>
-
-// ----------------------------------------------------------------------------
-// Editor Mode Definitions
-// ----------------------------------------------------------------------------
-#ifdef ENGINE_EDITOR
-
     /**
      * @brief Returns the current date and time as a formatted string.
      *
@@ -44,6 +38,12 @@
         oss << std::put_time(nowTm, "%Y-%m-%d %H:%M:%S");
         return oss.str();
     }
+// ----------------------------------------------------------------------------
+// Editor Mode Definitions
+// ----------------------------------------------------------------------------
+#ifdef ENGINE_EDITOR
+
+
 
     /// Includes `code` only when compiling in editor mode.
     #define EDITOR_ONLY(code) code
@@ -71,11 +71,13 @@
     /// Includes `code` only when compiling in game mode.
     #define IN_GAME_ONLY(code) code
 
-    /// Editor logs are disabled in game builds.
-    #define EDITOR_LOG(msg)
+    /// Logs a message to standard output with a timestamp, editor tag, and function name.
+    #define EDITOR_LOG(msg) \
+        std::cout << "[" << GetCurrentDateTime() << "] [Editor - LOG] [" << __FUNCTION__ << "]: " << msg << std::endl;
 
-    /// Editor error logs are disabled in game builds.
-    #define EDITOR_ERROR(msg)
+    /// Logs an error message to standard error with a timestamp, editor tag, and function name.
+    #define EDITOR_ERROR(msg) \
+        std::cerr << "[" << GetCurrentDateTime() << "] [Editor - ERROR] [" << __FUNCTION__ << "]: " << msg << std::endl;
 
 #endif // ENGINE_EDITOR
 

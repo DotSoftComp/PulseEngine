@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <string>
-#include <glm/glm.hpp>
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp> // Assimp::Importer
 
@@ -17,11 +16,12 @@ class Skeleton;
  */
 struct Vertex
 {
-    glm::vec3 Position;    ///< Vertex position in 3D space.
-    glm::vec3 Normal;      ///< Vertex normal vector.
-    glm::vec2 TexCoords;   ///< Texture coordinates (UV).
-    glm::ivec4 BoneIDs;    ///< IDs of the bones affecting this vertex.
-    glm::vec4 Weights;     ///< Weights corresponding to each bone.
+    PulseEngine::Vector3 Position;    ///< Vertex position in 3D space.
+    PulseEngine::Vector3 Normal;      ///< Vertex normal vector.
+    PulseEngine::Vector2 TexCoords;   ///< Texture coordinates (UV).
+    PulseEngine::iVector4 BoneIDs;    ///< IDs of the bones affecting this vertex.
+    PulseEngine::Vector4 Weights;     ///< Weights corresponding to each bone.
+    PulseEngine::Vector4 Tangent;
 };
 
 /**
@@ -58,7 +58,7 @@ public:
      * @brief Draws the mesh using the specified shader program.
      * @param shaderProgram OpenGL shader program ID.
      */
-    void Draw(GLuint shaderProgram) const;
+    void Draw(unsigned int shaderProgram);
 
     /**
      * @brief Loads mesh data from an Assimp mesh object.
@@ -105,6 +105,8 @@ public:
     PulseEngine::Vector3 position = PulseEngine::Vector3(0.0f, 0.0f, 0.0f); ///< Position of the mesh in local space.
     PulseEngine::Vector3 rotation = PulseEngine::Vector3(0.0f, 0.0f, 0.0f); ///< Rotation of the mesh in local space.
     PulseEngine::Vector3 scale = PulseEngine::Vector3(1.0f, 1.0f, 1.0f); ///< Scale of the mesh in local space.
+
+    PulseEngine::Mat4 matrix;
 private:
     /**
      * @brief Initializes the OpenGL buffers (VAO, VBO, EBO) for rendering.
@@ -112,8 +114,8 @@ private:
     void SetupMesh();
 
     std::vector<Vertex> vertices;         ///< Final vertex data including bone weights.
-    std::vector<glm::vec3> normals;       ///< Normal vectors (used before conversion).
-    std::vector<glm::vec2> texCoords;     ///< Texture coordinates (used before conversion).
+    std::vector<PulseEngine::Vector3> normals;       ///< Normal vectors (used before conversion).
+    std::vector<PulseEngine::Vector2> texCoords;     ///< Texture coordinates (used before conversion).
     std::vector<unsigned int> indices;    ///< Index data for rendering (EBO).
 
     std::string name;

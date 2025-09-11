@@ -7,7 +7,6 @@
  * This is the base class for all entities in the Pulse Engine.
  * This permit an easy init, update, render, and modification by the engine on basic rules.
  * each object that could be rendered, updated, or modified by the engine should inherit from this class.
- * @todo We should remove all use of openGL directly here and use classes and struct from the game Engine instead.
  * @version 0.1
  * @date 2025-06-28
  * 
@@ -86,7 +85,7 @@ public:
      * @brief Updates the entity's behavior/scripts.
      * @param deltaTime Time elapsed since the last frame.
      */
-    void UpdateEntity(float deltaTime) const;
+    void UpdateEntity(float deltaTime);
 
     /**
      * @brief Draws the entity using its current mesh/material/shader.
@@ -104,11 +103,24 @@ public:
     void SimplyDrawMesh() const;
 
     /**
+     * @brief Calculate the matrix of a mesh, based on the entity's transform and the mesh's local transform.
+     * @brief this is used in the update, to know the matrix of each mesh of the entity.
+     * 
+     * @param mesh 
+     */
+    void CalculateMeshMatrix(Mesh *const &mesh) const;
+
+    /**
+     * @brief Automaticaly bind all the textures of the material to the shader that is actual used.
+     * 
+     */
+    void BindTexturesToShader() const;
+
+    /**
      * @brief Specifically draws the mesh using a provided shader program, usefull for shadow or others drawing style
-     * @todo Consider removing GLuint and use a custom "int" for modularity between each graphics API.
      * @param shaderProgram 
      */
-    void DrawMeshWithShader(GLuint shaderProgram) const;
+    void DrawMeshWithShader(unsigned int shaderProgram) const;
 
     // ------------------------------------------------------------------------
     // Component Addition

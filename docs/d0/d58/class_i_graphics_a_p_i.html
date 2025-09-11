@@ -6,7 +6,6 @@
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Pulse Engine: IGraphicsAPI Class Reference</title>
-<link rel="icon" href="../../pulseIcon.ico" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -139,10 +138,64 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac7c7b825ab928fa2fe1b099b93823fe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of the current graphics API (e.g., "OpenGL", "Vulkan").  <br /></td></tr>
 <tr class="memitem:a5c30e64637b1185558b41f7a6f75adbe" id="r_a5c30e64637b1185558b41f7a6f75adbe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c30e64637b1185558b41f7a6f75adbe">StartFrame</a> () const =0</td></tr>
 <tr class="memdesc:a5c30e64637b1185558b41f7a6f75adbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a new rendering frame. Should clear buffers and prepare for drawing.  <br /></td></tr>
+<tr class="memitem:a08dbbdee5ac4577be4b41d40805fa159" id="r_a08dbbdee5ac4577be4b41d40805fa159"><td class="memItemLeft" align="right" valign="top"><a id="a08dbbdee5ac4577be4b41d40805fa159" name="a08dbbdee5ac4577be4b41d40805fa159"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SpecificStartFrame</b> (int specificVBO, const <a class="el" href="../../db/d8f/struct_pulse_engine_1_1_vector2.html">PulseEngine::Vector2</a> &amp;frameSize) const =0</td></tr>
 <tr class="memitem:ae8e7d4169ceafce6abb04db4ad66b902" id="r_ae8e7d4169ceafce6abb04db4ad66b902"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8e7d4169ceafce6abb04db4ad66b902">EndFrame</a> () const =0</td></tr>
 <tr class="memdesc:ae8e7d4169ceafce6abb04db4ad66b902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the rendering frame. Usually includes buffer swapping or command submission.  <br /></td></tr>
+<tr class="memitem:a5e3776e7da9a889a04218dfb4a19d697" id="r_a5e3776e7da9a889a04218dfb4a19d697"><td class="memItemLeft" align="right" valign="top"><a id="a5e3776e7da9a889a04218dfb4a19d697" name="a5e3776e7da9a889a04218dfb4a19d697"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ActivateBackCull</b> () const =0</td></tr>
 <tr class="memitem:adcfba8e0e58a2601089e3bb3d6dd14df" id="r_adcfba8e0e58a2601089e3bb3d6dd14df"><td class="memItemLeft" align="right" valign="top"><a id="adcfba8e0e58a2601089e3bb3d6dd14df" name="adcfba8e0e58a2601089e3bb3d6dd14df"></a>
 virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>CreateShader</b> (const std::string &amp;vertexPath, const std::string &amp;fragmentPath)=0</td></tr>
+<tr class="memitem:ae8018ab182e890a92da805579fd61c14" id="r_ae8018ab182e890a92da805579fd61c14"><td class="memItemLeft" align="right" valign="top"><a id="ae8018ab182e890a92da805579fd61c14" name="ae8018ab182e890a92da805579fd61c14"></a>
+virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>CreateShader</b> (const std::string &amp;vertexPath, const std::string &amp;fragmentPath, const std::string &amp;geometryPath)=0</td></tr>
+<tr class="memitem:a49f69acff4fc32025b6d276f172d62c3" id="r_a49f69acff4fc32025b6d276f172d62c3"><td class="memItemLeft" align="right" valign="top"><a id="a49f69acff4fc32025b6d276f172d62c3" name="a49f69acff4fc32025b6d276f172d62c3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UseShader</b> (unsigned int shaderID) const =0</td></tr>
+<tr class="memitem:a5e8a878d791510a6783e1fd0db39159f" id="r_a5e8a878d791510a6783e1fd0db39159f"><td class="memItemLeft" align="right" valign="top"><a id="a5e8a878d791510a6783e1fd0db39159f" name="a5e8a878d791510a6783e1fd0db39159f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderMat4</b> (const Shader *shader, const std::string &amp;name, const <a class="el" href="../../d5/db6/struct_pulse_engine_1_1_mat4.html">PulseEngine::Mat4</a> &amp;mat) const =0</td></tr>
+<tr class="memitem:a5175d9c6c132087124db8459f63e0f0f" id="r_a5175d9c6c132087124db8459f63e0f0f"><td class="memItemLeft" align="right" valign="top"><a id="a5175d9c6c132087124db8459f63e0f0f" name="a5175d9c6c132087124db8459f63e0f0f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderMat3</b> (const Shader *shader, const std::string &amp;name, const <a class="el" href="../../dc/d91/struct_pulse_engine_1_1_mat3.html">PulseEngine::Mat3</a> &amp;mat) const =0</td></tr>
+<tr class="memitem:a574ee6b4700d746b480183bf8e0ae0be" id="r_a574ee6b4700d746b480183bf8e0ae0be"><td class="memItemLeft" align="right" valign="top"><a id="a574ee6b4700d746b480183bf8e0ae0be" name="a574ee6b4700d746b480183bf8e0ae0be"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderVec3</b> (const Shader *shader, const std::string &amp;name, const <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &amp;vec) const =0</td></tr>
+<tr class="memitem:ab3ee1939f31bb48407dda235cb932a3a" id="r_ab3ee1939f31bb48407dda235cb932a3a"><td class="memItemLeft" align="right" valign="top"><a id="ab3ee1939f31bb48407dda235cb932a3a" name="ab3ee1939f31bb48407dda235cb932a3a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderFloat</b> (const Shader *shader, const std::string &amp;name, float value) const =0</td></tr>
+<tr class="memitem:aea399239dac3c27b9d55d20428e75ab3" id="r_aea399239dac3c27b9d55d20428e75ab3"><td class="memItemLeft" align="right" valign="top"><a id="aea399239dac3c27b9d55d20428e75ab3" name="aea399239dac3c27b9d55d20428e75ab3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderBool</b> (const Shader *shader, const std::string &amp;name, bool value) const =0</td></tr>
+<tr class="memitem:a23d3659a690ddc9593cfcc015484d336" id="r_a23d3659a690ddc9593cfcc015484d336"><td class="memItemLeft" align="right" valign="top"><a id="a23d3659a690ddc9593cfcc015484d336" name="a23d3659a690ddc9593cfcc015484d336"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderInt</b> (const Shader *shader, const std::string &amp;name, int value) const =0</td></tr>
+<tr class="memitem:a494baec78a68f637dd8ca18e7b61b65c" id="r_a494baec78a68f637dd8ca18e7b61b65c"><td class="memItemLeft" align="right" valign="top"><a id="a494baec78a68f637dd8ca18e7b61b65c" name="a494baec78a68f637dd8ca18e7b61b65c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderIntArray</b> (const Shader *shader, const std::string &amp;name, const int *values, int count) const =0</td></tr>
+<tr class="memitem:a9ed004aeca70e746b69ded00813bd971" id="r_a9ed004aeca70e746b69ded00813bd971"><td class="memItemLeft" align="right" valign="top"><a id="a9ed004aeca70e746b69ded00813bd971" name="a9ed004aeca70e746b69ded00813bd971"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderVec3Array</b> (const Shader *shader, const std::string &amp;name, const std::vector&lt; <a class="el" href="../../d4/dce/struct_pulse_engine_1_1_vector3.html">PulseEngine::Vector3</a> &gt; &amp;vecArray) const =0</td></tr>
+<tr class="memitem:ac190d7f50df45abbf0e878de9a78cb29" id="r_ac190d7f50df45abbf0e878de9a78cb29"><td class="memItemLeft" align="right" valign="top"><a id="ac190d7f50df45abbf0e878de9a78cb29" name="ac190d7f50df45abbf0e878de9a78cb29"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetShaderFloatArray</b> (const Shader *shader, const std::string &amp;name, const std::vector&lt; float &gt; &amp;floatArray) const =0</td></tr>
+<tr class="memitem:af6befa72f57e221031ac42fdd687b9c3" id="r_af6befa72f57e221031ac42fdd687b9c3"><td class="memItemLeft" align="right" valign="top"><a id="af6befa72f57e221031ac42fdd687b9c3" name="af6befa72f57e221031ac42fdd687b9c3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateDepthCubeMap</b> (unsigned int *FBO, unsigned int *depthCubeMap) const =0</td></tr>
+<tr class="memitem:a6bbb9f2b7c6a2e187f8c9b0a2e473b4a" id="r_a6bbb9f2b7c6a2e187f8c9b0a2e473b4a"><td class="memItemLeft" align="right" valign="top"><a id="a6bbb9f2b7c6a2e187f8c9b0a2e473b4a" name="a6bbb9f2b7c6a2e187f8c9b0a2e473b4a"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsFrameBufferComplete</b> () const =0</td></tr>
+<tr class="memitem:a22eb780a30ec923ae5440459a8450c70" id="r_a22eb780a30ec923ae5440459a8450c70"><td class="memItemLeft" align="right" valign="top"><a id="a22eb780a30ec923ae5440459a8450c70" name="a22eb780a30ec923ae5440459a8450c70"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>InitCubeMapFaceForRender</b> (unsigned int *CubeMap, unsigned int faceIndex) const =0</td></tr>
+<tr class="memitem:a39d0f80acfb43d8a4c865c539d6f58e7" id="r_a39d0f80acfb43d8a4c865c539d6f58e7"><td class="memItemLeft" align="right" valign="top"><a id="a39d0f80acfb43d8a4c865c539d6f58e7" name="a39d0f80acfb43d8a4c865c539d6f58e7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateTextureMap</b> (unsigned int *textureID, const std::string &amp;filePath) const =0</td></tr>
+<tr class="memitem:a86dd730c832869ee02456d2b4624d294" id="r_a86dd730c832869ee02456d2b4624d294"><td class="memItemLeft" align="right" valign="top"><a id="a86dd730c832869ee02456d2b4624d294" name="a86dd730c832869ee02456d2b4624d294"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateShadowMap</b> (unsigned int *shadowMap, unsigned int *FBO, int <a class="el" href="#ad57c3abdd4d28965896b627978df40d1">width</a>, int <a class="el" href="#ab78afaf745a74176fe545ace11fe0690">height</a>) const =0</td></tr>
+<tr class="memitem:a07d6cb30246f821009d7862eb670f43d" id="r_a07d6cb30246f821009d7862eb670f43d"><td class="memItemLeft" align="right" valign="top"><a id="a07d6cb30246f821009d7862eb670f43d" name="a07d6cb30246f821009d7862eb670f43d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>BindShadowFramebuffer</b> (unsigned int *FBO) const =0</td></tr>
+<tr class="memitem:a7df9deba4f6758304d5a03d7151f2b5a" id="r_a7df9deba4f6758304d5a03d7151f2b5a"><td class="memItemLeft" align="right" valign="top"><a id="a7df9deba4f6758304d5a03d7151f2b5a" name="a7df9deba4f6758304d5a03d7151f2b5a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UnbindShadowFramebuffer</b> () const =0</td></tr>
+<tr class="memitem:a1960eb39a95111c0d865569c6d3f730b" id="r_a1960eb39a95111c0d865569c6d3f730b"><td class="memItemLeft" align="right" valign="top"><a id="a1960eb39a95111c0d865569c6d3f730b" name="a1960eb39a95111c0d865569c6d3f730b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteMesh</b> (unsigned int *VAO, unsigned int *VBO) const =0</td></tr>
+<tr class="memitem:a7f44b5a63bf8c5b16a4401cc00f9cf3e" id="r_a7f44b5a63bf8c5b16a4401cc00f9cf3e"><td class="memItemLeft" align="right" valign="top"><a id="a7f44b5a63bf8c5b16a4401cc00f9cf3e" name="a7f44b5a63bf8c5b16a4401cc00f9cf3e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetupSimpleSquare</b> (unsigned int *VAO, unsigned int *VBO, unsigned int *EBO) const =0</td></tr>
+<tr class="memitem:acec193865132e64c18faf84706a8ebfd" id="r_acec193865132e64c18faf84706a8ebfd"><td class="memItemLeft" align="right" valign="top"><a id="acec193865132e64c18faf84706a8ebfd" name="acec193865132e64c18faf84706a8ebfd"></a>
+virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>GetTime</b> () const =0</td></tr>
+<tr class="memitem:aa694115176c847c69a0b9da83de5b00c" id="r_aa694115176c847c69a0b9da83de5b00c"><td class="memItemLeft" align="right" valign="top"><a id="aa694115176c847c69a0b9da83de5b00c" name="aa694115176c847c69a0b9da83de5b00c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ActivateTexture</b> (unsigned int textureID) const =0</td></tr>
+<tr class="memitem:a86edf1ce8a61408600644c94f2aff9f6" id="r_a86edf1ce8a61408600644c94f2aff9f6"><td class="memItemLeft" align="right" valign="top"><a id="a86edf1ce8a61408600644c94f2aff9f6" name="a86edf1ce8a61408600644c94f2aff9f6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>BindTexture</b> (TextureType type, unsigned int textureID) const =0</td></tr>
+<tr class="memitem:ad2ddbb4ec06b9c9f67f71922e6a0d98e" id="r_ad2ddbb4ec06b9c9f67f71922e6a0d98e"><td class="memItemLeft" align="right" valign="top"><a id="ad2ddbb4ec06b9c9f67f71922e6a0d98e" name="ad2ddbb4ec06b9c9f67f71922e6a0d98e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetupMesh</b> (unsigned int *VAO, unsigned int *VBO, unsigned int *EBO, const std::vector&lt; <a class="el" href="../../d7/d62/struct_vertex.html">Vertex</a> &gt; &amp;vertices, const std::vector&lt; unsigned int &gt; &amp;indices) const =0</td></tr>
+<tr class="memitem:a9fe2d1f8de317f1091bcfc28591a0fe1" id="r_a9fe2d1f8de317f1091bcfc28591a0fe1"><td class="memItemLeft" align="right" valign="top"><a id="a9fe2d1f8de317f1091bcfc28591a0fe1" name="a9fe2d1f8de317f1091bcfc28591a0fe1"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RenderMesh</b> (unsigned int *VAO, unsigned int *VBO, const std::vector&lt; <a class="el" href="../../d7/d62/struct_vertex.html">Vertex</a> &gt; &amp;vertices, const std::vector&lt; unsigned int &gt; &amp;indices) const =0</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
