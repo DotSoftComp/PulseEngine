@@ -9,6 +9,7 @@ var namespaces_dup =
         [ "ToRadians", "d9/d3f/namespace_pulse_engine_1_1_math_utils.html#a44c3b6227858241c58fcc3bf839f5900", null ]
       ] ],
       [ "Color", "d7/de0/struct_pulse_engine_1_1_color.html", "d7/de0/struct_pulse_engine_1_1_color" ],
+      [ "EntityApi", "d0/d47/class_pulse_engine_1_1_entity_api.html", "d0/d47/class_pulse_engine_1_1_entity_api" ],
       [ "GameEntity", "dc/d6b/class_pulse_engine_1_1_game_entity.html", null ],
       [ "iVector4", "da/db5/struct_pulse_engine_1_1i_vector4.html", null ],
       [ "Mat3", "dc/d91/struct_pulse_engine_1_1_mat3.html", "dc/d91/struct_pulse_engine_1_1_mat3" ],

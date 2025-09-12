@@ -101,13 +101,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9e299bfa51a47e830fb4f714643724ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the specific dll of custom scripts (CustomScripts.dll) and load the exported functions.  <br /></td></tr>
 <tr class="memitem:afb4c383f22ebda24561e7ade83762d26" id="r_afb4c383f22ebda24561e7ade83762d26"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb4c383f22ebda24561e7ade83762d26">FreeDll</a> ()</td></tr>
 <tr class="memdesc:afb4c383f22ebda24561e7ade83762d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple function to be called before a new dll generation.  <br /></td></tr>
-<tr class="memitem:abf914685a685d96033a9d483b42ed1e5" id="r_abf914685a685d96033a9d483b42ed1e5"><td class="memItemLeft" align="right" valign="top"><a id="abf914685a685d96033a9d483b42ed1e5" name="abf914685a685d96033a9d483b42ed1e5"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadExportedFunctions</b> ()</td></tr>
+<tr class="memitem:aa8982988661cd604a958f2c5c441f55b" id="r_aa8982988661cd604a958f2c5c441f55b"><td class="memItemLeft" align="right" valign="top"><a id="aa8982988661cd604a958f2c5c441f55b" name="aa8982988661cd604a958f2c5c441f55b"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadExportedFunctions</b> (HMODULE dll)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:af82b765777c6031d976ec56c8304a54a" id="r_af82b765777c6031d976ec56c8304a54a"><td class="memItemLeft" align="right" valign="top"><a id="af82b765777c6031d976ec56c8304a54a" name="af82b765777c6031d976ec56c8304a54a"></a>
 static HMODULE&#160;</td><td class="memItemRight" valign="bottom"><b>customScriptDll</b> = nullptr</td></tr>
+<tr class="memitem:aa193bfeae259e0f365a4b9304a9951b9" id="r_aa193bfeae259e0f365a4b9304a9951b9"><td class="memItemLeft" align="right" valign="top"><a id="aa193bfeae259e0f365a4b9304a9951b9" name="aa193bfeae259e0f365a4b9304a9951b9"></a>
+static HMODULE&#160;</td><td class="memItemRight" valign="bottom"><b>pulseCustomScriptDll</b> = nullptr</td></tr>
 <tr class="memitem:ab2789e329f28c0f3f40c661568c08dd1" id="r_ab2789e329f28c0f3f40c661568c08dd1"><td class="memItemLeft" align="right" valign="top"><a id="ab2789e329f28c0f3f40c661568c08dd1" name="ab2789e329f28c0f3f40c661568c08dd1"></a>
 static std::map&lt; std::string, CreateScriptFunc &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scriptMap</b></td></tr>
 </table>
