@@ -103,6 +103,8 @@ public:
     PulseEngine::Vector3 GetCameraPosition();
     PulseEngine::Vector3 GetCameraRotation();
 
+    Account* GetAccountLoggedIn() {return account; }
+
 
     static IGraphicsAPI* graphicsAPI;
     CoroutineManager* coroutineManager = nullptr;

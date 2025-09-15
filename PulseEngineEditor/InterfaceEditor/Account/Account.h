@@ -18,6 +18,9 @@ class PULSE_ENGINE_DLL_API Account
 {
     public:
         Account(const std::string& mail, const std::string& password);
+
+        const std::string GetName() const {return name; }
+        const std::string GetEmail() const {return email; }
     
     private:
         std::string id;
