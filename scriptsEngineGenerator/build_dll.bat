@@ -57,6 +57,7 @@ imgui-node/imgui_node_editor_api.cpp ^
 imgui-node/imgui_canvas.cpp ^
 imgui-node/crude_json.cpp ^
 src\PulseEngine\core\Network\Request\Request.cpp ^
+PulseEngineEditor/InterfaceEditor/Account/Account.cpp ^
 -I. -Iinclude -Iinclude/websocketpp -Iinclude/asio -Iimgui -Iimgui-node -I./src -IE:/Editor/Include -Iexternal/assimp/include ^
 -Lexternal/assimp/lib ^
 -Lexternal/assimp/lib/x64 ^

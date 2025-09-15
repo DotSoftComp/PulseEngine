@@ -26,6 +26,7 @@
 #include "PulseEngine/core/GUID/GuidCollection.h"
 #include "PulseEngine/core/ExecutableManager/PulseExecutable.h"
 #include "PulseEngine/core/Input/InputSystem.h"
+#include "PulseEngineEditor/InterfaceEditor/Account/Account.h"
 
 #include "PulseEngine/core/Math/MathUtils.h"
 
@@ -48,10 +49,7 @@ InterfaceEditor* PulseEngineBackend::editor = nullptr;
 
 PulseEngineBackend::PulseEngineBackend() 
 { 
-    Request req("localhost", "3000");
-
-    auto rep = req.Get("/PulseForge/Patchnote");
-    std::cout << rep.dump(4) << std::endl;
+    account = new Account("dlexteriaque@gmail.com", "passwordTest");
 }
 
 int PulseEngineBackend::Initialize()

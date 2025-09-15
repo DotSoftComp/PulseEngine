@@ -27,7 +27,7 @@ nlohmann::json Request::sendRequest(const std::string& method,
     // send request
     *this << method << " " << route << " HTTP/1.1\r\n";
     *this << "Host: " << ip << "\r\n";
-    *this << "Connection: close\r\n";
+    *this << "Connection: keep-alive\r\n";
 
     for (auto& kv : headers) {
         *this << kv.first << ": " << kv.second << "\r\n";
@@ -44,21 +44,64 @@ nlohmann::json Request::sendRequest(const std::string& method,
         *this << body;
     }
 
-    // read response
+    // --- read status line ---
+    std::string statusLine;
+    std::getline(*this, statusLine);
+
+    // --- read headers ---
+    std::map<std::string, std::string> respHeaders;
     std::string line;
-    std::string response;
-    while (std::getline(*this, line)) {
-        response += line + "\n";
+    while (std::getline(*this, line) && line != "\r") {
+        auto pos = line.find(":");
+        if (pos != std::string::npos) {
+            std::string key = line.substr(0, pos);
+            std::string value = line.substr(pos + 1);
+            // trim
+            key.erase(key.find_last_not_of(" \r\n") + 1);
+            value.erase(0, value.find_first_not_of(" \t\r\n"));
+            value.erase(value.find_last_not_of(" \r\n") + 1);
+            respHeaders[key] = value;
+        }
     }
 
-    // find JSON start
-    auto pos = response.find("{");
-    if (pos != std::string::npos) {
-        return nlohmann::json::parse(response.substr(pos));
+    // --- read body ---
+    std::string responseBody;
+
+    if (respHeaders["Transfer-Encoding"] == "chunked") {
+        // handle chunked
+        while (true) {
+            std::string chunkSizeStr;
+            std::getline(*this, chunkSizeStr);
+            int chunkSize = std::stoi(chunkSizeStr, nullptr, 16);
+            if (chunkSize == 0) break;
+
+            std::string chunk(chunkSize, '\0');
+            this->read(&chunk[0], chunkSize);
+            responseBody += chunk;
+
+            // eat trailing CRLF
+            std::getline(*this, line);
+        }
+    } else if (respHeaders.count("Content-Length")) {
+        int contentLength = std::stoi(respHeaders["Content-Length"]);
+        std::string buf(contentLength, '\0');
+        this->read(&buf[0], contentLength);
+        responseBody = buf;
+    } else {
+        // read until EOF
+        std::ostringstream oss;
+        oss << this->rdbuf();
+        responseBody = oss.str();
     }
 
-    return nlohmann::json(); // empty JSON
+    // --- parse JSON ---
+    if (!responseBody.empty()) {
+        return nlohmann::json::parse(responseBody);
+    }
+
+    return nlohmann::json(); 
 }
+
 
 nlohmann::json Request::Get(const std::string& route,
                             const std::map<std::string,std::string>& query,
