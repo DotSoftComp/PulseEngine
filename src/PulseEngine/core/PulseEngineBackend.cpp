@@ -29,6 +29,7 @@
 
 #include "PulseEngine/core/Math/MathUtils.h"
 
+#include "PulseEngine/core/Network/Request/Request.h"
 
 #ifdef PULSE_GRAPHIC_OPENGL
 #include "PulseEngine/core/Graphics/OpenGLAPI/OpenGLApi.h"
@@ -45,7 +46,13 @@ float PulseEngineBackend::deltaTime = 0.0f;
 InterfaceEditor* PulseEngineBackend::editor = nullptr;
 #endif
 
-PulseEngineBackend::PulseEngineBackend() { }
+PulseEngineBackend::PulseEngineBackend() 
+{ 
+    Request req("localhost", "3000");
+
+    auto rep = req.Get("/PulseForge/Patchnote");
+    std::cout << rep.dump(4) << std::endl;
+}
 
 int PulseEngineBackend::Initialize()
 {

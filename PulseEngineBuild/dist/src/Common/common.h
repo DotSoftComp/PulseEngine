@@ -43,6 +43,8 @@
 #include "PulseEngine/ModuleLoader/IModule/IModule.h"
 #include "PulseEngine/core/FileManager/FileManager.h"
 
+#define ASIO_STANDALONE
+
 // --------------------
 // Platform-Specific Includes
 // --------------------
@@ -50,6 +52,7 @@
 // Windows
 // -----------------------------
 #ifdef PULSE_WINDOWS
+    #include "winsock2.h"
     #include <Windows.h>      // Core Windows API
     #include <direct.h>       // _mkdir, _getcwd
 #endif

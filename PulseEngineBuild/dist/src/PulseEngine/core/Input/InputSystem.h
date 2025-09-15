@@ -17,8 +17,6 @@ public:
 
     // Call at the beginning of each frame
     void newFrame() {
-        pollKeyboard();
-        pollMouse();
 
         for (auto &kv : keyStates) {
             if (kv.second == KeyState::Pressed) kv.second = KeyState::Down;
@@ -28,6 +26,8 @@ public:
             if (kv.second == KeyState::Pressed) kv.second = KeyState::Down;
             else if (kv.second == KeyState::Released) kv.second = KeyState::Up;
         }
+        pollKeyboard();
+        pollMouse();
     }
 
     // Mapping API

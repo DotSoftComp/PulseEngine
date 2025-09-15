@@ -27,11 +27,15 @@
 #include <map>
 
 
+
 int main()
 {
     std::cout << "the actual working directory is : " << std::filesystem::current_path() << std::endl;
     FileManager::workingDirectory = std::filesystem::current_path();
     PulseEngineBackend* engine = PulseEngineBackend::GetInstance();
+    
+
+
 
     //during the compilation of the game, some datas are defined in the preprocessor.
     //here, we get them and use them with the engine. (the dll didnt have them, so we need to set them manually)

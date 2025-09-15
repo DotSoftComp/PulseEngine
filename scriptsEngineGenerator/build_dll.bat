@@ -56,11 +56,12 @@ imgui-node/imgui_node_editor.cpp ^
 imgui-node/imgui_node_editor_api.cpp ^
 imgui-node/imgui_canvas.cpp ^
 imgui-node/crude_json.cpp ^
--I. -Iinclude -Iimgui -Iimgui-node -I./src -IE:/Editor/Include -Iexternal/assimp/include ^
+src\PulseEngine\core\Network\Request\Request.cpp ^
+-I. -Iinclude -Iinclude/websocketpp -Iinclude/asio -Iimgui -Iimgui-node -I./src -IE:/Editor/Include -Iexternal/assimp/include ^
 -Lexternal/assimp/lib ^
 -Lexternal/assimp/lib/x64 ^
 -LD:/MSYS2/mingw64/lib ^
--lglfw3 -lopengl32 -lm -lassimp -lcomdlg32 ^
+-lglfw3 -lopengl32 -lm -lassimp -lcomdlg32 -lws2_32 -lwinmm -lmswsock ^
 -DBUILDING_DLL -DENGINE_EDITOR -DPULSE_GRAPHIC_OPENGL -DPULSE_WINDOWS -DIMGUI_IMPL_OPENGL_LOADER_GLAD
 
 if %errorlevel% neq 0 (
